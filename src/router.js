@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./pages/Home.vue";
 import History from "./pages/History.vue";
+import Map from "./pages/Map.vue";
 import Login from "./pages/Login.vue";
 import PageNotFound from "./pages/404.vue";
 import { URL_PAGE_LOGIN, TOKEN_NAME, DEFAULT_LOGIN } from './services/variables.js'
@@ -16,6 +17,11 @@ const router = new Router({
             name: 'home',
             alias: '/home',
             component: Home
+        },
+        {
+            path: '/map',
+            name: 'map',
+            component: Map
         },
         {
             path: '/history',
