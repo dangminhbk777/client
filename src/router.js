@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./pages/Home.vue";
 import History from "./pages/History.vue";
 import Map from "./pages/Map.vue";
+import Trip from "./pages/Trip.vue";
 import Login from "./pages/Login.vue";
 import PageNotFound from "./pages/404.vue";
 import { URL_PAGE_LOGIN, TOKEN_NAME, DEFAULT_LOGIN } from './services/variables.js'
@@ -27,6 +28,11 @@ const router = new Router({
             path: '/history',
             name: 'history',
             component: History
+        },
+        {
+            path: '/trip-vehicle',
+            name: 'TripVehicle',
+            component: Trip
         },
         {
             path: '/login',
