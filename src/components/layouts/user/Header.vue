@@ -17,21 +17,6 @@
                   <a href="#" class="dropdown-toggle m-dropdown__toggle btn btn-outline-metal m-btn  m-btn--icon m-btn--pill">
                       <span>Dashboard</span>
                   </a>
-                  <div class="m-dropdown__wrapper">
-                    <span class="m-dropdown__arrow m-dropdown__arrow--leftm-dropdown__arrow--adjust">
-                    </span>
-                    <div class="m-dropdown__inner">
-                      <div class="m-dropdown__body">
-                        <div class="m-dropdown__content">
-                          <ul class="m-nav">
-                            <li class="m-nav__section m-nav__section--first m--hide">
-                              <span class="m-nav__section-text">Quick Menu</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <!-- begin::Responsive Header Menu Toggler-->
                 <a id="m_aside_header_menu_mobile_toggle" href="javascript:;" class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
