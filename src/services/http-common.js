@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+/*jshint -W109 */
 import axios from "axios";
 
 export default axios.create({
