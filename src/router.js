@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./pages/Home.vue";
+import RegisterUser from "./pages/RegisterUser.vue";
 import History from "./pages/History.vue";
 import Map from "./pages/Map.vue";
 import Trip from "./pages/Trip.vue";
@@ -18,6 +19,11 @@ const router = new Router({
             name: 'home',
             alias: '/home',
             component: Home
+        },
+        {
+            path: '/register-user',
+            name: 'registerUser',
+            component: RegisterUser
         },
         {
             path: '/map',

@@ -49,10 +49,10 @@
                 <div class="col-8">
                   <div class="custom-file">
                     <input type="file" class="custom-file-input" id="image" v-on:change="onImageChange" multiple>
-                    <label class="custom-file-label" for="image">Choose file</label>
+                    <label class="custom-file-label" for="image">Chọn ảnh</label>
                   </div>
-                  <div  v-if="images">
-                    <img :src="images" class="img-responsive" height="70" width="90">
+                  <div v-if="previewImages">
+                    <img v-for="image in previewImages" :src="image" class="img-responsive mr-10 overview-img">
                   </div>
                 </div>
               </div>
@@ -65,7 +65,7 @@
             </div>
             <div class="m-portlet__foot m-portlet__foot--fit">
               <div class="m-form__actions text-right">
-                  <button class="btn btn-primary margin-10" v-on:click="postNewTrip">Submit</button>
+                  <button type="button" class="btn btn-primary margin-10" v-on:click="postNewTrip">Submit</button>
                   <button type="reset" class="btn btn-secondary">Cancel</button>
               </div>
             </div>
@@ -87,14 +87,18 @@
     },
     data() {
       return {
+        // Field request
+        startPosition: null,
+        endPosition: null,
+        startPoint: null,
+        endPoint: null,
         time: null,
         typeVehicle: null,
         numberSeat: null,
-        images: null,
         price: null,
         note: null,
-        startPoint: null,
-        endPoint: null,
+        // Form submit and show image
+        previewImages: [],
         formData: new FormData(),
         select2: {
           allowClear: true,
@@ -104,24 +108,27 @@
             { id: '2', text: 'Ô tô (nhỏ)' },
             { id: '3', text: 'Ô tô (lớn)' }
           ],
-          selected: '1',
+          selected: null,
         },
       }
     },
     methods: {
       onImageChange: function(e) {
+        let vm = this;
         let files = e.target.files || e.dataTransfer.files;
-        if (!files.length)
+        if (!files.length) {
           return;
-        this.formData.append('images', files[0]);
-        this.createImage(files[0]);
+        }
+        Array.from(files).forEach(function(file) {
+          vm.formData.append("images[]", file);
+          vm.createImage(file);
+        });
       },
       createImage: function(file) {
         let reader = new FileReader();
         let vm = this;
         reader.onload = (e) => {
-          vm.images = e.target.result;
-          console.log(vm.images);
+          vm.previewImages.push(e.target.result);
         };
         reader.readAsDataURL(file);
       },
@@ -136,14 +143,15 @@
             });
       },
       setDataToFormRequest: function () {
+        this.formData.append("startPosition", this.startPosition);
+        this.formData.append("endPosition", this.endPosition);
+        this.formData.append("startPoint", this.startPoint);
+        this.formData.append("endPoint", this.endPoint);
         this.formData.append("time", this.time);
         this.formData.append("typeVehicle", this.typeVehicle);
         this.formData.append("numberSeat", this.numberSeat);
-        this.formData.append("images", this.images);
         this.formData.append("price", this.price);
         this.formData.append("note", this.note);
-        this.formData.append("startPoint", this.startPoint);
-        this.formData.append("endPoint", this.endPoint);
       }
     }
   }
@@ -152,5 +160,12 @@
 <style scoped>
   .margin-10 {
     margin: 0 10px 0 10px;
+  }
+  .mr-10 {
+    margin: 10px 10px 10px 10px;
+  }
+  .overview-img {
+    height: 70px;
+    width: 90px;
   }
 </style>
