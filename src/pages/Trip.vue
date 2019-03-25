@@ -72,6 +72,11 @@
           </form>
         </div>
       </div>
+      <div class="col-xl-6">
+          <div id='map'></div>
+          <div id='inputs'></div>
+          <div id='errors'></div>
+      </div>
     </div>
   </div>
 </template>
@@ -152,7 +157,31 @@
         this.formData.append("numberSeat", this.numberSeat);
         this.formData.append("price", this.price);
         this.formData.append("note", this.note);
+      },
+      
+      initMap: function () {
+        L.mapbox.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
+        let map = L.mapbox.map('map', null, {zoomControl: false})
+            .setView([21.003, 105.847], 15)
+            .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+        // move the attribution control out of the way
+        map.attributionControl.setPosition('bottomleft');
+
+        // create the initial directions object, from which the layer
+        // and inputs will pull data.
+        let directions = L.mapbox.directions();
+        console.log(directions);
+
+        let directionsLayer = L.mapbox.directions.layer(directions)
+            .addTo(map);
+
+        let directionsInputControl = L.mapbox.directions.inputControl('inputs', directions)
+            .addTo(map);
       }
+    },
+    mounted() {
+      this.initMap();
     }
   }
 </script>
@@ -167,5 +196,35 @@
   .overview-img {
     height: 70px;
     width: 90px;
+  }
+  #map {
+    position: absolute;
+    top: 0;
+    bottom: 30px;
+    left: 15px;
+    right: 15px;
+    width: 95%;
+    margin-right: 15px;
+  }
+  #inputs,
+  #errors {
+    position: absolute;
+    width: 33.3333%;
+    max-width: 300px;
+    min-width: 200px;
+  }
+  #inputs {
+    z-index: 10;
+    top: 10px;
+    left: 25px;
+  }
+  #errors {
+    z-index: 8;
+    opacity: 0;
+    padding: 10px;
+    border-radius: 0 0 3px 3px;
+    background: rgba(0,0,0,.25);
+    top: 90px;
+    left: 10px;
   }
 </style>
