@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-xl-6">
+      <div class="col-xl-6" id="information-driver">
         <div class="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--bordered">
           <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
@@ -72,7 +72,7 @@
           </form>
         </div>
       </div>
-      <div class="col-xl-6">
+      <div class="col-xl-6" id="information-map">
           <div id='map'></div>
           <div id='inputs'></div>
           <div id='errors'></div>
@@ -158,16 +158,22 @@
         this.formData.append("price", this.price);
         this.formData.append("note", this.note);
       },
-      
+      setupSize: function (){
+        let offsetHeight = document.getElementById('information-driver').offsetHeight;
+        let offsetWidth = document.getElementById('information-driver').offsetWidth;
+        document.getElementById('information-map').style.height = offsetHeight + 'px';
+        document.getElementById('information-map').style.width = offsetWidth + 'px';
+      },
       initMap: function () {
+        let vm = this;
         L.mapbox.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
         let map = L.mapbox.map('map', null, {zoomControl: false})
             .setView([21.003, 105.847], 15)
             .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
-            .addControl(L.mapbox.geocoderControl('mapbox.places', {
+            /*.addControl(L.mapbox.geocoderControl('mapbox.places', {
               keepOpen: false,
               autocomplete: true
-            }))
+            }))*/
         ;
 
         // move the attribution control out of the way
@@ -176,22 +182,21 @@
         // create the initial directions object, from which the layer
         // and inputs will pull data.
         let directions = L.mapbox.directions();
-
-        let directionsLayer = L.mapbox.directions.layer(directions)
-            .addTo(map);
-
-        let directionsInputControl = L.mapbox.directions.inputControl('inputs', directions)
-            .addTo(map);
-
-        let directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions)
-            .addTo(map);
+        L.mapbox.directions.layer(directions).addTo(map);
+        L.mapbox.directions.inputControl('inputs', directions).addTo(map);
+        L.mapbox.directions.routesControl('routes', directions).addTo(map);
 
         map.on('click', function(e) {
           alert(e.latlng.toString());
         });
+
+        window.onresize = function() {
+          vm.setupSize();
+        };
       }
     },
     mounted() {
+      this.setupSize();
       this.initMap();
     }
   }
