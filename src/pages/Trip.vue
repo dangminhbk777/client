@@ -163,7 +163,12 @@
         L.mapbox.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
         let map = L.mapbox.map('map', null, {zoomControl: false})
             .setView([21.003, 105.847], 15)
-            .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+            .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
+            .addControl(L.mapbox.geocoderControl('mapbox.places', {
+              keepOpen: false,
+              autocomplete: true
+            }))
+        ;
 
         // move the attribution control out of the way
         map.attributionControl.setPosition('bottomleft');
@@ -171,13 +176,19 @@
         // create the initial directions object, from which the layer
         // and inputs will pull data.
         let directions = L.mapbox.directions();
-        console.log(directions);
 
         let directionsLayer = L.mapbox.directions.layer(directions)
             .addTo(map);
 
         let directionsInputControl = L.mapbox.directions.inputControl('inputs', directions)
             .addTo(map);
+
+        let directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions)
+            .addTo(map);
+
+        map.on('click', function(e) {
+          alert(e.latlng.toString());
+        });
       }
     },
     mounted() {
