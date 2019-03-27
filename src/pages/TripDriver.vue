@@ -101,6 +101,7 @@
         typeVehicle: null,
         numberSeat: null,
         price: null,
+        isShipping: null,
         note: null,
         // Form submit and show image
         previewImages: [],
@@ -139,7 +140,7 @@
       },
       postNewTrip: function() {
         this.setDataToFormRequest();
-        http.post('/user/upload',this.formData)
+        http.post('/trip-driver/new-trip',this.formData)
             .then(response => {
               console.log(response);
             })
@@ -184,10 +185,15 @@
         let directions = L.mapbox.directions();
         L.mapbox.directions.layer(directions).addTo(map);
         L.mapbox.directions.inputControl('inputs', directions).addTo(map);
+        L.mapbox.directions.errorsControl('errors', directions).addTo(map);
         L.mapbox.directions.routesControl('routes', directions).addTo(map);
+        L.mapbox.directions.instructionsControl('instructions', directions).addTo(map);
 
-        map.on('click', function(e) {
-          alert(e.latlng.toString());
+        directions.on('origin', function (e) {
+          vm.startPoint = e.origin.geometry.coordinates.toString();
+        });
+        directions.on('destination', function (e) {
+          vm.endPoint = e.destination.geometry.coordinates.toString();
         });
 
         window.onresize = function() {

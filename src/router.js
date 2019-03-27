@@ -4,7 +4,7 @@ import Home from "./pages/Home.vue";
 import RegisterUser from "./pages/RegisterUser.vue";
 import History from "./pages/History.vue";
 import Map from "./pages/Map.vue";
-import Trip from "./pages/Trip.vue";
+import TripDriver from "./pages/TripDriver.vue";
 import Login from "./pages/Login.vue";
 import PageNotFound from "./pages/404.vue";
 import { URL_PAGE_LOGIN, TOKEN_NAME, DEFAULT_LOGIN } from './services/variables.js'
@@ -36,9 +36,9 @@ const router = new Router({
             component: History
         },
         {
-            path: '/trip-vehicle',
-            name: 'TripVehicle',
-            component: Trip
+            path: '/trip-driver',
+            name: 'TripDriver',
+            component: TripDriver
         },
         {
             path: '/login',
