@@ -100,10 +100,12 @@
         reader.readAsDataURL(file);
       },
       registerUser: function() {
-        this.setDataToFormRequest();
-        http.post('/user/register',this.formData)
+        let vm = this;
+        vm.setDataToFormRequest();
+        http.post('/user/register', vm.formData)
             .then(success => {
               console.log(success.response.data);
+              vm.formData = new FormData();
             })
             .catch(error => {
               console.log(error.response.data);

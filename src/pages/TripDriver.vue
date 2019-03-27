@@ -139,13 +139,16 @@
         reader.readAsDataURL(file);
       },
       postNewTrip: function() {
+        let vm = this;
         this.setDataToFormRequest();
-        http.post('/trip-driver/new-trip',this.formData)
+        http.post('/trip-driver/new-trip', this.formData)
             .then(response => {
               console.log(response);
+              vm.formData = new FormData();
             })
             .catch(e => {
               console.error(e);
+              vm.formData = new FormData();
             });
       },
       setDataToFormRequest: function () {

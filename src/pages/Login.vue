@@ -98,7 +98,7 @@
 
 <script>
     import http from '../services/http-common.js';
-    import {DEFAULT_LOGIN, TOKEN_NAME, ROLE_NAME, USER_ROLE, ADMIN_ROLE} from '../services/variables.js';
+    import {DEFAULT_LOGIN, TOKEN_NAME, ROLE_NAME, USER_ROLE, ADMIN_ROLE, AUTHORIZATION} from '../services/variables.js';
 
     export default {
         name: "login",
@@ -125,6 +125,7 @@
                 if (dataUserLogin.username == 'a' && dataUserLogin.password == 'a') {
                     localStorage.setItem(TOKEN_NAME, JSON.stringify('a'));
                     localStorage.setItem(ROLE_NAME, JSON.stringify(USER_ROLE));
+                    localStorage.setItem(AUTHORIZATION, JSON.stringify('data auth'));
                     window.location.href = DEFAULT_LOGIN;
                 } else if (dataUserLogin.username == 'b' && dataUserLogin.password == 'b') {
                     localStorage.setItem(TOKEN_NAME, JSON.stringify('a'));
