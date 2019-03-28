@@ -32,8 +32,9 @@
                             </div>
                         </div>
                         <div class="m-login__form-action">
-                            <button type="button" id="button_login_submit" v-on:click="getTokenFake"
-                                    class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">Sign In</button>
+                            <button type="button" id="button_login_submit" v-on:click="getToken" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
+                                Sign In
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -108,13 +109,14 @@
                     username: document.getElementById("user_name").value,
                     password: document.getElementById("pass_word").value
                 };
-                http.post("/auth/generateJWT", dataUserLogin)
-                    .then(response => {
-                        localStorage.setItem(TOKEN_NAME, JSON.stringify(response.data.token));
-                        localStorage.setItem(ROLE_NAME, JSON.stringify(response.data.role));
+                http.post("/authentication/token", dataUserLogin)
+                    .then(success => {
+                        localStorage.setItem(TOKEN_NAME, success.data.metadata);
+                        localStorage.setItem(ROLE_NAME, USER_ROLE);
+                        window.location.href = DEFAULT_LOGIN;
                     })
-                    .catch(e => {
-                        console.error(e);
+                    .catch(error => {
+                        console.error(error);
                     });
             },
             getTokenFake: function () {

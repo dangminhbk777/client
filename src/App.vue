@@ -42,8 +42,8 @@ export default {
         return {
             isPageLogin: this.$route.path.includes('login'),
             isPageNotFound: this.$route.path.includes('page-not-found'),
-            isUserPage : (JSON.parse(localStorage.getItem(ROLE_NAME)) === USER_ROLE),
-            isAdminPage : (JSON.parse(localStorage.getItem(ROLE_NAME)) === ADMIN_ROLE),
+            isUserPage : localStorage.getItem(ROLE_NAME) === USER_ROLE,
+            isAdminPage : localStorage.getItem(ROLE_NAME) === ADMIN_ROLE,
             modal: {
                 title: 'title - update ',
                 content: 'content - update',
@@ -54,8 +54,8 @@ export default {
     },
     methods: {
         information() {
-            console.log(JSON.parse(localStorage.getItem(ROLE_NAME)) === "user");
-            console.log(JSON.parse(localStorage.getItem(ROLE_NAME)));
+            console.log(localStorage.getItem(ROLE_NAME) === "user");
+            console.log(localStorage.getItem(ROLE_NAME));
         }
     },
     mounted() {
