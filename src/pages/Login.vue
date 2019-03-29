@@ -112,6 +112,7 @@
                 http.post("/authentication/token", dataUserLogin)
                     .then(success => {
                         localStorage.setItem(TOKEN_NAME, success.data.metadata);
+                        localStorage.setItem(AUTHORIZATION, success.data.metadata);
                         localStorage.setItem(ROLE_NAME, USER_ROLE);
                         window.location.href = DEFAULT_LOGIN;
                     })

@@ -155,6 +155,14 @@
                                       </span>
                                     </span>
                                   </a>
+                                  <a href="#" class="m-nav__link">
+                                    <i class="m-nav__link-icon flaticon-logout"></i>
+                                    <span class="m-nav__link-title">
+                                      <span class="m-nav__link-wrap">
+                                        <span class="m-nav__link-text" v-on:click="logout">Log out</span>
+                                      </span>
+                                    </span>
+                                  </a>
                                 </li>
                               </ul>
                             </div>

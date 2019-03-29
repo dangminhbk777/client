@@ -17,7 +17,7 @@
               <div class="form-group m-form__group row">
                 <label class="col-4 col-form-label">Thời gian xuất phát</label>
                 <div class="col-8">
-                  <input class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00">
+                  <input class="form-control m-input" type="datetime-local" v-model="time">
                 </div>
               </div>
               <div class="form-group m-form__group row">
@@ -97,7 +97,7 @@
         endPosition: null,
         startPoint: null,
         endPoint: null,
-        time: null,
+        time: "2019-03-30T10:10",
         typeVehicle: null,
         numberSeat: null,
         price: null,
@@ -152,6 +152,7 @@
             });
       },
       setDataToFormRequest: function () {
+        this.typeVehicle = this.select2.selected;
         this.formData.append("startPosition", this.startPosition);
         this.formData.append("endPosition", this.endPosition);
         this.formData.append("startPoint", this.startPoint);
@@ -160,6 +161,7 @@
         this.formData.append("typeVehicle", this.typeVehicle);
         this.formData.append("numberSeat", this.numberSeat);
         this.formData.append("price", this.price);
+        this.formData.append("isShipping", this.isShipping);
         this.formData.append("note", this.note);
       },
       setupSize: function (){
@@ -167,6 +169,18 @@
         let offsetWidth = document.getElementById('information-driver').offsetWidth;
         document.getElementById('information-map').style.height = offsetHeight + 'px';
         document.getElementById('information-map').style.width = offsetWidth + 'px';
+        // setup current time
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth() + 1;
+        if (month < 10) {
+          month = '0' + month;
+        }
+        let dateTime = today.getDate();
+        let hour = today.getHours();
+        let minute = today.getMinutes();
+        this.time = year + '-' + month + '-' + dateTime + 'T' + hour + ':' + minute;
+        console.log(this.time);
       },
       initMap: function () {
         let vm = this;
