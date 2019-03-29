@@ -13,12 +13,13 @@
                     </div>
                     <form class="m-login__form m-form">
                         <div class="form-group m-form__group">
-                            <input id="user_name" class="form-control m-input" type="text" placeholder="Email"
-                                   autocomplete="off">
+                            <input id="user_name" class="form-control m-input" type="text" placeholder="Email" autocomplete="off">
                         </div>
                         <div class="form-group m-form__group">
-                            <input id="pass_word" class="form-control m-input m-login__form-input--last" type="password"
-                                   placeholder="Password">
+                            <input id="pass_word" class="form-control m-input m-login__form-input--last" type="password" placeholder="Password">
+                        </div>
+                        <div class="form-group m-form__group">
+                            <p v-if="messageError" class="m--font-danger message-error">{{messageError}}</p>
                         </div>
                         <div class="row m-login__form-sub">
                             <div class="col m--align-left m-login__form-left">
@@ -103,6 +104,11 @@
 
     export default {
         name: "login",
+        data() {
+          return {
+            messageError: null
+          }
+        },
         methods: {
             getToken() {
                 let dataUserLogin = {
@@ -118,28 +124,16 @@
                     })
                     .catch(error => {
                         console.error(error);
+                        console.log(error.response.data);
+                        this.messageError = error.response.data.message;
                     });
-            },
-            getTokenFake: function () {
-                let dataUserLogin = {
-                    username: document.getElementById("user_name").value,
-                    password: document.getElementById("pass_word").value
-                };
-                if (dataUserLogin.username == 'a' && dataUserLogin.password == 'a') {
-                    localStorage.setItem(TOKEN_NAME, JSON.stringify('a'));
-                    localStorage.setItem(ROLE_NAME, JSON.stringify(USER_ROLE));
-                    localStorage.setItem(AUTHORIZATION, JSON.stringify('data auth'));
-                    window.location.href = DEFAULT_LOGIN;
-                } else if (dataUserLogin.username == 'b' && dataUserLogin.password == 'b') {
-                    localStorage.setItem(TOKEN_NAME, JSON.stringify('a'));
-                    localStorage.setItem(ROLE_NAME, JSON.stringify(ADMIN_ROLE));
-                    window.location.href = DEFAULT_LOGIN;
-                }
             }
         }
     }
 </script>
 
 <style scoped>
-
+    .message-error {
+        padding: 1.5rem 1.5rem;
+    }
 </style>
