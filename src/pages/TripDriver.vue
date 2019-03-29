@@ -180,7 +180,6 @@
         let hour = today.getHours();
         let minute = today.getMinutes();
         this.time = year + '-' + month + '-' + dateTime + 'T' + hour + ':' + minute;
-        console.log(this.time);
       },
       initMap: function () {
         let vm = this;
