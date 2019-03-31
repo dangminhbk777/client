@@ -73,9 +73,40 @@
         </div>
       </div>
       <div class="col-xl-6" id="information-map">
-          <div id='map'></div>
-          <div id='inputs'></div>
-          <div id='errors'></div>
+        <div class="flex-parent viewport-full relative scroll-hidden">
+          <div class="flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-mm mapboxgl-map" id="map">
+            <div class="mapboxgl-canary" style="visibility: hidden;">
+            </div>
+            <div class="mapboxgl-control-container">
+              <div class="mapboxgl-ctrl-top-left">
+                <div class="mapboxgl-ctrl-directions mapboxgl-ctrl">
+                  <div class="directions-control directions-control-inputs">
+                    <div class="mapbox-directions-component mapbox-directions-inputs">
+                      <div class="mapbox-directions-component-keyline">
+                        <div class="mapbox-directions-origin">
+                          <label class="mapbox-form-label">
+                            <span class="directions-icon directions-icon-depart"></span>
+                          </label>
+                          <div id="mapbox-directions-origin-input"><div class="mapboxgl-ctrl-geocoder"><span class="geocoder-icon geocoder-icon-search"></span><input type="text" placeholder="Choose a starting place"><ul class="suggestions" style="display: none;"></ul><div class="geocoder-pin-right"><button class="geocoder-icon geocoder-icon-close"></button><span class="geocoder-icon geocoder-icon-loading"></span></div></div></div>
+                        </div>
+
+                        <button class="directions-icon directions-icon-reverse directions-reverse js-reverse-inputs" title="Reverse origin &amp; destination">
+                        </button>
+
+                        <div class="mapbox-directions-destination">
+                          <label class="mapbox-form-label">
+                            <span class="directions-icon directions-icon-arrive"></span>
+                          </label>
+                          <div id="mapbox-directions-destination-input"><div class="mapboxgl-ctrl-geocoder"><span class="geocoder-icon geocoder-icon-search"></span><input type="text" placeholder="Choose destination"><ul class="suggestions" style="display: none;"></ul><div class="geocoder-pin-right"><button class="geocoder-icon geocoder-icon-close"></button><span class="geocoder-icon geocoder-icon-loading"></span></div></div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -97,7 +128,7 @@
         endPosition: null,
         startPoint: null,
         endPoint: null,
-        time: "2019-03-30T10:10",
+        time: null,
         typeVehicle: null,
         numberSeat: null,
         price: null,
@@ -141,7 +172,7 @@
       postNewTrip: function() {
         let vm = this;
         this.setDataToFormRequest();
-        http.post('/trip-driver/new-trip', this.formData)
+        http.post('/trip-by-driver/new-trip', this.formData)
             .then(response => {
               console.log(response);
               vm.formData = new FormData();
@@ -183,35 +214,46 @@
       },
       initMap: function () {
         let vm = this;
-        L.mapbox.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
-        let map = L.mapbox.map('map', null, {zoomControl: false})
-            .setView([21.003, 105.847], 15)
-            .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
-            /*.addControl(L.mapbox.geocoderControl('mapbox.places', {
-              keepOpen: false,
-              autocomplete: true
-            }))*/
-        ;
-
-        // move the attribution control out of the way
-        map.attributionControl.setPosition('bottomleft');
-
-        // create the initial directions object, from which the layer
-        // and inputs will pull data.
-        let directions = L.mapbox.directions();
-        L.mapbox.directions.layer(directions).addTo(map);
-        L.mapbox.directions.inputControl('inputs', directions).addTo(map);
-        L.mapbox.directions.errorsControl('errors', directions).addTo(map);
-        L.mapbox.directions.routesControl('routes', directions).addTo(map);
-        L.mapbox.directions.instructionsControl('instructions', directions).addTo(map);
-
-        directions.on('origin', function (e) {
-          vm.startPoint = e.origin.geometry.coordinates.toString();
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
+        let map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [105.859979061677,21.007181634883864],
+          zoom: 12
         });
-        directions.on('destination', function (e) {
-          vm.endPoint = e.destination.geometry.coordinates.toString();
+        let directions = new MapboxDirections({
+          accessToken: mapboxgl.accessToken,
+          steps: false,
+          geometries: 'polyline',
+          controls: {instructions: false}
         });
+        map.addControl( directions, 'top-left');
 
+        // After the map style has loaded on the page, add a source layer and default
+        // styling for a single point.
+        map.on('load', function() {
+
+          // Listen for the `directions.route` event that is triggered when a user
+          // makes a selection and add a symbol that matches the result.
+          directions.on('route', function (ev) {
+            console.log(ev.route);
+            // let styleSpec = ev.route;
+            // let styleSpecBox = document.getElementById('json-response');
+            // let styleSpecText = JSON.stringify(styleSpec, null, 2);
+            // let syntaxStyleSpecText = syntaxHighlight(styleSpecText);
+            // styleSpecBox.innerHTML = syntaxStyleSpecText;
+          });
+          directions.on('origin', function (e) {
+            if (e !=  null) {
+              vm.startPoint = e.feature.geometry.coordinates.toString();
+            }
+          });
+          directions.on('destination', function (e) {
+            if (e != null) {
+              vm.endPoint = e.feature.geometry.coordinates.toString();
+            }
+          });
+        });
         window.onresize = function() {
           vm.setupSize();
         };
@@ -234,35 +276,5 @@
   .overview-img {
     height: 70px;
     width: 90px;
-  }
-  #map {
-    position: absolute;
-    top: 0;
-    bottom: 30px;
-    left: 15px;
-    right: 15px;
-    width: 95%;
-    margin-right: 15px;
-  }
-  #inputs,
-  #errors {
-    position: absolute;
-    width: 33.3333%;
-    max-width: 300px;
-    min-width: 200px;
-  }
-  #inputs {
-    z-index: 10;
-    top: 10px;
-    left: 25px;
-  }
-  #errors {
-    z-index: 8;
-    opacity: 0;
-    padding: 10px;
-    border-radius: 0 0 3px 3px;
-    background: rgba(0,0,0,.25);
-    top: 90px;
-    left: 10px;
   }
 </style>

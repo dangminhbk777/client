@@ -286,4 +286,7 @@
     body.m-aside-left--skin-light .m-header {
         back-ground: #fff;
     }
+    .m-stack.m-stack--general.m-stack--inline {
+      width: inherit;
+    }
 </style>
