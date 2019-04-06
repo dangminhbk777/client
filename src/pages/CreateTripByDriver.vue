@@ -124,10 +124,10 @@
     data() {
       return {
         // Field request
-        startPosition: null,
-        endPosition: null,
-        startPoint: null,
-        endPoint: null,
+        startLongitude: null,
+        endLongitude: null,
+        startLatitude: null,
+        endLatitude: null,
         time: null,
         typeVehicle: null,
         numberSeat: null,
@@ -184,10 +184,10 @@
       },
       setDataToFormRequest: function () {
         this.typeVehicle = this.select2.selected;
-        this.formData.append("startPosition", this.startPosition);
-        this.formData.append("endPosition", this.endPosition);
-        this.formData.append("startPoint", this.startPoint);
-        this.formData.append("endPoint", this.endPoint);
+        this.formData.append("startLongitude", this.startLongitude);
+        this.formData.append("endLongitude", this.endLongitude);
+        this.formData.append("startLatitude", this.startLatitude);
+        this.formData.append("endLatitude", this.endLatitude);
         this.formData.append("time", this.time);
         this.formData.append("typeVehicle", this.typeVehicle);
         this.formData.append("numberSeat", this.numberSeat);
@@ -208,9 +208,15 @@
           month = '0' + month;
         }
         let dateTime = today.getDate();
+        if (dateTime < 10) {
+          dateTime = '0' + dateTime;
+        }
         let hour = today.getHours();
+        if (hour < 10) {
+          hour = '0' + hour;
+        }
         let minute = today.getMinutes();
-        this.time = year + '-' + month + '-' + dateTime + 'T' + hour + ':' + minute;
+        this.time = year + '-' + month + '-' + dateTime + 'T' + hour + ':' + minute + ":00";
       },
       initMap: function () {
         let vm = this;
@@ -245,12 +251,15 @@
           });
           directions.on('origin', function (e) {
             if (e !=  null) {
-              vm.startPoint = e.feature.geometry.coordinates.toString();
+              console.log(e);
+              vm.startLatitude = e.feature.geometry.coordinates[0];
+              vm.startLongitude = e.feature.geometry.coordinates[1];
             }
           });
           directions.on('destination', function (e) {
             if (e != null) {
-              vm.endPoint = e.feature.geometry.coordinates.toString();
+              vm.endLatitude = e.feature.geometry.coordinates[0];
+              vm.endLongitude = e.feature.geometry.coordinates[1];
             }
           });
         });

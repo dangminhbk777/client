@@ -4,10 +4,10 @@ import Home from "./pages/Home.vue";
 import RegisterUser from "./pages/RegisterUser.vue";
 import History from "./pages/History.vue";
 import Map from "./pages/Map.vue";
-import TripByDriver from "./pages/TripByDriver.vue";
+import CreateTripByDriver from "./pages/CreateTripByDriver.vue";
 import Login from "./pages/Login.vue";
 import PageNotFound from "./pages/404.vue";
-import { URL_PAGE_LOGIN, TOKEN_NAME, DEFAULT_LOGIN } from './services/variables.js'
+import { URL_PAGE_LOGIN, URL_PAGE_REGISTER, TOKEN_NAME, DEFAULT_LOGIN } from './services/variables.js'
 
 Vue.use(Router);
 
@@ -37,8 +37,8 @@ const router = new Router({
         },
         {
             path: '/trip-by-driver',
-            name: 'TripByDriver',
-            component: TripByDriver
+            name: 'CreateTripByDriver',
+            component: CreateTripByDriver
         },
         {
             path: '/login',
@@ -58,7 +58,7 @@ const router = new Router({
 });
 router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = [URL_PAGE_LOGIN];
+    const publicPages = [URL_PAGE_LOGIN, URL_PAGE_REGISTER];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem(TOKEN_NAME);
 

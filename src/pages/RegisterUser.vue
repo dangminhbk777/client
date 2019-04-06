@@ -104,7 +104,7 @@
         vm.setDataToFormRequest();
         http.post('/user/register', vm.formData)
             .then(success => {
-              console.log(success.response.data);
+              console.log(success.data.metadata);
               vm.formData = new FormData();
             })
             .catch(error => {
