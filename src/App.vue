@@ -31,7 +31,7 @@ export default {
         return {
             isPageLogin: this.$route.path.includes('login'),
             isPageNotFound: this.$route.path.includes('page-not-found'),
-            isUserPage : /*localStorage.getItem(ROLE_NAME) === USER_ROLE*/true,
+            isUserPage : !this.$route.path.includes('login') && !this.$route.path.includes('page-not-found'),
             modal: {
                 title: 'title - update ',
                 content: 'content - update',

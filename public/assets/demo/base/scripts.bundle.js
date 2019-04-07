@@ -9148,16 +9148,12 @@ var mWizard = function(elementId, options) {
 
 }(jQuery));
 var mLayout = function() {
-    var header;
     var horMenu;
     var asideMenu;
     var asideMenuOffcanvas;
+    var asideMenuOffcanvasMobile;
     var horMenuOffcanvas;
-    var asideLeftToggle;
-    var scrollTop;
-    var quicksearch;
 
-    //== Header
     var initStickyHeader = function() {
         var tmp;
         var headerEl = mUtil.get('m_header');
@@ -9193,8 +9189,8 @@ var mLayout = function() {
         header = new mHeader('m_header', options);
     };
 
-    //== Hor menu
-    var initHorMenu = function() { 
+    // handle horizontal menu
+    var initHorMenu = function() {
         // init aside left offcanvas
         horMenuOffcanvas = new mOffcanvas('m_header_menu', {
             overlay: true,
@@ -9219,7 +9215,7 @@ var mLayout = function() {
         });
     }
 
-    //== Aside menu
+    // handle vertical menu
     var initLeftAsideMenu = function() {
         //== Init aside menu
         var menu = mUtil.get('m_ver_menu');
@@ -9230,7 +9226,7 @@ var mLayout = function() {
             scroll = {
                 height: function() {
                     if (mUtil.isInResponsiveRange('desktop')) {
-                        return mUtil.getViewPort().height - parseInt(mUtil.css('m_header', 'height'));
+                        return mUtil.getViewPort().height;
                     }
                 }
             };
@@ -9273,42 +9269,24 @@ var mLayout = function() {
             baseClass: asideOffcanvasClass,
             overlay: true,
             closeBy: 'm_aside_left_close_btn',
-            toggleBy: {
-                target: 'm_aside_left_offcanvas_toggle',
-                state: 'm-brand__toggler--active'                
-            }            
-        });        
-    }
-
-    //== Sidebar toggle
-    var initLeftAsideToggle = function() {
-        if ($('#m_aside_left_minimize_toggle').length === 0 ) {
-            return;
-        }
-
-        asideLeftToggle = new mToggle('m_aside_left_minimize_toggle', {
-            target: 'body',
-            targetState: 'm-brand--minimize m-aside-left--minimize',
-            togglerState: 'm-brand__toggler--active'
-        });
-
-        asideLeftToggle.on('toggle', function(toggle) {
-            horMenu.pauseDropdownHover(800);
-            asideMenu.pauseDropdownHover(800);
-
-            //== Remember state in cookie
-            Cookies.set('sidebar_toggle_state', toggle.getState());
-            // to set default minimized left aside use this cookie value in your 
-            // server side code and add "m-brand--minimize m-aside-left--minimize" classes to 
-            // the body tag in order to initialize the minimized left aside mode during page loading.
-        });
+            toggleBy: [
+                { 
+                    target: 'm_aside_left_toggle',
+                    state: 'm-aside-left-toggler--active' 
+                },
+                { 
+                    target: 'm_aside_left_toggle_mobile',
+                    state: 'm-brand__toggler--active' 
+                }
+            ]        
+        });      
     }
 
     //== Topbar
     var initTopbar = function() {
         $('#m_aside_header_topbar_mobile_toggle').click(function() {
             $('body').toggleClass('m-topbar--on');
-        });       
+        });          
     }
 
     //== Quicksearch
@@ -9352,7 +9330,7 @@ var mLayout = function() {
     }
 
     return {
-        init: function() {  
+        init: function() {
             this.initHeader();
             this.initAside();
         },
@@ -9367,16 +9345,7 @@ var mLayout = function() {
 
         initAside: function() {
             initLeftAside();
-            initLeftAsideMenu();            
-            initLeftAsideToggle();
-
-            this.onLeftSidebarToggle(function(e) {
-              var datatables = $('.m-datatable');
-
-                $(datatables).each(function() {
-                    $(this).mDatatable('redraw');
-                });
-            });
+            initLeftAsideMenu();
         },
 
         getAsideMenu: function() {
@@ -9384,9 +9353,7 @@ var mLayout = function() {
         },
 
         onLeftSidebarToggle: function(func) {
-            if (asideLeftToggle) {
-                asideLeftToggle.on('toggle', func);
-            }            
+            //
         },
 
         closeMobileAsideMenuOffcanvas: function() {
@@ -9399,6 +9366,14 @@ var mLayout = function() {
             if (mUtil.isMobileDevice()) {
                 horMenuOffcanvas.hide();
             }
+        },
+
+        closeAsideMenuOffcanvas: function() {
+            asideMenuOffcanvas.hide();
+        },
+
+        closeHorMenuOffcanvas: function() {
+            horMenuOffcanvas.hide();
         }
     };
 }();

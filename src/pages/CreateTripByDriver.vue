@@ -134,6 +134,8 @@
         price: null,
         isShipping: null,
         note: null,
+        descriptionOrigin: null,
+        descriptionDestination: null,
         // Form submit and show image
         previewImages: [],
         formData: new FormData(),
@@ -216,6 +218,9 @@
           hour = '0' + hour;
         }
         let minute = today.getMinutes();
+        if (minute < 10) {
+          minute = '0' + minute;
+        }
         this.time = year + '-' + month + '-' + dateTime + 'T' + hour + ':' + minute + ":00";
       },
       initMap: function () {
@@ -239,6 +244,17 @@
         // styling for a single point.
         map.on('load', function() {
 
+          $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
+            let id = $(this).parent('div').attr('id');
+            if (id === "mapbox-directions-origin-input") {
+              vm.descriptionOrigin = e.target.value;
+            } else {
+              vm.descriptionDestination = e.target.value;
+            }
+            console.log(vm.descriptionOrigin);
+            console.log(vm.descriptionDestination);
+          });
+
           // Listen for the `directions.route` event that is triggered when a user
           // makes a selection and add a symbol that matches the result.
           directions.on('route', function (ev) {
@@ -251,7 +267,6 @@
           });
           directions.on('origin', function (e) {
             if (e !=  null) {
-              console.log(e);
               vm.startLatitude = e.feature.geometry.coordinates[0];
               vm.startLongitude = e.feature.geometry.coordinates[1];
             }
