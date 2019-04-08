@@ -24,5 +24,9 @@
 </script>
 
 <style scoped>
-
+  @media (min-width: 1025px) {
+    .m-body .m-container.m-container--responsive .m-wrapper {
+      padding: 0 80px;
+    }
+  }
 </style>
