@@ -100,7 +100,7 @@
 
 <script>
     import http from '../services/http-common.js';
-    import {DEFAULT_LOGIN, TOKEN_NAME, ROLE_NAME, USER_ROLE, ADMIN_ROLE, AUTHORIZATION} from '../services/variables.js';
+    import {DEFAULT_LOGIN, ROLE_NAME, USER_ROLE, AUTHORIZATION} from '../services/variables.js';
 
     export default {
         name: "login",
@@ -117,7 +117,6 @@
                 };
                 http.post("/authentication/token", dataUserLogin)
                     .then(success => {
-                        localStorage.setItem(TOKEN_NAME, JSON.parse(success.data.metadata));
                         localStorage.setItem(AUTHORIZATION, JSON.parse(success.data.metadata));
                         localStorage.setItem(ROLE_NAME, USER_ROLE);
                         window.location.href = DEFAULT_LOGIN;

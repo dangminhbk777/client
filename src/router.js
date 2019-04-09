@@ -7,7 +7,7 @@ import Map from "./pages/Map.vue";
 import CreateTripByDriver from "./pages/CreateTripByDriver.vue";
 import Login from "./pages/Login.vue";
 import PageNotFound from "./pages/404.vue";
-import { URL_PAGE_LOGIN, URL_PAGE_REGISTER, TOKEN_NAME, DEFAULT_LOGIN } from './services/variables.js'
+import { URL_PAGE_LOGIN, URL_PAGE_REGISTER, AUTHORIZATION, DEFAULT_LOGIN } from './services/variables.js'
 
 Vue.use(Router);
 
@@ -60,7 +60,7 @@ router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const publicPages = [URL_PAGE_LOGIN, URL_PAGE_REGISTER];
     const authRequired = !publicPages.includes(to.path);
-    const loggedIn = localStorage.getItem(TOKEN_NAME);
+    const loggedIn = localStorage.getItem(AUTHORIZATION);
 
     if (authRequired && !loggedIn) {
         return next(URL_PAGE_LOGIN);
@@ -90,36 +90,3 @@ export default router;
 //           }
 //         ]
 //         },*/
-//         {
-//             path: '/',
-//             name: 'home',
-//             alias: '/home',
-//             component: Home
-//         },
-//         {
-//             path: '/login',
-//             name: 'login',
-//             component: Login
-//         },
-//         {
-//             path: '/page-not-found',
-//             name: 'page-not-found',
-//             component: PageNotFound
-//         },
-//         {
-//             path: '*',
-//             redirect: '/page-not-found'
-//         },
-//     ]
-// }).beforeEach((to, from, next) => {
-//     // redirect to login page if not logged in and trying to access a restricted page
-//     const publicPages = ['/login'];
-//     const authRequired = !publicPages.includes(to.path);
-//     const loggedIn = localStorage.getItem('user');
-//
-//     if (authRequired && !loggedIn) {
-//         return next('/login');
-//     }
-//
-//     next();
-// });

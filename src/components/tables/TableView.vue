@@ -4,7 +4,6 @@
 </template>
 
 <script>
-    import ActionTable from '../other/ActionTable.vue'
     export default {
         name: "table-view",
         /*components: {
@@ -77,11 +76,15 @@
             let table = $(this.$el);
             let tableApp =  table.mDatatable({
                 data: {
-                    type: 'local',
-                    source: dataSet,
+                    type: 'remote',
+                    source: {
+                        read: {
+                            url: 'https://keenthemes.com/metronic/themes/themes/metronic/dist/preview/inc/api/datatables/demos/default.php',
+                        },
+                    },
                     pageSize: 10,
                     serverPaging: true,
-                    serverFiltering: false,
+                    serverFiltering: true,
                     serverSorting: true
                 },
                 processing: true,
