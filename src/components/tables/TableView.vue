@@ -4,7 +4,8 @@
 </template>
 
 <script>
-  import { AUTHORIZATION } from '../../services/variables.js'
+  import {AUTHORIZATION} from '../../services/variables.js'
+
   export default {
     name: "table-view",
     /*components: {
@@ -58,6 +59,17 @@
         sortable: true,
         filterable: false,
         pagination: true,
+        // toolbar
+        toolbar: {
+          // toolbar placement can be at top or bottom or both top and bottom repeated
+          placement: ['bottom'],
+          // toolbar items
+          items: {
+            pagination: {
+              pageSizeSelect: [1, 5, 10, 20, 30, 50] // display dropdown to select pagination size. -1 is used for "ALl" option
+            },
+          }
+        },
         /*search: {
             input: $('#generalSearch')
         },*/
@@ -73,20 +85,29 @@
           {
             field: "id",
             title: "ID",
-            sortable: false, // disable sort for this column
+            sortable: false,
             width: 50,
             textAlign: 'center',
           },
           {
             field: "description",
             title: "Description",
-            sortable: 'asc', // default sort
-            filterable: false, // disable or enable filtering
-            width: 150
+            filterable: false,
+            width: 250
           },
           {
             field: "time",
             title: "Time",
+            template: function(data) {
+              let timeMilliseconds = data.time;
+              let dateTime = new Date(timeMilliseconds);
+              let options = {
+                year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'
+              };
+              data.time = dateTime.toLocaleDateString('en', options);
+              return data.time;
+            },
+            sortable: 'desc'
           },
           {
             field: "typeVehicle",
@@ -103,7 +124,7 @@
           {
             field: "note",
             title: "note",
-            width: 500
+            sortable: false,
           },
           {
             field: "Actions",
