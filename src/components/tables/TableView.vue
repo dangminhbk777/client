@@ -68,13 +68,6 @@
         },*/
         // columns definition
         columns: [
-          // {
-          //   field: "id",
-          //   sortable: false, // disable sort for this column
-          //   width: 50,
-          //   textAlign: 'center',
-          //   selector: {class: 'm-checkbox--solid m-checkbox--brand'}
-          // },
           {
             field: "id",
             title: "ID",
@@ -91,7 +84,7 @@
           {
             field: "time",
             title: "Time",
-            // textAlign: 'left',
+            textAlign: 'left',
             sortable: 'desc',
             template: function(data) {
               let timeMilliseconds = data.time;
@@ -145,7 +138,7 @@
             field: "Actions",
             title: "Actions",
             width: 110,
-            locked: {right: 'xl'},
+            // locked: {right: 'xl'},
             sortable: false,
             overflow: 'visible',
             template: function (row, index, datatable) {
