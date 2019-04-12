@@ -12,9 +12,10 @@
       </div>
       <div class="m-portlet__body">
 
+        <!--begin: Search Form -->
         <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
           <div class="row align-items-center">
-            <div class="col-xl-8 order-2 order-xl-1">
+            <div class="col-xl-10 order-2 order-xl-1">
               <div class="form-group m-form__group row align-items-center">
                 <div class="col-md-4">
                   <div class="m-form__group m-form__group--inline">
@@ -27,7 +28,7 @@
                         <option value="1">Pending</option>
                         <option value="2">Delivered</option>
                         <option value="3">Canceled</option>
-                      </select><button type="button" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="button" data-id="m_form_status" title="Pending" aria-expanded="false"><div class="filter-option"><div class="filter-option-inner">Pending</div></div>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu" role="combobox" x-placement="bottom-start" style="max-height: 502.938px; overflow: hidden; min-height: 121px; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);"><div class="inner show" role="listbox" aria-expanded="false" tabindex="-1" style="max-height: 490.938px; overflow-y: auto; min-height: 109px;"><ul class="dropdown-menu inner show"><li class="selected active"><a role="option" class="dropdown-item selected active" aria-disabled="false" tabindex="0" aria-selected="true"><span class=" bs-ok-default check-mark"></span><span class="text">All</span></a></li><li class="selected"><a role="option" class="dropdown-item selected" aria-disabled="false" tabindex="0" aria-selected="true"><span class=" bs-ok-default check-mark"></span><span class="text">Pending</span></a></li><li><a role="option" class="dropdown-item" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">Delivered</span></a></li><li><a role="option" class="dropdown-item" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">Canceled</span></a></li></ul></div></div></div>
+                      </select><button type="button" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="button" data-id="m_form_status" title="Delivered" aria-expanded="false"><div class="filter-option"><div class="filter-option-inner">Delivered</div></div>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu" role="combobox" x-placement="bottom-start" style="max-height: 439.938px; overflow: hidden; min-height: 121px; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);"><div class="inner show" role="listbox" aria-expanded="false" tabindex="-1" style="max-height: 427.938px; overflow-y: auto; min-height: 109px;"><ul class="dropdown-menu inner show"><li class=""><a role="option" class="dropdown-item" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">All</span></a></li><li class=""><a role="option" class="dropdown-item" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">Pending</span></a></li><li class="selected active"><a role="option" class="dropdown-item selected active" aria-disabled="false" tabindex="0" aria-selected="true"><span class=" bs-ok-default check-mark"></span><span class="text">Delivered</span></a></li><li><a role="option" class="dropdown-item" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">Canceled</span></a></li></ul></div></div></div>
                     </div>
                   </div>
                   <div class="d-md-none m--margin-bottom-10"></div>
@@ -43,7 +44,7 @@
                         <option value="1">Online</option>
                         <option value="2">Retail</option>
                         <option value="3">Direct</option>
-                      </select><button type="button" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="button" data-id="m_form_type" title="Online" aria-expanded="false"><div class="filter-option"><div class="filter-option-inner">Online</div></div>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu" role="combobox" x-placement="bottom-start" style="max-height: 502.938px; overflow: hidden; min-height: 121px; position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;"><div class="inner show" role="listbox" aria-expanded="false" tabindex="-1" style="max-height: 490.938px; overflow-y: auto; min-height: 109px;"><ul class="dropdown-menu inner show"><li class="selected active"><a role="option" class="dropdown-item selected active" aria-disabled="false" tabindex="0" aria-selected="true"><span class=" bs-ok-default check-mark"></span><span class="text">All</span></a></li><li class="selected"><a role="option" class="dropdown-item selected" aria-disabled="false" tabindex="0" aria-selected="true"><span class=" bs-ok-default check-mark"></span><span class="text">Online</span></a></li><li><a role="option" class="dropdown-item" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">Retail</span></a></li><li><a role="option" class="dropdown-item" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">Direct</span></a></li></ul></div></div></div>
+                      </select><button type="button" class="btn dropdown-toggle bs-placeholder btn-light" data-toggle="dropdown" role="button" data-id="m_form_type" title="All" aria-expanded="false"><div class="filter-option"><div class="filter-option-inner">All</div></div>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu" role="combobox" x-placement="bottom-start" style="max-height: 439.938px; overflow: hidden; min-height: 121px; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);"><div class="inner show" role="listbox" aria-expanded="false" tabindex="-1" style="max-height: 427.938px; overflow-y: auto; min-height: 109px;"><ul class="dropdown-menu inner show"><li class="selected active"><a role="option" class="dropdown-item selected active" aria-disabled="false" tabindex="0" aria-selected="true"><span class=" bs-ok-default check-mark"></span><span class="text">All</span></a></li><li><a role="option" class="dropdown-item" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">Online</span></a></li><li><a role="option" class="dropdown-item" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">Retail</span></a></li><li><a role="option" class="dropdown-item" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">Direct</span></a></li></ul></div></div></div>
                     </div>
                   </div>
                   <div class="d-md-none m--margin-bottom-10"></div>
@@ -58,17 +59,18 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+            <div class="col-xl-2 order-1 order-xl-2 m--align-right">
               <a href="#" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
                 <span>
-                    <i class="la la-cart-plus"></i>
-                    <span>New Order</span>
+                  <i class="la la-cart-plus"></i>
+                  <span>Tìm kiếm</span>
                 </span>
               </a>
               <div class="m-separator m-separator--dashed d-xl-none"></div>
             </div>
           </div>
         </div>
+        <!--end: Search Form -->
 
         <table-app></table-app>
       </div>
@@ -77,14 +79,30 @@
 </template>
 
 <script>
-    import Table from '../components/tables/TableView.vue';
+  import Table from '../components/tables/TableView.vue';
+  import Select from '../components/selects/SelectPlaceHolder';
 
-    export default {
-        name: "History",
-        components: {
-            'table-app': Table
-        }
+  export default {
+    name: "History",
+    components: {
+      'table-app': Table,
+      'select-place-holder': Select
+    },
+    data() {
+      return {
+        select2: {
+          allowClear: true,
+          placeHolder: "Select One",
+          options: [
+            { id: '1', text: 'Xe máy' },
+            { id: '2', text: 'Ô tô (nhỏ)' },
+            { id: '3', text: 'Ô tô (lớn)' }
+          ],
+          selected: null,
+        },
+      }
     }
+  }
 </script>
 
 <style scoped>

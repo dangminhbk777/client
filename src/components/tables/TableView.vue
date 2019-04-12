@@ -8,9 +8,6 @@
 
   export default {
     name: "table-view",
-    /*components: {
-        'action-table': ActionTable
-    },*/
     props: {
       url: {
         type: String,
@@ -46,7 +43,6 @@
           serverSorting: true
         },
         processing: true,
-        // layout definition
         layout: {
           theme: 'default',
           class: '',
@@ -59,11 +55,8 @@
         sortable: true,
         filterable: false,
         pagination: true,
-        // toolbar
         toolbar: {
-          // toolbar placement can be at top or bottom or both top and bottom repeated
           placement: ['bottom'],
-          // toolbar items
           items: {
             pagination: {
               pageSizeSelect: [1, 5, 10, 20, 30, 50] // display dropdown to select pagination size. -1 is used for "ALl" option
@@ -98,6 +91,8 @@
           {
             field: "time",
             title: "Time",
+            // textAlign: 'left',
+            sortable: 'desc',
             template: function(data) {
               let timeMilliseconds = data.time;
               let dateTime = new Date(timeMilliseconds);
@@ -106,12 +101,28 @@
               };
               data.time = dateTime.toLocaleDateString('en', options);
               return data.time;
-            },
-            sortable: 'desc'
+            }
           },
           {
             field: "typeVehicle",
-            title: "Type Vehicle"
+            title: "Type Vehicle",
+            textAlign: 'center',
+            template: function(data) {
+              switch(data.typeVehicle) {
+                case "1":
+                  data.typeVehicle = "Xe máy";
+                  break;
+                case "2":
+                  data.typeVehicle = "Ô tô (nhỏ)";
+                  break;
+                case "3":
+                  data.typeVehicle = "Ô tô (lớn)";
+                  break;
+                default:
+                  data.typeVehicle = null;
+              }
+              return data.typeVehicle;
+            },
           },
           {
             field: "numberSeat",
@@ -119,7 +130,11 @@
           },
           {
             field: "price",
-            title: "Price"
+            title: "Price",
+            template: function(data) {
+              data.price = data.price + ".000 (VNĐ)";
+              return data.price;
+            },
           },
           {
             field: "note",
