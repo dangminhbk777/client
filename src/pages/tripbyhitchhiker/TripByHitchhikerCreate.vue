@@ -17,49 +17,25 @@
               <div class="form-group m-form__group row">
                 <label class="col-4 col-form-label">Thời gian xuất phát</label>
                 <div class="col-8">
-                  <input class="form-control m-input" type="datetime-local" v-model="time">
-                </div>
-              </div>
-              <div class="form-group m-form__group row">
-                <label class="col-4 col-form-label">Phương tiện</label>
-                <div class="col-8">
-                  <select-place-holder
-                    :options="select2.options"
-                    :placeHolder="select2.placeHolder"
-                    :allowClear="select2.allowClear"
-                    v-model="select2.selected">
-                    <option disabled value="0">Select One</option>
-                  </select-place-holder>
+                  <input class="form-control m-input" type="datetime-local" v-model="position.time">
                 </div>
               </div>
               <div class="form-group m-form__group row">
                 <label class="col-4 col-form-label">Số chỗ trống</label>
                 <div class="col-8">
-                  <input class="form-control m-input" type="number" v-model="numberSeat">
+                  <input class="form-control m-input" type="number" v-model="position.numberSeat">
                 </div>
               </div>
               <div class="form-group m-form__group row">
                 <label class="col-4 col-form-label">Giá dự kiến (VND)</label>
                 <div class="col-8">
-                  <input class="form-control m-input" type="number" v-model="price">
-                </div>
-              </div>
-              <div class="form-group m-form__group row">
-                <label for="image" class="col-4 col-form-label">Ảnh mô tả</label>
-                <div class="col-8">
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="image" v-on:change="onImageChange" multiple>
-                    <label class="custom-file-label" for="image">Chọn ảnh</label>
-                  </div>
-                  <div v-if="previewImages">
-                    <img v-for="image in previewImages" :src="image" class="img-responsive mr-10 overview-img">
-                  </div>
+                  <input class="form-control m-input" type="number" v-model="position.price">
                 </div>
               </div>
               <div class="form-group m-form__group row">
                 <label class="col-4 col-form-label">Chú thích</label>
                 <div class="col-8">
-                  <textarea class="form-control m-input" rows="3" v-model="note"></textarea>
+                  <textarea class="form-control m-input" rows="3" v-model="position.note"></textarea>
                 </div>
               </div>
             </div>
@@ -113,89 +89,53 @@
 </template>
 
 <script>
-  import http from '../services/http-common.js';
-  import Select from '../components/selects/SelectPlaceHolder';
+  import http from '../../services/http-common.js';
+  import Select from '../../components/selects/SelectPlaceHolder';
 
   export default {
-    name: "Trip",
+    name: "TripByDriverCreate",
     components: {
       'select-place-holder': Select
     },
     data() {
       return {
-        // Field request
-        startLongitude: null,
-        endLongitude: null,
-        startLatitude: null,
-        endLatitude: null,
-        time: null,
-        typeVehicle: null,
-        numberSeat: null,
-        price: null,
-        isShipping: null,
-        note: null,
-        descriptionOrigin: null,
-        descriptionDestination: null,
-        // Form submit and show image
-        previewImages: [],
-        formData: new FormData(),
-        select2: {
-          allowClear: true,
-          placeHolder: "Select One",
-          options: [
-            { id: '1', text: 'Xe máy' },
-            { id: '2', text: 'Ô tô (nhỏ)' },
-            { id: '3', text: 'Ô tô (lớn)' }
-          ],
-          selected: null,
-        },
+        position: {
+          startLongitude: null,
+          endLongitude: null,
+          startLatitude: null,
+          endLatitude: null,
+          time: null,
+          numberSeat: null,
+          price: null,
+          note: null,
+          descriptionOrigin: null,
+          descriptionDestination: null,
+        }
       }
     },
     methods: {
-      onImageChange: function(e) {
-        let vm = this;
-        let files = e.target.files || e.dataTransfer.files;
-        if (!files.length) {
-          return;
-        }
-        Array.from(files).forEach(function(file) {
-          vm.formData.append("images[]", file);
-          vm.createImage(file);
-        });
-      },
-      createImage: function(file) {
-        let reader = new FileReader();
-        let vm = this;
-        reader.onload = (e) => {
-          vm.previewImages.push(e.target.result);
-        };
-        reader.readAsDataURL(file);
-      },
       postNewTrip: function() {
         let vm = this;
-        this.setDataToFormRequest();
-        http.post('/trip-by-driver/new-trip', this.formData)
+        http.post('/trip-by-hitchhiker/new-trip', this.position)
             .then(response => {
               console.log(response);
-              vm.formData = new FormData();
+              vm.position = null;
             })
             .catch(e => {
               console.error(e);
-              vm.formData = new FormData();
             });
       },
-      setDataToFormRequest: function () {
-        this.typeVehicle = this.select2.selected;
-        this.formData.append("startLongitude", this.startLongitude);
-        this.formData.append("endLongitude", this.endLongitude);
-        this.formData.append("startLatitude", this.startLatitude);
-        this.formData.append("endLatitude", this.endLatitude);
-        this.formData.append("time", this.time);
-        this.formData.append("typeVehicle", this.typeVehicle);
-        this.formData.append("numberSeat", this.numberSeat);
-        this.formData.append("price", this.price);
-        this.formData.append("isShipping", this.isShipping);
-        this.formData.append("note", this.note);
+      reset: function () {
+        this.position.startLongitude = null;
+        this.position.endLongitude = null;
+        this.position.startLatitude = null;
+        this.position.endLatitude = null;
+        this.position.time = null;
+        this.position.numberSeat = null;
+        this.position.price = null;
+        this.position.note = null;
+        this.position.descriptionOrigin = null;
+        this.position.descriptionDestination = null;
       },
       setupSize: function (){
         let offsetHeight = document.getElementById('information-driver').offsetHeight;
@@ -221,7 +161,7 @@
         if (minute < 10) {
           minute = '0' + minute;
         }
-        this.time = year + '-' + month + '-' + dateTime + 'T' + hour + ':' + minute + ":00";
+        this.position.time = year + '-' + month + '-' + dateTime + 'T' + hour + ':' + minute + ":00";
       },
       initMap: function () {
         let vm = this;
@@ -247,12 +187,12 @@
           $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
             let id = $(this).parent('div').attr('id');
             if (id === "mapbox-directions-origin-input") {
-              vm.descriptionOrigin = e.target.value;
+              vm.position.descriptionOrigin = e.target.value;
             } else {
-              vm.descriptionDestination = e.target.value;
+              vm.position.descriptionDestination = e.target.value;
             }
-            console.log(vm.descriptionOrigin);
-            console.log(vm.descriptionDestination);
+            console.log(vm.position.descriptionOrigin);
+            console.log(vm.position.descriptionDestination);
           });
 
           // Listen for the `directions.route` event that is triggered when a user
@@ -267,14 +207,14 @@
           });
           directions.on('origin', function (e) {
             if (e !=  null) {
-              vm.startLatitude = e.feature.geometry.coordinates[0];
-              vm.startLongitude = e.feature.geometry.coordinates[1];
+              vm.position.startLatitude = e.feature.geometry.coordinates[0];
+              vm.position.startLongitude = e.feature.geometry.coordinates[1];
             }
           });
           directions.on('destination', function (e) {
             if (e != null) {
-              vm.endLatitude = e.feature.geometry.coordinates[0];
-              vm.endLongitude = e.feature.geometry.coordinates[1];
+              vm.position.endLatitude = e.feature.geometry.coordinates[0];
+              vm.position.endLongitude = e.feature.geometry.coordinates[1];
             }
           });
         });
@@ -293,12 +233,5 @@
 <style scoped>
   .margin-10 {
     margin: 0 10px 0 10px;
-  }
-  .mr-10 {
-    margin: 10px 10px 10px 10px;
-  }
-  .overview-img {
-    height: 70px;
-    width: 90px;
   }
 </style>

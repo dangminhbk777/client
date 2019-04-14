@@ -65,7 +65,7 @@
 </template>
 
 <script>
-  import http from '../services/http-common.js';
+  import http from '../../services/http-common.js';
 
   export default {
     name: "RegisterUser",

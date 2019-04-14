@@ -1,6 +1,5 @@
 <template>
-  <div class="m_datatable_">
-  </div>
+  <div class="m_datatable_"></div>
 </template>
 
 <script>
@@ -14,11 +13,11 @@
         default: 'localhost'
       }
     },
-    methods: {
+    /*methods: {
       showInformation() {
         alert('run');
       }
-    },
+    },*/
     mounted() {
       let table = $(this.$el);
       let tableApp =  table.mDatatable({
@@ -137,26 +136,19 @@
           {
             field: "Actions",
             title: "Actions",
+            textAlign: 'center',
             width: 110,
-            // locked: {right: 'xl'},
+            locked: {right: 'xl'},
             sortable: false,
             overflow: 'visible',
             template: function (row, index, datatable) {
               // console.log('index-' + index);
               // console.log(row);
-              let dropup = (datatable.getPageSize() - index) <= 4 ? 'dropup' : '';
-              // return ActionTable.toString();
-              return '<span>\n' +
-                  '        <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="View details">\n' +
-                  '            <i class="la la-ellipsis-h"></i>\n' +
-                  '        </a>\n' +
-                  '        <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">\n' +
-                  '            <i class="la la-edit"></i>\n' +
-                  '        </a>\n' +
-                  '        <a href="#" id="btn-delete-row" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">\n' +
-                  '            <i class="la la-trash"></i>\n' +
-                  '        </a>\n' +
-                  '    </span>';
+              let template =
+                  '<a href="#" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
+                  '  <span>Detail</span>\n' +
+                  '</a>';
+              return template;
             }
           }
         ]

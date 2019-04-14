@@ -89,11 +89,11 @@
 </template>
 
 <script>
-  import Table from '../components/tables/TableView.vue';
-  import Select from '../components/selects/SelectPlaceHolder';
+  import Table from '../../components/tables/TableView.vue';
+  import Select from '../../components/selects/SelectPlaceHolder';
 
   export default {
-    name: "History",
+    name: "TripByDriverList",
     components: {
       'table-app': Table,
       'select-place-holder': Select
