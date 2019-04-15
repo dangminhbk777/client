@@ -93,7 +93,7 @@
   import Select from '../../components/selects/SelectPlaceHolder';
 
   export default {
-    name: "TripByDriverCreate",
+    name: "TripByHitchhikerCreate",
     components: {
       'select-place-holder': Select
     },

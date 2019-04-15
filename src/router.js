@@ -1,8 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./pages/Home.vue";
-import RegisterUser from "./pages/user/UserRegister.vue";
+import UserRegister from "./pages/user/UserRegister.vue";
 import TripByDriverList from "./pages/tripbydriver/TripByDriverList.vue";
+import TripByDriverDetail from "./pages/tripbydriver/TripByDriverDetail.vue";
 import TripByDriverCreate from "./pages/tripbydriver/TripByDriverCreate.vue";
 import TripByHitchhikerCreate from "./pages/tripbyhitchhiker/TripByHitchhikerCreate.vue";
 import Login from "./pages/Login.vue";
@@ -20,31 +21,42 @@ const router = new Router({
       alias: '/home',
       component: Home
     },
+    // User
     {
-      path: '/register-user',
-      name: 'registerUser',
-      component: RegisterUser
+      path: 'user/register',
+      name: 'UserRegister',
+      component: UserRegister
     },
+    // Trip by driver
     {
       path: '/trip-by-driver',
-      name: 'trip-by-driver',
+      name: 'TripByDriverList',
       component: TripByDriverList,
     },
     {
-      path: '/trip-by-driver-create',
-      name: 'trip-by-driver-create',
+      path: '/trip-by-driver/create',
+      name: 'TripByDriverCreate',
       component: TripByDriverCreate,
     },
     {
-      path: '/trip-by-hitchhiker-create',
-      name: 'trip-by-hitchhiker-create',
+      path: '/trip-by-driver/:driverId',
+      name: 'TripByDriverDetail',
+      component: TripByDriverDetail,
+      props: true
+    },
+    // Trip by hitchhiker
+    {
+      path: '/trip-by-hitchhiker/create',
+      name: 'TripByHitchhikerCreate',
       component: TripByHitchhikerCreate,
     },
+    // Authentication
     {
       path: '/login',
       name: 'login',
       component: Login
     },
+    // System error
     {
       path: '/page-not-found',
       name: 'page-not-found',

@@ -68,7 +68,7 @@
   import http from '../../services/http-common.js';
 
   export default {
-    name: "RegisterUser",
+    name: "UserRegister",
     data() {
       return {
         // Field request

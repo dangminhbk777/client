@@ -141,14 +141,12 @@
             locked: {right: 'xl'},
             sortable: false,
             overflow: 'visible',
-            template: function (row, index, datatable) {
-              // console.log('index-' + index);
-              // console.log(row);
-              let template =
-                  '<a href="#" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
-                  '  <span>Detail</span>\n' +
-                  '</a>';
-              return template;
+            template: function (data) {
+              console.log(data);
+              let url = "http://localhost:4200/trip-by-driver/" + data.id;
+              return '<a href="' + url + '" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
+                     '  <span>Detail</span>\n' +
+                     '</a>';
             }
           }
         ]
