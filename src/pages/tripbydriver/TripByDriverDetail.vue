@@ -17,14 +17,105 @@
           <!-- BODY: BEGIN -->
           <div class="m-portlet__body">
             <div class="row">
-              <div class="col-lg-5">
-                {{tripDetail}}
+              <div class="col-lg-6">
+                <!--{{tripDetail}}-->
+                <div class="m-widget4">
+                  <div class="m-widget4__item">
+                    <div class="m-widget4__ext">
+                      <span class="m-widget4__icon m--font-brand">
+                        <i class="flaticon-lock"></i>
+                      </span>
+                    </div>
+                    <div class="m-widget4__info">
+                      <span class="m-widget4__text">
+                        <span class="text-dark">ID</span>&nbsp;&nbsp;{{tripDetail.driverId}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="m-widget4__item">
+                    <div class="m-widget4__ext">
+                      <span class="m-widget4__icon m--font-brand">
+                        <i class="flaticon-avatar"></i>
+                      </span>
+                    </div>
+                    <div class="m-widget4__info">
+                      <span class="m-widget4__text">
+                        <span class="text-dark">Name</span>&nbsp;&nbsp;{{tripDetail.name}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="m-widget4__item">
+                    <div class="m-widget4__ext">
+                      <span class="m-widget4__icon m--font-brand">
+                        <i class="flaticon-support"></i>
+                      </span>
+                    </div>
+                    <div class="m-widget4__info">
+                      <span class="m-widget4__text">
+                          <span class="text-dark">Phone</span>&nbsp;&nbsp;{{tripDetail.phone}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="m-widget4__item">
+                    <div class="m-widget4__ext">
+                      <span class="m-widget4__icon m--font-brand">
+                        <i class="flaticon-customer"></i>
+                      </span>
+                    </div>
+                    <div class="m-widget4__info">
+                      <span class="m-widget4__text">
+                          <span class="text-dark">Quality service</span>&nbsp;&nbsp;{{tripDetail.star}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="m-widget4__item">
+                    <div class="m-widget4__ext">
+                      <span class="m-widget4__icon m--font-brand">
+                        <i class="flaticon-users"></i>
+                      </span>
+                    </div>
+                    <div class="m-widget4__info">
+                      <span class="m-widget4__text">
+                          <span class="text-dark">Number of seats</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="m-widget4__item">
+                    <div class="m-widget4__ext">
+                      <span class="m-widget4__icon m--font-brand">
+                        <i class="flaticon-price-tag"></i>
+                      </span>
+                    </div>
+                    <div class="m-widget4__info">
+                      <span class="m-widget4__text">
+                          <span class="text-dark">Price</span>&nbsp;&nbsp;{{tripDetail.price}}.000 (VNĐ)
+                      </span>
+                    </div>
+                  </div>
+                  <div class="m-widget4__item">
+                    <div class="m-widget4__ext">
+                      <span class="m-widget4__icon m--font-brand">
+                        <i class="flaticon-notes"></i>
+                      </span>
+                    </div>
+                    <div class="m-widget4__info">
+                      <span class="m-widget4__text">
+                          <span class="text-dark">Note</span>&nbsp;&nbsp;
+                      </span>
+                      <span class="m-widget4__text">
+                          {{tripDetail.note}} Lorem Ipsum is simply dummy text of the printing and typesetting industry scrambled it to make text of the printing and typesetting industry scrambled a type specimen book text of the dummy text of the printing printing and typesetting industry scrambled dummy text of the printing.
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="col-lg-7">
-                <slide-show :images="tripDetail.images"></slide-show>
+              <div class="col-lg-6">
+                <slide-show :images="tripDetail.images"
+                            :type-image="path">
+                </slide-show>
               </div>
             </div>
-            <div class="row __padding-top-bottom">
+            <div class="row __padding-top">
               <div class="col-lg-12">
                 <!-- MAP: BEGIN -->
                 <div id="information-map">
@@ -112,6 +203,10 @@
         type: String,
         default: null
       },
+      path: {
+        type: String,
+        default: "/trip-by-driver/"
+      }
     },
     data() {
       return {
@@ -202,6 +297,8 @@
       http.get('/trip-by-driver/' + this.driverId)
           .then(response => {
             this.tripDetail = JSON.parse(response.data.metadata);
+            this.tripDetail.images = JSON.parse(this.tripDetail.images);
+            console.log(this.tripDetail.images);
             vm.initMap();
           })
           .catch(e => {
@@ -216,7 +313,7 @@
     width: 100%;
     height: 100%;
   }
-  .__padding-top-bottom {
+  .__padding-top {
     padding-top: 2.2rem;
   }
   #map, #information-map {

@@ -9,7 +9,7 @@
           <div class="m-stack m-stack--ver m-stack--general">
             <div class="m-stack__item m-stack__item--middle m-brand__logo">
               <a href="index.html" class="m-brand__logo-wrapper">
-                <img alt="" src="assets/demo/media/img/logo/logo.png" />
+                <img alt="" src="/assets/demo/media/img/logo/logo.png"/>
               </a>
             </div>
             <div class="m-stack__item m-stack__item--middle m-brand__tools">
@@ -195,11 +195,11 @@
                   <a href="#" class="m-nav__link m-dropdown__toggle">
                     <span class="m-topbar__username m--hidden-mobile">Mark</span>
                     <span class="m-topbar__userpic">
-													<img src="assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless m--img-centered" alt="" />
-												</span>
+                      <img src="/assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless m--img-centered" alt="" />
+                    </span>
                     <span class="m-nav__link-icon m-topbar__usericon  m--hide">
-													<span class="m-nav__link-icon-wrapper"><i class="flaticon-user-ok"></i></span>
-												</span>
+                      <span class="m-nav__link-icon-wrapper"><i class="flaticon-user-ok"></i></span>
+                    </span>
                   </a>
                   <div class="m-dropdown__wrapper">
                     <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
@@ -207,7 +207,7 @@
                       <div class="m-dropdown__header m--align-center">
                         <div class="m-card-user m-card-user--skin-light">
                           <div class="m-card-user__pic">
-                            <img src="assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless" alt="" />
+                            <img src="/assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless" alt="" />
                           </div>
                           <div class="m-card-user__details">
                             <span class="m-card-user__name m--font-weight-500">Mark Andre</span>
@@ -225,11 +225,11 @@
                               <a href="profile.html" class="m-nav__link">
                                 <i class="m-nav__link-icon flaticon-profile-1"></i>
                                 <span class="m-nav__link-title">
-																			<span class="m-nav__link-wrap">
-																				<span class="m-nav__link-text">My Profile</span>
-																				<span class="m-nav__link-badge"><span class="m-badge m-badge--success">2</span></span>
-																			</span>
-																		</span>
+                                  <span class="m-nav__link-wrap">
+                                    <span class="m-nav__link-text">My Profile</span>
+                                    <span class="m-nav__link-badge"><span class="m-badge m-badge--success">2</span></span>
+                                  </span>
+                                </span>
                               </a>
                             </li>
                             <li class="m-nav__item">

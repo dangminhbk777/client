@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import {AUTHORIZATION} from '../../services/variables.js'
+  import {AUTHORIZATION, URL_CALL_API} from '../../services/variables.js'
 
   export default {
     name: "table-view",
@@ -25,7 +25,7 @@
           type: 'remote',
           source: {
             read: {
-              url: 'http://localhost:8080/api/data-tables/trip-by-driver',
+              url: URL_CALL_API + '/data-tables/trip-by-driver',
               headers: {
                 'authorization': localStorage.getItem(AUTHORIZATION)
               },

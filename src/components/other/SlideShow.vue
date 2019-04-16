@@ -2,22 +2,13 @@
   <div id="slideShow" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ul class="carousel-indicators">
-      <li data-target="#slideShow" data-slide-to="0" class="active"></li>
-      <li v-for="image in images" data-target="#slideShow" :data-slide-to="index++"></li>
-<!--      <li v-for="image in images" data-target="#slideShow" :data-slide-to="index++" class="active"></li>-->
-<!--      <li data-target="#slideShow" data-slide-to="1"></li>-->
-<!--      <li data-target="#slideShow" data-slide-to="2"></li>-->
+      <li v-for="(image, index) in images" data-target="#slideShow" :data-slide-to="index" :class="[index === 0 ? 'active': '']">
+      </li>
     </ul>
     <!-- The slide show -->
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://www.w3schools.com/bootstrap4/la.jpg" alt="Los Angeles">
-      </div>
-      <div class="carousel-item">
-        <img src="https://www.w3schools.com/bootstrap4/chicago.jpg" alt="Chicago">
-      </div>
-      <div class="carousel-item">
-        <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="New York">
+      <div v-for="(image, index) in images" :class="[index === 0 ? 'carousel-item active': 'carousel-item']">
+        <img :src="baseUrlImage + image " alt="Image">
       </div>
     </div>
     <!-- Left and right controls -->
@@ -31,6 +22,8 @@
 </template>
 
 <script>
+  import {URL_CALL_API} from '../../services/variables.js'
+
   export default {
     name: "SlideShow",
     props: {
@@ -38,15 +31,24 @@
         type: Array,
         default: null
       },
+      typeImage: {
+        type: String,
+        default: null
+      }
     },
     data() {
       return {
-        index: 0
+        baseUrlImage: URL_CALL_API + '/images' + this.typeImage
       }
     }
   }
 </script>
 
 <style scoped>
-
+  .carousel-item img {
+    width: 100%;
+    height: 100%;
+    min-height: 550px;
+    max-height: 550px;
+  }
 </style>
