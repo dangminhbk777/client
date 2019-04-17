@@ -3,8 +3,9 @@ import Router from "vue-router";
 import Home from "./pages/Home.vue";
 import UserRegister from "./pages/user/UserRegister.vue";
 import TripByDriverList from "./pages/tripbydriver/TripByDriverList.vue";
-import TripByDriverDetail from "./pages/tripbydriver/TripByDriverDetail.vue";
 import TripByDriverCreate from "./pages/tripbydriver/TripByDriverCreate.vue";
+import TripByDriverDetail from "./pages/tripbydriver/TripByDriverDetail.vue";
+import TripByDriverListRegister from "./pages/tripbydriver/TripByDriverListRegister.vue";
 import TripByHitchhikerCreate from "./pages/tripbyhitchhiker/TripByHitchhikerCreate.vue";
 import Login from "./pages/Login.vue";
 import PageNotFound from "./pages/404.vue";
@@ -42,6 +43,12 @@ const router = new Router({
       path: '/trip-by-driver/:driverId',
       name: 'TripByDriverDetail',
       component: TripByDriverDetail,
+      props: true
+    },
+    {
+      path: '/trip-by-driver/:driverId/list-register',
+      name: 'TripByDriverListRegister',
+      component: TripByDriverListRegister,
       props: true
     },
     // Trip by hitchhiker

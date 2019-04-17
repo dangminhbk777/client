@@ -142,7 +142,6 @@
             sortable: false,
             overflow: 'visible',
             template: function (data) {
-              console.log(data);
               let url = "http://localhost:4200/trip-by-driver/" + data.id;
               return '<a href="' + url + '" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
                      '  <span>Detail</span>\n' +

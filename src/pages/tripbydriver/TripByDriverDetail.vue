@@ -12,6 +12,21 @@
                 </h3>
               </div>
             </div>
+            <div class="m-portlet__head-tools">
+              <ul class="m-portlet__nav">
+                <li class="m-portlet__nav-item">
+                  <button v-if="showButton === '03'" v-on:click="console.log('run')" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
+                    Show list register
+                  </button>
+                  <button v-else-if="showButton === '01'" v-on:click="registerTrip" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
+                    Register trip
+                  </button>
+                  <button v-else class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
+                    Registered
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
           <!-- HEAD: END -->
           <!-- BODY: BEGIN -->
@@ -103,7 +118,7 @@
                           <span class="text-dark">Note</span>&nbsp;&nbsp;
                       </span>
                       <span class="m-widget4__text">
-                          {{tripDetail.note}} Lorem Ipsum is simply dummy text of the printing and typesetting industry scrambled it to make text of the printing and typesetting industry scrambled a type specimen book text of the dummy text of the printing printing and typesetting industry scrambled dummy text of the printing.
+                          {{tripDetail.note}}
                       </span>
                     </div>
                   </div>
@@ -228,8 +243,17 @@
           images: null,
           price: null,
           isShipping: null,
-          note: null
-        }
+          note: null,
+          isSubmitter: null,
+          status: null
+        },
+        //urlPageListRegister:  'localhost:4200/trip-by-driver/' + this.driverId + "/list-register",
+        /*
+        * show register trip : 01
+        * show registered    : 02
+        * show list register : 03
+        * */
+        showButton: null
       }
     },
     methods: {
@@ -290,20 +314,47 @@
         window.onresize = function() {
           map.resize();
         };
+      },
+      registerTrip: function () {
+        http.post("trip-by-driver/register-with-driver/" + this.driverId)
+            .then(response => {
+              console.log(JSON.parse(response.data.metadata));
+              this.showButton = "02";
+            })
+            .catch(e => {
+              console.error(e);
+            });
+      },
+      getTripDetail: function () {
+        let vm = this;
+        http.get('/trip-by-driver/status/' + this.driverId)
+            .then(response => {
+              let userDriver = JSON.parse(response.data.metadata);
+              if (userDriver === null) {
+                vm.showButton = "01";
+              } else if (userDriver.isSubmitter) {
+                vm.showButton = "03";
+              } else {
+                vm.showButton = "02";
+              }
+            })
+            .catch(e => {
+              console.error(e);
+            });
+        http.get('/trip-by-driver/' + this.driverId)
+            .then(response => {
+              vm.tripDetail = JSON.parse(response.data.metadata);
+              vm.tripDetail.images = JSON.parse(this.tripDetail.images);
+              // check show button
+              vm.initMap();
+            })
+            .catch(e => {
+              console.error(e);
+            });
       }
     },
     mounted() {
-      let vm = this;
-      http.get('/trip-by-driver/' + this.driverId)
-          .then(response => {
-            this.tripDetail = JSON.parse(response.data.metadata);
-            this.tripDetail.images = JSON.parse(this.tripDetail.images);
-            console.log(this.tripDetail.images);
-            vm.initMap();
-          })
-          .catch(e => {
-            console.error(e);
-          });
+      this.getTripDetail();
     }
   }
 </script>
