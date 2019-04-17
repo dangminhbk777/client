@@ -1,6 +1,6 @@
 <template>
   <!-- begin::Header -->
-  <header id="m_header" class="m-grid__item    m-header " m-minimize="minimize" m-minimize-mobile="minimize" m-minimize-offset="200" m-minimize-mobile-offset="200">
+  <header id="m_header" class="m-grid__item m-header " m-minimize="minimize" m-minimize-mobile="minimize" m-minimize-offset="200" m-minimize-mobile-offset="200">
     <div class="m-container m-container--fluid m-container--full-height">
       <div class="m-stack m-stack--ver m-stack--desktop  m-header__wrapper">
 
@@ -40,35 +40,29 @@
                       class="m-menu__item-here"></span><i class="m-menu__link-icon flaticon-analytics"></i><span class="m-menu__link-text">Dashboard</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
                     <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span class="m-menu__arrow m-menu__arrow--adjust"></span>
                       <ul class="m-menu__subnav">
-                        <li class="m-menu__item  m-menu__item--active " aria-haspopup="true"><a href="inner.html" class="m-menu__link "><i class="m-menu__link-icon flaticon-diagram"></i><span class="m-menu__link-title"> <span class="m-menu__link-wrap"> <span
-                            class="m-menu__link-text">Generate Reports</span> <span class="m-menu__link-badge"><span class="m-badge m-badge--success">2</span></span> </span></span></a></li>
-                        <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link"><i class="m-menu__link-icon flaticon-business"></i><span
-                            class="m-menu__link-text">Manage Orders</span><i class="m-menu__hor-arrow la la-angle-right"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
-                          <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right"><span class="m-menu__arrow "></span>
-                            <ul class="m-menu__subnav">
-                              <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a href="inner.html" class="m-menu__link "><span class="m-menu__link-text">Latest Orders</span></a></li>
-                              <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link"><i class="m-menu__link-icon flaticon-business"></i><span
-                                  class="m-menu__link-text">Delivered Orders</span><i class="m-menu__hor-arrow la la-angle-right"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
-                                <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right"><span class="m-menu__arrow "></span>
-                                  <ul class="m-menu__subnav">
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a href="inner.html" class="m-menu__link "><span class="m-menu__link-text">Latest Orders</span></a></li>
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a href="inner.html" class="m-menu__link "><span class="m-menu__link-text">Pending Orders</span></a></li>
-                                  </ul>
-                                </div>
-                              </li>
-                            </ul>
-                          </div>
+                        <li class="m-menu__item  m-menu__item--active " aria-haspopup="true">
+                          <a href="inner.html" class="m-menu__link ">
+                            <i class="m-menu__link-icon flaticon-diagram"></i>
+                            <span class="m-menu__link-title">
+                              <span class="m-menu__link-wrap">
+                                <span class="m-menu__link-text">Generate Reports</span>
+                                <span class="m-menu__link-badge">
+                                  <span class="m-badge m-badge--success">2</span>
+                                </span>
+                              </span>
+                            </span>
+                          </a>
                         </li>
                       </ul>
                     </div>
                   </li>
                   <!-- Menu DashBoard: END -->
-                  <!-- Menu Trip by driver: BEGIN -->
+                  <!-- Menu TRIP: BEGIN -->
                   <li class="m-menu__item  m-menu__item--active  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" aria-haspopup="true">
                     <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
                       <span class="m-menu__item-here"></span>
                       <i class="m-menu__link-icon fa fa-road"></i>
-                      <span class="m-menu__link-text">Trip by driver</span>
+                      <span class="m-menu__link-text">Trip</span>
                       <i class="m-menu__hor-arrow la la-angle-down"></i>
                       <i class="m-menu__ver-arrow la la-angle-right"></i>
                     </a>
@@ -77,30 +71,33 @@
                       <ul class="m-menu__subnav">
                         <li class="m-menu__item  m-menu__item--active " aria-haspopup="true">
                           <a href="/trip-by-driver" class="m-menu__link ">
-                            <i class="m-menu__link-icon flaticon-diagram"></i>
+                            <i class="m-menu__link-icon fa fa-shoe-prints"></i>
                             <span class="m-menu__link-title">
                               <span class="m-menu__link-wrap">
-                                <span class="m-menu__link-text">List trip</span>
-                                <!--<span class="m-menu__link-badge">
-                                  <span class="m-badge m-badge&#45;&#45;success">2</span>
-                                </span>-->
+                                <span class="m-menu__link-text">My Trip</span>
                               </span>
                             </span>
                           </a>
                         </li>
+                        <!-- TRIP BY DRIVERS: BEGIN -->
                         <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
                           <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
-                            <i class="m-menu__link-icon flaticon-business"></i>
-                            <span class="m-menu__link-text">Manage Orders</span>
+                            <i class="m-menu__link-icon fa fa-car"></i>
+                            <span class="m-menu__link-text">Trip By Drivers</span>
                             <i class="m-menu__hor-arrow la la-angle-right"></i>
                             <i class="m-menu__ver-arrow la la-angle-right"></i>
                           </a>
                           <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right">
-                            <span class="m-menu__arrow "></span>
+                            <span class="m-menu__arrow"></span>
                             <ul class="m-menu__subnav">
-                              <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-                                <a href="inner.html" class="m-menu__link ">
-                                  <span class="m-menu__link-text">Latest Orders</span>
+                              <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                                <a href="/trip-by-driver" class="m-menu__link ">
+                                  <span class="m-menu__link-text">List Trip</span>
+                                </a>
+                              </li>
+                              <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                                <a href="/trip-by-driver/create" class="m-menu__link ">
+                                  <span class="m-menu__link-text">New Trip</span>
                                 </a>
                               </li>
                               <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
@@ -120,10 +117,50 @@
                             </ul>
                           </div>
                         </li>
+                        <!-- TRIP BY DRIVERS: END -->
+                        <!-- TRIP BY HITCHHIKER: BEGIN -->
+                        <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
+                          <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
+                            <i class="m-menu__link-icon fa fa-user-friends"></i>
+                            <span class="m-menu__link-text">Trip By Hitchhikers</span>
+                            <i class="m-menu__hor-arrow la la-angle-right"></i>
+                            <i class="m-menu__ver-arrow la la-angle-right"></i>
+                          </a>
+                          <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right">
+                            <span class="m-menu__arrow "></span>
+                            <ul class="m-menu__subnav">
+                              <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                                <a href="/trip-by-hitchhiker" class="m-menu__link ">
+                                  <span class="m-menu__link-text">List Trip</span>
+                                </a>
+                              </li>
+                              <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                                <a href="/trip-by-hitchhiker/create" class="m-menu__link ">
+                                  <span class="m-menu__link-text">New Trip</span>
+                                </a>
+                              </li>
+                              <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
+                                <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
+                                  <i class="m-menu__link-icon flaticon-business"></i>
+                                  <span class="m-menu__link-text">Delivered Orders</span>
+                                  <i class="m-menu__hor-arrow la la-angle-right"></i>
+                                  <i class="m-menu__ver-arrow la la-angle-right"></i>
+                                </a>
+                                <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right"><span class="m-menu__arrow "></span>
+                                  <ul class="m-menu__subnav">
+                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a href="inner.html" class="m-menu__link "><span class="m-menu__link-text">Latest Orders</span></a></li>
+                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a href="inner.html" class="m-menu__link "><span class="m-menu__link-text">Pending Orders</span></a></li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                        <!-- TRIP BY HITCHHIKER: END -->
                       </ul>
                     </div>
                   </li>
-                  <!-- Menu Trip by driver: END -->
+                  <!-- Menu TRIP: END -->
                 </ul>
               </div>
               <!-- END: Horizontal Menu -->
@@ -154,12 +191,12 @@
                       <div class="m-dropdown__header">
                         <form class="m-list-search__form">
                           <div class="m-list-search__form-wrapper">
-																<span class="m-list-search__form-input-wrapper">
-																	<input id="m_quicksearch_input" autocomplete="off" type="text" name="q" class="m-list-search__form-input" value="" placeholder="Search...">
-																</span>
+                            <span class="m-list-search__form-input-wrapper">
+                              <input id="m_quicksearch_input" autocomplete="off" type="text" name="q" class="m-list-search__form-input" value="" placeholder="Search...">
+                            </span>
                             <span class="m-list-search__form-icon-close" id="m_quicksearch_close">
-																	<i class="la la-remove"></i>
-																</span>
+                              <i class="la la-remove"></i>
+                            </span>
                           </div>
                         </form>
                       </div>
@@ -297,32 +334,11 @@
                             </li>
                             <li class="m-nav__item">
                               <a href="profile.html" class="m-nav__link">
-                                <i class="m-nav__link-icon flaticon-share"></i>
-                                <span class="m-nav__link-text">Activity</span>
-                              </a>
-                            </li>
-                            <li class="m-nav__item">
-                              <a href="profile.html" class="m-nav__link">
-                                <i class="m-nav__link-icon flaticon-chat-1"></i>
-                                <span class="m-nav__link-text">Messages</span>
-                              </a>
-                            </li>
-                            <li class="m-nav__separator m-nav__separator--fit">
-                            </li>
-                            <li class="m-nav__item">
-                              <a href="profile.html" class="m-nav__link">
-                                <i class="m-nav__link-icon flaticon-info"></i>
-                                <span class="m-nav__link-text">FAQ</span>
-                              </a>
-                            </li>
-                            <li class="m-nav__item">
-                              <a href="profile.html" class="m-nav__link">
                                 <i class="m-nav__link-icon flaticon-lifebuoy"></i>
                                 <span class="m-nav__link-text">Support</span>
                               </a>
                             </li>
-                            <li class="m-nav__separator m-nav__separator--fit">
-                            </li>
+                            <li class="m-nav__separator m-nav__separator--fit"></li>
                             <li class="m-nav__item">
                               <a href="#" v-on:click="logout" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Logout</a>
                             </li>

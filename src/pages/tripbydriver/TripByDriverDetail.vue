@@ -37,8 +37,8 @@
                 <div class="m-widget4">
                   <div class="m-widget4__item">
                     <div class="m-widget4__ext">
-                      <span class="m-widget4__icon m--font-brand">
-                        <i class="flaticon-lock"></i>
+                      <span class="m-widget4__icon">
+                        <i class="flaticon-lock m--font-brand"></i>
                       </span>
                     </div>
                     <div class="m-widget4__info">
@@ -49,8 +49,8 @@
                   </div>
                   <div class="m-widget4__item">
                     <div class="m-widget4__ext">
-                      <span class="m-widget4__icon m--font-brand">
-                        <i class="flaticon-avatar"></i>
+                      <span class="m-widget4__icon">
+                        <i class="flaticon-avatar m--font-brand"></i>
                       </span>
                     </div>
                     <div class="m-widget4__info">
@@ -61,8 +61,8 @@
                   </div>
                   <div class="m-widget4__item">
                     <div class="m-widget4__ext">
-                      <span class="m-widget4__icon m--font-brand">
-                        <i class="flaticon-support"></i>
+                      <span class="m-widget4__icon">
+                        <i class="flaticon-support m--font-brand"></i>
                       </span>
                     </div>
                     <div class="m-widget4__info">
@@ -73,8 +73,8 @@
                   </div>
                   <div class="m-widget4__item">
                     <div class="m-widget4__ext">
-                      <span class="m-widget4__icon m--font-brand">
-                        <i class="flaticon-customer"></i>
+                      <span class="m-widget4__icon">
+                        <i class="flaticon-customer m--font-brand"></i>
                       </span>
                     </div>
                     <div class="m-widget4__info">
@@ -85,8 +85,8 @@
                   </div>
                   <div class="m-widget4__item">
                     <div class="m-widget4__ext">
-                      <span class="m-widget4__icon m--font-brand">
-                        <i class="flaticon-users"></i>
+                      <span class="m-widget4__icon">
+                        <i class="flaticon-users m--font-brand"></i>
                       </span>
                     </div>
                     <div class="m-widget4__info">
@@ -97,8 +97,8 @@
                   </div>
                   <div class="m-widget4__item">
                     <div class="m-widget4__ext">
-                      <span class="m-widget4__icon m--font-brand">
-                        <i class="flaticon-price-tag"></i>
+                      <span class="m-widget4__icon">
+                        <i class="flaticon-price-tag m--font-brand"></i>
                       </span>
                     </div>
                     <div class="m-widget4__info">
@@ -109,8 +109,8 @@
                   </div>
                   <div class="m-widget4__item">
                     <div class="m-widget4__ext">
-                      <span class="m-widget4__icon m--font-brand">
-                        <i class="flaticon-notes"></i>
+                      <span class="m-widget4__icon">
+                        <i class="flaticon-notes m--font-brand"></i>
                       </span>
                     </div>
                     <div class="m-widget4__info">
@@ -273,43 +273,11 @@
           controls: {instructions: false}
         });
         map.addControl( directions, 'top-left');
-
         // After the map style has loaded on the page, add a source layer and default
         // styling for a single point.
         map.on('load', function() {
-          $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
-            let id = $(this).parent('div').attr('id');
-            if (id === "mapbox-directions-origin-input") {
-              vm.descriptionOrigin = e.target.value;
-            } else {
-              vm.descriptionDestination = e.target.value;
-            }
-            console.log(vm.descriptionOrigin);
-            console.log(vm.descriptionDestination);
-          });
-
-          // Listen for the `directions.route` event that is triggered when a user
-          // makes a selection and add a symbol that matches the result.
-          directions.on('route', function (ev) {
-            console.log(ev.route);
-            // let styleSpec = ev.route;
-            // let styleSpecBox = document.getElementById('json-response');
-            // let styleSpecText = JSON.stringify(styleSpec, null, 2);
-            // let syntaxStyleSpecText = syntaxHighlight(styleSpecText);
-            // styleSpecBox.innerHTML = syntaxStyleSpecText;
-          });
-          directions.on('origin', function (e) {
-            if (e !=  null) {
-              vm.startLatitude = e.feature.geometry.coordinates[0];
-              vm.startLongitude = e.feature.geometry.coordinates[1];
-            }
-          });
-          directions.on('destination', function (e) {
-            if (e != null) {
-              vm.endLatitude = e.feature.geometry.coordinates[0];
-              vm.endLongitude = e.feature.geometry.coordinates[1];
-            }
-          });
+          directions.setOrigin([vm.tripDetail.startLatitude, vm.tripDetail.startLongitude]);
+          directions.setDestination([vm.tripDetail.endLatitude, vm.tripDetail.endLongitude]);
         });
         window.onresize = function() {
           map.resize();

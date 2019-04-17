@@ -172,6 +172,7 @@
           vm.previewImages.push(e.target.result);
         };
         reader.readAsDataURL(file);
+        vm.setupSize();
       },
       postNewTrip: function() {
         let vm = this;
@@ -200,9 +201,9 @@
         this.formData.append("note", this.note);
       },
       setupSize: function (){
-        let offsetHeight = document.getElementById('information-driver').offsetHeight;
+        // let offsetHeight = document.getElementById('information-driver').offsetHeight;
         let offsetWidth = document.getElementById('information-driver').offsetWidth;
-        document.getElementById('information-map').style.height = offsetHeight + 'px';
+        // document.getElementById('information-map').style.maxHeight = offsetHeight + 'px';
         document.getElementById('information-map').style.width = offsetWidth + 'px';
         // setup current time
         let today = new Date();
@@ -303,5 +304,8 @@
   .overview-img {
     height: 70px;
     width: 90px;
+  }
+  #map, #information-map {
+    max-height: 650px;
   }
 </style>
