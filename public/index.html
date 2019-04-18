@@ -365,23 +365,21 @@
     <div class="popup-box chat-popup" id="qnimate">
       <div class="popup-head">
         <div class="popup-head-left pull-left">
-          <img src="http://localhost:8080/api/images/trip-by-driver/driver__wmBZTM_2.jpg" alt="iamgurdeeposahan">
-          Custom
+          <img src="/assets/app/media/img/users/user4.jpg" alt="avatar">
+          <span class="__font-size-head">Custom</span>
         </div>
         <div class="popup-head-right pull-right">
           <div class="btn-group">
             <button class="chat-header-button" data-toggle="dropdown" type="button" aria-expanded="false">
-              <i class="la la-cog __font-size-box"></i>
+              <i class="fa fa-cog __font-size-box"></i>
             </button>
             <ul role="menu" class="dropdown-menu pull-right">
-              <li><a href="#">Media</a></li>
               <li><a href="#">Block</a></li>
               <li><a href="#">Clear Chat</a></li>
-              <li><a href="#">Email Chat</a></li>
             </ul>
           </div>
           <button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button">
-            <i class="la la-close __font-size-box"></i>
+            <i class="fa fa-times __font-size-box"></i>
           </button>
         </div>
       </div>
@@ -396,7 +394,7 @@
               <span class="direct-chat-name pull-left">Osahan</span>
             </div>
             <!-- /.direct-chat-info -->
-            <img alt="message user image" src="http://localhost:8080/api/images/trip-by-driver/driver__wmBZTM_1.jpg" class="direct-chat-img">
+            <img alt="message user image" src="/assets/app/media/img/users/user4.jpg" class="direct-chat-img">
             <!-- /.direct-chat-img -->
             <div class="direct-chat-text">
               Hey bro, how’s everything going ?
@@ -420,7 +418,8 @@
               <span class="direct-chat-name pull-left">Osahan</span>
             </div>
             <!-- /.direct-chat-info -->
-            <img alt="iamgurdeeposahan" src="http://localhost:8080/api/images/trip-by-driver/driver__wmBZTM_1.jpg" class="direct-chat-img"><!-- /.direct-chat-img -->
+            <img alt="avatar" src="/assets/app/media/img/users/user4.jpg" class="direct-chat-img"><!-- /.direct-chat-img
+             -->
             <div class="direct-chat-text">
               Hey bro, how’s everything going ?
             </div>
@@ -428,7 +427,7 @@
               <span class="direct-chat-timestamp pull-right">3.36 PM</span>
             </div>
             <div class="direct-chat-info clearfix">
-              <img alt="iamgurdeeposahan" src="http://localhost:8080/api/images/trip-by-driver/driver__wmBZTM_1.jpg" class="direct-chat-img big-round">
+              <img alt="iamgurdeeposahan" src="/assets/app/media/img/users/user4.jpg" class="direct-chat-img big-round">
               <span class="direct-chat-reply-name">Singh</span>
             </div>
             <!-- /.direct-chat-text -->
@@ -558,22 +557,27 @@
     </script>
     <style>
       .__font-size-box {
-        font-size: 1.8rem !important;
+        font-size: 1.3rem !important;
+        color: darkgrey;
       }
       .__input-chat {
         width: 95% !important;
         margin: auto;
       }
+      .__font-size-head {
+        font-size: 65%;
+        font-weight: 400;
+      }
       .popup-box {
         border-radius: 6px;
         background-color: #ffffff;
-        border: 1px solid #b0b0b0;
+        border: 2px solid #EEEEEE;
         bottom: 0;
         display: none;
-        height: 415px;
+        height: 350px;
         position: fixed;
         right: 70px;
-        width: 300px;
+        width: 285px;
         font-family: 'Open Sans', sans-serif;
       }
       /*.round.hollow {*/
@@ -603,14 +607,15 @@
         z-index: 999;
       }
       .popup-box .popup-head {
-        background-color: darkgrey;
-        border-radius: 5px 5px 0px 0px;
-        /*background-color: #fff;*/
+        border-bottom: 1px solid #EEEEEE;
+        /*background-color: #939DE9;*/
+        border-radius: 5px 5px 0 0;
+        background-color: #fff;
         clear: both;
         /*color: #7b7b7b;*/
         display: inline-table;
         font-size: 21px;
-        padding: 7px 10px;
+        padding: 5px 7px;
         width: 100%;
         /*font-family: Oswald;*/
       }
@@ -632,10 +637,10 @@
         line-height: 30px;
         width: 33px;
       }
-      .bg_none {
-        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-        border: medium none;
-      }
+      /*.bg_none {*/
+      /*  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;*/
+      /*  border: medium none;*/
+      /*}*/
       /*.popup-box .popup-head .popup-head-right {
         margin: 11px 7px 0;
       }*/
@@ -644,8 +649,8 @@
       .popup-head-left img {
         border: 1px solid #7b7b7b;
         border-radius: 50%;
-        width: 35px;
-        height: 35px;
+        width: 33px;
+        height: 33px;
       }
       .popup-messages-footer > textarea {
         border-bottom: 1px solid #b2b2b2 !important;
@@ -678,7 +683,7 @@
       .popup-box .popup-messages {
         background: #fff none repeat scroll 0 0;
         border-bottom: 1px solid #EEEEEE;
-        height: 300px;
+        height: 240px;
         overflow: auto;
       }
       .direct-chat-messages {
