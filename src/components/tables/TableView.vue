@@ -25,7 +25,7 @@
           type: 'remote',
           source: {
             read: {
-              url: URL_CALL_API + '/data-tables/trip-by-driver',
+              url: URL_CALL_API + this.url,
               headers: {
                 'authorization': localStorage.getItem(AUTHORIZATION)
               },

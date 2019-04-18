@@ -13,7 +13,7 @@
       </div>
       <!-- HEAD: END -->
       <div class="m-portlet__body">
-        <!-- begin: Accordions -->
+        <!-- ACCORDIONS: BEGIN -->
         <div class="m-accordion m-accordion--default" id="m_accordion_1" role="tablist">
           <div class="m-accordion__item">
             <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
@@ -78,12 +78,13 @@
                       <div class="m-separator m-separator--dashed d-xl-none"></div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- end: Accordions -->
+        <!-- ACCORDIONS: END -->
         <table-app :url="url"></table-app>
       </div>
     </div>
@@ -95,7 +96,7 @@
   import Select from '../../components/selects/SelectPlaceHolder';
 
   export default {
-    name: "TripByDriverList",
+    name: "TripByHitchhikerList",
     components: {
       'table-app': Table,
       'select-place-holder': Select
@@ -112,7 +113,7 @@
           ],
           selected: null,
         },
-        url: "/data-tables/trip-by-driver"
+        url: "/data-tables/trip-by-hitchhiker"
       }
     }
   }

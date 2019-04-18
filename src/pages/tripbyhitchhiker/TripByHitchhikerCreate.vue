@@ -234,4 +234,7 @@
   .margin-10 {
     margin: 0 10px 0 10px;
   }
+  #map, #information-map {
+    max-height: 510px;
+  }
 </style>
