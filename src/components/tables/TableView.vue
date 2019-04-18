@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import {AUTHORIZATION, URL_CALL_API} from '../../services/variables.js'
+  import {AUTHORIZATION, URL_CALL_API, URL_WEP_APP} from '../../services/variables.js'
 
   export default {
     name: "table-view",
@@ -11,6 +11,10 @@
       url: {
         type: String,
         default: 'localhost'
+      },
+      urlRecord: {
+        type: String,
+        default: null
       }
     },
     /*methods: {
@@ -19,6 +23,7 @@
       }
     },*/
     mounted() {
+      let vm = this;
       let table = $(this.$el);
       let tableApp =  table.mDatatable({
         data: {
@@ -142,7 +147,7 @@
             sortable: false,
             overflow: 'visible',
             template: function (data) {
-              let url = "http://localhost:4200/trip-by-driver/" + data.id;
+              let url = URL_WEP_APP + vm.urlRecord + data.id;
               return '<a href="' + url + '" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
                      '  <span>Detail</span>\n' +
                      '</a>';

@@ -1,204 +1,202 @@
 <template>
-  <div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="m-portlet m-portlet--mobile">
-          <!-- HEAD: BEGIN -->
-          <div class="m-portlet__head">
-            <div class="m-portlet__head-caption">
-              <div class="m-portlet__head-title">
-                <h3 class="m-portlet__head-text">
-                  TRIP Data Detail<small>data loaded from remote service</small>
-                </h3>
-              </div>
-            </div>
-            <div class="m-portlet__head-tools">
-              <ul class="m-portlet__nav">
-                <li class="m-portlet__nav-item">
-                  <button v-if="showButton === '03'" v-on:click="console.log('run')" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                    Show list register
-                  </button>
-                  <button v-else-if="showButton === '01'" v-on:click="registerTrip" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                    Register trip
-                  </button>
-                  <button v-else class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
-                    Registered
-                  </button>
-                </li>
-              </ul>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="m-portlet m-portlet--mobile">
+        <!-- HEAD: BEGIN -->
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">
+                TRIP Data Detail<small>data loaded from remote service</small>
+              </h3>
             </div>
           </div>
-          <!-- HEAD: END -->
-          <!-- BODY: BEGIN -->
-          <div class="m-portlet__body">
-            <div class="row">
-              <div class="col-lg-6">
-                <!--{{tripDetail}}-->
-                <div class="m-widget4">
-                  <div class="m-widget4__item">
-                    <div class="m-widget4__ext">
-                      <span class="m-widget4__icon">
-                        <i class="flaticon-lock m--font-brand"></i>
-                      </span>
-                    </div>
-                    <div class="m-widget4__info">
-                      <span class="m-widget4__text">
-                        <span class="text-dark">ID</span>&nbsp;&nbsp;{{tripDetail.driverId}}
-                      </span>
-                    </div>
+          <div class="m-portlet__head-tools">
+            <ul class="m-portlet__nav">
+              <li class="m-portlet__nav-item">
+                <button v-if="showButton === '03'" v-on:click="console.log('run')" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
+                  Show list register
+                </button>
+                <button v-else-if="showButton === '01'" v-on:click="registerTrip" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
+                  Register trip
+                </button>
+                <button v-else class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
+                  Registered
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- HEAD: END -->
+        <!-- BODY: BEGIN -->
+        <div class="m-portlet__body">
+          <div class="row">
+            <div class="col-lg-6">
+              <!--{{tripDetail}}-->
+              <div class="m-widget4">
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-lock m--font-brand"></i>
+                    </span>
                   </div>
-                  <div class="m-widget4__item">
-                    <div class="m-widget4__ext">
-                      <span class="m-widget4__icon">
-                        <i class="flaticon-avatar m--font-brand"></i>
-                      </span>
-                    </div>
-                    <div class="m-widget4__info">
-                      <span class="m-widget4__text">
-                        <span class="text-dark">Name</span>&nbsp;&nbsp;{{tripDetail.name}}
-                      </span>
-                    </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                      <span class="text-dark">ID</span>&nbsp;&nbsp;{{tripDetail.driverId}}
+                    </span>
                   </div>
-                  <div class="m-widget4__item">
-                    <div class="m-widget4__ext">
-                      <span class="m-widget4__icon">
-                        <i class="flaticon-support m--font-brand"></i>
-                      </span>
-                    </div>
-                    <div class="m-widget4__info">
-                      <span class="m-widget4__text">
-                          <span class="text-dark">Phone</span>&nbsp;&nbsp;{{tripDetail.phone}}
-                      </span>
-                    </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-avatar m--font-brand"></i>
+                    </span>
                   </div>
-                  <div class="m-widget4__item">
-                    <div class="m-widget4__ext">
-                      <span class="m-widget4__icon">
-                        <i class="flaticon-customer m--font-brand"></i>
-                      </span>
-                    </div>
-                    <div class="m-widget4__info">
-                      <span class="m-widget4__text">
-                          <span class="text-dark">Quality service</span>&nbsp;&nbsp;{{tripDetail.star}}
-                      </span>
-                    </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                      <span class="text-dark">Name</span>&nbsp;&nbsp;{{tripDetail.username}}
+                    </span>
                   </div>
-                  <div class="m-widget4__item">
-                    <div class="m-widget4__ext">
-                      <span class="m-widget4__icon">
-                        <i class="flaticon-users m--font-brand"></i>
-                      </span>
-                    </div>
-                    <div class="m-widget4__info">
-                      <span class="m-widget4__text">
-                          <span class="text-dark">Number of seats</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
-                      </span>
-                    </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-support m--font-brand"></i>
+                    </span>
                   </div>
-                  <div class="m-widget4__item">
-                    <div class="m-widget4__ext">
-                      <span class="m-widget4__icon">
-                        <i class="flaticon-price-tag m--font-brand"></i>
-                      </span>
-                    </div>
-                    <div class="m-widget4__info">
-                      <span class="m-widget4__text">
-                          <span class="text-dark">Price</span>&nbsp;&nbsp;{{tripDetail.price}}.000 (VNĐ)
-                      </span>
-                    </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                        <span class="text-dark">Phone</span>&nbsp;&nbsp;{{tripDetail.phone}}
+                    </span>
                   </div>
-                  <div class="m-widget4__item">
-                    <div class="m-widget4__ext">
-                      <span class="m-widget4__icon">
-                        <i class="flaticon-notes m--font-brand"></i>
-                      </span>
-                    </div>
-                    <div class="m-widget4__info">
-                      <span class="m-widget4__text">
-                          <span class="text-dark">Note</span>&nbsp;&nbsp;
-                      </span>
-                      <span class="m-widget4__text">
-                          {{tripDetail.note}}
-                      </span>
-                    </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-customer m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                        <span class="text-dark">Quality service</span>&nbsp;&nbsp;{{tripDetail.star}}
+                    </span>
+                  </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-users m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                        <span class="text-dark">Number of seats</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
+                    </span>
+                  </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-price-tag m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                        <span class="text-dark">Price</span>&nbsp;&nbsp;{{tripDetail.price}}.000 (VNĐ)
+                    </span>
+                  </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-notes m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                        <span class="text-dark">Note</span>&nbsp;&nbsp;
+                    </span>
+                    <span class="m-widget4__text">
+                        {{tripDetail.note}}
+                    </span>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6">
-                <slide-show :images="tripDetail.images"
-                            :type-image="path">
-                </slide-show>
-              </div>
             </div>
-            <div class="row __padding-top">
-              <div class="col-lg-12">
-                <!-- MAP: BEGIN -->
-                <div id="information-map">
-                  <div class="flex-parent relative scroll-hidden">
-                    <div id="map" class="flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-mm mapboxgl-map" >
-                      <div class="mapboxgl-canary" style="visibility: hidden;">
-                      </div>
-                      <!-- MAP BOX CONTAINER: BEGIN -->
-                      <div class="mapboxgl-control-container">
-                        <div class="mapboxgl-ctrl-top-left">
-                          <div class="mapboxgl-ctrl-directions mapboxgl-ctrl">
-                            <div class="directions-control directions-control-inputs">
-                              <div class="mapbox-directions-component mapbox-directions-inputs">
-                                <div class="mapbox-directions-component-keyline">
-                                  <!-- INPUT ORIGIN: BEGIN -->
-                                  <div class="mapbox-directions-origin">
-                                    <label class="mapbox-form-label">
-                                      <span class="directions-icon directions-icon-depart"></span>
-                                    </label>
-                                    <div id="mapbox-directions-origin-input">
-                                      <div class="mapboxgl-ctrl-geocoder">
-                                        <span class="geocoder-icon geocoder-icon-search"></span>
-                                        <input type="text" placeholder="Choose a starting place">
-                                        <ul class="suggestions" style="display: none;"></ul>
-                                        <div class="geocoder-pin-right">
-                                          <button class="geocoder-icon geocoder-icon-close"></button>
-                                          <span class="geocoder-icon geocoder-icon-loading"></span>
-                                        </div>
+            <div class="col-lg-6">
+              <slide-show :images="tripDetail.images"
+                          :type-image="path">
+              </slide-show>
+            </div>
+          </div>
+          <div class="row __padding-top">
+            <div class="col-lg-12">
+              <!-- MAP: BEGIN -->
+              <div id="information-map">
+                <div class="flex-parent relative scroll-hidden">
+                  <div id="map" class="flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-mm mapboxgl-map" >
+                    <div class="mapboxgl-canary" style="visibility: hidden;">
+                    </div>
+                    <!-- MAP BOX CONTAINER: BEGIN -->
+                    <div class="mapboxgl-control-container">
+                      <div class="mapboxgl-ctrl-top-left">
+                        <div class="mapboxgl-ctrl-directions mapboxgl-ctrl">
+                          <div class="directions-control directions-control-inputs">
+                            <div class="mapbox-directions-component mapbox-directions-inputs">
+                              <div class="mapbox-directions-component-keyline">
+                                <!-- INPUT ORIGIN: BEGIN -->
+                                <div class="mapbox-directions-origin">
+                                  <label class="mapbox-form-label">
+                                    <span class="directions-icon directions-icon-depart"></span>
+                                  </label>
+                                  <div id="mapbox-directions-origin-input">
+                                    <div class="mapboxgl-ctrl-geocoder">
+                                      <span class="geocoder-icon geocoder-icon-search"></span>
+                                      <input type="text" placeholder="Choose a starting place">
+                                      <ul class="suggestions" style="display: none;"></ul>
+                                      <div class="geocoder-pin-right">
+                                        <button class="geocoder-icon geocoder-icon-close"></button>
+                                        <span class="geocoder-icon geocoder-icon-loading"></span>
                                       </div>
                                     </div>
                                   </div>
-                                  <!-- INPUT ORIGIN: END -->
-                                  <button class="directions-icon directions-icon-reverse directions-reverse js-reverse-inputs" title="Reverse origin &amp; destination">
-                                  </button>
-                                  <!-- INPUT DESTINATION: BEGIN -->
-                                  <div class="mapbox-directions-destination">
-                                    <label class="mapbox-form-label">
-                                      <span class="directions-icon directions-icon-arrive"></span>
-                                    </label>
-                                    <div id="mapbox-directions-destination-input">
-                                      <div class="mapboxgl-ctrl-geocoder">
-                                        <span class="geocoder-icon geocoder-icon-search"></span>
-                                        <input type="text" placeholder="Choose destination">
-                                        <ul class="suggestions" style="display: none;"></ul>
-                                        <div class="geocoder-pin-right">
-                                          <button class="geocoder-icon geocoder-icon-close"></button>
-                                          <span class="geocoder-icon geocoder-icon-loading"></span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- INPUT DESTINATION: END -->
                                 </div>
+                                <!-- INPUT ORIGIN: END -->
+                                <button class="directions-icon directions-icon-reverse directions-reverse js-reverse-inputs" title="Reverse origin &amp; destination">
+                                </button>
+                                <!-- INPUT DESTINATION: BEGIN -->
+                                <div class="mapbox-directions-destination">
+                                  <label class="mapbox-form-label">
+                                    <span class="directions-icon directions-icon-arrive"></span>
+                                  </label>
+                                  <div id="mapbox-directions-destination-input">
+                                    <div class="mapboxgl-ctrl-geocoder">
+                                      <span class="geocoder-icon geocoder-icon-search"></span>
+                                      <input type="text" placeholder="Choose destination">
+                                      <ul class="suggestions" style="display: none;"></ul>
+                                      <div class="geocoder-pin-right">
+                                        <button class="geocoder-icon geocoder-icon-close"></button>
+                                        <span class="geocoder-icon geocoder-icon-loading"></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- INPUT DESTINATION: END -->
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <!-- MAP BOX CONTAINER: END -->
                     </div>
+                    <!-- MAP BOX CONTAINER: END -->
                   </div>
                 </div>
-                <!-- MAP: END -->
               </div>
+              <!-- MAP: END -->
             </div>
           </div>
-          <!-- BODY: END -->
         </div>
+        <!-- BODY: END -->
       </div>
     </div>
   </div>
@@ -227,7 +225,7 @@
       return {
         tripDetail: {
           userId: null,
-          name: null,
+          username: null,
           avatar: null,
           phone: null,
           star: null,

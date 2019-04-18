@@ -85,7 +85,7 @@
           </div>
         </div>
         <!-- ACCORDIONS: END -->
-        <table-app :url="url"></table-app>
+        <table-app :url="url" :urlRecord="urlRecord"></table-app>
       </div>
     </div>
   </div>
@@ -113,7 +113,8 @@
           ],
           selected: null,
         },
-        url: "/data-tables/trip-by-hitchhiker"
+        url: "/data-tables/trip-by-hitchhiker",
+        urlRecord: "trip-by-hitchhiker/",
       }
     }
   }
