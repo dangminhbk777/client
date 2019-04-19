@@ -129,7 +129,9 @@
             field: "price",
             title: "Price",
             template: function(data) {
-              data.price = data.price + ".000 (VNĐ)";
+              if (data.price != null && !data.price.toString().includes(".000 (VNĐ)")) {
+                data.price = data.price + ".000 (VNĐ)";
+              }
               return data.price;
             },
           },
