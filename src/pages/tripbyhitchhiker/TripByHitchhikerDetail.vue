@@ -14,25 +14,300 @@
           <div class="m-portlet__head-tools">
             <ul class="m-portlet__nav">
               <li class="m-portlet__nav-item">
-                <button class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                  Show
+                <button v-if="showButton === '03'" v-on:click="redirectListRegister" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
+                  Show list register
+                </button>
+                <button v-else-if="showButton === '01'" v-on:click="registerTrip" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
+                  Register trip
+                </button>
+                <button v-else class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
+                  Registered
                 </button>
               </li>
             </ul>
           </div>
         </div>
         <!-- HEAD: END -->
+        <!-- BODY: BEGIN -->
+        <div class="m-portlet__body">
+          <div class="row">
+            <div class="col-lg-6">
+<!--              {{tripDetail}}-->
+              <div class="m-widget4">
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-lock m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                      <span class="text-dark">ID</span>&nbsp;&nbsp;{{tripDetail.hitchhikerId}}
+                    </span>
+                  </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-avatar m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                      <span class="text-dark">Name</span>&nbsp;&nbsp;{{tripDetail.username}}
+                    </span>
+                  </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-support m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                        <span class="text-dark">Phone</span>&nbsp;&nbsp;{{tripDetail.phone}}
+                    </span>
+                  </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-users m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                        <span class="text-dark">Number of seats</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
+                    </span>
+                  </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-price-tag m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                        <span class="text-dark">Price</span>&nbsp;&nbsp;{{tripDetail.price}}.000 (VNĐ)
+                    </span>
+                  </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-notes m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                        <span class="text-dark">Note</span>&nbsp;&nbsp;
+                    </span>
+                    <span class="m-widget4__text">
+                        {{tripDetail.note}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <!-- MAP: BEGIN -->
+              <div id="information-map">
+                <div class="flex-parent relative scroll-hidden">
+                  <div id="map" class="flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-mm mapboxgl-map" >
+                    <div class="mapboxgl-canary" style="visibility: hidden;">
+                    </div>
+                    <!-- MAP BOX CONTAINER: BEGIN -->
+                    <div class="mapboxgl-control-container">
+                      <div class="mapboxgl-ctrl-top-left">
+                        <div class="mapboxgl-ctrl-directions mapboxgl-ctrl">
+                          <div class="directions-control directions-control-inputs">
+                            <div class="mapbox-directions-component mapbox-directions-inputs">
+                              <div class="mapbox-directions-component-keyline">
+                                <!-- INPUT ORIGIN: BEGIN -->
+                                <div class="mapbox-directions-origin">
+                                  <label class="mapbox-form-label">
+                                    <span class="directions-icon directions-icon-depart"></span>
+                                  </label>
+                                  <div id="mapbox-directions-origin-input">
+                                    <div class="mapboxgl-ctrl-geocoder">
+                                      <span class="geocoder-icon geocoder-icon-search"></span>
+                                      <input type="text" placeholder="Choose a starting place">
+                                      <ul class="suggestions" style="display: none;"></ul>
+                                      <div class="geocoder-pin-right">
+                                        <button class="geocoder-icon geocoder-icon-close"></button>
+                                        <span class="geocoder-icon geocoder-icon-loading"></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- INPUT ORIGIN: END -->
+                                <button class="directions-icon directions-icon-reverse directions-reverse js-reverse-inputs" title="Reverse origin &amp; destination">
+                                </button>
+                                <!-- INPUT DESTINATION: BEGIN -->
+                                <div class="mapbox-directions-destination">
+                                  <label class="mapbox-form-label">
+                                    <span class="directions-icon directions-icon-arrive"></span>
+                                  </label>
+                                  <div id="mapbox-directions-destination-input">
+                                    <div class="mapboxgl-ctrl-geocoder">
+                                      <span class="geocoder-icon geocoder-icon-search"></span>
+                                      <input type="text" placeholder="Choose destination">
+                                      <ul class="suggestions" style="display: none;"></ul>
+                                      <div class="geocoder-pin-right">
+                                        <button class="geocoder-icon geocoder-icon-close"></button>
+                                        <span class="geocoder-icon geocoder-icon-loading"></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- INPUT DESTINATION: END -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- MAP BOX CONTAINER: END -->
+                  </div>
+                </div>
+              </div>
+              <!-- MAP: END -->
+            </div>
+          </div>
+        </div>
+        <!-- BODY: END -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import http from '../../services/http-common.js';
+
   export default {
-    name: "TripByHitchhikerDetail"
+    name: "TripByHitchhikerDetail",
+    props: {
+      hitchhikerId: {
+        type: String,
+        default: null
+      },
+      path: {
+        type: String,
+        default: "/trip-by-hitchhiker/"
+      }
+    },
+    data() {
+      return {
+        tripDetail: {
+          userId: null,
+          username: null,
+          avatar: null,
+          phone: null,
+          star: null,
+          createdAt: null,
+          hitchhikerId: null,
+          startLongitude: null,
+          endLongitude: null,
+          startLatitude: null,
+          endLatitude: null,
+          time: null,
+          // typeVehicle: null,
+          numberSeat: null,
+          // images: null,
+          price: null,
+          // isShipping: null,
+          note: null,
+          isSubmitter: null,
+          status: null
+        },
+        //urlPageListRegister:  'localhost:4200/trip-by-driver/' + this.driverId + "/list-register",
+        /*
+        * show register trip : 01
+        * show registered    : 02
+        * show list register : 03
+        * */
+        showButton: null
+      }
+    },
+    methods: {
+      initMap: function () {
+        let vm = this;
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
+        let map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [105.859979061677,21.007181634883864],
+          zoom: 11
+        });
+        let directions = new MapboxDirections({
+          accessToken: mapboxgl.accessToken,
+          steps: false,
+          geometries: 'polyline',
+          controls: {instructions: false}
+        });
+        map.addControl( directions, 'top-left');
+        // After the map style has loaded on the page, add a source layer and default
+        // styling for a single point.
+        map.on('load', function() {
+          console.log(vm.tripDetail);
+          directions.setOrigin([vm.tripDetail.startLatitude, vm.tripDetail.startLongitude]);
+          directions.setDestination([vm.tripDetail.endLatitude, vm.tripDetail.endLongitude]);
+        });
+        window.onresize = function() {
+          map.resize();
+        };
+      },
+      getTripDetail: function () {
+        let vm = this;
+        http.get('/trip-by-hitchhiker/status/' + vm.hitchhikerId)
+            .then(response => {
+              let userDriver = JSON.parse(response.data.metadata);
+              if (userDriver === null) {
+                vm.showButton = "01";
+              } else if (userDriver.isSubmitter) {
+                vm.showButton = "03";
+              } else {
+                vm.showButton = "02";
+              }
+            })
+            .catch(e => {
+              console.error(e);
+            });
+        http.get('/trip-by-hitchhiker/' + vm.hitchhikerId)
+            .then(response => {
+              console.log(response);
+              vm.tripDetail = JSON.parse(response.data.metadata);
+              // check show button
+              vm.initMap();
+            })
+            .catch(e => {
+              console.error(e);
+            });
+      },
+      registerTrip: function () {
+        http.post("trip-by-hitchhiker/register-with-hitchhiker/" + this.hitchhikerId)
+            .then(response => {
+              console.log(JSON.parse(response.data.metadata));
+              this.showButton = "02";
+            })
+            .catch(e => {
+              console.error(e);
+            });
+      },
+      redirectListRegister() {
+        window.location.href = "/trip-by-hitchhiker/" + this.hitchhikerId + "/list-register";
+      }
+    },
+    mounted() {
+      this.getTripDetail();
+    }
   }
 </script>
 
 <style scoped>
-
+  #map, #information-map {
+    max-height: 450px;
+  }
 </style>

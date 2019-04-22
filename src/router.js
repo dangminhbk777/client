@@ -9,6 +9,7 @@ import TripByDriverListRegister from "./pages/tripbydriver/TripByDriverListRegis
 import TripByHitchhikerList from "./pages/tripbyhitchhiker/TripByHitchhikerList.vue";
 import TripByHitchhikerCreate from "./pages/tripbyhitchhiker/TripByHitchhikerCreate.vue";
 import TripByHitchhikerDetail from "./pages/tripbyhitchhiker/TripByHitchhikerDetail.vue";
+import TripByHitchhikerListRegister from "./pages/tripbyhitchhiker/TripByHitchhikerListRegister.vue";
 import Login from "./pages/Login.vue";
 import PageNotFound from "./pages/404.vue";
 import { URL_PAGE_LOGIN, URL_PAGE_REGISTER, AUTHORIZATION, DEFAULT_LOGIN } from './services/variables.js'
@@ -68,6 +69,12 @@ const router = new Router({
       path: '/trip-by-hitchhiker/:hitchhikerId',
       name: 'TripByHitchhikerDetail',
       component: TripByHitchhikerDetail,
+      props: true
+    },
+    {
+      path: '/trip-by-hitchhiker/:hitchhikerId/list-register',
+      name: 'TripByHitchhikerListRegister',
+      component: TripByHitchhikerListRegister,
       props: true
     },
     // Authentication
