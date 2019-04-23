@@ -365,15 +365,31 @@
 </template>
 
 <script>
-    export default {
-        name: "Header",
-        methods: {
-            logout() {
-                localStorage.clear();
-                window.location.href = '/login';
-            }
-        }
+  export default {
+    name: "Header",
+    methods: {
+      logout() {
+          localStorage.clear();
+          window.location.href = '/login';
+      }
+    },
+    mounted() {
+      // let client = Stomp.client("ws://10.1.42.51:8080/socket/ride-share");
+      let stompClient = null;
+      let authorization = localStorage.getItem("authorization");
+      let socket = new SockJS('http://localhost:8080/socket/ride-share?authorization=' + authorization);
+      stompClient = Stomp.over(socket);
+      let headers = {};
+      headers["authorization"] = localStorage.getItem("authorization");
+      stompClient.connect({headers}, function(frame) {
+        // setConnected(true);
+        stompClient.subscribe('/socket/system', function(notification){
+          console.log(notification);
+          //showMessage(JSON.parse(position));
+        });
+      });
     }
+  }
 </script>
 
 <style scoped>
