@@ -14,7 +14,7 @@
           <div class="m-portlet__head-tools">
             <ul class="m-portlet__nav">
               <li class="m-portlet__nav-item">
-                <button v-if="showButton === '03'" v-on:click="console.log('run')" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
+                <button v-if="showButton === '03'" v-on:click="redirectListRegister" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
                   Show list register
                 </button>
                 <button v-else-if="showButton === '01'" v-on:click="registerTrip" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
@@ -317,6 +317,9 @@
             .catch(e => {
               console.error(e);
             });
+      },
+      redirectListRegister() {
+        window.location.href = "/trip-by-driver/" + this.driverId + "/list-register";
       }
     },
     mounted() {

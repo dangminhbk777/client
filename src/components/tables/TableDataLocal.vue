@@ -1,13 +1,20 @@
 <template>
+<!--  <div></div>-->
   <div class="m_datatable_"></div>
 </template>
 
 <script>
+  import {URL_CALL_API} from '../../services/variables.js'
+
   export default {
     name: "TableDataLocal",
     props: {
       mData: {
         type: Array,
+        default: null
+      },
+      urlImage: {
+        type: String,
         default: null
       }
     },
@@ -66,7 +73,7 @@
             width: 200,
             textAlign: 'center',
             template: function (data) {
-              return '<img style="border: solid 1px darkgrey" src="http://localhost:8080/api/images/trip-by-driver/driver__cTICfa_3.png" alt="Image">'
+              return '<img style="border: solid 1px darkgrey" src="'+ URL_CALL_API + vm.urlImage + data.avatar +'" alt="Image">'
             }
           },
           {
@@ -132,6 +139,7 @@
         let btnBetween = $(this);
         btnBetween.attr("disabled", true);
         btnBetween.prev().attr("disabled", false);
+        btnBetween.next().attr("disabled", false);
       });
       tableApp.on('click', '.___btn-cancel', function(e) {
         let btnLast = $(this);

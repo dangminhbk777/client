@@ -139,20 +139,6 @@
                                   <span class="m-menu__link-text">New Trip</span>
                                 </a>
                               </li>
-                              <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
-                                <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
-                                  <i class="m-menu__link-icon flaticon-business"></i>
-                                  <span class="m-menu__link-text">Delivered Orders</span>
-                                  <i class="m-menu__hor-arrow la la-angle-right"></i>
-                                  <i class="m-menu__ver-arrow la la-angle-right"></i>
-                                </a>
-                                <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right"><span class="m-menu__arrow "></span>
-                                  <ul class="m-menu__subnav">
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a href="inner.html" class="m-menu__link "><span class="m-menu__link-text">Latest Orders</span></a></li>
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a href="inner.html" class="m-menu__link "><span class="m-menu__link-text">Pending Orders</span></a></li>
-                                  </ul>
-                                </div>
-                              </li>
                             </ul>
                           </div>
                         </li>
@@ -170,7 +156,7 @@
         <div class="m-stack__item m-stack__item--middle m-stack__item--center">
           <!-- BEGIN: Brand -->
           <a href="index.html" class="m-brand m-brand--desktop">
-            <img alt="" src="assets/demo/media/img/logo/logo.png" />
+            <img alt="" src="/assets/demo/media/img/logo/logo.png" />
           </a>
           <!-- END: Brand -->
         </div>
@@ -211,19 +197,24 @@
                 </li>
                 <li class="m-nav__item m-nav__item--accent m-dropdown m-dropdown--large m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" m-dropdown-toggle="click" m-dropdown-persistent="1">
                   <a href="#" class="m-nav__link m-dropdown__toggle" id="m_topbar_notification_icon">
-                    <span class="m-nav__link-badge m-badge m-badge--dot m-badge--dot-small m-badge--danger"></span>
-                    <span class="m-nav__link-icon"><span class="m-nav__link-icon-wrapper"><i class="flaticon-alarm"></i></span></span>
+<!--                    <span class="m-nav__link-badge m-badge m-badge&#45;&#45;dot m-badge&#45;&#45;dot-small m-badge&#45;&#45;danger"></span>-->
+                    <span class="m-nav__link-icon">
+                      <span class="m-nav__link-icon-wrapper">
+                        <i class="flaticon-alarm"></i>
+                        <span class="m-badge m-badge--success">0</span>
+                      </span>
+                    </span>
                   </a>
                   <div class="m-dropdown__wrapper">
                     <span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
                     <div class="m-dropdown__inner">
-                      <div class="m-dropdown__header m--align-center">
+                      <!--<div class="m-dropdown__header m&#45;&#45;align-center">
                         <span class="m-dropdown__header-title">9 New</span>
                         <span class="m-dropdown__header-subtitle">User Notifications</span>
-                      </div>
+                      </div>-->
                       <div class="m-dropdown__body">
                         <div class="m-dropdown__content">
-                          <ul class="nav nav-tabs m-tabs m-tabs-line m-tabs-line--brand" role="tablist">
+                          <!--<ul class="nav nav-tabs m-tabs m-tabs-line m-tabs-line&#45;&#45;brand" role="tablist">
                             <li class="nav-item m-tabs__item">
                               <a class="nav-link m-tabs__link active" data-toggle="tab" href="#topbar_notifications_notifications" role="tab">
                                 Alerts
@@ -235,7 +226,7 @@
                             <li class="nav-item m-tabs__item">
                               <a class="nav-link m-tabs__link" data-toggle="tab" href="#topbar_notifications_logs" role="tab">Logs</a>
                             </li>
-                          </ul>
+                          </ul>-->
                           <div class="tab-content">
                             <div class="tab-pane active" id="topbar_notifications_notifications" role="tabpanel">
                               <div class="m-scrollable" data-scrollable="true" data-height="250" data-mobile-height="200">
