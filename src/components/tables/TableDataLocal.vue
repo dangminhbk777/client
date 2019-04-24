@@ -130,22 +130,22 @@
         ]
       });
       tableApp.on('click', '.___btn-accept', function(e) {
-        let btnFirst = $(this);
-        btnFirst.attr("disabled", true);
-        btnFirst.next().attr("disabled", false);
-        btnFirst.next().next().attr("disabled", false);
+        let elementFirst = $(this);
+        elementFirst.attr("disabled", true);
+        elementFirst.next().attr("disabled", false);
+        elementFirst.next().next().attr("disabled", false);
       });
       tableApp.on('click', '.___btn-not-accept', function(e) {
-        let btnBetween = $(this);
-        btnBetween.attr("disabled", true);
-        btnBetween.prev().attr("disabled", false);
-        btnBetween.next().attr("disabled", false);
+        let elementBetween = $(this);
+        elementBetween.attr("disabled", true);
+        elementBetween.prev().attr("disabled", false);
+        elementBetween.next().attr("disabled", false);
       });
       tableApp.on('click', '.___btn-cancel', function(e) {
-        let btnLast = $(this);
-        btnLast.attr("disabled", true);
-        btnLast.prev().attr("disabled", false);
-        btnLast.prev().prev().attr("disabled", false);
+        let elementLast = $(this);
+        elementLast.attr("disabled", true);
+        elementLast.prev().attr("disabled", false);
+        elementLast.prev().prev().attr("disabled", false);
       });
     }
   }
