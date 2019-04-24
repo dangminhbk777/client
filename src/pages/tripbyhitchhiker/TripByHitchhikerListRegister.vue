@@ -23,7 +23,7 @@
         </div>
         <!-- HEAD: END -->
         <div class="m-portlet__body">
-          <table-app :mData="mData" :urlImage="urlImage"></table-app>
+          <table-app v-if="mData" :mData="mData" :urlImage="urlImage"></table-app>
         </div>
       </div>
     </div>
