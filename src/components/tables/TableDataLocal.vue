@@ -131,6 +131,7 @@
       });
       tableApp.on('click', '.___btn-accept', function(e) {
         let elementFirst = $(this);
+        let id = elementFirst.attr("data-uh-id");
         elementFirst.attr("disabled", true);
         elementFirst.next().attr("disabled", false);
         elementFirst.next().next().attr("disabled", false);
