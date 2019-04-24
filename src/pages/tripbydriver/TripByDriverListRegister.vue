@@ -13,7 +13,7 @@
         <div class="m-portlet__head-tools">
           <ul class="m-portlet__nav">
             <li class="m-portlet__nav-item">
-              <button class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
+              <button v-on:click="acceptHitchhiker" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
                 Submit
               </button>
             </li>
@@ -61,6 +61,9 @@
               console.error(e);
               toastr.error("Error occurred");
             });
+      },
+      acceptHitchhiker: function () {
+        console.log("accept hitchhiker");
       }
     },
     mounted() {
