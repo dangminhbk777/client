@@ -22,7 +22,11 @@
       </div>
       <!-- HEAD: END -->
       <div class="m-portlet__body">
-        <table-app v-if="mData" :mData="mData" :urlImage="urlImage"></table-app>
+        <table-app v-if="mData"
+            :mData="mData"
+            :urlImage="urlImage"
+            v-on:dataMapUpdate="dataRaw = $event">
+        </table-app>
       </div>
     </div>
   </div>
@@ -31,7 +35,7 @@
 <script>
   import http from '../../services/http-common.js';
   import toastr from '../../services/toastr.js';
-  import Table from '../../components/tables/TableDataLocal.vue';
+  import Table from '../../components/tables/TableDataRegisterTrip.vue';
 
   export default {
     name: "TripByDriverListRegister",
@@ -47,7 +51,8 @@
     data: function() {
       return {
         mData: null,
-        urlImage: "/images/avatar/"
+        urlImage: "/images/avatar/",
+        dataRaw: null
       }
     },
     methods: {
@@ -64,6 +69,7 @@
       },
       acceptHitchhiker: function () {
         console.log("accept hitchhiker");
+        console.log(this.dataRaw);
       }
     },
     mounted() {

@@ -370,6 +370,7 @@
       let authorization = localStorage.getItem("authorization");
       let socket = new SockJS('http://localhost:8080/socket/ride-share?authorization=' + authorization);
       stompClient = Stomp.over(socket);
+      stompClient.debug = false;
       let headers = {};
       headers["authorization"] = localStorage.getItem("authorization");
       stompClient.connect({headers}, function(frame) {

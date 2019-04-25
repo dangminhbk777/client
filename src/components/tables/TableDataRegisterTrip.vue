@@ -1,5 +1,4 @@
 <template>
-<!--  <div></div>-->
   <div class="m_datatable_"></div>
 </template>
 
@@ -16,6 +15,11 @@
       urlImage: {
         type: String,
         default: null
+      }
+    },
+    data() {
+      return {
+        dataMap: new Map()
       }
     },
     mounted() {
@@ -112,16 +116,24 @@
             textAlign: 'center',
             sortable: false,
             template: function (data) {
-              let dataId = data.userHitchhikerId;
+              let dataId = null;
+              if (data.userHitchhikerId) {
+                dataId = data.userHitchhikerId;
+              } else {
+                dataId = data.userDriverId;
+              }
               let status = data.status;
+              let isDisableCancel = status === "00" ? 'disabled="disabled" ' : '';
+              let isDisableNotAccept = status === "01" ? 'disabled="disabled" ' : '';
+              let isDisableAccept = status === "02" ? 'disabled="disabled" ' : '';
               let temp =
-                  '  <button data-uh-id="'+ dataId +'" class="m-badge--wide btn btn-success btn-sm ___btn-accept">\n' +
+                  '  <button data-uh-id="'+ dataId +'" class="m-badge--wide btn btn-success btn-sm ___btn-accept"'+ isDisableAccept +'>\n' +
                   '    <span>Accept</span>\n' +
                   '  </button>\n' +
-                  '  <button data-uh-id="'+ dataId +'" class="m-badge--wide btn btn btn-warning btn-sm ___btn-not-accept">\n' +
+                  '  <button data-uh-id="'+ dataId +'" class="m-badge--wide btn btn btn-warning btn-sm ___btn-not-accept"'+ isDisableNotAccept + '>\n' +
                   '    <span>Not Accept</span>\n' +
                   '  </button>\n' +
-                  '  <button data-uh-id="'+ dataId +'" class="m-badge--wide btn btn-danger btn-sm ___btn-cancel">\n' +
+                  '  <button data-uh-id="'+ dataId +'" class="m-badge--wide btn btn-danger btn-sm ___btn-cancel"'+ isDisableCancel + '>\n' +
                   '    <span>Cancel</span>\n' +
                   '  </button>\n';
               return temp;
@@ -132,18 +144,26 @@
       tableApp.on('click', '.___btn-accept', function(e) {
         let elementFirst = $(this);
         let id = elementFirst.attr("data-uh-id");
+        vm.dataMap.set(id, "02");
+        vm.$emit('dataMapUpdate', vm.dataMap);
         elementFirst.attr("disabled", true);
         elementFirst.next().attr("disabled", false);
         elementFirst.next().next().attr("disabled", false);
       });
       tableApp.on('click', '.___btn-not-accept', function(e) {
         let elementBetween = $(this);
+        let id = elementBetween.attr("data-uh-id");
+        vm.dataMap.set(id, "01");
+        vm.$emit('dataMapUpdate', vm.dataMap);
         elementBetween.attr("disabled", true);
         elementBetween.prev().attr("disabled", false);
         elementBetween.next().attr("disabled", false);
       });
       tableApp.on('click', '.___btn-cancel', function(e) {
         let elementLast = $(this);
+        let id = elementLast.attr("data-uh-id");
+        vm.dataMap.set(id, "00");
+        vm.$emit('dataMapUpdate', vm.dataMap);
         elementLast.attr("disabled", true);
         elementLast.prev().attr("disabled", false);
         elementLast.prev().prev().attr("disabled", false);

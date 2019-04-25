@@ -23,7 +23,11 @@
         </div>
         <!-- HEAD: END -->
         <div class="m-portlet__body">
-          <table-app v-if="mData" :mData="mData" :urlImage="urlImage"></table-app>
+          <table-app v-if="mData"
+              :mData="mData"
+              :urlImage="urlImage"
+              v-on:dataMapUpdate="dataRaw = $event">
+          </table-app>
         </div>
       </div>
     </div>
@@ -32,7 +36,7 @@
 
 <script>
   import http from '../../services/http-common.js';
-  import Table from '../../components/tables/TableDataLocal.vue';
+  import Table from '../../components/tables/TableDataRegisterTrip.vue';
 
   export default {
     name: "TripByHitchhikerListRegister",
@@ -48,7 +52,12 @@
     data: function() {
       return {
         mData: null,
-        urlImage: "/images/avatar/"
+        urlImage: "/images/avatar/",
+        dataRaw: null,
+        tripStatus: {
+          tripId: null,
+          status: null
+        }
       }
     },
     methods: {
@@ -63,7 +72,25 @@
             });
       },
       acceptDriver: function () {
-        console.log("accept driver")
+        let vm = this;
+        let dataChange = [];
+        console.log("accept driver");
+        console.log(vm.dataRaw);
+        vm.dataRaw.forEach(function (value, key) {
+          vm.tripStatus.tripId = key;
+          vm.tripStatus.status = value;
+          dataChange.push(vm.copyObject(vm.tripStatus));
+        });
+        http.post('/trip-by-hitchhiker/accept-driver/', JSON.stringify(dataChange))
+            .then(response => {
+              console.log(response.data);
+            })
+            .catch(e => {
+              console.error(e);
+            });
+      },
+      copyObject: function (object) {
+        return JSON.parse(JSON.stringify(object));
       }
     },
     mounted() {
