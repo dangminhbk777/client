@@ -375,7 +375,7 @@
       headers["authorization"] = localStorage.getItem("authorization");
       stompClient.connect({headers}, function(frame) {
         // setConnected(true);
-        stompClient.subscribe('/socket/system', function(notification){
+        stompClient.subscribe('/socket/notification', function(notification){
           console.log(notification);
           //showMessage(JSON.parse(position));
         });

@@ -14,7 +14,7 @@
           <div class="m-portlet__head-tools">
             <ul class="m-portlet__nav">
               <li class="m-portlet__nav-item">
-                <button v-on:click="acceptDriver" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
+                <button v-on:click="acceptDriver" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" :disabled="!dataRaw">
                   Submit
                 </button>
               </li>
@@ -36,6 +36,7 @@
 
 <script>
   import http from '../../services/http-common.js';
+  import toastr from '../../services/toastr.js';
   import Table from '../../components/tables/TableDataRegisterTrip.vue';
 
   export default {
@@ -54,9 +55,10 @@
         mData: null,
         urlImage: "/images/avatar/",
         dataRaw: null,
-        tripStatus: {
-          tripId: null,
-          status: null
+        dataChange: [],
+        registerTripUpdate: {
+          registerTripId: null,
+          status: null,
         }
       }
     },
@@ -73,17 +75,16 @@
       },
       acceptDriver: function () {
         let vm = this;
-        let dataChange = [];
-        console.log("accept driver");
-        console.log(vm.dataRaw);
         vm.dataRaw.forEach(function (value, key) {
-          vm.tripStatus.tripId = key;
-          vm.tripStatus.status = value;
-          dataChange.push(vm.copyObject(vm.tripStatus));
+          vm.registerTripUpdate.registerTripId = key;
+          vm.registerTripUpdate.status = value;
+          vm.dataChange.push(vm.copyObject(vm.registerTripUpdate));
         });
-        http.post('/trip-by-hitchhiker/accept-driver/', JSON.stringify(dataChange))
+        http.post('/trip-by-hitchhiker/accept-driver/' + vm.hitchhikerId, JSON.stringify(vm.dataChange))
             .then(response => {
               console.log(response.data);
+              toastr.success("Update success");
+              vm.dataChange = [];
             })
             .catch(e => {
               console.error(e);
