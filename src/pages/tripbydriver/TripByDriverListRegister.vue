@@ -79,16 +79,18 @@
           vm.registerTripUpdate.status = value;
           vm.dataChange.push(vm.copyObject(vm.registerTripUpdate));
         });
-        console.log(vm.dataChange);
-        // http.post('/trip-by-driver/accept-hitchhiker/' + vm.driverId, JSON.stringify(vm.dataChange))
-        //     .then(response => {
-        //       console.log(response.data);
-        //       toastr.success("Update success");
-        //       vm.dataChange = [];
-        //     })
-        //     .catch(e => {
-        //       console.error(e);
-        //     });
+        http.post('/trip-by-driver/accept-hitchhiker/' + vm.driverId, JSON.stringify(vm.dataChange))
+            .then(response => {
+              console.log(response.data);
+              toastr.success("Update success");
+              vm.dataChange = [];
+            })
+            .catch(e => {
+              console.error(e);
+            });
+      },
+      copyObject: function (object) {
+        return JSON.parse(JSON.stringify(object));
       }
     },
     mounted() {

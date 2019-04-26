@@ -36,9 +36,16 @@
               <div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark ">
                 <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
                   <!-- Menu DashBoard: BEGIN -->
-                  <li class="m-menu__item  m-menu__item--active  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link"><span
-                      class="m-menu__item-here"></span><i class="m-menu__link-icon flaticon-analytics"></i><span class="m-menu__link-text">Dashboard</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
-                    <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span class="m-menu__arrow m-menu__arrow--adjust"></span>
+                  <li class="m-menu__item  m-menu__item--active  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" aria-haspopup="true">
+                    <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
+                      <span class="m-menu__item-here"></span>
+                      <i class="m-menu__link-icon flaticon-analytics"></i>
+                      <span class="m-menu__link-text">Dashboard</span>
+                      <i class="m-menu__hor-arrow la la-angle-down"></i>
+                      <i class="m-menu__ver-arrow la la-angle-right"></i>
+                    </a>
+                    <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
+                      <span class="m-menu__arrow m-menu__arrow--adjust"></span>
                       <ul class="m-menu__subnav">
                         <li class="m-menu__item  m-menu__item--active " aria-haspopup="true">
                           <a href="inner.html" class="m-menu__link ">
@@ -69,16 +76,31 @@
                     <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
                       <span class="m-menu__arrow m-menu__arrow--adjust"></span>
                       <ul class="m-menu__subnav">
-                        <li class="m-menu__item  m-menu__item--active " aria-haspopup="true">
-                          <a href="/trip-by-driver" class="m-menu__link ">
+                        <!-- MY TRIP: BEGIN -->
+                        <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
+                          <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
                             <i class="m-menu__link-icon fa fa-shoe-prints"></i>
-                            <span class="m-menu__link-title">
-                              <span class="m-menu__link-wrap">
-                                <span class="m-menu__link-text">My Trip</span>
-                              </span>
-                            </span>
+                            <span class="m-menu__link-text">My Trip</span>
+                            <i class="m-menu__hor-arrow la la-angle-right"></i>
+                            <i class="m-menu__ver-arrow la la-angle-right"></i>
                           </a>
+                          <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right">
+                            <span class="m-menu__arrow "></span>
+                            <ul class="m-menu__subnav">
+                              <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                                <a href="/my-driver" class="m-menu__link ">
+                                  <span class="m-menu__link-text">Driver</span>
+                                </a>
+                              </li>
+                              <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                                <a href="/my-hitchhiker" class="m-menu__link ">
+                                  <span class="m-menu__link-text">Hitchhiker</span>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
                         </li>
+                        <!-- MY TRIP: END -->
                         <!-- TRIP BY DRIVERS: BEGIN -->
                         <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
                           <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
