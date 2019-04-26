@@ -217,9 +217,8 @@
                     </div>
                   </div>
                 </li>
-                <li class="m-nav__item m-nav__item--accent m-dropdown m-dropdown--large m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" m-dropdown-toggle="click" m-dropdown-persistent="1">
+                <li class="m-nav__item m-nav__item--accent m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" m-dropdown-toggle="click" m-dropdown-persistent="1">
                   <a href="#" class="m-nav__link m-dropdown__toggle" id="m_topbar_notification_icon">
-<!--                    <span class="m-nav__link-badge m-badge m-badge&#45;&#45;dot m-badge&#45;&#45;dot-small m-badge&#45;&#45;danger"></span>-->
                     <span class="m-nav__link-icon">
                       <span class="m-nav__link-icon-wrapper">
                         <i class="flaticon-alarm"></i>
@@ -230,30 +229,48 @@
                   <div class="m-dropdown__wrapper">
                     <span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
                     <div class="m-dropdown__inner">
-                      <!--<div class="m-dropdown__header m&#45;&#45;align-center">
-                        <span class="m-dropdown__header-title">9 New</span>
-                        <span class="m-dropdown__header-subtitle">User Notifications</span>
-                      </div>-->
                       <div class="m-dropdown__body">
                         <div class="m-dropdown__content">
-                          <!--<ul class="nav nav-tabs m-tabs m-tabs-line m-tabs-line&#45;&#45;brand" role="tablist">
-                            <li class="nav-item m-tabs__item">
-                              <a class="nav-link m-tabs__link active" data-toggle="tab" href="#topbar_notifications_notifications" role="tab">
-                                Alerts
-                              </a>
-                            </li>
-                            <li class="nav-item m-tabs__item">
-                              <a class="nav-link m-tabs__link" data-toggle="tab" href="#topbar_notifications_events" role="tab">Events</a>
-                            </li>
-                            <li class="nav-item m-tabs__item">
-                              <a class="nav-link m-tabs__link" data-toggle="tab" href="#topbar_notifications_logs" role="tab">Logs</a>
-                            </li>
-                          </ul>-->
                           <div class="tab-content">
                             <div class="tab-pane active" id="topbar_notifications_notifications" role="tabpanel">
                               <div class="m-scrollable" data-scrollable="true" data-height="250" data-mobile-height="200">
                                 <div class="m-list-timeline m-list-timeline--skin-light">
                                   <div class="m-list-timeline__items">
+                                    <div class="m-list-timeline__item">
+                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
+                                      <span class="m-list-timeline__text">12 new users registered</span>
+                                      <span class="m-list-timeline__time">Just now</span>
+                                    </div>
+                                    <div class="m-list-timeline__item">
+                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
+                                      <span class="m-list-timeline__text">12 new users registered</span>
+                                      <span class="m-list-timeline__time">Just now</span>
+                                    </div>
+                                    <div class="m-list-timeline__item">
+                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
+                                      <span class="m-list-timeline__text">12 new users registered</span>
+                                      <span class="m-list-timeline__time">Just now</span>
+                                    </div>
+                                    <div class="m-list-timeline__item">
+                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
+                                      <span class="m-list-timeline__text">12 new users registered</span>
+                                      <span class="m-list-timeline__time">Just now</span>
+                                    </div>
+                                    <div class="m-list-timeline__item">
+                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
+                                      <span class="m-list-timeline__text">12 new users registered</span>
+                                      <span class="m-list-timeline__time">Just now</span>
+                                    </div>
+                                    <div class="m-list-timeline__item">
+                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
+                                      <span class="m-list-timeline__text">12 new users registered</span>
+                                      <span class="m-list-timeline__time">Just now</span>
+                                    </div>
+                                    <div class="m-list-timeline__item">
+                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
+                                      <span class="m-list-timeline__text">12 new users registered</span>
+                                      <span class="m-list-timeline__time">Just now</span>
+                                    </div>
                                     <div class="m-list-timeline__item">
                                       <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
                                       <span class="m-list-timeline__text">12 new users registered</span>
@@ -273,31 +290,6 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="tab-pane" id="topbar_notifications_events" role="tabpanel">
-                              <div class="m-scrollable" data-scrollable="true" data-height="250" data-mobile-height="200">
-                                <div class="m-list-timeline m-list-timeline--skin-light">
-                                  <div class="m-list-timeline__items">
-                                    <div class="m-list-timeline__item">
-                                      <span class="m-list-timeline__badge m-list-timeline__badge--state1-success"></span>
-                                      <a href="" class="m-list-timeline__text">New order received</a>
-                                      <span class="m-list-timeline__time">Just now</span>
-                                    </div>
-                                    <div class="m-list-timeline__item">
-                                      <span class="m-list-timeline__badge m-list-timeline__badge--state1-danger"></span>
-                                      <a href="" class="m-list-timeline__text">New invoice received</a>
-                                      <span class="m-list-timeline__time">20 mins</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="tab-pane" id="topbar_notifications_logs" role="tabpanel">
-                              <div class="m-stack m-stack--ver m-stack--general" style="min-height: 180px;">
-                                <div class="m-stack__item m-stack__item--center m-stack__item--middle">
-                                  <span class="">All caught up!<br>No new logs.</span>
-                                </div>
-                              </div>
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -306,7 +298,7 @@
                 </li>
                 <li class="m-nav__item m-dropdown m-dropdown--medium m-dropdown--arrow  m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
                   <a href="#" class="m-nav__link m-dropdown__toggle">
-                    <span class="m-topbar__username m--hidden-mobile">Mark</span>
+                    <span class="m-topbar__username m--hidden-mobile">{{username}}</span>
                     <span class="m-topbar__userpic">
                       <img src="/assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless m--img-centered" alt="" />
                     </span>
@@ -378,33 +370,52 @@
 </template>
 
 <script>
+  import http from '../../../services/http-common';
+
   export default {
     name: "Header",
+    data() {
+      return {
+        username: localStorage.getItem("user")
+      }
+    },
     methods: {
       logout() {
           localStorage.clear();
           window.location.href = '/login';
-      }
+      },
+      getNotification: function() {
+
+      },
+      initWebSocket: function () {
+        let stompClient = null;
+        let authorization = localStorage.getItem("authorization");
+        let socket = new SockJS('http://localhost:8080/socket/ride-share?authorization=' + authorization);
+        stompClient = Stomp.over(socket);
+        stompClient.debug = false;
+        let headers = {};
+        headers["authorization"] = localStorage.getItem("authorization");
+        stompClient.connect({headers}, function(frame) {
+          // setConnected(true);
+          stompClient.subscribe('/socket/notification', function(notification){
+            console.log(notification);
+            //showMessage(JSON.parse(position));
+          });
+        });
+      },
     },
     mounted() {
-      // let client = Stomp.client("ws://10.1.42.51:8080/socket/ride-share");
-      let stompClient = null;
-      let authorization = localStorage.getItem("authorization");
-      let socket = new SockJS('http://localhost:8080/socket/ride-share?authorization=' + authorization);
-      stompClient = Stomp.over(socket);
-      stompClient.debug = false;
-      let headers = {};
-      headers["authorization"] = localStorage.getItem("authorization");
-      stompClient.connect({headers}, function(frame) {
-        // setConnected(true);
-        stompClient.subscribe('/socket/notification', function(notification){
-          console.log(notification);
-          //showMessage(JSON.parse(position));
-        });
-      });
+      this.initWebSocket();
     }
   }
 </script>
 
 <style scoped>
+  .m-list-timeline m-list-timeline--skin-light {
+    height: 100%;
+    max-height: 300px;
+  }
+  .m-list-timeline__items {
+    height: inherit;
+  }
 </style>

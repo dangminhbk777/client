@@ -14,7 +14,7 @@
       <!-- HEAD: END -->
       <div class="m-portlet__body">
         <table-app v-if="mData"
-            :mData="mData">
+                   :mData="mData">
         </table-app>
       </div>
     </div>
@@ -24,10 +24,10 @@
 <script>
   import http from '../../services/http-common.js';
   import toastr from '../../services/toastr.js';
-  import Table from '../../components/tables/TableMyDriver.vue';
+  import Table from '../../components/tables/TableMyHitchhiker.vue';
 
   export default {
-    name: "MyDriver",
+    name: "MyHitchhikerList",
     components: {
       'table-app': Table
     },
@@ -37,9 +37,9 @@
       }
     },
     methods: {
-      myDriverList: function () {
+      myHitchhikerList: function () {
         let vm = this;
-        http.get('/trip-by-driver/my-trip/')
+        http.get('/trip-by-hitchhiker/my-trip/')
             .then(response => {
               vm.mData = JSON.parse(response.data.metadata);
               console.log(vm.mData);
@@ -51,7 +51,7 @@
       }
     },
     mounted() {
-      this.myDriverList();
+      this.myHitchhikerList();
     }
   }
 </script>

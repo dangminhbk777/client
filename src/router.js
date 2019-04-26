@@ -11,6 +11,7 @@ import TripByHitchhikerCreate from "./pages/tripbyhitchhiker/TripByHitchhikerCre
 import TripByHitchhikerDetail from "./pages/tripbyhitchhiker/TripByHitchhikerDetail.vue";
 import TripByHitchhikerListRegister from "./pages/tripbyhitchhiker/TripByHitchhikerListRegister.vue";
 import MyDriverList from "./pages/mytrip/MyDriverList.vue";
+import MyHitchhikerList from "./pages/mytrip/MyHitchhikerList.vue";
 import Login from "./pages/Login.vue";
 import PageNotFound from "./pages/404.vue";
 import { URL_PAGE_LOGIN, URL_PAGE_REGISTER, AUTHORIZATION, DEFAULT_LOGIN } from './services/variables.js'
@@ -83,6 +84,11 @@ const router = new Router({
       path: '/my-driver',
       name: 'MyDriverList',
       component: MyDriverList,
+    },
+    {
+      path: '/my-hitchhiker',
+      name: 'MyHitchhikerList',
+      component: MyHitchhikerList,
     },
     // Authentication
     {
