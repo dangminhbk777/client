@@ -42,7 +42,6 @@
         http.get('/trip-by-driver/my-trip/')
             .then(response => {
               vm.mData = JSON.parse(response.data.metadata);
-              console.log(vm.mData);
             })
             .catch(e => {
               console.error(e);

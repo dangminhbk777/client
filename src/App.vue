@@ -40,15 +40,15 @@ export default {
             },
         }
     },
-    methods: {
-        information() {
-            console.log(localStorage.getItem(ROLE_NAME) === "user");
-            console.log(localStorage.getItem(ROLE_NAME));
-        }
-    },
-    mounted() {
-        this.information();
-    }
+    // methods: {
+    //     information() {
+    //         console.log(localStorage.getItem(ROLE_NAME) === "user");
+    //         console.log(localStorage.getItem(ROLE_NAME));
+    //     }
+    // },
+    // mounted() {
+    //     this.information();
+    // }
 };
 </script>
 

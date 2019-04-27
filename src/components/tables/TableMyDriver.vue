@@ -86,7 +86,6 @@
             width: 150,
             textAlign: 'center',
             template: function(data) {
-              console.log(data.typeVehicle);
               switch(data.typeVehicle) {
                 case "1":
                   data.typeVehicle = "Xe máy";

@@ -112,12 +112,12 @@
     methods: {
       getToken() {
         let dataUserLogin = {
-          username: document.getElementById("user_name").value,
+          email: document.getElementById("user_name").value,
           password: document.getElementById("pass_word").value
         };
         http.post("/authentication/token", dataUserLogin)
             .then(success => {
-              localStorage.setItem("user", dataUserLogin.username);
+              localStorage.setItem("user", dataUserLogin.email);
               localStorage.setItem(AUTHORIZATION, JSON.parse(success.data.metadata));
               localStorage.setItem(ROLE_NAME, USER_ROLE);
               window.location.href = DEFAULT_LOGIN;

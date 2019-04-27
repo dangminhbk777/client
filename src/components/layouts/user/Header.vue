@@ -236,55 +236,10 @@
                               <div class="m-scrollable" data-scrollable="true" data-height="250" data-mobile-height="200">
                                 <div class="m-list-timeline m-list-timeline--skin-light">
                                   <div class="m-list-timeline__items">
-                                    <div class="m-list-timeline__item">
+                                    <div v-for="notification in notifications" class="m-list-timeline__item">
                                       <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
-                                      <span class="m-list-timeline__text">12 new users registered</span>
-                                      <span class="m-list-timeline__time">Just now</span>
-                                    </div>
-                                    <div class="m-list-timeline__item">
-                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
-                                      <span class="m-list-timeline__text">12 new users registered</span>
-                                      <span class="m-list-timeline__time">Just now</span>
-                                    </div>
-                                    <div class="m-list-timeline__item">
-                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
-                                      <span class="m-list-timeline__text">12 new users registered</span>
-                                      <span class="m-list-timeline__time">Just now</span>
-                                    </div>
-                                    <div class="m-list-timeline__item">
-                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
-                                      <span class="m-list-timeline__text">12 new users registered</span>
-                                      <span class="m-list-timeline__time">Just now</span>
-                                    </div>
-                                    <div class="m-list-timeline__item">
-                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
-                                      <span class="m-list-timeline__text">12 new users registered</span>
-                                      <span class="m-list-timeline__time">Just now</span>
-                                    </div>
-                                    <div class="m-list-timeline__item">
-                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
-                                      <span class="m-list-timeline__text">12 new users registered</span>
-                                      <span class="m-list-timeline__time">Just now</span>
-                                    </div>
-                                    <div class="m-list-timeline__item">
-                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
-                                      <span class="m-list-timeline__text">12 new users registered</span>
-                                      <span class="m-list-timeline__time">Just now</span>
-                                    </div>
-                                    <div class="m-list-timeline__item">
-                                      <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
-                                      <span class="m-list-timeline__text">12 new users registered</span>
-                                      <span class="m-list-timeline__time">Just now</span>
-                                    </div>
-                                    <div class="m-list-timeline__item">
-                                      <span class="m-list-timeline__badge"></span>
-                                      <span class="m-list-timeline__text">System shutdown <span class="m-badge m-badge--success m-badge--wide">pending</span></span>
-                                      <span class="m-list-timeline__time">14 mins</span>
-                                    </div>
-                                    <div class="m-list-timeline__item m-list-timeline__item--read">
-                                      <span class="m-list-timeline__badge"></span>
-                                      <span class="m-list-timeline__text">Production server down</span>
-                                      <span class="m-list-timeline__time">3 hrs</span>
+                                      <span class="m-list-timeline__text">{{notification.content}}</span>
+                                      <span class="m-list-timeline__time">{{notification.createdAt}}</span>
                                     </div>
                                   </div>
                                 </div>
@@ -371,12 +326,14 @@
 
 <script>
   import http from '../../../services/http-common';
+  import toastr from '../../../services/toastr.js';
 
   export default {
     name: "Header",
     data() {
       return {
-        username: localStorage.getItem("user")
+        username: localStorage.getItem("user"),
+        notifications: []
       }
     },
     methods: {
@@ -385,20 +342,32 @@
           window.location.href = '/login';
       },
       getNotification: function() {
-
+        let vm = this;
+        http.get('/notification')
+            .then(response => {
+              vm.notifications = JSON.parse(response.data.metadata);
+              console.log(JSON.parse(response.data.metadata));
+            })
+            .catch(e => {
+              console.error(e);
+              toastr.error("Error occurred");
+            });
       },
       initWebSocket: function () {
+        let vm = this;
         let stompClient = null;
         let authorization = localStorage.getItem("authorization");
-        let socket = new SockJS('http://localhost:8080/socket/ride-share?authorization=' + authorization);
+        let socket = new SockJS('http://localhost:8080/carpool?authorization=' + authorization);
         stompClient = Stomp.over(socket);
         stompClient.debug = false;
         let headers = {};
         headers["authorization"] = localStorage.getItem("authorization");
-        stompClient.connect({headers}, function(frame) {
+        // stompClient.connect({headers}, function(frame) {
+        stompClient.connect({}, function(frame) {
           // setConnected(true);
           stompClient.subscribe('/socket/notification', function(notification){
-            console.log(notification);
+            vm.notifications.unshift(JSON.parse(notification.body));
+            console.log(vm.notifications);
             //showMessage(JSON.parse(position));
           });
         });
@@ -406,6 +375,7 @@
     },
     mounted() {
       this.initWebSocket();
+      this.getNotification();
     }
   }
 </script>

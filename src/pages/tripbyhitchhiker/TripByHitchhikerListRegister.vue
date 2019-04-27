@@ -55,7 +55,7 @@
         mData: null,
         urlImage: "/images/avatar/",
         dataRaw: null,
-        dataChange: [],
+        dataChange: null,
         registerTripUpdate: {
           registerTripId: null,
           status: null,
@@ -78,13 +78,13 @@
         vm.dataRaw.forEach(function (value, key) {
           vm.registerTripUpdate.registerTripId = key;
           vm.registerTripUpdate.status = value;
-          vm.dataChange.push(vm.copyObject(vm.registerTripUpdate));
+          // vm.dataChange = vm.copyObject(vm.registerTripUpdate);
         });
-        http.post('/trip-by-hitchhiker/accept-driver/' + vm.hitchhikerId, JSON.stringify(vm.dataChange))
+        http.post('/trip-by-hitchhiker/accept-driver/' + vm.hitchhikerId, JSON.stringify(vm.registerTripUpdate))
             .then(response => {
               console.log(response.data);
               toastr.success("Update success");
-              vm.dataChange = [];
+              vm.dataChange = null;
             })
             .catch(e => {
               console.error(e);
