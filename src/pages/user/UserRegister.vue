@@ -65,6 +65,7 @@
 </template>
 
 <script>
+  import toastr from '../../services/toastr.js';
   import http from '../../services/http-common.js';
 
   export default {
@@ -106,6 +107,7 @@
             .then(success => {
               console.log(success.data.metadata);
               vm.formData = new FormData();
+              toastr.success("Create new user SUCCESS");
             })
             .catch(error => {
               console.log(error.response.data);

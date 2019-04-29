@@ -184,6 +184,7 @@
 </template>
 
 <script>
+  import toastr from '../../services/toastr.js';
   import http from '../../services/http-common.js';
 
   export default {
@@ -291,6 +292,7 @@
             .then(response => {
               console.log(JSON.parse(response.data.metadata));
               this.showButton = "02";
+              toastr.success('Register trip SUCCESS');
             })
             .catch(e => {
               console.error(e);

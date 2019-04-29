@@ -89,6 +89,7 @@
 </template>
 
 <script>
+  import toastr from '../../services/toastr.js';
   import http from '../../services/http-common.js';
   import Select from '../../components/selects/SelectPlaceHolder';
 
@@ -120,6 +121,7 @@
             .then(response => {
               console.log(response);
               vm.position = null;
+              toastr.success('Create trip by hitchhiker SUCCESS');
             })
             .catch(e => {
               console.error(e);

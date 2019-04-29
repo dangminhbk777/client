@@ -6,7 +6,7 @@ import {URL_CALL_API, AUTHORIZATION} from "./variables";
 export default axios.create({
   baseURL: URL_CALL_API,
   headers: {
-    "Content-type": "application/json",
+    "Content-type": "application/json;charset=UTF-8",
     "authorization": localStorage.getItem(AUTHORIZATION) != null ? localStorage.getItem(AUTHORIZATION) : ''
   }
 });

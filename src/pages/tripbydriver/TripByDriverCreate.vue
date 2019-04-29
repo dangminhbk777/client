@@ -115,6 +115,7 @@
 </template>
 
 <script>
+  import toastr from '../../services/toastr.js';
   import http from '../../services/http-common.js';
   import Select from '../../components/selects/SelectPlaceHolder';
 
@@ -181,6 +182,7 @@
             .then(response => {
               console.log(response);
               vm.formData = new FormData();
+              toastr.success('Create trip by driver SUCCESS');
             })
             .catch(e => {
               console.error(e);

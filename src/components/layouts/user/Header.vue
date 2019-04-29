@@ -357,16 +357,23 @@
         let vm = this;
         let stompClient = null;
         let authorization = localStorage.getItem("authorization");
-        let socket = new SockJS('http://localhost:8080/carpool?authorization=' + authorization);
+        let socket = new WebSocket('ws://192.168.1.61:8080/carpool/websocket');
+        // let socket = new SockJS('http://localhost:8080/carpool?authorization=' + authorization);
         stompClient = Stomp.over(socket);
         stompClient.debug = false;
         let headers = {};
-        headers["authorization"] = localStorage.getItem("authorization");
-        // stompClient.connect({headers}, function(frame) {
-        stompClient.connect({}, function(frame) {
+        headers["authorization"] = authorization;
+        stompClient.connect({headers}, function(frame) {
+        // stompClient.connect({}, function(frame) {
           // setConnected(true);
           stompClient.subscribe('/socket/notification', function(notification){
-            vm.notifications.unshift(JSON.parse(notification.body));
+            let temp = JSON.parse(notification.body);
+            let myDate = new Date("2012-02-10T13:19:11+0000");
+            let options = {
+              year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'
+            };
+            temp.createdAt = myDate.toLocaleDateString('en', options);
+            vm.notifications.unshift(temp);
             console.log(vm.notifications);
             //showMessage(JSON.parse(position));
           });
@@ -387,5 +394,8 @@
   }
   .m-list-timeline__items {
     height: inherit;
+  }
+  .m-list-timeline__items .m-list-timeline__item .m-list-timeline__time {
+    width: 100px;
   }
 </style>
