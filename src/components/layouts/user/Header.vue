@@ -311,9 +311,13 @@
                     </div>
                   </div>
                 </li>
-                <li id="m_quick_sidebar_toggle" class="m-nav__item m-nav__item--info m-nav__item--qs">
+                <li id="m_quick_sidebar_toggle" v-on:click="showQuickSidebar" class="m-nav__item m-nav__item--info m-nav__item--qs">
                   <a href="#" class="m-nav__link m-dropdown__toggle">
-                    <span class="m-nav__link-icon m-nav__link-icon-alt"><span class="m-nav__link-icon-wrapper"><i class="flaticon-grid-menu"></i></span></span>
+                    <span class="m-nav__link-icon m-nav__link-icon-alt">
+                      <span class="m-nav__link-icon-wrapper">
+                        <i class="flaticon-grid-menu"></i>
+                      </span>
+                    </span>
                   </a>
                 </li>
               </ul>
@@ -333,6 +337,12 @@
 
   export default {
     name: "Header",
+    props: {
+      show: {
+        type: Boolean,
+        default: false
+      }
+    },
     data() {
       return {
         username: localStorage.getItem("user"),
@@ -344,6 +354,11 @@
       logout() {
           localStorage.clear();
           window.location.href = '/login';
+      },
+      showQuickSidebar: function() {
+        let vm = this;
+        vm.show = true;
+        vm.$emit('showQuickSidebar', vm.show);
       },
       initEventPage: function() {
         let vm = this;
