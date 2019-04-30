@@ -222,13 +222,16 @@
                     <span class="m-nav__link-icon">
                       <span class="m-nav__link-icon-wrapper">
                         <i class="flaticon-alarm"></i>
-                        <span class="m-badge m-badge--success">0</span>
+                        <span class="m-badge m-badge--success">{{unread}}</span>
                       </span>
                     </span>
                   </a>
                   <div class="m-dropdown__wrapper">
                     <span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
                     <div class="m-dropdown__inner">
+                      <div class="m-dropdown__header m--align-center">
+                        <span class="m-dropdown__header-subtitle">Have {{unread}} new notifications</span>
+                      </div>
                       <div class="m-dropdown__body">
                         <div class="m-dropdown__content">
                           <div class="tab-content">
@@ -333,6 +336,7 @@
     data() {
       return {
         username: localStorage.getItem("user"),
+        unread: null,
         notifications: []
       }
     },
@@ -341,12 +345,28 @@
           localStorage.clear();
           window.location.href = '/login';
       },
+      initEventPage: function() {
+        let vm = this;
+        $('#m_topbar_notification_icon').click(function () {
+          vm.unread = 0;
+        });
+      },
       getNotification: function() {
         let vm = this;
         http.get('/notification')
             .then(response => {
-              vm.notifications = JSON.parse(response.data.metadata);
-              console.log(JSON.parse(response.data.metadata));
+              if (response.data.metadata) {
+                let dataRaw = JSON.parse(response.data.metadata);
+                vm.unread = dataRaw.total;
+                vm.notifications = dataRaw.notifications;
+                vm.notifications.forEach(function (e) {
+                  let myDate = new Date(e.createdAt);
+                  let options = {
+                    year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'
+                  };
+                  e.createdAt = myDate.toLocaleDateString('en', options);
+                });
+              }
             })
             .catch(e => {
               console.error(e);
@@ -357,30 +377,27 @@
         let vm = this;
         let stompClient = null;
         let authorization = localStorage.getItem("authorization");
-        let socket = new WebSocket('ws://192.168.1.61:8080/carpool/websocket');
-        // let socket = new SockJS('http://localhost:8080/carpool?authorization=' + authorization);
+        let socket = new WebSocket('ws://localhost:8080/carpool/websocket?authorization=' + authorization);
         stompClient = Stomp.over(socket);
         stompClient.debug = false;
         let headers = {};
         headers["authorization"] = authorization;
         stompClient.connect({headers}, function(frame) {
-        // stompClient.connect({}, function(frame) {
-          // setConnected(true);
           stompClient.subscribe('/socket/notification', function(notification){
             let temp = JSON.parse(notification.body);
-            let myDate = new Date("2012-02-10T13:19:11+0000");
+            let myDate = new Date(temp.createdAt);
             let options = {
               year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'
             };
             temp.createdAt = myDate.toLocaleDateString('en', options);
             vm.notifications.unshift(temp);
-            console.log(vm.notifications);
-            //showMessage(JSON.parse(position));
+            vm.unread = vm.unread + 1;
           });
         });
       },
     },
     mounted() {
+      this.initEventPage();
       this.initWebSocket();
       this.getNotification();
     }
@@ -396,6 +413,6 @@
     height: inherit;
   }
   .m-list-timeline__items .m-list-timeline__item .m-list-timeline__time {
-    width: 100px;
+    width: 110px;
   }
 </style>
