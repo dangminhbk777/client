@@ -1,5 +1,5 @@
 <template>
-  <!-- begin::Quick Sidebar -->
+  <!-- QUICK SIDEBAR: BEGIN -->
   <div id="m_quick_sidebar" v-bind:class="classQuickSidebar">
     <div v-bind:class="classQuickSidebarContent">
         <span id="m_quick_sidebar_close" class="m-quick-sidebar__close" v-on:click="hide">
@@ -94,7 +94,7 @@
       </div>
     </div>
   </div>
-  <!-- end::Quick Sidebar -->
+  <!-- QUICK SIDEBAR: END -->
 </template>
 
 <script>
