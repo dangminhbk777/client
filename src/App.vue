@@ -1,21 +1,17 @@
 <template>
-  <div id="app">
-    <div class="m-page-loader m-page-loader--base"></div>
+  <div id="app" class="m-grid m-grid--hor m-grid--root m-page">
+    <!-- PAGES: BEGIN -->
+    <login-page v-if="isPageLogin"></login-page>
+    <page-not-found v-else-if="isPageNotFound"></page-not-found>
+    <header-user-app v-if="isUserPage"
+        :show="showQuickSidebar"
+        v-on:showQuickSidebar="showQuickSidebar = $event">
+    </header-user-app>
+    <body-user-app v-if="isUserPage"></body-user-app>
+    <footer-user-app v-if="isUserPage"></footer-user-app>
+    <!-- PAGES: END -->
 
-    <div id="_body" class="m-grid m-grid--hor m-grid--root m-page">
-      <login-page v-if="isPageLogin"></login-page>
-      <page-not-found v-else-if="isPageNotFound"></page-not-found>
-      <!-- Page User: BEGIN -->
-      <header-user-app v-if="isUserPage"
-          :show="showQuickSidebar"
-          v-on:showQuickSidebar="showQuickSidebar = $event">
-      </header-user-app>
-      <body-user-app v-if="isUserPage"></body-user-app>
-      <footer-user-app v-if="isUserPage"></footer-user-app>
-      <!-- Page User: END -->
-    </div>
-
-    <quick-sidebar-app
+    <quick-sidebar-app v-if="isUserPage"
         :show="showQuickSidebar"
         v-on:hideQuickSidebar="showQuickSidebar = $event">
     </quick-sidebar-app>
@@ -26,8 +22,7 @@
     </div>
     <!-- end::Scroll Top -->
 
-    <chat-app></chat-app>
-
+    <chat-app v-if="isUserPage"></chat-app>
   </div>
 </template>
 

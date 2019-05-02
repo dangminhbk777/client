@@ -75,7 +75,7 @@
     <!-- FORM INFORMATION: END -->
     <!-- MAP: BEGIN -->
     <div class="col-xl-6" id="information-map">
-      <div class="flex-parent viewport-full relative scroll-hidden">
+      <div class="flex-parent viewport-full relative scroll-hidden" style="max-height: 650px">
         <div class="flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-mm mapboxgl-map" id="map">
           <div class="mapboxgl-canary" style="visibility: hidden;">
           </div>
