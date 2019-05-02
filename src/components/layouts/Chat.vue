@@ -102,10 +102,73 @@
                 </span>
               </div>
             </div>
+
             <div class="chat-window ember-view">
               <div class="chat-content shopee-chat__scrollable chat-content ember-view">
-                <div class="shopee-chat__scrollable-inner"></div>
+                <div class="shopee-chat__scrollable-inner">
+
+                  <div class="chat-message ember-view">
+                    <div class="shopee-chat-grid">
+                      <div class="col-15 message-content ">
+                        <div class="chat-bubble to">
+                          <div class="overflow-wrapper">
+                            Shop ơi có bán ví nhiều ngăn kèm cùng sp này ko ạ, em muốn lấy ví nhiều ngăn thay vì ví nhỏ kia, bù thêm tiền cũng dc ạ
+                          </div>
+                        </div>
+                        <div class="timestamp">
+                          20-08-2018 14:49
+                        </div>
+                      </div>
+                      <div class="col-1">
+                        <div class="avatar">
+                          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAMAAAAKE/YAAAABJlBMVEXP2NxgfYtjf412j5uMoavO19uis7vG0dVxi5fBzNJyjJhjgI56kp5hfoxxi5h5kZ2ouL9ohJGInaipucCHnah3kJyxv8bL1NnM1dlphJGXqrN4kZzM1tqUp7Gnt76InqlkgY6wvsWGnKdrhpOnuL+xwMZ8lJ+3xMvAzNGCmaTFz9Sdr7fN1trN19tlgY5qhZJkgI6/y9COoqzL1dlphJJ0jZp7k566x8y7x81ng5CywMegsrp4kZ14kJyhs7uJn6nH0dZlgY+Fm6bG0daWqrO2xMqzwcfF0NXBzdK3xcu0wsh7k5+qusG0wsmzwchuiJVviZaYq7S7yM2Kn6m8yM6/y9GInqiWqbKNoqxzjJmjtLyqucGfsbmdr7iwv8WKoKpuiZVif42PQ9RwAAABzUlEQVR4Xu3YVZLjShBA0UyBmZmamXuYmZmZ3tv/Jua3Y8JWTdsKKR1zzwruR1aVlDIdAAAAAAAAAAAAAAAAAADyN1t+3fPqfiOTl7kQ1qp6QqkZinmdnP6hcFVs6wY6RtATwx75OlY7K2ZlczpBzmx194ZONOyKTbc0QiAmrWikFTHoIKeRKgdiz7o6LIo919XhophzRp3yYs01dcqINavqtCTWXFAnX6y5ok7nxZqyOhWJNjAeHERzVx6Py7Y6PRZzqnP4wSQ1dajN4U9AIRSDOhqpIyYFGuGs2HRuqBMNR/O3rKlYXjG1dazhbTGsF4yd557YtlFwrHpNCpslPeHZ81DmQj7T8OvFYt9vfM3LPwkAgOzDzMLdUqV/qHqnXymtLmRe3hPD9h/s7RzpGEc7e1v7Yk+4dX/zWCMsbw6eiClPgzV107XPL8SI3cEr/Wuv3+xK+t4ueXoq3rv3kq4PrbKeWvnjtqRn9MnTqXiDkaTkUkGn9uWypKK5rDM4/CYp+K4z+iGJW9SZrSc+z57OzEt6rtsag6ok6qfGYkOS1NJY/JIk/aexyEmS/tdYHEuSNCbzGU000UQTTTQAAAAAAAAAAAAAAAAAAL8BwZgl987F+p8AAAAASUVORK5CYII=">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="chat-message ember-view">
+                    <div class="shopee-chat-grid">
+                      <div class="col-1">
+                        <div class="avatar">
+                          <img src="//cf.shopee.vn/file/01a22c4233b32279bbcc2c324dbd5c24_tn" height="37">
+                        </div>
+                      </div>
+                      <div class="col-15 message-content reverse">
+                        <div class="chat-bubble from">
+                          <div class="overflow-wrapper">
+                            Xin chào, tôi có thể giúp gì cho ban
+                            - Miễn Phí Vận Chuyển với đơn hàng trên ₫99.000 giao tại TP.HCM, Hà Nội,trên ₫200.000 giao tại các tỉnh / thành khác (giảm tối đa 40.000 VNĐ
+                            nhập mã [ Nhập Mã GHNWED giảm 15% ]
+                          </div>
+                        </div>
+                        <div class="timestamp">
+                          20-08-2018 14:49
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="chat-message ember-view">
+                    <div class="shopee-chat-grid">
+                      <div class="col-1">
+                        <div class="avatar">
+                          <img src="//cf.shopee.vn/file/01a22c4233b32279bbcc2c324dbd5c24_tn" height="37">
+                        </div>
+                      </div>
+                      <div class="col-15 message-content reverse">
+                        <div class="chat-bubble from">
+                          <div class="overflow-wrapper">
+                            Vậy b đặt thêm ví nhé
+                          </div>
+                        </div>
+                        <div class="timestamp">
+                          20-08-2018 16:00
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+
               <div class="chat-panel">
                 <textarea placeholder="Gửi tin nhắn ..." maxlength="5000" class="ember-text-area ember-view"></textarea>
                 <div class="chat-toolbar">
@@ -120,6 +183,7 @@
               </div>
               <input type="file" multiple="" accept=".png,.jpg,.jpeg,.gif" style="display:none;">
             </div>
+
           </div>
         </div>
         <div class="liquid-modal liquid-modal--closed">
@@ -137,14 +201,19 @@
 </template>
 
 <script>
-  // import http from '../../../services/http-common';
+  import http from '../../services/http-common';
+  import toastr from '../../services/toastr.js';
 
   export default {
     name: "Chat",
     data() {
       return {
         stompClient: null,
-        headers: {}
+        headers: {},
+        params: {
+          idSend: 1,
+          idReceive: 2
+        }
       }
     },
     methods: {
@@ -163,7 +232,16 @@
         });
       },
       getConversation: function() {
-
+        let queryString = Object.keys(this.params).map(key => key + '=' + this.params[key]).join('&');
+        console.log(queryString);
+        http.get('/message' + '?' + queryString)
+            .then(response => {
+              console.log(response.data.metadata);
+            })
+            .catch(e => {
+              console.error(e);
+              toastr.error("Error occurred");
+            });
       },
       sendMessage: function () {
         let authorization = localStorage.getItem("authorization");
@@ -179,10 +257,14 @@
     },
     mounted() {
       this.initChat();
+      this.getConversation();
     }
   }
 </script>
 
 <style scoped>
-
+  .col-1 {
+     padding-right: 0;
+     padding-left: 0;
+  }
 </style>
