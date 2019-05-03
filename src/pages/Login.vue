@@ -100,40 +100,52 @@
 
 <script>
   import http from '../services/http-common.js';
-  import {DEFAULT_LOGIN, ROLE_NAME, USER_ROLE, AUTHORIZATION} from '../services/variables.js';
+  import {DEFAULT_LOGIN, AUTHORIZATION} from '../services/variables.js';
 
   export default {
     name: "login",
     data() {
       return {
-        messageError: null
+        messageError: null,
+        userLoginResponse: {
+          token: null,
+          userInformation: {
+            userId: null,
+            username: null,
+            image: null,
+            email: null
+          }
+        }
       }
     },
     methods: {
       getToken() {
+        let self = this;
         let dataUserLogin = {
           email: document.getElementById("user_name").value,
           password: document.getElementById("pass_word").value
         };
         http.post("/authentication/token", dataUserLogin)
             .then(success => {
-              localStorage.setItem("user", dataUserLogin.email);
-              localStorage.setItem(AUTHORIZATION, JSON.parse(success.data.metadata));
-              localStorage.setItem(ROLE_NAME, USER_ROLE);
+              self.userLoginResponse = JSON.parse(success.data.metadata);
+              localStorage.setItem("userId", self.userLoginResponse.userInformation.userId);
+              localStorage.setItem("username", self.userLoginResponse.userInformation.username);
+              localStorage.setItem("image", self.userLoginResponse.userInformation.image);
+              localStorage.setItem("email", self.userLoginResponse.userInformation.email);
+              localStorage.setItem(AUTHORIZATION, self.userLoginResponse.token);
               window.location.href = DEFAULT_LOGIN;
             })
             .catch(error => {
               console.error(error);
-              console.log(error.response.data);
               this.messageError = error.response.data.message;
             });
       }
     },
     mounted() {
-      let vm = this;
+      let self = this;
       document.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
-          vm.getToken();
+          self.getToken();
         }
       })
     }

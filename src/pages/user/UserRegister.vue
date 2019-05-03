@@ -84,29 +84,29 @@
     },
     methods: {
       onImageChange: function(e) {
-        let vm = this;
+        let self = this;
         let files = e.target.files || e.dataTransfer.files;
         if (!files.length) {
           return;
         }
-        vm.formData.append("image", files[0]);
-        vm.createImage(files[0]);
+        self.formData.append("image", files[0]);
+        self.createImage(files[0]);
       },
       createImage: function(file) {
         let reader = new FileReader();
-        let vm = this;
+        let self = this;
         reader.onload = (e) => {
-          vm.previewImage = e.target.result;
+          self.previewImage = e.target.result;
         };
         reader.readAsDataURL(file);
       },
       registerUser: function() {
-        let vm = this;
-        vm.setDataToFormRequest();
-        http.post('/user/register', vm.formData)
+        let self = this;
+        self.setDataToFormRequest();
+        http.post('/user/register', self.formData)
             .then(success => {
               console.log(success.data.metadata);
-              vm.formData = new FormData();
+              self.formData = new FormData();
               toastr.success("Create new user SUCCESS");
             })
             .catch(error => {

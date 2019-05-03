@@ -258,7 +258,7 @@
                   <a href="#" class="m-nav__link m-dropdown__toggle">
                     <span class="m-topbar__username m--hidden-mobile">{{username}}</span>
                     <span class="m-topbar__userpic">
-                      <img src="/assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless m--img-centered" alt="" />
+                      <img :src="avatar" class="m--img-rounded m--marginless m--img-centered" alt="" />
                     </span>
                     <span class="m-nav__link-icon m-topbar__usericon  m--hide">
                       <span class="m-nav__link-icon-wrapper"><i class="flaticon-user-ok"></i></span>
@@ -270,11 +270,11 @@
                       <div class="m-dropdown__header m--align-center">
                         <div class="m-card-user m-card-user--skin-light">
                           <div class="m-card-user__pic">
-                            <img src="/assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless" alt="" />
+                            <img :src="avatar" class="m--img-rounded m--marginless" alt="" />
                           </div>
                           <div class="m-card-user__details">
-                            <span class="m-card-user__name m--font-weight-500">Mark Andre</span>
-                            <a href="" class="m-card-user__email m--font-weight-300 m-link">mark.andre@gmail.com</a>
+                            <span class="m-card-user__name m--font-weight-500">{{username}}</span>
+                            <a href="" class="m-card-user__email m--font-weight-300 m-link">{{email}}</a>
                           </div>
                         </div>
                       </div>
@@ -345,7 +345,9 @@
     },
     data() {
       return {
-        username: localStorage.getItem("user"),
+        username: localStorage.getItem("username"),
+        email: localStorage.getItem("email"),
+        avatar: 'http://localhost:8080/api/images/avatar/' + localStorage.getItem("image"),
         unread: null,
         notifications: []
       }
@@ -356,25 +358,25 @@
           window.location.href = '/login';
       },
       showQuickSidebar: function() {
-        let vm = this;
-        vm.show = true;
-        vm.$emit('showQuickSidebar', vm.show);
+        let self = this;
+        self.show = true;
+        self.$emit('showQuickSidebar', self.show);
       },
       initEventPage: function() {
-        let vm = this;
+        let self = this;
         $('#m_topbar_notification_icon').click(function () {
-          vm.unread = 0;
+          self.unread = 0;
         });
       },
       getNotification: function() {
-        let vm = this;
+        let self = this;
         http.get('/notification')
             .then(response => {
               if (response.data.metadata) {
                 let dataRaw = JSON.parse(response.data.metadata);
-                vm.unread = dataRaw.total;
-                vm.notifications = dataRaw.notifications;
-                vm.notifications.forEach(function (e) {
+                self.unread = dataRaw.total;
+                self.notifications = dataRaw.notifications;
+                self.notifications.forEach(function (e) {
                   let myDate = new Date(e.createdAt);
                   let options = {
                     year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'
@@ -389,7 +391,7 @@
             });
       },
       initWebSocket: function () {
-        let vm = this;
+        let self = this;
         let stompClient = null;
         let authorization = localStorage.getItem("authorization");
         let socket = new WebSocket('ws://localhost:8080/carpool/websocket?authorization=' + authorization);
@@ -405,8 +407,8 @@
               year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'
             };
             temp.createdAt = myDate.toLocaleDateString('en', options);
-            vm.notifications.unshift(temp);
-            vm.unread = vm.unread + 1;
+            self.notifications.unshift(temp);
+            self.unread = self.unread + 1;
           });
         });
       },

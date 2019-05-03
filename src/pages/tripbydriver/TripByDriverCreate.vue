@@ -156,37 +156,36 @@
     },
     methods: {
       onImageChange: function(e) {
-        let vm = this;
+        let self = this;
         let files = e.target.files || e.dataTransfer.files;
         if (!files.length) {
           return;
         }
         Array.from(files).forEach(function(file) {
-          vm.formData.append("images[]", file);
-          vm.createImage(file);
+          self.formData.append("images[]", file);
+          self.createImage(file);
         });
       },
       createImage: function(file) {
         let reader = new FileReader();
-        let vm = this;
+        let self = this;
         reader.onload = (e) => {
-          vm.previewImages.push(e.target.result);
+          self.previewImages.push(e.target.result);
         };
         reader.readAsDataURL(file);
-        vm.setupSize();
+        self.setupSize();
       },
       postNewTrip: function() {
-        let vm = this;
+        let self = this;
         this.setDataToFormRequest();
         http.post('/trip-by-driver/new-trip', this.formData)
             .then(response => {
-              console.log(response);
-              vm.formData = new FormData();
+              self.formData = new FormData();
               toastr.success('Create trip by driver SUCCESS');
             })
             .catch(e => {
               console.error(e);
-              vm.formData = new FormData();
+              self.formData = new FormData();
             });
       },
       setDataToFormRequest: function () {
@@ -229,7 +228,7 @@
         this.time = year + '-' + month + '-' + dateTime + 'T' + hour + ':' + minute + ":00";
       },
       initMap: function () {
-        let vm = this;
+        let self = this;
         console.log(this);
         mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
         let map = new mapboxgl.Map({
@@ -253,12 +252,12 @@
           $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
             let id = $(this).parent('div').attr('id');
             if (id === "mapbox-directions-origin-input") {
-              vm.descriptionOrigin = e.target.value;
+              self.descriptionOrigin = e.target.value;
             } else {
-              vm.descriptionDestination = e.target.value;
+              self.descriptionDestination = e.target.value;
             }
-            console.log(vm.descriptionOrigin);
-            console.log(vm.descriptionDestination);
+            console.log(self.descriptionOrigin);
+            console.log(self.descriptionDestination);
           });
 
           // Listen for the `directions.route` event that is triggered when a user
@@ -273,19 +272,19 @@
           });
           directions.on('origin', function (e) {
             if (e !=  null) {
-              vm.startLatitude = e.feature.geometry.coordinates[0];
-              vm.startLongitude = e.feature.geometry.coordinates[1];
+              self.startLatitude = e.feature.geometry.coordinates[0];
+              self.startLongitude = e.feature.geometry.coordinates[1];
             }
           });
           directions.on('destination', function (e) {
             if (e != null) {
-              vm.endLatitude = e.feature.geometry.coordinates[0];
-              vm.endLongitude = e.feature.geometry.coordinates[1];
+              self.endLatitude = e.feature.geometry.coordinates[0];
+              self.endLongitude = e.feature.geometry.coordinates[1];
             }
           });
         });
         window.onresize = function() {
-          vm.setupSize();
+          self.setupSize();
         };
       }
     },

@@ -38,10 +38,10 @@
     },
     methods: {
       myDriverList: function () {
-        let vm = this;
+        let self = this;
         http.get('/trip-by-driver/my-trip/')
             .then(response => {
-              vm.mData = JSON.parse(response.data.metadata);
+              self.mData = JSON.parse(response.data.metadata);
             })
             .catch(e => {
               console.error(e);

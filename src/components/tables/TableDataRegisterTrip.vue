@@ -23,12 +23,12 @@
       }
     },
     mounted() {
-      let vm = this;
+      let self = this;
       let table = $(this.$el);
       let tableApp =  table.mDatatable({
         data: {
           type: 'local',
-          source: vm.mData,
+          source: self.mData,
           pageSize: 10,
           // serverPaging: true,
           // serverFiltering: true,
@@ -51,7 +51,7 @@
           placement: ['bottom'],
           items: {
             pagination: {
-              pageSizeSelect: [1, 5, 10, 20, 30, 50] // display dropdown to select pagination size. -1 is used for "ALl" option
+              pageSizeSelect: [5, 10, 20, 30, 50] // display dropdown to select pagination size. -1 is used for "ALl" option
             },
           }
         },
@@ -77,7 +77,7 @@
             width: 200,
             textAlign: 'center',
             template: function (data) {
-              return '<img style="border: solid 1px darkgrey" src="'+ URL_CALL_API + vm.urlImage + data.avatar +'" alt="Image">'
+              return '<img style="border: solid 1px darkgrey" src="'+ URL_CALL_API + self.urlImage + data.avatar +'" alt="Image">'
             }
           },
           {
@@ -144,8 +144,8 @@
       tableApp.on('click', '.___btn-accept', function(e) {
         let elementFirst = $(this);
         let id = elementFirst.attr("data-uh-id");
-        vm.dataMap.set(id, "02");
-        vm.$emit('dataMapUpdate', vm.dataMap);
+        self.dataMap.set(id, "02");
+        self.$emit('dataMapUpdate', self.dataMap);
         elementFirst.attr("disabled", true);
         elementFirst.next().attr("disabled", false);
         elementFirst.next().next().attr("disabled", false);
@@ -153,8 +153,8 @@
       tableApp.on('click', '.___btn-not-accept', function(e) {
         let elementBetween = $(this);
         let id = elementBetween.attr("data-uh-id");
-        vm.dataMap.set(id, "01");
-        vm.$emit('dataMapUpdate', vm.dataMap);
+        self.dataMap.set(id, "01");
+        self.$emit('dataMapUpdate', self.dataMap);
         elementBetween.attr("disabled", true);
         elementBetween.prev().attr("disabled", false);
         elementBetween.next().attr("disabled", false);
@@ -162,8 +162,8 @@
       tableApp.on('click', '.___btn-cancel', function(e) {
         let elementLast = $(this);
         let id = elementLast.attr("data-uh-id");
-        vm.dataMap.set(id, "00");
-        vm.$emit('dataMapUpdate', vm.dataMap);
+        self.dataMap.set(id, "00");
+        self.$emit('dataMapUpdate', self.dataMap);
         elementLast.attr("disabled", true);
         elementLast.prev().attr("disabled", false);
         elementLast.prev().prev().attr("disabled", false);

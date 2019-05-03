@@ -38,11 +38,11 @@
     },
     methods: {
       myHitchhikerList: function () {
-        let vm = this;
+        let self = this;
         http.get('/trip-by-hitchhiker/my-trip/')
             .then(response => {
-              vm.mData = JSON.parse(response.data.metadata);
-              console.log(vm.mData);
+              self.mData = JSON.parse(response.data.metadata);
+              console.log(self.mData);
             })
             .catch(e => {
               console.error(e);

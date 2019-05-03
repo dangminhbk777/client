@@ -23,7 +23,7 @@
       }
     },*/
     mounted() {
-      let vm = this;
+      let self = this;
       let table = $(this.$el);
       let tableApp =  table.mDatatable({
         data: {
@@ -63,7 +63,7 @@
           placement: ['bottom'],
           items: {
             pagination: {
-              pageSizeSelect: [1, 5, 10, 20, 30, 50] // display dropdown to select pagination size. -1 is used for "ALl" option
+              pageSizeSelect: [5, 10, 20, 30, 50] // display dropdown to select pagination size. -1 is used for "ALl" option
             },
           }
         },
@@ -147,7 +147,7 @@
             sortable: false,
             overflow: 'visible',
             template: function (data) {
-              let url = URL_WEP_APP + vm.urlRecord + data.id;
+              let url = URL_WEP_APP + self.urlRecord + data.id;
               return '<a href="' + url + '" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
                      '  <span>Detail</span>\n' +
                      '</a>';

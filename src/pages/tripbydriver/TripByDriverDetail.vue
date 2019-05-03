@@ -256,7 +256,7 @@
     },
     methods: {
       initMap: function () {
-        let vm = this;
+        let self = this;
         mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
         let map = new mapboxgl.Map({
           container: 'map',
@@ -274,8 +274,8 @@
         // After the map style has loaded on the page, add a source layer and default
         // styling for a single point.
         map.on('load', function() {
-          directions.setOrigin([vm.tripDetail.startLatitude, vm.tripDetail.startLongitude]);
-          directions.setDestination([vm.tripDetail.endLatitude, vm.tripDetail.endLongitude]);
+          directions.setOrigin([self.tripDetail.startLatitude, self.tripDetail.startLongitude]);
+          directions.setDestination([self.tripDetail.endLatitude, self.tripDetail.endLongitude]);
         });
         window.onresize = function() {
           map.resize();
@@ -292,16 +292,16 @@
             });
       },
       getTripDetail: function () {
-        let vm = this;
+        let self = this;
         http.get('/trip-by-driver/status/' + this.driverId)
             .then(response => {
               let userDriver = JSON.parse(response.data.metadata);
               if (userDriver === null) {
-                vm.showButton = "01";
+                self.showButton = "01";
               } else if (userDriver.isSubmitter) {
-                vm.showButton = "03";
+                self.showButton = "03";
               } else {
-                vm.showButton = "02";
+                self.showButton = "02";
               }
             })
             .catch(e => {
@@ -309,10 +309,10 @@
             });
         http.get('/trip-by-driver/' + this.driverId)
             .then(response => {
-              vm.tripDetail = JSON.parse(response.data.metadata);
-              vm.tripDetail.images = JSON.parse(this.tripDetail.images);
+              self.tripDetail = JSON.parse(response.data.metadata);
+              self.tripDetail.images = JSON.parse(this.tripDetail.images);
               // check show button
-              vm.initMap();
+              self.initMap();
             })
             .catch(e => {
               console.error(e);

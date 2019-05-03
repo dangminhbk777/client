@@ -64,27 +64,27 @@
     },
     methods: {
       getListRegister: function () {
-        let vm = this;
-        http.get('/trip-by-hitchhiker/register-trip/' + vm.hitchhikerId)
+        let self = this;
+        http.get('/trip-by-hitchhiker/register-trip/' + self.hitchhikerId)
             .then(response => {
-              vm.mData = JSON.parse(response.data.metadata);
+              self.mData = JSON.parse(response.data.metadata);
             })
             .catch(e => {
               console.error(e);
             });
       },
       acceptDriver: function () {
-        let vm = this;
-        vm.dataRaw.forEach(function (value, key) {
-          vm.registerTripUpdate.registerTripId = key;
-          vm.registerTripUpdate.status = value;
+        let self = this;
+        self.dataRaw.forEach(function (value, key) {
+          self.registerTripUpdate.registerTripId = key;
+          self.registerTripUpdate.status = value;
           // vm.dataChange = vm.copyObject(vm.registerTripUpdate);
         });
-        http.post('/trip-by-hitchhiker/accept-driver/' + vm.hitchhikerId, JSON.stringify(vm.registerTripUpdate))
+        http.post('/trip-by-hitchhiker/accept-driver/' + self.hitchhikerId, JSON.stringify(self.registerTripUpdate))
             .then(response => {
               console.log(response.data);
               toastr.success("Update success");
-              vm.dataChange = null;
+              self.dataChange = null;
             })
             .catch(e => {
               console.error(e);

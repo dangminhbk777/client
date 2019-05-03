@@ -36,28 +36,14 @@
               <div class="ember-view">
                 <div class="ember-view">
                   <div style="position: relative; width: 155px; height: 100px;">
-                    <div style="position:absolute;top:0;left:0;transform:matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);width:138px;height:50px;">
-                      <div class="ember-view">
-                        <!--/chat/136117046-->
-                        <a href="#" class="buddy-item active ember-view">
+                    <div v-if="userConversations" v-for="(user, index) in userConversations" :style="user.style">
+                      <div class="ember-view" :id="user.userId" v-on:click="switchConversation(user.userId, user.username)">
+                        <a href="#" :class="index > 0 ? 'buddy-item ember-view' : 'buddy-item active ember-view'">
                           <div class="shopee-chat__avatar">
-                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAMAAAAKE/YAAAABJlBMVEXP2NxgfYtjf412j5uMoavO19uis7vG0dVxi5fBzNJyjJhjgI56kp5hfoxxi5h5kZ2ouL9ohJGInaipucCHnah3kJyxv8bL1NnM1dlphJGXqrN4kZzM1tqUp7Gnt76InqlkgY6wvsWGnKdrhpOnuL+xwMZ8lJ+3xMvAzNGCmaTFz9Sdr7fN1trN19tlgY5qhZJkgI6/y9COoqzL1dlphJJ0jZp7k566x8y7x81ng5CywMegsrp4kZ14kJyhs7uJn6nH0dZlgY+Fm6bG0daWqrO2xMqzwcfF0NXBzdK3xcu0wsh7k5+qusG0wsmzwchuiJVviZaYq7S7yM2Kn6m8yM6/y9GInqiWqbKNoqxzjJmjtLyqucGfsbmdr7iwv8WKoKpuiZVif42PQ9RwAAABzUlEQVR4Xu3YVZLjShBA0UyBmZmamXuYmZmZ3tv/Jua3Y8JWTdsKKR1zzwruR1aVlDIdAAAAAAAAAAAAAAAAAADyN1t+3fPqfiOTl7kQ1qp6QqkZinmdnP6hcFVs6wY6RtATwx75OlY7K2ZlczpBzmx194ZONOyKTbc0QiAmrWikFTHoIKeRKgdiz7o6LIo919XhophzRp3yYs01dcqINavqtCTWXFAnX6y5ok7nxZqyOhWJNjAeHERzVx6Py7Y6PRZzqnP4wSQ1dajN4U9AIRSDOhqpIyYFGuGs2HRuqBMNR/O3rKlYXjG1dazhbTGsF4yd557YtlFwrHpNCpslPeHZ81DmQj7T8OvFYt9vfM3LPwkAgOzDzMLdUqV/qHqnXymtLmRe3hPD9h/s7RzpGEc7e1v7Yk+4dX/zWCMsbw6eiClPgzV107XPL8SI3cEr/Wuv3+xK+t4ueXoq3rv3kq4PrbKeWvnjtqRn9MnTqXiDkaTkUkGn9uWypKK5rDM4/CYp+K4z+iGJW9SZrSc+z57OzEt6rtsag6ok6qfGYkOS1NJY/JIk/aexyEmS/tdYHEuSNCbzGU000UQTTTQAAAAAAAAAAAAAAAAAAL8BwZgl987F+p8AAAAASUVORK5CYII=" width="100%" height="100%">
+                            <img :src="user.image" width="100%" height="100%">
                             <div class="badge "></div>
                           </div>
-                          <div class="shopee-chat__name">luckyshop06</div>
-                          <div class="shopee-chat__close">✕</div>
-                        </a>
-                      </div>
-                    </div>
-                    <div style="position:absolute;top:0;left:0;transform:matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 50, 0, 1);width:138px;height:50px;">
-                      <div class="ember-view">
-                        <!--/chat/77371462-->
-                        <a href="#" class="buddy-item ember-view">
-                          <div class="shopee-chat__avatar">
-                            <img src="//cf.shopee.vn/file/e0c25c8c616bcbd1dcbaa5caffa58dac_tn" width="100%" height="100%">
-                            <div class="badge "></div>
-                          </div>
-                          <div class="shopee-chat__name">3cworld.vn</div>
+                          <div class="shopee-chat__name">{{user.username}}</div>
                           <div class="shopee-chat__close">✕</div>
                         </a>
                       </div>
@@ -80,7 +66,7 @@
               </a>
               <div class="user-menu ember-view">
                 <span style="cursor:pointer;" class="shopee-chat-header-text">
-                  luckyshop06
+                  <span id="username"></span>
                   <span class="arrow-down "></span>
                 </span>
               </div>
@@ -133,13 +119,11 @@
               <!-- Content conversation: end -->
               <!-- Footer chat: begin -->
               <div class="chat-panel">
-                <textarea placeholder="Gửi tin nhắn ..." maxlength="5000" class="ember-text-area ember-view"></textarea>
+                <textarea id="content-chat" placeholder="Gửi tin nhắn ..." maxlength="5000" class="ember-text-area ember-view"></textarea>
                 <div class="chat-toolbar">
                   <div class="clearfix">
                     <div class="right">
-                      <button v-on:click="sendMessage" class="shopee-chat__primary">
-                        Gửi
-                      </button>
+                      <button v-on:click="sendMessage" class="shopee-chat__primary">Gửi</button>
                     </div>
                   </div>
                 </div>
@@ -165,7 +149,6 @@
 <script>
   import http from '../../services/http-common';
   import toastr from '../../services/toastr.js';
-  //'http://localhost:8080/api/images/avatar'
 
   export default {
     name: "Chat",
@@ -174,38 +157,77 @@
         stompClient: null,
         headers: {},
         params: {
-          idSend: 1,
-          idReceive: 2
+          // idSend: 1,
+          idReceive: null
         },
-        conversations: []
+        conversations: [],
+        userConversations: [],
+        message: {
+          userIdSend: null,
+          role: null,
+          content: null,
+          createdAt: null,
+          image: null
+        }
       }
     },
     methods: {
       initChat: function () {
-        let vm = this;
+        let self = this;
         let authorization = localStorage.getItem("authorization");
         let socket = new WebSocket('ws://localhost:8080/carpool/websocket?authorization=' + authorization);
-        vm.stompClient = Stomp.over(socket);
-        vm.stompClient.debug = false;
+        self.stompClient = Stomp.over(socket);
+        self.stompClient.debug = false;
         let headers = {};
         headers["authorization"] = authorization;
-        vm.stompClient.connect({headers}, function(frame) {
-          vm.stompClient.subscribe('/socket/message/' + '3', function(message){
-            alert(message);
+        let userId = localStorage.getItem('userId');
+        self.stompClient.connect({headers}, function(frame) {
+          self.stompClient.subscribe('/socket/message/' + userId, function(message){
+            self.message = JSON.parse(message.body);
+            self.message.image = prefixUrl + self.message.image;
+            let myDate = new Date(self.message.createdAt);
+            let options = {
+              year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'
+            };
+            self.message.createdAt = myDate.toLocaleDateString('en', options);
+            if (self.params.idReceive === self.message.userIdSend) {
+              self.conversations.push(self.message);
+            }
           });
         });
+      },
+      getUserConversation: function() {
+        let self = this;
+        let prefixUrl = 'http://localhost:8080/api/images/avatar/';
+        http.get('/message/user-conversation')
+            .then(response => {
+              self.userConversations = JSON.parse(response.data.metadata);
+              self.userConversations.forEach(function (element, index) {
+                if (!element.image.includes(prefixUrl)) {
+                  element.image = prefixUrl + element.image;
+                }
+                element.style = 'position:absolute;top:0;left:0;width:138px;height:50px;' +
+                    'transform:matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, ' + index*50 + ', 0, 1);';
+              });
+              self.params.idReceive = self.userConversations[0].userId;
+              $('#username').text(self.userConversations[0].username);
+              self.getConversation();
+            })
+            .catch(e => {
+              console.error(e);
+              toastr.error("Error occurred");
+            });
       },
       getConversation: function() {
         let vm = this;
         let queryString = Object.keys(this.params).map(key => key + '=' + this.params[key]).join('&');
-        console.log(queryString);
         http.get('/message' + '?' + queryString)
             .then(response => {
+              let prefixUrl = 'http://localhost:8080/api/images/avatar/';
               vm.conversations = JSON.parse(response.data.metadata);
-              console.log(vm.conversations);
               vm.conversations.forEach(function (element) {
-                if (!element.image.includes('http://localhost:8080/api/images/avatar')) {
-                  element.image = 'http://localhost:8080/api/images/avatar/' + element.image;
+                if (!element.image.includes(prefixUrl)) {
+                  element.image = prefixUrl + element.image;
                 }
                 let myDate = new Date(element.createdAt);
                 let options = {
@@ -219,21 +241,46 @@
               toastr.error("Error occurred");
             });
       },
+      switchConversation: function(userId, username) {
+        let self = this;
+        let idOld = self.params.idReceive;
+        self.params.idReceive = userId;
+        self.conversations = [];
+        self.getConversation();
+        $('#'+ idOld).children().removeClass('active');
+        $('#'+ userId).children().addClass('active');
+        $('#username').text(username);
+      },
       sendMessage: function () {
+        let self = this;
+        let content = $('#content-chat').val();
+        let messageShow = {
+          content: content,
+          createdAt: null,
+          image: 'http://localhost:8080/api/images/avatar/' + localStorage.getItem('image'),
+          role: 'to'
+        };
+        self.conversations.push(messageShow);
+        let messageSave = {
+          userIdSend: localStorage.getItem('userId'),
+          userIdReceive: this.params.idReceive,
+          content: content
+        };
         let authorization = localStorage.getItem("authorization");
         let headers = {};
         headers["authorization"] = authorization;
-        let url = '/user/3/';
+        let url = '/user/' + this.params.idReceive + '/';
         this.stompClient.send(
             url,
             {headers},
-            JSON.stringify({'id': 123, 'userIdSend': 1, 'userIdReceive': 2, 'content': 'aaaaaa'})
+            JSON.stringify(messageSave)
         );
+        $('#content-chat').val("");
       }
     },
     mounted() {
       this.initChat();
-      this.getConversation();
+      this.getUserConversation();
     }
   }
 </script>

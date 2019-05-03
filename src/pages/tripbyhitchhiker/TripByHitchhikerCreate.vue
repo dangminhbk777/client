@@ -116,11 +116,11 @@
     },
     methods: {
       postNewTrip: function() {
-        let vm = this;
+        let self = this;
         http.post('/trip-by-hitchhiker/new-trip', this.position)
             .then(response => {
               console.log(response);
-              vm.position = null;
+              self.position = null;
               toastr.success('Create trip by hitchhiker SUCCESS');
             })
             .catch(e => {
@@ -166,7 +166,7 @@
         this.position.time = year + '-' + month + '-' + dateTime + 'T' + hour + ':' + minute + ":00";
       },
       initMap: function () {
-        let vm = this;
+        let self = this;
         mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
         let map = new mapboxgl.Map({
           container: 'map',
@@ -189,12 +189,12 @@
           $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
             let id = $(this).parent('div').attr('id');
             if (id === "mapbox-directions-origin-input") {
-              vm.position.descriptionOrigin = e.target.value;
+              self.position.descriptionOrigin = e.target.value;
             } else {
-              vm.position.descriptionDestination = e.target.value;
+              self.position.descriptionDestination = e.target.value;
             }
-            console.log(vm.position.descriptionOrigin);
-            console.log(vm.position.descriptionDestination);
+            console.log(self.position.descriptionOrigin);
+            console.log(self.position.descriptionDestination);
           });
 
           // Listen for the `directions.route` event that is triggered when a user
@@ -209,19 +209,19 @@
           });
           directions.on('origin', function (e) {
             if (e !=  null) {
-              vm.position.startLatitude = e.feature.geometry.coordinates[0];
-              vm.position.startLongitude = e.feature.geometry.coordinates[1];
+              self.position.startLatitude = e.feature.geometry.coordinates[0];
+              self.position.startLongitude = e.feature.geometry.coordinates[1];
             }
           });
           directions.on('destination', function (e) {
             if (e != null) {
-              vm.position.endLatitude = e.feature.geometry.coordinates[0];
-              vm.position.endLongitude = e.feature.geometry.coordinates[1];
+              self.position.endLatitude = e.feature.geometry.coordinates[0];
+              self.position.endLongitude = e.feature.geometry.coordinates[1];
             }
           });
         });
         window.onresize = function() {
-          vm.setupSize();
+          self.setupSize();
         };
       }
     },
