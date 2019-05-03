@@ -334,7 +334,7 @@
 <script>
   import http from '../../../services/http-common';
   import toastr from '../../../services/toastr.js';
-  import { URL_AVATAR } from '../../../services/variables.js';
+  import { URL_AVATAR, ADDRESS_SOCKET } from '../../../services/variables.js';
 
   export default {
     name: "Header",
@@ -395,7 +395,7 @@
         let self = this;
         let stompClient = null;
         let authorization = localStorage.getItem("authorization");
-        let socket = new WebSocket('ws://localhost:8080/carpool/websocket?authorization=' + authorization);
+        let socket = new WebSocket(ADDRESS_SOCKET + authorization);
         stompClient = Stomp.over(socket);
         stompClient.debug = false;
         let headers = {};

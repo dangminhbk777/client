@@ -149,7 +149,7 @@
 <script>
   import http from '../../services/http-common.js';
   import toastr from '../../services/toastr.js';
-  import { URL_AVATAR } from '../../services/variables.js';
+  import { URL_AVATAR, ADDRESS_SOCKET } from '../../services/variables.js';
 
   export default {
     name: "Chat",
@@ -176,7 +176,7 @@
       initChat: function () {
         let self = this;
         let authorization = localStorage.getItem("authorization");
-        let socket = new WebSocket('ws://localhost:8080/carpool/websocket?authorization=' + authorization);
+        let socket = new WebSocket(ADDRESS_SOCKET + authorization);
         self.stompClient = Stomp.over(socket);
         self.stompClient.debug = false;
         let headers = {};
