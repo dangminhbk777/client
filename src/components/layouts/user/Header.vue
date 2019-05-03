@@ -334,6 +334,7 @@
 <script>
   import http from '../../../services/http-common';
   import toastr from '../../../services/toastr.js';
+  import { URL_AVATAR } from '../../../services/variables.js';
 
   export default {
     name: "Header",
@@ -347,7 +348,7 @@
       return {
         username: localStorage.getItem("username"),
         email: localStorage.getItem("email"),
-        avatar: 'http://localhost:8080/api/images/avatar/' + localStorage.getItem("image"),
+        avatar: URL_AVATAR + localStorage.getItem("image"),
         unread: null,
         notifications: []
       }
