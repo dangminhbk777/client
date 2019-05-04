@@ -1,167 +1,200 @@
 <template>
+  <div>
     <div class="row">
-        <div class="col-xl-8">
-            <div class="m-portlet m-portlet--mobile ">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <h3 class="m-portlet__head-text">
-                                Exclusive Datatable Plugin
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="m-portlet__head-tools">
-                        <ul class="m-portlet__nav">
-                            <li class="m-portlet__nav-item">
-                                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
-                                    <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
-                                        <i class="la la-ellipsis-h m--font-brand"></i>
-                                    </a>
-                                    <div class="m-dropdown__wrapper">
-                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-                                        <div class="m-dropdown__inner">
-                                            <div class="m-dropdown__body">
-                                                <div class="m-dropdown__content">
-                                                    <ul class="m-nav">
-                                                        <li class="m-nav__section m-nav__section--first">
-                                                            <span class="m-nav__section-text">Quick Actions</span>
-                                                        </li>
-                                                        <li class="m-nav__item">
-                                                            <a href="" class="m-nav__link">
-                                                                <i class="m-nav__link-icon flaticon-share"></i>
-                                                                <span class="m-nav__link-text">Create Post</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="m-nav__item">
-                                                            <a href="" class="m-nav__link">
-                                                                <i class="m-nav__link-icon flaticon-chat-1"></i>
-                                                                <span class="m-nav__link-text">Send Messages</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="m-nav__item">
-                                                            <a href="" class="m-nav__link">
-                                                                <i class="m-nav__link-icon flaticon-multimedia-2"></i>
-                                                                <span class="m-nav__link-text">Upload File</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="m-nav__section">
-                                                            <span class="m-nav__section-text">Useful Links</span>
-                                                        </li>
-                                                        <li class="m-nav__item">
-                                                            <a href="" class="m-nav__link">
-                                                                <i class="m-nav__link-icon flaticon-info"></i>
-                                                                <span class="m-nav__link-text">FAQ</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="m-nav__item">
-                                                            <a href="" class="m-nav__link">
-                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
-                                                                <span class="m-nav__link-text">Support</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="m-nav__separator m-nav__separator--fit m--hide">
-                                                        </li>
-                                                        <li class="m-nav__item m--hide">
-                                                            <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">Submit</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="m-portlet__body">
-                    <!--begin: Datatable -->
-                    <div class="m_datatable" id="m_datatable_latest_orders"></div>
-                    <!--end: Datatable -->
-                </div>
+      <div class="col-xl-12">
+        <!--begin:: Widgets/Blog-->
+        <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height  m-portlet--rounded-force">
+          <div class="m-portlet__head m-portlet__head--fit">
+            <div class="m-portlet__head-caption">
+              <div class="m-portlet__head-action">
+                <button type="button" class="btn btn-sm m-btn--pill  btn-brand">Blog</button>
+              </div>
             </div>
-        </div>
-        <div class="col-xl-4">
-            <!--begin:: Widgets/Audit Log-->
-            <div class="m-portlet m-portlet--full-height ">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <h3 class="m-portlet__head-text">
-                                Audit Log
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="m-portlet__head-tools">
-                        <ul class="nav nav-pills nav-pills--brand m-nav-pills--align-right m-nav-pills--btn-pill m-nav-pills--btn-sm" role="tablist">
-                            <li class="nav-item m-tabs__item">
-                                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_widget4_tab1_content" role="tab">
-                                    Today
-                                </a>
-                            </li>
-                            <li class="nav-item m-tabs__item">
-                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_widget4_tab2_content" role="tab">
-                                    Week
-                                </a>
-                            </li>
-                            <li class="nav-item m-tabs__item">
-                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_widget4_tab3_content" role="tab">
-                                    Month
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+          </div>
+          <div class="m-portlet__body">
+            <div class="m-widget19">
+              <div class="m-widget19__pic m-portlet-fit--top m-portlet-fit--sides" style="min-height: 286px">
+                <img src="https://www.takescoop.com/static/images/intro/home-bg.jpg" alt="">
+                <div class="col-sm-12 text-center" style="position: absolute; display: block; top: 10%; z-index: 1;">
+                  <h2 class="m--font-light">Dramatically improve</h2>
+                  <h2 class="m--font-light">your commute</h2>
+                  <h4 class="m--font-light" style="padding-top: 20px; font-weight: lighter">Convenient carpools with</h4>
+                  <h4 class="m--font-light" style="font-weight: lighter">co-workers and neighbors</h4>
                 </div>
-                <div class="m-portlet__body">
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="m_widget4_tab1_content">
-                            <div class="m-scrollable" data-scrollable="true" data-height="400" style="height: 400px; overflow: hidden;">
-                                <div class="m-list-timeline m-list-timeline--skin-light">
-                                    <div class="m-list-timeline__items">
-                                        <div class="m-list-timeline__item">
-                                            <span class="m-list-timeline__badge m-list-timeline__badge--success"></span>
-                                            <span class="m-list-timeline__text">12 new users registered</span>
-                                            <span class="m-list-timeline__time">Just now</span>
-                                        </div>
-                                        <div class="m-list-timeline__item">
-                                            <span class="m-list-timeline__badge m-list-timeline__badge--info"></span>
-                                            <span class="m-list-timeline__text">System shutdown <span class="m-badge m-badge--success m-badge--wide">pending</span></span>
-                                            <span class="m-list-timeline__time">14 mins</span>
-                                        </div>
-                                        <div class="m-list-timeline__item">
-                                            <span class="m-list-timeline__badge m-list-timeline__badge--danger"></span>
-                                            <span class="m-list-timeline__text">New invoice received</span>
-                                            <span class="m-list-timeline__time">20 mins</span>
-                                        </div>
-                                        <div class="m-list-timeline__item">
-                                            <span class="m-list-timeline__badge m-list-timeline__badge--accent"></span>
-                                            <span class="m-list-timeline__text">DB overloaded 80% <span class="m-badge m-badge--info m-badge--wide">settled</span></span>
-                                            <span class="m-list-timeline__time">1 hr</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="m_widget4_tab2_content">
-                            m_widget4_tab2_content
-                        </div>
-                        <div class="tab-pane" id="m_widget4_tab3_content">
-                            m_widget4_tab3_content
-                        </div>
-                    </div>
+                <div class="m-widget19__shadow"></div>
+              </div>
+              <!--<div class="m-widget19__content">
+                <div class="m-widget19__header">
+                  <div class="m-widget19__user-img">
+                    <img class="m-widget19__img" src="assets/app/media/img//users/user1.jpg" alt="">
+                  </div>
+                  <div class="m-widget19__info">
+                  <span class="m-widget19__username">
+                      Anna Krox
+                  </span><br>
+                    <span class="m-widget19__time">
+                      UX/UI Designer, Google
+                  </span>
+                  </div>
+                  <div class="m-widget19__stats">
+                  <span class="m-widget19__number m&#45;&#45;font-brand">
+                      18
+                  </span>
+                    <span class="m-widget19__comment">
+                      Comments
+                  </span>
+                  </div>
                 </div>
+                <div class="m-widget19__body">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry scrambled it to make text of the printing and typesetting industry scrambled a type specimen book text of the dummy text of the printing printing and typesetting
+                  industry scrambled dummy text of the printing.
+                </div>
+              </div>
+              <div class="m-widget19__action">
+                <button type="button" class="btn m-btn&#45;&#45;pill btn-secondary m-btn m-btn&#45;&#45;hover-brand m-btn&#45;&#45;custom">Read More</button>
+              </div>-->
             </div>
-            <!--end:: Widgets/Audit Log-->
+          </div>
         </div>
+        <!--end:: Widgets/Blog-->
+      </div>
     </div>
+    <div class="row" style="padding-bottom: 40px; padding-top: 60px;">
+      <div class="col-sm-12 text-center">
+        <h1 class="text-uppercase">What is Scoop?</h1>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-sm-3 col-lg-offset-1 col-lg-3 col-sm-pull-5">
+        <div class="wiss-description wiss-description-active" id="wiss-description-0">
+          <strong>Carpooling Service:</strong><br class="hidden-xs"> Scoop brings together co-workers and neighbors who are going the same way.
+        </div>
+        <div class="wiss-description wiss-description-inactive" id="wiss-description-1">
+          <strong>Community of Carpoolers:</strong><br class="hidden-xs"> Scoop carpoolers enjoy meeting new people and making the most of their time.
+        </div>
+        <div class="wiss-description wiss-description-inactive" id="wiss-description-2">
+          <strong>Enterprise Solution:</strong><br class="hidden-xs"> Scoop partners with competitive employers to enrich the lives of their employees.
+        </div>
+      </div>
+      <div class="col-sm-5 col-sm-push-3 text-center">
+        <img src="https://www.takescoop.com/static/images/what-is-scoop/carpooling-service.png" id="wiss-image-0" class="wiss-image" alt="Carpooling service">
+        <img src="https://www.takescoop.com/static/images/what-is-scoop/community-of-carpoolers.png" id="wiss-image-1" class="wiss-image init-hidden" alt="Community of carpoolers">
+        <img src="https://www.takescoop.com/static/images/what-is-scoop/enterprise-solution.png" id="wiss-image-2" class="wiss-image init-hidden" alt="An enterprise solution">
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "Home"
+  export default {
+    name: "Home",
+    mounted() {
+      let element0 = $('#wiss-description-0');
+      let element1 = $('#wiss-description-1');
+      let element2 = $('#wiss-description-2');
+
+      let image0 = $('#wiss-image-0');
+      let image1 = $('#wiss-image-1');
+      let image2 = $('#wiss-image-2');
+
+      element0.on('click', function () {
+        if (element0.hasClass('wiss-description-inactive')) {
+          element0.removeClass('wiss-description-inactive');
+          element0.addClass('wiss-description-active');
+
+          image0.removeClass('init-hidden');
+        }
+        if (element1.hasClass('wiss-description-active')) {
+          element1.removeClass('wiss-description-active');
+          element1.addClass('wiss-description-inactive');
+
+          image1.addClass('init-hidden');
+        }
+        if (element2.hasClass('wiss-description-active')) {
+          element2.removeClass('wiss-description-active');
+          element2.addClass('wiss-description-inactive');
+
+          image2.addClass('init-hidden');
+        }
+      });
+      element1.on('click', function () {
+        if (element1.hasClass('wiss-description-inactive')) {
+          element1.removeClass('wiss-description-inactive');
+          element1.addClass('wiss-description-active');
+
+          image1.removeClass('init-hidden');
+        }
+        if (element2.hasClass('wiss-description-active')) {
+          element2.removeClass('wiss-description-active');
+          element2.addClass('wiss-description-inactive');
+
+          image2.addClass('init-hidden');
+        }
+        if (element0.hasClass('wiss-description-active')) {
+          element0.removeClass('wiss-description-active');
+          element0.addClass('wiss-description-inactive');
+
+          image0.addClass('init-hidden');
+        }
+      });
+      element2.on('click', function () {
+        if (element2.hasClass('wiss-description-inactive')) {
+          element2.removeClass('wiss-description-inactive');
+          element2.addClass('wiss-description-active');
+
+          image2.removeClass('init-hidden');
+        }
+        if (element0.hasClass('wiss-description-active')) {
+          element0.removeClass('wiss-description-active');
+          element0.addClass('wiss-description-inactive');
+
+          image0.addClass('init-hidden');
+        }
+        if (element1.hasClass('wiss-description-active')) {
+          element1.removeClass('wiss-description-active');
+          element1.addClass('wiss-description-inactive');
+
+          image1.addClass('init-hidden');
+        }
+      });
     }
+  }
 </script>
 
 <style scoped>
-
+  .wiss-description-active {
+    border: 2px solid #ffad4e;
+  }
+  .wiss-description {
+    padding: 20px 20px;
+    margin-bottom: 30px;
+    font-size: 15px;
+    border-radius: 4px;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: .3s all;
+  }
+  .wiss-description-inactive {
+    border: 2px solid #dadddd;
+    color: #9fa7a6;
+  }
+  .wiss-description {
+    padding: 20px 20px;
+    margin-bottom: 30px;
+    font-size: 15px;
+    border-radius: 4px;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: .3s all;
+  }
+  .wiss-image {
+    width: 500px;
+    height: 450px;
+  }
+  .init-hidden {
+    display: none;
+  }
+  .m-portlet .m-portlet__body {
+    padding: 0;
+  }
 </style>
