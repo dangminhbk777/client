@@ -92,6 +92,7 @@
   import toastr from '../../services/toastr.js';
   import http from '../../services/http-common.js';
   import Select from '../../components/selects/SelectPlaceHolder';
+  import axios from 'axios';
 
   export default {
     name: "TripByHitchhikerCreate",
@@ -211,6 +212,19 @@
             if (e !=  null) {
               self.position.startLatitude = e.feature.geometry.coordinates[0];
               self.position.startLongitude = e.feature.geometry.coordinates[1];
+              if (self.position.startLatitude != null && self.position.startLongitude != null) {
+                axios.get('https://api.mapbox.com/geocoding/v5/mapbox.places/' +
+                    self.position.startLatitude + ',' + self.position.startLongitude +
+                    '.json?types=poi&access_token=' +
+                    'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ')
+                    .then(response => {
+                      console.log(response.data);
+                      console.log(response.data.features[0].place_name);
+                    })
+                    .catch(e => {
+                      this.errors.push(e)
+                    })
+              }
             }
           });
           directions.on('destination', function (e) {

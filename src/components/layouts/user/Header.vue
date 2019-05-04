@@ -401,7 +401,7 @@
         let headers = {};
         headers["authorization"] = authorization;
         stompClient.connect({headers}, function(frame) {
-          stompClient.subscribe('/socket/notification', function(notification){
+          stompClient.subscribe('/socket/notification/' + localStorage.getItem('userId'), function(notification){
             let temp = JSON.parse(notification.body);
             let myDate = new Date(temp.createdAt);
             let options = {

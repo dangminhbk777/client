@@ -246,11 +246,10 @@
           accessToken: mapboxgl.accessToken,
           steps: false,
           geometries: 'polyline',
+          interactive: false,
           controls: {instructions: false}
         });
         map.addControl( directions, 'top-left');
-        // After the map style has loaded on the page, add a source layer and default
-        // styling for a single point.
         map.on('load', function() {
           console.log(self.tripDetail);
           directions.setOrigin([self.tripDetail.startLatitude, self.tripDetail.startLongitude]);
