@@ -17,11 +17,6 @@
         default: null
       }
     },
-    /*methods: {
-      showInformation() {
-        alert('run');
-      }
-    },*/
     mounted() {
       let self = this;
       let table = $(this.$el);
@@ -83,7 +78,8 @@
             field: "description",
             title: "Description",
             filterable: false,
-            width: 250
+            width: 250,
+            textAlign: 'left'
           },
           {
             field: "time",
