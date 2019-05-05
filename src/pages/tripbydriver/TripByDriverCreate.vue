@@ -115,8 +115,10 @@
 </template>
 
 <script>
+  import axios from 'axios';
   import toastr from '../../services/toastr.js';
   import http from '../../services/http-common.js';
+  import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
   import Select from '../../components/selects/SelectPlaceHolder';
 
   export default {
@@ -194,6 +196,7 @@
         this.formData.append("endLongitude", this.endLongitude);
         this.formData.append("startLatitude", this.startLatitude);
         this.formData.append("endLatitude", this.endLatitude);
+        this.formData.append("description", this.descriptionOrigin + ' &#8658 ' + this.descriptionDestination);
         this.formData.append("time", this.time);
         this.formData.append("typeVehicle", this.typeVehicle);
         this.formData.append("numberSeat", this.numberSeat);
@@ -230,7 +233,7 @@
       initMap: function () {
         let self = this;
         console.log(this);
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
+        mapboxgl.accessToken = MAPBOX_KEY;
         let map = new mapboxgl.Map({
           container: 'map',
           style: 'mapbox://styles/mapbox/streets-v11',
@@ -244,31 +247,32 @@
           controls: {instructions: false}
         });
         map.addControl( directions, 'top-left');
-
-        // After the map style has loaded on the page, add a source layer and default
-        // styling for a single point.
         map.on('load', function() {
-
           $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
             let id = $(this).parent('div').attr('id');
-            if (id === "mapbox-directions-origin-input") {
-              self.descriptionOrigin = e.target.value;
-            } else {
-              self.descriptionDestination = e.target.value;
+            if (id === "mapbox-directions-origin-input" && e.target.value != null) {
+              axios.get(URL_MAPBOX_API + e.target.value + '.json?types=poi&access_token=' + MAPBOX_KEY)
+                  .then(response => {
+                    e.target.value = response.data.features[0].place_name;
+                    self.descriptionOrigin = e.target.value;
+                  })
+                  .catch(e => {
+                    this.errors.push(e)
+                  });
+            } else if (e.target.value != null) {
+              axios.get(URL_MAPBOX_API + e.target.value + '.json?types=poi&access_token=' + MAPBOX_KEY)
+                  .then(response => {
+                    e.target.value = response.data.features[0].place_name;
+                    self.descriptionDestination = e.target.value;
+                  })
+                  .catch(e => {
+                    this.errors.push(e)
+                  });
             }
-            console.log(self.descriptionOrigin);
-            console.log(self.descriptionDestination);
           });
 
-          // Listen for the `directions.route` event that is triggered when a user
-          // makes a selection and add a symbol that matches the result.
           directions.on('route', function (ev) {
             console.log(ev.route);
-            // let styleSpec = ev.route;
-            // let styleSpecBox = document.getElementById('json-response');
-            // let styleSpecText = JSON.stringify(styleSpec, null, 2);
-            // let syntaxStyleSpecText = syntaxHighlight(styleSpecText);
-            // styleSpecBox.innerHTML = syntaxStyleSpecText;
           });
           directions.on('origin', function (e) {
             if (e !=  null) {

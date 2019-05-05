@@ -135,60 +135,6 @@
               <div id="information-map">
                 <div class="flex-parent relative scroll-hidden">
                   <div id="map" class="flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-mm mapboxgl-map" >
-                    <div class="mapboxgl-canary" style="visibility: hidden;">
-                    </div>
-                    <!-- MAP BOX CONTAINER: BEGIN -->
-                    <div class="mapboxgl-control-container">
-                      <div class="mapboxgl-ctrl-top-left">
-                        <div class="mapboxgl-ctrl-directions mapboxgl-ctrl">
-                          <div class="directions-control directions-control-inputs">
-                            <div class="mapbox-directions-component mapbox-directions-inputs">
-                              <div class="mapbox-directions-component-keyline">
-                                <!-- INPUT ORIGIN: BEGIN -->
-                                <div class="mapbox-directions-origin">
-                                  <label class="mapbox-form-label">
-                                    <span class="directions-icon directions-icon-depart"></span>
-                                  </label>
-                                  <div id="mapbox-directions-origin-input">
-                                    <div class="mapboxgl-ctrl-geocoder">
-                                      <span class="geocoder-icon geocoder-icon-search"></span>
-                                      <input type="text" placeholder="Choose a starting place">
-                                      <ul class="suggestions" style="display: none;"></ul>
-                                      <div class="geocoder-pin-right">
-                                        <button class="geocoder-icon geocoder-icon-close"></button>
-                                        <span class="geocoder-icon geocoder-icon-loading"></span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- INPUT ORIGIN: END -->
-                                <button class="directions-icon directions-icon-reverse directions-reverse js-reverse-inputs" title="Reverse origin &amp; destination">
-                                </button>
-                                <!-- INPUT DESTINATION: BEGIN -->
-                                <div class="mapbox-directions-destination">
-                                  <label class="mapbox-form-label">
-                                    <span class="directions-icon directions-icon-arrive"></span>
-                                  </label>
-                                  <div id="mapbox-directions-destination-input">
-                                    <div class="mapboxgl-ctrl-geocoder">
-                                      <span class="geocoder-icon geocoder-icon-search"></span>
-                                      <input type="text" placeholder="Choose destination">
-                                      <ul class="suggestions" style="display: none;"></ul>
-                                      <div class="geocoder-pin-right">
-                                        <button class="geocoder-icon geocoder-icon-close"></button>
-                                        <span class="geocoder-icon geocoder-icon-loading"></span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- INPUT DESTINATION: END -->
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- MAP BOX CONTAINER: END -->
                   </div>
                 </div>
               </div>
@@ -203,7 +149,10 @@
 </template>
 
 <script>
+  import axios from 'axios';
   import http from '../../services/http-common.js';
+  import toastr from '../../services/toastr.js';
+  import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
   import SlideShow from '../../components/other/SlideShow.vue';
 
   export default {
@@ -257,7 +206,7 @@
     methods: {
       initMap: function () {
         let self = this;
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
+        mapboxgl.accessToken = MAPBOX_KEY;
         let map = new mapboxgl.Map({
           container: 'map',
           style: 'mapbox://styles/mapbox/streets-v11',
@@ -276,6 +225,27 @@
         });
         map.addControl( directions, 'top-left');
         map.on('load', function() {
+          $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
+            let id = $(this).parent('div').attr('id');
+            if (id === "mapbox-directions-origin-input" && e.target.value != null) {
+              axios.get(URL_MAPBOX_API + self.tripDetail.startLatitude + ',' + self.tripDetail.startLongitude
+                  + '.json?types=poi&access_token=' + MAPBOX_KEY)
+                  .then(response => {
+                    e.target.value = response.data.features[0].place_name;
+                  })
+                  .catch(e => {
+                    this.errors.push(e)
+                  });
+            } else if (e.target.value != null) {
+              axios.get(URL_MAPBOX_API + self.tripDetail.endLatitude + ',' + self.tripDetail.endLongitude + '.json?types=poi&access_token=' + MAPBOX_KEY)
+                  .then(response => {
+                    e.target.value = response.data.features[0].place_name;
+                  })
+                  .catch(e => {
+                    this.errors.push(e)
+                  });
+            }
+          });
           directions.setOrigin([self.tripDetail.startLatitude, self.tripDetail.startLongitude]);
           directions.setDestination([self.tripDetail.endLatitude, self.tripDetail.endLongitude]);
         });
@@ -287,6 +257,7 @@
         http.post("trip-by-driver/register-with-driver/" + this.driverId)
             .then(response => {
               console.log(JSON.parse(response.data.metadata));
+              toastr.success('Register trip SUCCESS');
               this.showButton = "02";
             })
             .catch(e => {

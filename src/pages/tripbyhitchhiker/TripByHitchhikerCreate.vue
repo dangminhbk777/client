@@ -51,35 +51,6 @@
       <div class="col-xl-6" id="information-map">
         <div class="flex-parent viewport-full relative scroll-hidden" style="max-height: 510px">
           <div class="flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-mm mapboxgl-map" id="map">
-            <div class="mapboxgl-canary" style="visibility: hidden;"></div>
-            <div class="mapboxgl-control-container">
-              <div class="mapboxgl-ctrl-top-left">
-                <div class="mapboxgl-ctrl-directions mapboxgl-ctrl">
-                  <div class="directions-control directions-control-inputs">
-                    <div class="mapbox-directions-component mapbox-directions-inputs">
-                      <div class="mapbox-directions-component-keyline">
-                        <div class="mapbox-directions-origin">
-                          <label class="mapbox-form-label">
-                            <span class="directions-icon directions-icon-depart"></span>
-                          </label>
-                          <div id="mapbox-directions-origin-input"><div class="mapboxgl-ctrl-geocoder"><span class="geocoder-icon geocoder-icon-search"></span><input type="text" placeholder="Choose a starting place"><ul class="suggestions" style="display: none;"></ul><div class="geocoder-pin-right"><button class="geocoder-icon geocoder-icon-close"></button><span class="geocoder-icon geocoder-icon-loading"></span></div></div></div>
-                        </div>
-
-                        <button class="directions-icon directions-icon-reverse directions-reverse js-reverse-inputs" title="Reverse origin &amp; destination">
-                        </button>
-
-                        <div class="mapbox-directions-destination">
-                          <label class="mapbox-form-label">
-                            <span class="directions-icon directions-icon-arrive"></span>
-                          </label>
-                          <div id="mapbox-directions-destination-input"><div class="mapboxgl-ctrl-geocoder"><span class="geocoder-icon geocoder-icon-search"></span><input type="text" placeholder="Choose destination"><ul class="suggestions" style="display: none;"></ul><div class="geocoder-pin-right"><button class="geocoder-icon geocoder-icon-close"></button><span class="geocoder-icon geocoder-icon-loading"></span></div></div></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -88,11 +59,11 @@
 </template>
 
 <script>
+  import axios from 'axios';
   import toastr from '../../services/toastr.js';
   import http from '../../services/http-common.js';
   import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
   import Select from '../../components/selects/SelectPlaceHolder';
-  import axios from 'axios';
 
   export default {
     name: "TripByHitchhikerCreate",
@@ -110,6 +81,7 @@
           numberSeat: null,
           price: null,
           note: null,
+          description: null,
           descriptionOrigin: null,
           descriptionDestination: null,
         }
@@ -118,6 +90,8 @@
     methods: {
       postNewTrip: function() {
         let self = this;
+        self.position.description = self.position.descriptionOrigin + ' &#8658; '
+            + self.position.descriptionDestination;
         http.post('/trip-by-hitchhiker/new-trip', this.position)
             .then(response => {
               console.log(response);
@@ -137,6 +111,7 @@
         this.position.numberSeat = null;
         this.position.price = null;
         this.position.note = null;
+        this.position.description = null;
         this.position.descriptionOrigin = null;
         this.position.descriptionDestination = null;
       },
@@ -171,7 +146,7 @@
         mapboxgl.accessToken = MAPBOX_KEY;
         let map = new mapboxgl.Map({
           container: 'map',
-          style: 'mapbox://styles/mapbox/streets-v11',
+          style: 'mapbox://styles/mapbox/streets-v10',
           center: [105.859979061677,21.007181634883864],
           zoom: 12
         });
@@ -185,13 +160,25 @@
         map.on('load', function() {
           $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
             let id = $(this).parent('div').attr('id');
-            if (id === "mapbox-directions-origin-input") {
-              self.position.descriptionOrigin = e.target.value;
-            } else {
-              self.position.descriptionDestination = e.target.value;
+            if (id === "mapbox-directions-origin-input" && e.target.value != null) {
+              axios.get(URL_MAPBOX_API + e.target.value + '.json?types=poi&access_token=' + MAPBOX_KEY)
+                  .then(response => {
+                    e.target.value = response.data.features[0].place_name;
+                    self.position.descriptionOrigin = e.target.value;
+                  })
+                  .catch(e => {
+                    this.errors.push(e)
+                  });
+            } else if (e.target.value != null) {
+              axios.get(URL_MAPBOX_API + e.target.value + '.json?types=poi&access_token=' + MAPBOX_KEY)
+                  .then(response => {
+                    e.target.value = response.data.features[0].place_name;
+                    self.position.descriptionDestination = e.target.value;
+                  })
+                  .catch(e => {
+                    this.errors.push(e)
+                  });
             }
-            console.log(self.position.descriptionOrigin);
-            console.log(self.position.descriptionDestination);
           });
 
           directions.on('route', function (ev) {
@@ -201,17 +188,6 @@
             if (e !=  null) {
               self.position.startLatitude = e.feature.geometry.coordinates[0];
               self.position.startLongitude = e.feature.geometry.coordinates[1];
-              if (self.position.startLatitude != null && self.position.startLongitude != null) {
-                axios.get(URL_MAPBOX_API + self.position.startLatitude + ',' + self.position.startLongitude +
-                    '.json?types=poi&access_token=' + MAPBOX_KEY)
-                    .then(response => {
-                      console.log(response.data);
-                      console.log(response.data.features[0].place_name);
-                    })
-                    .catch(e => {
-                      this.errors.push(e)
-                    })
-              }
             }
           });
           directions.on('destination', function (e) {

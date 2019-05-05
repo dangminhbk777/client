@@ -184,8 +184,10 @@
 </template>
 
 <script>
-  import toastr from '../../services/toastr.js';
+  import axios from 'axios';
   import http from '../../services/http-common.js';
+  import toastr from '../../services/toastr.js';
+  import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
 
   export default {
     name: "TripByHitchhikerDetail",
@@ -251,7 +253,27 @@
         });
         map.addControl( directions, 'top-left');
         map.on('load', function() {
-          console.log(self.tripDetail);
+          $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
+            let id = $(this).parent('div').attr('id');
+            if (id === "mapbox-directions-origin-input" && e.target.value != null) {
+              axios.get(URL_MAPBOX_API + self.tripDetail.startLatitude + ',' + self.tripDetail.startLongitude
+                  + '.json?types=poi&access_token=' + MAPBOX_KEY)
+                  .then(response => {
+                    e.target.value = response.data.features[0].place_name;
+                  })
+                  .catch(e => {
+                    this.errors.push(e)
+                  });
+            } else if (e.target.value != null) {
+              axios.get(URL_MAPBOX_API + self.tripDetail.endLatitude + ',' + self.tripDetail.endLongitude + '.json?types=poi&access_token=' + MAPBOX_KEY)
+                  .then(response => {
+                    e.target.value = response.data.features[0].place_name;
+                  })
+                  .catch(e => {
+                    this.errors.push(e)
+                  });
+            }
+          });
           directions.setOrigin([self.tripDetail.startLatitude, self.tripDetail.startLongitude]);
           directions.setDestination([self.tripDetail.endLatitude, self.tripDetail.endLongitude]);
         });
@@ -277,7 +299,6 @@
             });
         http.get('/trip-by-hitchhiker/' + self.hitchhikerId)
             .then(response => {
-              console.log(response);
               self.tripDetail = JSON.parse(response.data.metadata);
               // check show button
               self.initMap();
