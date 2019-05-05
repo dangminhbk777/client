@@ -51,8 +51,7 @@
       <div class="col-xl-6" id="information-map">
         <div class="flex-parent viewport-full relative scroll-hidden" style="max-height: 510px">
           <div class="flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-mm mapboxgl-map" id="map">
-            <div class="mapboxgl-canary" style="visibility: hidden;">
-            </div>
+            <div class="mapboxgl-canary" style="visibility: hidden;"></div>
             <div class="mapboxgl-control-container">
               <div class="mapboxgl-ctrl-top-left">
                 <div class="mapboxgl-ctrl-directions mapboxgl-ctrl">
@@ -91,6 +90,7 @@
 <script>
   import toastr from '../../services/toastr.js';
   import http from '../../services/http-common.js';
+  import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
   import Select from '../../components/selects/SelectPlaceHolder';
   import axios from 'axios';
 
@@ -168,7 +168,7 @@
       },
       initMap: function () {
         let self = this;
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
+        mapboxgl.accessToken = MAPBOX_KEY;
         let map = new mapboxgl.Map({
           container: 'map',
           style: 'mapbox://styles/mapbox/streets-v11',
@@ -182,11 +182,7 @@
           controls: {instructions: false}
         });
         map.addControl( directions, 'top-left');
-
-        // After the map style has loaded on the page, add a source layer and default
-        // styling for a single point.
         map.on('load', function() {
-
           $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
             let id = $(this).parent('div').attr('id');
             if (id === "mapbox-directions-origin-input") {
@@ -198,25 +194,16 @@
             console.log(self.position.descriptionDestination);
           });
 
-          // Listen for the `directions.route` event that is triggered when a user
-          // makes a selection and add a symbol that matches the result.
           directions.on('route', function (ev) {
             console.log(ev.route);
-            // let styleSpec = ev.route;
-            // let styleSpecBox = document.getElementById('json-response');
-            // let styleSpecText = JSON.stringify(styleSpec, null, 2);
-            // let syntaxStyleSpecText = syntaxHighlight(styleSpecText);
-            // styleSpecBox.innerHTML = syntaxStyleSpecText;
           });
           directions.on('origin', function (e) {
             if (e !=  null) {
               self.position.startLatitude = e.feature.geometry.coordinates[0];
               self.position.startLongitude = e.feature.geometry.coordinates[1];
               if (self.position.startLatitude != null && self.position.startLongitude != null) {
-                axios.get('https://api.mapbox.com/geocoding/v5/mapbox.places/' +
-                    self.position.startLatitude + ',' + self.position.startLongitude +
-                    '.json?types=poi&access_token=' +
-                    'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ')
+                axios.get(URL_MAPBOX_API + self.position.startLatitude + ',' + self.position.startLongitude +
+                    '.json?types=poi&access_token=' + MAPBOX_KEY)
                     .then(response => {
                       console.log(response.data);
                       console.log(response.data.features[0].place_name);
