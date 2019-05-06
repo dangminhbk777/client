@@ -14,7 +14,8 @@
       <!-- HEAD: END -->
       <div class="m-portlet__body">
         <table-app v-if="mData"
-            :mData="mData">
+            :mData="mData"
+            :urlRecord="urlRecord">
         </table-app>
       </div>
     </div>
@@ -33,7 +34,8 @@
     },
     data: function() {
       return {
-        mData: null
+        mData: null,
+        urlRecord: 'trip-by-driver/'
       }
     },
     methods: {

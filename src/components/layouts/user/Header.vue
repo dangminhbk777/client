@@ -8,7 +8,7 @@
         <div class="m-stack__item m-brand m-brand--mobile">
           <div class="m-stack m-stack--ver m-stack--general">
             <div class="m-stack__item m-stack__item--middle m-brand__logo">
-              <a href="index.html" class="m-brand__logo-wrapper">
+              <a href="/home" class="m-brand__logo-wrapper">
                 <img alt="" src="/assets/demo/media/img/logo/logo.png"/>
               </a>
             </div>
@@ -26,8 +26,8 @@
             </div>
           </div>
         </div>
-
         <!-- END: Brand -->
+
         <div class="m-stack__item m-stack__item--middle m-stack__item--left m-header-head" id="m_header_nav">
           <div class="m-stack m-stack--ver m-stack--desktop">
             <div class="m-stack__item m-stack__item--fluid">
