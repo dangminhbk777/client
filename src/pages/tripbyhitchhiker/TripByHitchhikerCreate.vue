@@ -186,14 +186,14 @@
           });
           directions.on('origin', function (e) {
             if (e !=  null) {
-              self.position.startLatitude = e.feature.geometry.coordinates[0];
-              self.position.startLongitude = e.feature.geometry.coordinates[1];
+              self.position.startLongitude = e.feature.geometry.coordinates[0];
+              self.position.startLatitude = e.feature.geometry.coordinates[1];
             }
           });
           directions.on('destination', function (e) {
             if (e != null) {
-              self.position.endLatitude = e.feature.geometry.coordinates[0];
-              self.position.endLongitude = e.feature.geometry.coordinates[1];
+              self.position.endLongitude = e.feature.geometry.coordinates[0];
+              self.position.endLatitude = e.feature.geometry.coordinates[1];
             }
           });
         });

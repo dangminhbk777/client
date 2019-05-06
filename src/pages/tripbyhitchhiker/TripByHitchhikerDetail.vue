@@ -256,7 +256,7 @@
           $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
             let id = $(this).parent('div').attr('id');
             if (id === "mapbox-directions-origin-input" && e.target.value != null) {
-              axios.get(URL_MAPBOX_API + self.tripDetail.startLatitude + ',' + self.tripDetail.startLongitude
+              axios.get(URL_MAPBOX_API + self.tripDetail.startLongitude + ',' + self.tripDetail.startLatitude
                   + '.json?types=poi&access_token=' + MAPBOX_KEY)
                   .then(response => {
                     e.target.value = response.data.features[0].place_name;
@@ -265,7 +265,8 @@
                     this.errors.push(e)
                   });
             } else if (e.target.value != null) {
-              axios.get(URL_MAPBOX_API + self.tripDetail.endLatitude + ',' + self.tripDetail.endLongitude + '.json?types=poi&access_token=' + MAPBOX_KEY)
+              axios.get(URL_MAPBOX_API + self.tripDetail.endLongitude + ',' + self.tripDetail.endLatitude
+                  + '.json?types=poi&access_token=' + MAPBOX_KEY)
                   .then(response => {
                     e.target.value = response.data.features[0].place_name;
                   })
@@ -274,8 +275,8 @@
                   });
             }
           });
-          directions.setOrigin([self.tripDetail.startLatitude, self.tripDetail.startLongitude]);
-          directions.setDestination([self.tripDetail.endLatitude, self.tripDetail.endLongitude]);
+          directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
+          directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
         });
         window.onresize = function() {
           map.resize();

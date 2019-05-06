@@ -192,10 +192,10 @@
       },
       setDataToFormRequest: function () {
         this.typeVehicle = this.select2.selected;
-        this.formData.append("startLongitude", this.startLongitude);
-        this.formData.append("endLongitude", this.endLongitude);
         this.formData.append("startLatitude", this.startLatitude);
+        this.formData.append("startLongitude", this.startLongitude);
         this.formData.append("endLatitude", this.endLatitude);
+        this.formData.append("endLongitude", this.endLongitude);
         this.formData.append("description", this.descriptionOrigin + ' &#8658 ' + this.descriptionDestination);
         this.formData.append("time", this.time);
         this.formData.append("typeVehicle", this.typeVehicle);
@@ -276,14 +276,14 @@
           });
           directions.on('origin', function (e) {
             if (e !=  null) {
-              self.startLatitude = e.feature.geometry.coordinates[0];
-              self.startLongitude = e.feature.geometry.coordinates[1];
+              self.startLongitude = e.feature.geometry.coordinates[0];
+              self.startLatitude = e.feature.geometry.coordinates[1];
             }
           });
           directions.on('destination', function (e) {
             if (e != null) {
-              self.endLatitude = e.feature.geometry.coordinates[0];
-              self.endLongitude = e.feature.geometry.coordinates[1];
+              self.endLongitude = e.feature.geometry.coordinates[0];
+              self.endLatitude = e.feature.geometry.coordinates[1];
             }
           });
         });
