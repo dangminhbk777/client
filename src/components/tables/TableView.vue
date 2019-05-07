@@ -15,7 +15,8 @@
       urlRecord: {
         type: String,
         default: null
-      }
+      },
+      vehicle: null
     },
     mounted() {
       let self = this;
@@ -28,13 +29,8 @@
               url: URL_CALL_API + this.url,
               headers: {
                 'authorization': localStorage.getItem(AUTHORIZATION)
-              },
-              params: {
-                query: {
-                  param: 'value'
-                }
-              },
-            },
+              }
+            }
           },
           pageSize: 10,
           serverPaging: true,
@@ -62,9 +58,6 @@
             },
           }
         },
-        /*search: {
-            input: $('#generalSearch')
-        },*/
         // columns definition
         columns: [
           {
@@ -185,6 +178,38 @@
           .on('click', '.m-btn--pill', function(e) {
             console.log(tableApp);
           });
+
+      $('#buttonSearch').click(function () {
+        // get value position
+        let position = $('#positionSearch').val();
+        let positionArr = position.split(',');
+        // get value date
+        let date = $('#m_daterangepicker_1').val();
+        date = date.replace(' ', '');
+        date = date.replace('-', ',');
+        let dateArr = date.split(',');
+        // get value vehicle
+        let vehicle = self.vehicle.selected;
+        // get value price
+        let priceFrom = $('#priceFrom').val();
+        let priceTo = $('#priceTo').val();
+        // get number seat
+        let numberSeat = $('#numberSeat').val();
+        // get radius
+        let radius = $('#radius');
+        let params = {
+          longitude: positionArr[0],
+          latitude: positionArr[1],
+          radius: radius,
+          dateFrom: dateArr[0],
+          dateTo: dateArr[1],
+          vehicle: vehicle,
+          priceFrom: priceFrom,
+          priceTo: priceTo,
+          numberSeat: numberSeat
+        };
+        tableApp.search(JSON.stringify(params));
+      })
     }
   }
 </script>

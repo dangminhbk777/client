@@ -179,18 +179,15 @@
 
     <!-- MapBox: BEGIN -->
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js"></script>
-<!--    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.js"></script>-->
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'></script>
     <!-- MapBox: END -->
 
     <script type="text/javascript">
       $(document).ready(function() {
         $("#addClass").click(function () {
-          // $('#qnimate').addClass('popup-box-on');
           $('#_shopee-chat-container').addClass('expanded');
         });
         $("#chat-close-button").click(function () {
-          // $('#qnimate').removeClass('popup-box-on');
           $('#_shopee-chat-container').removeClass('expanded');
         });
       });

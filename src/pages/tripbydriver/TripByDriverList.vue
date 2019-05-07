@@ -29,7 +29,7 @@
                       <div class="form-group m-form__group row align-items-center">
                         <div class="col-md-3">
                           <div class="m-input-icon m-input-icon--left">
-                            <input type="text" class="form-control m-input" placeholder="Description..." id="generalSearch">
+                            <input type="text" class="form-control m-input" placeholder="Position..." id="positionSearch">
                             <span class="m-input-icon__icon m-input-icon__icon--left">
                               <span><i class="la la-search"></i></span>
                             </span>
@@ -66,15 +66,33 @@
                   </div>
 
                   <div class="row align-items-center __padding-top-10">
-                    <div class="col-xl-10 order-2 order-xl-1">
+                    <div class="col-xl-10 order-2 order-xl-1 m--align-right">
+                      <div class="m-form__group m-form__group--inline">
+                        <div class="m-form__label">
+                          <label class="m-label m-label--single">Radius</label>
+                        </div>
+                        <input type="number" class="form-control" id="radius" style="max-width: 90px"/>
+                        <div class="m-form__label">
+                          <label class="m-label m-label--single">Price From</label>
+                        </div>
+                        <input type="number" class="form-control" id="priceFrom"/>
+                        <div class="m-form__label" style="padding-left: 20px">
+                          <label class="m-label m-label--single">Price To</label>
+                        </div>
+                        <input type="number" class="form-control" id="priceTo"/>
+                        <div class="m-form__label" style="padding-left: 20px">
+                          <label class="m-label m-label--single">Number Seat</label>
+                        </div>
+                        <input type="number" class="form-control" id="numberSeat"/>
+                      </div>
                     </div>
                     <div class="col-xl-2 order-1 order-xl-2 m--align-right">
-                      <a href="#" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
+                      <button id="buttonSearch" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
                         <span>
                           <i class="la la-search"></i>
                           <span>Tìm kiếm</span>
                         </span>
-                      </a>
+                      </button>
                       <div class="m-separator m-separator--dashed d-xl-none"></div>
                     </div>
                   </div>
@@ -84,7 +102,12 @@
           </div>
         </div>
         <!-- end: Accordions -->
-        <table-app :url="url" :urlRecord="urlRecord"></table-app>
+        <table-app
+            :url="url"
+            :urlRecord="urlRecord"
+            :vehicle="select2"
+        >
+        </table-app>
       </div>
     </div>
   </div>
@@ -113,7 +136,7 @@
           selected: null,
         },
         url: "/data-tables/trip-by-driver",
-        urlRecord: "trip-by-driver/",
+        urlRecord: "trip-by-driver/"
       }
     }
   }
