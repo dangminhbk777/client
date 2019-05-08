@@ -217,41 +217,282 @@
           accessToken: mapboxgl.accessToken,
           steps: false,
           geometries: 'polyline',
-          interactive: false,
+          profile: 'driving',
+          interactive: true,
           controls: {
-            inputs : true,
-            instructions: false
+            inputs: true,
+            instructions: false,
+            profileSwitcher: false
           }
         });
         map.addControl( directions, 'top-left');
+        map.on('click', function (e) {
+          map.addLayer({
+            id: 'customer',
+            type: 'circle',
+            source: {
+              type: 'geojson',
+              data: {
+                type: 'FeatureCollection',
+                features: [{
+                  type: 'Feature',
+                  properties: {},
+                  geometry: {
+                    type: 'Point',
+                    coordinates: [e.lngLat.lng,e.lngLat.lat]
+                  }
+                }]
+              }
+            },
+            paint: {
+              'circle-radius': 10,
+              'circle-color': '#f30'
+            }
+          });
+          directions.addWaypoint(0, [e.lngLat.lng,e.lngLat.lat]);
+        });
         map.on('load', function() {
+          let initSearch = true;
           $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
             let id = $(this).parent('div').attr('id');
-            if (id === "mapbox-directions-origin-input" && e.target.value != null) {
+            if (id === "mapbox-directions-origin-input" && e.target.value != null && initSearch) {
               axios.get(URL_MAPBOX_API + self.tripDetail.startLongitude + ',' + self.tripDetail.startLatitude
                   + '.json?types=poi&access_token=' + MAPBOX_KEY)
                   .then(response => {
                     e.target.value = response.data.features[0].place_name;
+                    initSearch = false;
                   })
                   .catch(e => {
-                    this.errors.push(e)
+                    this.errors.push(e);
+                    initSearch = false;
                   });
-            } else if (e.target.value != null) {
+            } else if (e.target.value != null && initSearch) {
               axios.get(URL_MAPBOX_API + self.tripDetail.endLongitude + ',' + self.tripDetail.endLatitude + '.json?types=poi&access_token=' + MAPBOX_KEY)
                   .then(response => {
                     e.target.value = response.data.features[0].place_name;
+                    initSearch = false;
                   })
                   .catch(e => {
-                    this.errors.push(e)
+                    this.errors.push(e);
+                    initSearch = false;
                   });
             }
           });
           directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
           directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
+          directions.on('destination', function (e) {
+            if (e !=  null) {
+              console.log(directions);
+              // directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
+              // directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
+            }
+          });
         });
         window.onresize = function() {
           map.resize();
         };
+      },
+      init: function() {
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuZ21pbmhiazc3NyIsImEiOiJjanRsM2ltZmwzMm81NDVtdWhhM3RhYmJsIn0.6VYmuY3xP3IgEvT_Vc3pRQ';
+        var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [105.859979061677,21.007181634883864], // starting position
+          zoom: 12
+        });
+        // // set the bounds of the map
+        // var bounds = [[-123.069003, 45.395273], [-122.303707, 45.612333]];
+        // map.setMaxBounds(bounds);
+
+        // initialize the map canvas to interact with later
+        var canvas = map.getCanvasContainer();
+
+        // an arbitrary start will always be the same
+        // only the end or destination will change
+        var start = [105.801, 21.007];
+
+        // this is where the code for the next step will go
+        // create a function to make a directions request
+        function getRoute(end) {
+          // make a directions request using cycling profile
+          // an arbitrary start will always be the same
+          // only the end or destination will change
+          var start = [105.801, 21.007];
+          var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+
+          // make an XHR request https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+          var req = new XMLHttpRequest();
+          req.responseType = 'json';
+          req.open('GET', url, true);
+          req.onload = function() {
+            var data = req.response.routes[0];
+            var route = data.geometry.coordinates;
+            var geojson = {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates: route
+              }
+            };
+            // if the route already exists on the map, reset it using setData
+            if (map.getSource('route')) {
+              map.getSource('route').setData(geojson);
+            } else { // otherwise, make a new request
+              map.addLayer({
+                id: 'route',
+                type: 'line',
+                source: {
+                  type: 'geojson',
+                  data: {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                      type: 'LineString',
+                      coordinates: geojson
+                    }
+                  }
+                },
+                layout: {
+                  'line-join': 'round',
+                  'line-cap': 'round'
+                },
+                paint: {
+                  'line-color': '#3887be',
+                  'line-width': 5,
+                  'line-opacity': 0.75
+                }
+              });
+            }
+            // add turn instructions here at the end
+          };
+          req.send();
+        }
+
+        map.on('load', function() {
+          // marker
+          var geojson = {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                geometry: {
+                  type: 'Point',
+                  coordinates: [105.807, 21.307]
+                },
+                properties: {
+                  title: 'Mapbox',
+                  description: 'Washington, D.C.'
+                }
+              },
+              {
+                type: 'Feature',
+                geometry: {
+                  type: 'Point',
+                  coordinates: [105.827, 21.327]
+                },
+                properties: {
+                  title: 'Mapbox',
+                  description: 'San Francisco, California'
+                }
+              }]
+          };
+          // add markers to map
+          geojson.features.forEach(function(marker) {
+
+            // create a HTML element for each feature
+            var el = document.createElement('div');
+            el.className = 'marker';
+
+            // make a marker for each feature and add to the map
+            new mapboxgl.Marker(el)
+                .setLngLat(marker.geometry.coordinates)
+                .addTo(map);
+          });
+
+
+          // make an initial directions request that
+          // starts and ends at the same location
+          getRoute(start);
+
+          // Add starting point to the map
+          map.addLayer({
+            id: 'point',
+            type: 'circle',
+            source: {
+              type: 'geojson',
+              data: {
+                type: 'FeatureCollection',
+                features: [{
+                  type: 'Feature',
+                  properties: {},
+                  geometry: {
+                    type: 'Point',
+                    coordinates: start
+                  }
+                }
+                ]
+              }
+            },
+            paint: {
+              'circle-radius': 10,
+              'circle-color': '#3887be'
+            }
+          });
+          // this is where the code from the next step will go
+        });
+        map.on('click', function(e) {
+          var coordsObj = e.lngLat;
+          canvas.style.cursor = '';
+          var coords = Object.keys(coordsObj).map(function(key) {
+            return coordsObj[key];
+          });
+          var end = {
+            type: 'FeatureCollection',
+            features: [{
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'Point',
+                coordinates: coords
+              }
+            }
+            ]
+          };
+          if (map.getLayer('end')) {
+            map.getSource('end').setData(end);
+          } else {
+            map.addLayer({
+              id: 'end',
+              type: 'circle',
+              source: {
+                type: 'geojson',
+                data: {
+                  type: 'FeatureCollection',
+                  features: [
+                    {
+                      type: 'Feature',
+                      properties: {
+                        title: 'Mapbox',
+                        description: 'San Francisco, California'
+                      },
+                      geometry: {
+                        type: 'Point',
+                        coordinates: coords
+                      }
+                    }
+                  ]
+                }
+              },
+              paint: {
+                'circle-radius': 10,
+                'circle-color': '#f30'
+              }
+            });
+          }
+          getRoute(coords);
+        });
+
       },
       registerTrip: function () {
         http.post("trip-by-driver/register-with-driver/" + this.driverId)
@@ -297,6 +538,7 @@
     },
     mounted() {
       this.getTripDetail();
+      // this.init();
     }
   }
 </script>

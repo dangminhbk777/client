@@ -22,7 +22,7 @@
     <!--begin:: Global Mandatory Vendors -->
     <link href="https://api.mapbox.com/mapbox-assembly/mbx/v0.23.1/assembly.css" rel="stylesheet" type="text/css" >
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css" rel="stylesheet" type="text/css" >
-    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css"
+    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.css"
         rel="stylesheet" type="text/css">
 
     <link href="/vendors/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
@@ -76,6 +76,15 @@
         padding: 7px 5px 0 5px !important;
         border-radius: 20px !important;
         vertical-align: bottom !important;
+      }
+      .marker {
+        background-image: url('/assets/demo/media/img/logo/logo.png') !important;
+        background-size: cover !important;
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 50% !important;
+        cursor: pointer !important;
+        z-index: 100000;
       }
     </style>
   </head>
@@ -179,7 +188,7 @@
 
     <!-- MapBox: BEGIN -->
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js"></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.js'></script>
     <!-- MapBox: END -->
 
     <script type="text/javascript">
