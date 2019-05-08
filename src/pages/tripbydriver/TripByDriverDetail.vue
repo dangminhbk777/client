@@ -226,9 +226,64 @@
           }
         });
         map.addControl( directions, 'top-left');
+
+        let canvas = map.getCanvasContainer();
         map.on('click', function (e) {
+          if (map.getLayer('customer')) {
+            let coordsObj = e.lngLat;
+            canvas.style.cursor = '';
+            let coords = Object.keys(coordsObj).map(function(key) {
+              return coordsObj[key];
+            });
+            let customer = {
+              type: 'FeatureCollection',
+              features: [
+                {
+                  type: 'Feature',
+                  properties: {},
+                  geometry: {
+                    type: 'Point',
+                    coordinates: coords
+                  }
+                }
+              ]
+            };
+            map.getSource('customer').setData(customer);
+            directions.setWaypoint(1, [e.lngLat.lng,e.lngLat.lat]);
+          } else {
+            map.addLayer({
+              id: 'customer',
+              type: 'circle',
+              source: {
+                type: 'geojson',
+                data: {
+                  type: 'FeatureCollection',
+                  features: [{
+                    type: 'Feature',
+                    properties: {
+                      id: 'marker',
+                      "marker-symbol": "monument",
+                      "title": "Mapbox DC",
+                    },
+                    geometry: {
+                      type: 'Point',
+                      coordinates: [e.lngLat.lng, e.lngLat.lat]
+                    }
+                  }]
+                }
+              },
+              paint: {
+                'circle-radius': 10,
+                'circle-color': '#f30'
+              }
+            });
+            directions.addWaypoint(1, [e.lngLat.lng,e.lngLat.lat]);
+          }
+        });
+        map.on('load', function() {
+          let point1 = [105.869979061677, 21.037181634883864];
           map.addLayer({
-            id: 'customer',
+            id: 'old',
             type: 'circle',
             source: {
               type: 'geojson',
@@ -236,22 +291,22 @@
                 type: 'FeatureCollection',
                 features: [{
                   type: 'Feature',
-                  properties: {},
+                  properties: {
+                    id: 'marker'
+                  },
                   geometry: {
                     type: 'Point',
-                    coordinates: [e.lngLat.lng,e.lngLat.lat]
+                    coordinates: point1
                   }
                 }]
               }
             },
             paint: {
               'circle-radius': 10,
-              'circle-color': '#f30'
+              'circle-color': '#000'
             }
           });
-          directions.addWaypoint(0, [e.lngLat.lng,e.lngLat.lat]);
-        });
-        map.on('load', function() {
+
           let initSearch = true;
           $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
             let id = $(this).parent('div').attr('id');
@@ -279,12 +334,15 @@
             }
           });
           directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
+          directions.addWaypoint(0, point1);
           directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
           directions.on('destination', function (e) {
             if (e !=  null) {
-              console.log(directions);
-              // directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
-              // directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
+              if (directions.getDestination().geometry.coordinates[0].toString() !== self.tripDetail.endLongitude
+                  && directions.getDestination().geometry.coordinates[1].toString() !== self.tripDetail.endLatitude) {
+                directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
+                initSearch = true;
+              }
             }
           });
         });
