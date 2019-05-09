@@ -73,6 +73,11 @@
                                 </a>
                               </li>
                               <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                                <a href="/my-driver-register" class="m-menu__link ">
+                                  <span class="m-menu__link-text">Register Driver</span>
+                                </a>
+                              </li>
+                              <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                 <a href="/my-hitchhiker" class="m-menu__link ">
                                   <span class="m-menu__link-text">Hitchhiker</span>
                                 </a>

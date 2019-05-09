@@ -12,6 +12,7 @@ import TripByHitchhikerCreate from "./pages/tripbyhitchhiker/TripByHitchhikerCre
 import TripByHitchhikerDetail from "./pages/tripbyhitchhiker/TripByHitchhikerDetail.vue";
 import TripByHitchhikerListRegister from "./pages/tripbyhitchhiker/TripByHitchhikerListRegister.vue";
 import MyDriverList from "./pages/mytrip/MyDriverList.vue";
+import MyDriverRegisterList from "./pages/mytrip/MyDriverRegisterList.vue";
 import MyHitchhikerList from "./pages/mytrip/MyHitchhikerList.vue";
 import Login from "./pages/Login.vue";
 import PageNotFound from "./pages/404.vue";
@@ -91,6 +92,11 @@ const router = new Router({
       path: '/my-driver',
       name: 'MyDriverList',
       component: MyDriverList,
+    },
+    {
+      path: '/my-driver-register',
+      name: 'MyDriverRegisterList',
+      component: MyDriverRegisterList,
     },
     {
       path: '/my-hitchhiker',
