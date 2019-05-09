@@ -5,6 +5,7 @@ import UserRegister from "./pages/user/UserRegister.vue";
 import TripByDriverList from "./pages/tripbydriver/TripByDriverList.vue";
 import TripByDriverCreate from "./pages/tripbydriver/TripByDriverCreate.vue";
 import TripByDriverDetail from "./pages/tripbydriver/TripByDriverDetail.vue";
+import TripByDriverUpdate from "./pages/tripbydriver/TripByDriverUpdate.vue";
 import TripByDriverListRegister from "./pages/tripbydriver/TripByDriverListRegister.vue";
 import TripByHitchhikerList from "./pages/tripbyhitchhiker/TripByHitchhikerList.vue";
 import TripByHitchhikerCreate from "./pages/tripbyhitchhiker/TripByHitchhikerCreate.vue";
@@ -48,6 +49,12 @@ const router = new Router({
       path: '/trip-by-driver/:driverId',
       name: 'TripByDriverDetail',
       component: TripByDriverDetail,
+      props: true
+    },
+    {
+      path: '/trip-by-driver/:driverId/update',
+      name: 'TripByDriverUpdate',
+      component: TripByDriverUpdate,
       props: true
     },
     {
