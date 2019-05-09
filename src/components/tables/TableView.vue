@@ -96,13 +96,13 @@
             template: function(data) {
               switch(data.typeVehicle) {
                 case "1":
-                  data.typeVehicle = "Xe máy";
+                  data.typeVehicle = "Motorbike";
                   break;
                 case "2":
-                  data.typeVehicle = "Ô tô (nhỏ)";
+                  data.typeVehicle = "Car";
                   break;
                 case "3":
-                  data.typeVehicle = "Ô tô (lớn)";
+                  data.typeVehicle = "Passenger Car";
                   break;
               }
               return data.typeVehicle;
@@ -196,7 +196,7 @@
         // get number seat
         let numberSeat = $('#numberSeat').val();
         // get radius
-        let radius = $('#radius');
+        let radius = $('#radius').val();
         let params = {
           longitude: positionArr[0],
           latitude: positionArr[1],

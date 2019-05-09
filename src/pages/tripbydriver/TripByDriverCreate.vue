@@ -77,36 +77,6 @@
     <div class="col-xl-6" id="information-map">
       <div class="flex-parent viewport-full relative scroll-hidden" style="max-height: 650px">
         <div class="flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-mm mapboxgl-map" id="map">
-          <div class="mapboxgl-canary" style="visibility: hidden;">
-          </div>
-          <div class="mapboxgl-control-container">
-            <div class="mapboxgl-ctrl-top-left">
-              <div class="mapboxgl-ctrl-directions mapboxgl-ctrl">
-                <div class="directions-control directions-control-inputs">
-                  <div class="mapbox-directions-component mapbox-directions-inputs">
-                    <div class="mapbox-directions-component-keyline">
-                      <div class="mapbox-directions-origin">
-                        <label class="mapbox-form-label">
-                          <span class="directions-icon directions-icon-depart"></span>
-                        </label>
-                        <div id="mapbox-directions-origin-input"><div class="mapboxgl-ctrl-geocoder"><span class="geocoder-icon geocoder-icon-search"></span><input type="text" placeholder="Choose a starting place"><ul class="suggestions" style="display: none;"></ul><div class="geocoder-pin-right"><button class="geocoder-icon geocoder-icon-close"></button><span class="geocoder-icon geocoder-icon-loading"></span></div></div></div>
-                      </div>
-
-                      <button class="directions-icon directions-icon-reverse directions-reverse js-reverse-inputs" title="Reverse origin &amp; destination">
-                      </button>
-
-                      <div class="mapbox-directions-destination">
-                        <label class="mapbox-form-label">
-                          <span class="directions-icon directions-icon-arrive"></span>
-                        </label>
-                        <div id="mapbox-directions-destination-input"><div class="mapboxgl-ctrl-geocoder"><span class="geocoder-icon geocoder-icon-search"></span><input type="text" placeholder="Choose destination"><ul class="suggestions" style="display: none;"></ul><div class="geocoder-pin-right"><button class="geocoder-icon geocoder-icon-close"></button><span class="geocoder-icon geocoder-icon-loading"></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -148,9 +118,9 @@
           allowClear: true,
           placeHolder: "Select One",
           options: [
-            { id: '1', text: 'Xe máy' },
-            { id: '2', text: 'Ô tô (nhỏ)' },
-            { id: '3', text: 'Ô tô (lớn)' }
+            { id: '1', text: 'Motorbike' },
+            { id: '2', text: 'Car' },
+            { id: '3', text: 'Passenger Car' }
           ],
           selected: null,
         },
@@ -204,11 +174,13 @@
         this.formData.append("isShipping", this.isShipping);
         this.formData.append("note", this.note);
       },
-      setupSize: function (){
+      setupSize: function () {
         // let offsetHeight = document.getElementById('information-driver').offsetHeight;
         let offsetWidth = document.getElementById('information-driver').offsetWidth;
         // document.getElementById('information-map').style.maxHeight = offsetHeight + 'px';
         document.getElementById('information-map').style.width = offsetWidth + 'px';
+      },
+      setupTime: function() {
         // setup current time
         let today = new Date();
         let year = today.getFullYear();
@@ -294,6 +266,7 @@
     },
     mounted() {
       this.setupSize();
+      this.setupTime();
       this.initMap();
     }
   }

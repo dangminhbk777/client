@@ -107,9 +107,9 @@
           allowClear: true,
           placeHolder: "Select One",
           options: [
-            { id: '1', text: 'Xe máy' },
-            { id: '2', text: 'Ô tô (nhỏ)' },
-            { id: '3', text: 'Ô tô (lớn)' }
+            { id: '1', text: 'Motorbike' },
+            { id: '2', text: 'Car' },
+            { id: '3', text: 'Passenger Car' }
           ],
           selected: null,
         },
