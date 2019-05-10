@@ -15,7 +15,8 @@
       <div class="m-portlet__body">
         <table-app v-if="mData"
             :mData="mData"
-            :urlRecord="urlRecord">
+            :urlRecord="urlRecord"
+            :templateActions="templateActions">
         </table-app>
       </div>
     </div>
@@ -35,7 +36,16 @@
     data: function() {
       return {
         mData: null,
-        urlRecord: 'trip-by-driver/'
+        urlRecord: 'trip-by-driver/',
+        templateActions: '<a href="urlDetail" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
+        '  <span>Detail</span>\n' +
+        '</a>&nbsp;&nbsp;' +
+        '<a href="urlUpdate" class="btn m-btn--pill m-btn--air btn-warning btn-sm">\n' +
+        '  <span>Update</span>\n' +
+        '</a>&nbsp;&nbsp;' +
+        '<a href="urlDelete" class="btn m-btn--pill m-btn--air btn-danger btn-sm">\n' +
+        '  <span>Delete</span>\n' +
+        '</a>&nbsp;&nbsp;'
       }
     },
     methods: {

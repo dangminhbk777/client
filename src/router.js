@@ -1,21 +1,27 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./pages/Home.vue";
-import UserRegister from "./pages/user/UserRegister.vue";
+// TripByDriver
 import TripByDriverList from "./pages/tripbydriver/TripByDriverList.vue";
 import TripByDriverCreate from "./pages/tripbydriver/TripByDriverCreate.vue";
 import TripByDriverDetail from "./pages/tripbydriver/TripByDriverDetail.vue";
 import TripByDriverUpdate from "./pages/tripbydriver/TripByDriverUpdate.vue";
 import TripByDriverListRegister from "./pages/tripbydriver/TripByDriverListRegister.vue";
+// TripByHitchhiker
 import TripByHitchhikerList from "./pages/tripbyhitchhiker/TripByHitchhikerList.vue";
 import TripByHitchhikerCreate from "./pages/tripbyhitchhiker/TripByHitchhikerCreate.vue";
 import TripByHitchhikerDetail from "./pages/tripbyhitchhiker/TripByHitchhikerDetail.vue";
 import TripByHitchhikerListRegister from "./pages/tripbyhitchhiker/TripByHitchhikerListRegister.vue";
+// MyDriver
 import MyDriverList from "./pages/mytrip/MyDriverList.vue";
 import MyDriverRegisterList from "./pages/mytrip/MyDriverRegisterList.vue";
+import MyDriverComplete from "./pages/mytrip/MyDriverComplete.vue";
+// MyHitchhiker
 import MyHitchhikerList from "./pages/mytrip/MyHitchhikerList.vue";
+// Page
 import Login from "./pages/Login.vue";
 import PageNotFound from "./pages/404.vue";
+import Home from "./pages/Home.vue";
+import UserRegister from "./pages/user/UserRegister.vue";
 import { URL_PAGE_LOGIN, URL_PAGE_REGISTER, AUTHORIZATION, DEFAULT_LOGIN } from './services/variables.js'
 
 Vue.use(Router);
@@ -87,7 +93,7 @@ const router = new Router({
       component: TripByHitchhikerListRegister,
       props: true
     },
-    // My Trip
+    // My Trip Driver
     {
       path: '/my-driver',
       name: 'MyDriverList',
@@ -98,6 +104,12 @@ const router = new Router({
       name: 'MyDriverRegisterList',
       component: MyDriverRegisterList,
     },
+    {
+      path: '/my-driver-complete',
+      name: 'MyDriverComplete',
+      component: MyDriverComplete,
+    },
+    // My Trip Hitchhiker
     {
       path: '/my-hitchhiker',
       name: 'MyHitchhikerList',

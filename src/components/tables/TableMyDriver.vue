@@ -15,6 +15,10 @@
       urlRecord: {
         type: String,
         default: null
+      },
+      templateActions: {
+        type: String,
+        default: null
       }
     },
     mounted() {
@@ -131,15 +135,11 @@
               let urlDetail = URL_WEP_APP + self.urlRecord + data.id;
               let urlUpdate = URL_WEP_APP + self.urlRecord + data.id + '/update';
               let urlDelete = URL_WEP_APP + self.urlRecord + data.id + '/delete';
-              return '<a href="' + urlDetail + '" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
-                  '  <span>Detail</span>\n' +
-                  '</a>&nbsp;&nbsp;' +
-                  '<a href="' + urlUpdate + '" class="btn m-btn--pill m-btn--air btn-warning btn-sm">\n' +
-                  '  <span>Update</span>\n' +
-                  '</a>&nbsp;&nbsp;' +
-                  '<a href="' + urlDelete + '" class="btn m-btn--pill m-btn--air btn-danger btn-sm">\n' +
-                  '  <span>Delete</span>\n' +
-                  '</a>&nbsp;&nbsp;';
+              console.log(self.templateActions);
+              return self.templateActions
+                  .replace('urlDetail', urlDetail)
+                  .replace('urlUpdate', urlUpdate)
+                  .replace('urlDelete', urlDelete);
             }
           }
         ]

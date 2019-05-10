@@ -29,7 +29,7 @@
   import Table from '../../components/tables/TableMyDriver.vue';
 
   export default {
-    name: "MyDriverRegister",
+    name: "MyDriverComplete",
     components: {
       'table-app': Table
     },
@@ -39,16 +39,13 @@
         urlRecord: 'trip-by-driver/',
         templateActions: '<a href="urlDetail" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
             '  <span>Detail</span>\n' +
-            '</a>&nbsp;&nbsp;' +
-            '<a href="urlDelete" class="btn m-btn--pill m-btn--air btn-danger btn-sm">\n' +
-            '  <span>Delete</span>\n' +
             '</a>&nbsp;&nbsp;'
       }
     },
     methods: {
-      myDriverList: function () {
+      myDriverComplete: function () {
         let self = this;
-        http.get('/trip-by-driver/my-trip-register/')
+        http.get('/trip-by-driver/my-trip-complete/')
             .then(response => {
               self.mData = JSON.parse(response.data.metadata);
             })
@@ -59,7 +56,7 @@
       }
     },
     mounted() {
-      this.myDriverList();
+      this.myDriverComplete();
     }
   }
 </script>
