@@ -79,7 +79,7 @@
                               </li>
                               <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                 <a href="/my-driver-register" class="m-menu__link ">
-                                  <span class="m-menu__link-text">Register trip</span>
+                                  <span class="m-menu__link-text">Registered trip</span>
                                 </a>
                               </li>
                               <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
