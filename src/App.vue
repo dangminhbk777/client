@@ -4,7 +4,6 @@
     <login-page v-if="isPageLogin"></login-page>
     <page-not-found v-else-if="isPageNotFound"></page-not-found>
     <header-user-app v-if="isUserPage"
-        :show="showQuickSidebar"
         v-on:showQuickSidebar="showQuickSidebar = $event">
     </header-user-app>
     <body-user-app v-if="isUserPage"></body-user-app>

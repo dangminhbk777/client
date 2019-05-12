@@ -32,7 +32,6 @@
         <div class="m-portlet__body">
           <div class="row">
             <div class="col-lg-6">
-              <!--{{tripDetail}}-->
               <div class="m-widget4">
                 <div class="m-widget4__item">
                   <div class="m-widget4__ext">
@@ -194,7 +193,6 @@
           isSubmitter: null,
           status: null
         },
-        //urlPageListRegister:  'localhost:4200/trip-by-driver/' + this.driverId + "/list-register",
         /*
         * show register trip : 01
         * show registered    : 02

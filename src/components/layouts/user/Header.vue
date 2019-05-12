@@ -314,12 +314,6 @@
 
   export default {
     name: "Header",
-    props: {
-      show: {
-        type: Boolean,
-        default: false
-      }
-    },
     data() {
       return {
         username: localStorage.getItem("username"),
@@ -336,8 +330,7 @@
       },
       showQuickSidebar: function() {
         let self = this;
-        self.show = true;
-        self.$emit('showQuickSidebar', self.show);
+        self.$emit('showQuickSidebar', true);
       },
       initEventPage: function() {
         let self = this;

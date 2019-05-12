@@ -16,7 +16,8 @@
         <table-app v-if="mData"
             :mData="mData"
             :urlRecord="urlRecord"
-            :templateActions="templateActions">
+            :templateActions="templateActions"
+            numberActions="2">
         </table-app>
       </div>
     </div>

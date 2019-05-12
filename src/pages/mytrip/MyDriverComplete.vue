@@ -16,10 +16,19 @@
         <table-app v-if="mData"
             :mData="mData"
             :urlRecord="urlRecord"
-            :templateActions="templateActions">
+            :templateActions="templateActions"
+            v-on:showModal="showModal = $event"
+            v-on:driverId="driverId = $event"
+            numberActions="1">
         </table-app>
       </div>
     </div>
+    <modal-app v-if="driverId"
+        title="Evaluate driving quality"
+        :showModal="showModal"
+        :driverId="driverId"
+        v-on:hideModal="showModal = $event">
+    </modal-app>
   </div>
 </template>
 
@@ -27,19 +36,24 @@
   import http from '../../services/http-common.js';
   import toastr from '../../services/toastr.js';
   import Table from '../../components/tables/TableMyDriver.vue';
+  import Modal from '../../components/modals/ModalRating.vue';
 
   export default {
     name: "MyDriverComplete",
     components: {
-      'table-app': Table
+      'table-app': Table,
+      'modal-app': Modal
     },
     data: function() {
       return {
         mData: null,
         urlRecord: 'trip-by-driver/',
-        templateActions: '<a href="urlDetail" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
-            '  <span>Detail</span>\n' +
-            '</a>&nbsp;&nbsp;'
+        templateActions:
+            '<a href="#" driver-id="driverId" class="btn m-btn--pill m-btn--air btn-primary btn-sm ___btn-rating">\n' +
+            '  <span>Rating</span>\n' +
+            '</a>',
+        showModal: false,
+        driverId: null
       }
     },
     methods: {

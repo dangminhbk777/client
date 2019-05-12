@@ -82,7 +82,8 @@
           },
           {
             field: "numberSeat",
-            title: "Number Seat"
+            title: "Number Seat",
+            textAlign: 'center'
           },
           {
             field: "price",
@@ -103,7 +104,7 @@
             field: "Actions",
             title: "Actions",
             textAlign: 'center',
-            width: 110,
+            width: 195,
             locked: {right: 'xl'},
             sortable: false,
             overflow: 'visible',

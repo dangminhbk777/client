@@ -110,7 +110,8 @@
           },
           {
             field: "numberSeat",
-            title: "Number Seat"
+            title: "Number Seat",
+            textAlign: 'center'
           },
           {
             field: "price",

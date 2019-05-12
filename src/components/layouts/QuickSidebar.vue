@@ -109,8 +109,7 @@
     methods: {
       hide: function () {
         let vm = this;
-        vm.show = false;
-        vm.$emit('hideQuickSidebar', vm.show);
+        vm.$emit('hideQuickSidebar', false);
       }
     },
     mounted() {

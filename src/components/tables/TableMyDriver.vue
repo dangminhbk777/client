@@ -19,6 +19,22 @@
       templateActions: {
         type: String,
         default: null
+      },
+      numberActions: {
+        type: String,
+        default: "3"
+      }
+    },
+    data() {
+      return {
+        widthColumnActions: this.numberActions * 65
+      }
+    },
+    methods: {
+      updateAction: function (id) {
+        let self = this;
+        self.$emit('showModal', true);
+        self.$emit('driverId', id);
       }
     },
     mounted() {
@@ -106,7 +122,8 @@
           },
           {
             field: "numberSeat",
-            title: "Number Seat"
+            title: "Number Seat",
+            textAlign: 'center'
           },
           {
             field: "price",
@@ -127,7 +144,7 @@
             field: "Actions",
             title: "Actions",
             textAlign: 'center',
-            width: 195,
+            width: self.widthColumnActions,
             locked: {right: 'xl'},
             sortable: false,
             overflow: 'visible',
@@ -135,14 +152,19 @@
               let urlDetail = URL_WEP_APP + self.urlRecord + data.id;
               let urlUpdate = URL_WEP_APP + self.urlRecord + data.id + '/update';
               let urlDelete = URL_WEP_APP + self.urlRecord + data.id + '/delete';
-              console.log(self.templateActions);
               return self.templateActions
                   .replace('urlDetail', urlDetail)
                   .replace('urlUpdate', urlUpdate)
-                  .replace('urlDelete', urlDelete);
+                  .replace('urlDelete', urlDelete)
+                  .replace('driverId', data.id);
             }
           }
         ]
+      });
+      tableApp.on('click', '.___btn-rating', function(e) {
+        let element = $(this);
+        let id = element.attr("driver-id");
+        self.updateAction(id);
       });
     }
   }

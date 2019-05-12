@@ -123,8 +123,7 @@
             popupOnHover: !1, 
             highlightOnHover: !1, 
             borderColor: "transparent", 
-            borderWidth: 1, 
-            highlightBorderWidth: 3, 
+            highlightBorderWidth: 3,
             highlightFillColor: "rgba(0,123,255,0.5)", 
             highlightBorderColor: "white", 
             borderWidth: 1
