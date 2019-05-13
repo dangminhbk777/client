@@ -198,7 +198,8 @@
         * show registered    : 02
         * show list register : 03
         * */
-        showButton: null
+        showButton: null,
+        indexWayPoint: 0
       }
     },
     methods: {
@@ -247,7 +248,7 @@
               ]
             };
             map.getSource('customer').setData(customer);
-            directions.setWaypoint(1, [e.lngLat.lng,e.lngLat.lat]);
+            directions.setWaypoint(self.indexWayPoint, [e.lngLat.lng,e.lngLat.lat]);
           } else {
             map.addLayer({
               id: 'customer',
@@ -275,7 +276,7 @@
                 'circle-color': '#f30'
               }
             });
-            directions.addWaypoint(1, [e.lngLat.lng,e.lngLat.lat]);
+            directions.addWaypoint(self.indexWayPoint, [e.lngLat.lng,e.lngLat.lat]);
           }
         });
         map.on('load', function() {
@@ -304,6 +305,12 @@
           //     'circle-color': '#000'
           //   }
           // });
+          let routeStep = [
+            {long : 105.824780, lat: 21.009160},
+            {long : 105.828914, lat: 21.000584},
+            {long : 105.849991, lat: 20.995914},
+            {long : 105.861015, lat: 20.995723}
+          ];
 
           let initSearch = true;
           $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
@@ -332,6 +339,39 @@
             }
           });
           directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
+
+          //set route step
+          routeStep.forEach(function (element) {
+            map.addLayer({
+              id: 'point' + self.indexWayPoint,
+              type: 'circle',
+              source: {
+                type: 'geojson',
+                data: {
+                  type: 'FeatureCollection',
+                  features: [{
+                    type: 'Feature',
+                    properties: {
+                      id: 'marker',
+                      "marker-symbol": "monument",
+                      "title": "Mapbox DC",
+                    },
+                    geometry: {
+                      type: 'Point',
+                      coordinates: [element.long, element.lat]
+                    }
+                  }]
+                }
+              },
+              paint: {
+                'circle-radius': 3,
+                'circle-color': '#000'
+              }
+            });
+            directions.addWaypoint(self.indexWayPoint, [element.long, element.lat]);
+            self.indexWayPoint = self.indexWayPoint + 1;
+          });
+
           // directions.addWaypoint(0, point1);
           directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
           directions.on('destination', function (e) {
