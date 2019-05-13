@@ -13,12 +13,12 @@
           <div class="m-portlet__body">
             <div class="m-widget19">
               <div class="m-widget19__pic m-portlet-fit--top m-portlet-fit--sides" style="min-height: 286px">
-                <img src="https://www.takescoop.com/static/images/intro/home-bg.jpg" alt="">
+                <img src="http://hi.gocar.my/wp-content/uploads/2018/12/gocar-background-14.jpg" alt="">
                 <div class="col-sm-12 text-center" style="position: absolute; display: block; top: 10%; z-index: 1;">
-                  <h2 class="m--font-light">Dramatically improve</h2>
-                  <h2 class="m--font-light">your commute</h2>
-                  <h4 class="m--font-light" style="padding-top: 20px; font-weight: lighter">Convenient carpools with</h4>
-                  <h4 class="m--font-light" style="font-weight: lighter">co-workers and neighbors</h4>
+                  <h2 class="m--font-light">Cải thiện đáng kể</h2>
+                  <h2 class="m--font-light">đi lại của bạn</h2>
+                  <h4 class="m--font-light" style="padding-top: 20px; font-weight: lighter">Đi chung xe tiện lợi với</h4>
+                  <h4 class="m--font-light" style="font-weight: lighter">đồng nghiệp và hàng xóm</h4>
                 </div>
                 <div class="m-widget19__shadow"></div>
               </div>
@@ -30,22 +30,22 @@
     </div>
     <div class="row" style="padding-bottom: 50px; padding-top: 100px;">
       <div class="col-sm-12 text-center">
-        <h1 class="text-uppercase">What is Scoop?</h1>
+        <h1 class="text-uppercase">ĐI CHUNG XE LÀ GÌ?</h1>
       </div>
     </div>
     <div class="row justify-content-md-center">
       <div class="col-sm-5 col-lg-offset-1 col-lg-3 col-sm-pull-7">
         <div :class="descriptionCss1" v-on:click="switchShow(1)">
-          <span class="font-weight-bold">Carpooling Service:</span>
-          <br class="hidden-xs"> Scoop brings together co-workers and neighbors who are going the same way.
+          <span class="font-weight-bold">Dịch vụ đi chung xe:</span>
+          <br class="hidden-xs"> Tập hợp các đồng nghiệp và hàng xóm đang đi cùng một con đường.
         </div>
         <div :class="descriptionCss2" v-on:click="switchShow(2)">
-          <span class="font-weight-bold">Community of Carpoolers:</span>
-          <br class="hidden-xs"> Scoop carpoolers enjoy meeting new people and making the most of their time.
+          <span class="font-weight-bold">Cộng đồng những người đi chung xe:</span>
+          <br class="hidden-xs"> Người đi chung xe thích gặp gỡ những người mới và tận dụng tối đa thời gian của họ.
         </div>
         <div :class="descriptionCss3" v-on:click="switchShow(3)">
-          <span class="font-weight-bold"> Enterprise Solution:</span>
-          <br class="hidden-xs"> Scoop partners with competitive employers to enrich the lives of their employees.
+          <span class="font-weight-bold"> Giải pháp doanh nghiệp:</span>
+          <br class="hidden-xs"> Hợp tác với các nhà tuyển dụng cạnh tranh để làm phong phú thêm cuộc sống của nhân viên của họ.
         </div>
       </div>
       <div class="col-sm-7 col-sm-push-5 text-center">
@@ -56,7 +56,7 @@
     </div>
     <div class="row" style="padding-bottom: 50px; padding-top: 100px; background-color: #F7F7F7">
       <div class="col-sm-12 text-center">
-        <h1 class="text-uppercase">Here’s how it works</h1>
+        <h1 class="text-uppercase">Dưới đây là cách thức hoạt động</h1>
       </div>
     </div>
     <div class="row justify-content-md-center" style="background-color: #F7F7F7">

@@ -40,7 +40,7 @@
                     <a href="/home" class="m-menu__link" title="Non functional dummy link">
                       <span class="m-menu__item-here"></span>
                       <i class="m-menu__link-icon flaticon-home"></i>
-                      <span class="m-menu__link-text">Home</span>
+                      <span class="m-menu__link-text">Trang chủ</span>
                     </a>
                   </li>
                   <!-- Menu Home: END -->
@@ -49,7 +49,7 @@
                     <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
                       <span class="m-menu__item-here"></span>
                       <i class="m-menu__link-icon fa fa-road"></i>
-                      <span class="m-menu__link-text">Trip</span>
+                      <span class="m-menu__link-text">Quản lý chuyến đi</span>
                       <i class="m-menu__hor-arrow la la-angle-down"></i>
                       <i class="m-menu__ver-arrow la la-angle-right"></i>
                     </a>
@@ -60,7 +60,7 @@
                         <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
                           <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
                             <i class="m-menu__link-icon fa fa-shoe-prints"></i>
-                            <span class="m-menu__link-text">My Trip</span>
+                            <span class="m-menu__link-text">Chuyến đi của bạn</span>
                             <i class="m-menu__hor-arrow la la-angle-right"></i>
                             <i class="m-menu__ver-arrow la la-angle-right"></i>
                           </a>
@@ -69,22 +69,22 @@
                             <ul class="m-menu__subnav">
                               <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                 <a href="/my-driver" class="m-menu__link ">
-                                  <span class="m-menu__link-text">Driver</span>
+                                  <span class="m-menu__link-text">Chủ xe</span>
                                 </a>
                               </li>
                               <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                 <a href="/my-hitchhiker" class="m-menu__link ">
-                                  <span class="m-menu__link-text">Hitchhiker</span>
+                                  <span class="m-menu__link-text">Người đi chung</span>
                                 </a>
                               </li>
                               <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                 <a href="/my-driver-register" class="m-menu__link ">
-                                  <span class="m-menu__link-text">Registered trip</span>
+                                  <span class="m-menu__link-text">Chuyến đi đã đăng ký</span>
                                 </a>
                               </li>
                               <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                 <a href="/my-driver-complete" class="m-menu__link ">
-                                  <span class="m-menu__link-text">Trip completed</span>
+                                  <span class="m-menu__link-text">Chuyến đi hoàn thành</span>
                                 </a>
                               </li>
                             </ul>
@@ -95,7 +95,7 @@
                         <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
                           <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
                             <i class="m-menu__link-icon fa fa-car"></i>
-                            <span class="m-menu__link-text">Trip By Drivers</span>
+                            <span class="m-menu__link-text">Chuyến đi của chủ xe</span>
                             <i class="m-menu__hor-arrow la la-angle-right"></i>
                             <i class="m-menu__ver-arrow la la-angle-right"></i>
                           </a>
@@ -104,12 +104,12 @@
                             <ul class="m-menu__subnav">
                               <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                 <a href="/trip-by-driver" class="m-menu__link ">
-                                  <span class="m-menu__link-text">List Trip</span>
+                                  <span class="m-menu__link-text">Danh sách chuyến đi</span>
                                 </a>
                               </li>
                               <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                 <a href="/trip-by-driver/create" class="m-menu__link ">
-                                  <span class="m-menu__link-text">New Trip</span>
+                                  <span class="m-menu__link-text">Tạo mới</span>
                                 </a>
                               </li>
                             </ul>
@@ -120,7 +120,7 @@
                         <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
                           <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
                             <i class="m-menu__link-icon fa fa-user-friends"></i>
-                            <span class="m-menu__link-text">Trip By Hitchhikers</span>
+                            <span class="m-menu__link-text">Chuyến đi của người đi chung</span>
                             <i class="m-menu__hor-arrow la la-angle-right"></i>
                             <i class="m-menu__ver-arrow la la-angle-right"></i>
                           </a>
@@ -129,12 +129,12 @@
                             <ul class="m-menu__subnav">
                               <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                 <a href="/trip-by-hitchhiker" class="m-menu__link ">
-                                  <span class="m-menu__link-text">List Trip</span>
+                                  <span class="m-menu__link-text">Danh sách chuyến đi</span>
                                 </a>
                               </li>
                               <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                 <a href="/trip-by-hitchhiker/create" class="m-menu__link ">
-                                  <span class="m-menu__link-text">New Trip</span>
+                                  <span class="m-menu__link-text">Tạo mới</span>
                                 </a>
                               </li>
                             </ul>
@@ -206,7 +206,7 @@
                     <span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
                     <div class="m-dropdown__inner">
                       <div class="m-dropdown__header m--align-center">
-                        <span class="m-dropdown__header-subtitle">Have {{unread}} new notifications</span>
+                        <span class="m-dropdown__header-subtitle">Bạn có {{unread}} thông báo mới</span>
                       </div>
                       <div class="m-dropdown__body">
                         <div class="m-dropdown__content">
@@ -265,8 +265,10 @@
                                 <i class="m-nav__link-icon flaticon-profile-1"></i>
                                 <span class="m-nav__link-title">
                                   <span class="m-nav__link-wrap">
-                                    <span class="m-nav__link-text">My Profile</span>
-                                    <span class="m-nav__link-badge"><span class="m-badge m-badge--success">2</span></span>
+                                    <span class="m-nav__link-text">Trang cá nhân</span>
+                                    <span class="m-nav__link-badge">
+                                      <span class="m-badge m-badge--success">2</span>
+                                    </span>
                                   </span>
                                 </span>
                               </a>
@@ -279,7 +281,9 @@
                             </li>
                             <li class="m-nav__separator m-nav__separator--fit"></li>
                             <li class="m-nav__item">
-                              <a href="#" v-on:click="logout" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Logout</a>
+                              <a href="#" v-on:click="logout" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                                Đăng xuất
+                              </a>
                             </li>
                           </ul>
                         </div>
