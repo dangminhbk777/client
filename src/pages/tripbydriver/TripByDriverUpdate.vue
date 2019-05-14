@@ -250,7 +250,10 @@
               }
             });
             self.directions.addWaypoint(self.indexWayPoint, [e.lngLat.lng,e.lngLat.lat]);
-            self.routeStep.push([e.lngLat.lng,e.lngLat.lat]);
+            self.routeStep.push({
+              longitude: e.lngLat.lng,
+              latitude: e.lngLat.lat
+            });
             self.indexWayPoint = self.indexWayPoint + 1;
           }
         });
@@ -310,7 +313,7 @@
           self.directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
           self.directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
           self.directions.on('destination', function (e) {
-            if (e !=  null) {
+            if (e != null) {
               if (self.directions.getDestination().geometry.coordinates[0].toString() !== self.tripDetail.endLongitude
                   && self.directions.getDestination().geometry.coordinates[1].toString() !== self.tripDetail.endLatitude) {
                 self.directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
@@ -334,6 +337,13 @@
             .catch(e => {
               console.error(e);
             });
+        http.get('/trip-by-driver/' + this.driverId + '/route-step')
+            .then(response => {
+              console.log(response)
+            })
+            .catch(e => {
+              console.error(e);
+            });
       },
       clearRouteStep: function () {
         let self = this;
@@ -353,7 +363,23 @@
       },
       updateTrip: function () {
         let self = this;
-        console.log(self.routeStep);
+        let requestBody = {
+          driverId: self.driverId,
+          time: null,
+          numberSeat: null,
+          price: null,
+          note: null,
+          routeStep: JSON.stringify(self.routeStep)
+        };
+        http.post('/trip-by-driver/update-trip', requestBody)
+            .then(response => {
+              console.log(response);
+              toastr.success('Cập nhật thông tin chuyến đi thành công');
+            })
+            .catch(e => {
+              console.error(e);
+              toastr.error('Cập nhật thông tin chuyến đi thất bại');
+            });
       }
     },
     mounted() {
