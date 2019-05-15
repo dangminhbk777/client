@@ -64,14 +64,17 @@
         <img src="https://www.takescoop.com/static/images/how-it-works/see-your-community.png" class="home-image-md" alt="">
       </div>
       <div class="col-xs-12 col-sm-5">
-        <h2>Be Part of the Community</h2>
-        <p class="home-description-part">Download and meet Scoop carpoolers who are heading the same way. Get free Carpool Credits when you choose Scoop.</p>
+        <h2>Là một phần của cộng đồng</h2>
+        <p class="home-description-part">Là một phần của cộng đồng
+          Truy cập website và gặp những người đi chung xe đang đi theo cùng một tuyến đường.</p>
       </div>
     </div>
     <div class="row justify-content-md-center" style="background-color: #F7F7F7; padding-top: 50px">
       <div class="col-xs-12 col-sm-5" style="padding-top: 50px">
-        <h2>Schedule a Carpool</h2>
-        <p class="home-description-part">Separate AM and PM trips to fit your unpredictable work schedule. Ride or drive to meet your daily needs.</p>
+        <h2>Lên lịch đi chung xe</h2>
+        <p class="home-description-part">
+          Các chuyến đi sáng  và chiều riêng biệt để phù hợp với lịch trình làm việc không thể đoán trước của bạn. Đi xe hoặc lái xe để đáp ứng nhu cầu hàng ngày của bạn.
+        </p>
       </div>
       <div class="col-xs-12 col-sm-5 col-sm-offset-2">
         <img src="https://www.takescoop.com/static/images/how-it-works/request-a-trip.png" class="home-image-md" alt="">
@@ -82,14 +85,18 @@
         <img src="https://www.takescoop.com/static/images/how-it-works/get-matched.png" class="home-image-md" alt="">
       </div>
       <div class="col-xs-12 col-sm-5" style="padding-top: 50px">
-        <h2>Get Matched</h2>
-        <p class="home-description-part">Scoop’s algorithm identifies the most efficient trip based on the fastest route, nearby carpoolers, carpool lanes, and more.</p>
+        <h2>Được kết hợp</h2>
+        <p class="home-description-part">
+          Xác định chuyến đi hiệu quả nhất dựa trên tuyến đường nhanh nhất, xe chở khách gần đó
+        </p>
       </div>
     </div>
     <div class="row justify-content-md-center" style="background-color: #F7F7F7; padding-top: 50px">
       <div class="col-xs-12 col-sm-5" style="padding-top: 50px">
-        <h2>Enjoy a Smooth Commute</h2>
-        <p class="home-description-part">Meet new people, have more energy every day, and make the most of your time.</p>
+        <h2>Tận hưởng đi lại dễ dàng</h2>
+        <p class="home-description-part">
+          Gặp gỡ những người mới, có nhiều năng lượng hơn mỗi ngày và tận dụng tối đa thời gian của bạn.
+        </p>
       </div>
       <div class="col-xs-12 col-sm-5 col-sm-offset-2">
         <img src="https://www.takescoop.com/static/images/how-it-works/enjoy.png" class="home-image-md" alt="">

@@ -37,7 +37,7 @@
             <form>
               <div class="form-group">
                 <label for="comment-text" class="form-control-label">Comment:</label>
-                <textarea class="form-control" id="comment-text"></textarea>
+                <textarea class="form-control" id="comment-text" v-model="rating.comment"></textarea>
               </div>
             </form>
           </div>
@@ -93,7 +93,11 @@
         cssFour: 'btn btn-secondary m-btn m-btn--icon m-btn--icon-only __btn-star',
         cssFive: 'btn btn-secondary m-btn m-btn--icon m-btn--icon-only __btn-star',
         // Information owner trip
-        information: null
+        information: null,
+        rating: {
+          start: Number,
+          comment: null
+        }
       }
     },
     methods: {
@@ -105,8 +109,10 @@
       submitRating: function() {
         let self = this;
         let userInformation = {
-          id: self.information.id,
-          star: 5
+          userId: self.information.id,
+          driverId: self.driverId,
+          star: self.rating.star,
+          comment: self.rating.comment
         };
         http.post('/user/rating', JSON.stringify(userInformation))
             .then(response => {
@@ -147,6 +153,7 @@
         self.cssThree = self.notActive;
         self.cssFour = self.notActive;
         self.cssFive = self.notActive;
+        self.rating.star = 1;
       });
       let btn2 = $('#star2');
       btn2.click(function () {
@@ -155,6 +162,7 @@
         self.cssThree = self.notActive;
         self.cssFour = self.notActive;
         self.cssFive = self.notActive;
+        self.rating.star = 2;
       });
       let btn3 = $('#star3');
       btn3.click(function () {
@@ -163,6 +171,7 @@
         self.cssThree = self.active;
         self.cssFour = self.notActive;
         self.cssFive = self.notActive;
+        self.rating.star = 3;
       });
       let btn4 = $('#star4');
       btn4.click(function () {
@@ -171,6 +180,7 @@
         self.cssThree = self.active;
         self.cssFour = self.active;
         self.cssFive = self.notActive;
+        self.rating.star = 4;
       });
       let btn5 = $('#star5');
       btn5.click(function () {
@@ -179,6 +189,7 @@
         self.cssThree = self.active;
         self.cssFour = self.active;
         self.cssFive = self.active;
+        self.rating.star = 5;
       });
     },
     computed: {

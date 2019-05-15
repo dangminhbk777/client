@@ -81,7 +81,6 @@
         });
         http.post('/trip-by-driver/accept-hitchhiker/' + self.driverId, JSON.stringify(self.dataChange))
             .then(response => {
-              console.log(response.data);
               toastr.success("Update success");
               self.dataChange = [];
             })
