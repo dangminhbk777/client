@@ -7,7 +7,7 @@
           <div class="m-portlet__head-caption">
             <div class="m-portlet__head-title">
               <h3 class="m-portlet__head-text">
-                TRIP Data Detail<small>data loaded from remote service</small>
+                Thông tin chi tiết chuyến đi
               </h3>
             </div>
           </div>
@@ -15,13 +15,16 @@
             <ul class="m-portlet__nav">
               <li class="m-portlet__nav-item">
                 <button v-if="showButton === '03'" v-on:click="redirectListRegister" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                  Show list register
+                  Danh sách đăng ký
                 </button>
                 <button v-else-if="showButton === '01'" v-on:click="registerTrip" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                  Register trip
+                  Đăng ký
+                </button>
+                <button v-else-if="showButton === '04'" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
+                  Đã được chấp nhận
                 </button>
                 <button v-else class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
-                  Registered
+                  Đã đăng ký
                 </button>
               </li>
             </ul>
@@ -41,7 +44,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                      <span class="text-dark">ID</span>&nbsp;&nbsp;{{tripDetail.driverId}}
+                      <span class="text-dark">Mã chuyến đi</span>&nbsp;&nbsp;{{tripDetail.driverId}}
                     </span>
                   </div>
                 </div>
@@ -53,7 +56,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                      <span class="text-dark">Name</span>&nbsp;&nbsp;{{tripDetail.username}}
+                      <span class="text-dark">Tên chủ xe</span>&nbsp;&nbsp;{{tripDetail.username}}
                     </span>
                   </div>
                 </div>
@@ -65,7 +68,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Phone</span>&nbsp;&nbsp;{{tripDetail.phone}}
+                        <span class="text-dark">Số điện thoại</span>&nbsp;&nbsp;{{tripDetail.phone}}
                     </span>
                   </div>
                 </div>
@@ -77,7 +80,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Quality service</span>&nbsp;&nbsp;{{tripDetail.star}}
+                        <span class="text-dark">Xếp hạng</span>&nbsp;&nbsp;{{tripDetail.star}}
                     </span>
                   </div>
                 </div>
@@ -89,7 +92,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Number of seats</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
+                        <span class="text-dark">Số chỗ còn trống</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
                     </span>
                   </div>
                 </div>
@@ -101,7 +104,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Price</span>&nbsp;&nbsp;{{tripDetail.price}}.000 (VNĐ)
+                        <span class="text-dark">Giá</span>&nbsp;&nbsp;{{tripDetail.price}}.000 (VNĐ)
                     </span>
                   </div>
                 </div>
@@ -113,7 +116,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Note</span>&nbsp;&nbsp;
+                        <span class="text-dark">Chú thích</span>&nbsp;&nbsp;
                     </span>
                     <span class="m-widget4__text">
                         {{tripDetail.note}}
@@ -150,6 +153,7 @@
 <script>
   import axios from 'axios';
   import http from '../../services/http-common.js';
+  import mapbox from '../../services/mapbox-common.js';
   import toastr from '../../services/toastr.js';
   import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
   import SlideShow from '../../components/other/SlideShow.vue';
@@ -403,11 +407,14 @@
         let self = this;
         http.get('/trip-by-driver/status/' + this.driverId)
             .then(response => {
+              console.log(JSON.parse(response.data.metadata));
               let userDriver = JSON.parse(response.data.metadata);
               if (userDriver === null) {
                 self.showButton = "01";
               } else if (userDriver.isSubmitter) {
                 self.showButton = "03";
+              } else if (userDriver.status === "02") {
+                self.showButton = "04";
               } else {
                 self.showButton = "02";
               }
@@ -431,6 +438,7 @@
     },
     mounted() {
       this.getTripDetail();
+      mapbox.optimizeRoute();
     }
   }
 </script>
