@@ -147,6 +147,7 @@
 <script>
   import axios from 'axios';
   import http from '../../services/http-common.js';
+  import mapbox from '../../services/mapbox-common.js';
   import toastr from '../../services/toastr.js';
   import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
   import SlideShow from '../../components/other/SlideShow.vue';
@@ -195,6 +196,7 @@
         indexWayPoint: 0,
         map: null,
         directions: null,
+        steps: []
       }
     },
     methods: {
@@ -225,6 +227,7 @@
           if (self.indexWayPoint > 5) {
             toastr.warning('Max route step');
           } else {
+            console.log(self.indexWayPoint);
             self.map.addLayer({
               id: 'step' + self.indexWayPoint,
               type: 'circle',
@@ -258,32 +261,6 @@
           }
         });
         self.map.on('load', function() {
-          // let point1 = [105.869979061677, 21.037181634883864];
-          // map.addLayer({
-          //   id: 'old',
-          //   type: 'circle',
-          //   source: {
-          //     type: 'geojson',
-          //     data: {
-          //       type: 'FeatureCollection',
-          //       features: [{
-          //         type: 'Feature',
-          //         properties: {
-          //           id: 'marker'
-          //         },
-          //         geometry: {
-          //           type: 'Point',
-          //           coordinates: point1
-          //         }
-          //       }]
-          //     }
-          //   },
-          //   paint: {
-          //     'circle-radius': 10,
-          //     'circle-color': '#000'
-          //   }
-          // });
-
           let initSearch = true;
           $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
             let id = $(this).parent('div').attr('id');
@@ -311,6 +288,39 @@
             }
           });
           self.directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
+
+          //set route step
+          self.routeStep.forEach(function (element) {
+            self.map.addLayer({
+              id: 'step' + self.indexWayPoint,
+              type: 'circle',
+              source: {
+                type: 'geojson',
+                data: {
+                  type: 'FeatureCollection',
+                  features: [{
+                    type: 'Feature',
+                    properties: {
+                      id: 'marker',
+                      "marker-symbol": "monument",
+                      "title": "Mapbox DC",
+                    },
+                    geometry: {
+                      type: 'Point',
+                      coordinates: [element.longitude, element.latitude]
+                    }
+                  }]
+                }
+              },
+              paint: {
+                'circle-radius': 3,
+                'circle-color': '#000'
+              }
+            });
+            self.directions.addWaypoint(self.indexWayPoint, [element.longitude, element.latitude]);
+            self.indexWayPoint = self.indexWayPoint + 1;
+          });
+
           self.directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
           self.directions.on('destination', function (e) {
             if (e != null) {
@@ -337,9 +347,13 @@
             .catch(e => {
               console.error(e);
             });
+      },
+      getRouteStep: function() {
+        let self = this;
         http.get('/trip-by-driver/' + this.driverId + '/route-step')
             .then(response => {
-              console.log(response)
+              self.steps = JSON.parse(JSON.parse(response.data.metadata).steps);
+              self.routeStep = self.routeStep.concat(self.steps);
             })
             .catch(e => {
               console.error(e);
@@ -383,7 +397,9 @@
       }
     },
     mounted() {
+      this.getRouteStep();
       this.getTripDetail();
+      mapbox.optimizeRoute();
     }
   }
 </script>

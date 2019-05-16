@@ -133,6 +133,7 @@
           </div>
           <div class="row __padding-top">
             <div class="col-lg-12">
+              <small class="text-info">Chọn điểm đón bằng cách click trên bản đồ</small>
               <!-- MAP: BEGIN -->
               <div id="information-map">
                 <div class="flex-parent relative scroll-hidden">
@@ -153,7 +154,6 @@
 <script>
   import axios from 'axios';
   import http from '../../services/http-common.js';
-  import mapbox from '../../services/mapbox-common.js';
   import toastr from '../../services/toastr.js';
   import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
   import SlideShow from '../../components/other/SlideShow.vue';
@@ -203,7 +203,12 @@
         * show list register : 03
         * */
         showButton: null,
-        indexWayPoint: 0
+        indexWayPoint: 0,
+        steps: [],
+        position: {
+          longitude: null,
+          latitude: null
+        }
       }
     },
     methods: {
@@ -232,6 +237,8 @@
 
         let canvas = map.getCanvasContainer();
         map.on('click', function (e) {
+          self.position.longitude = e.lngLat.lng;
+          self.position.latitude = e.lngLat.lat;
           if (map.getLayer('customer')) {
             let coordsObj = e.lngLat;
             canvas.style.cursor = '';
@@ -252,7 +259,7 @@
               ]
             };
             map.getSource('customer').setData(customer);
-            directions.setWaypoint(self.indexWayPoint, [e.lngLat.lng,e.lngLat.lat]);
+            // directions.setWaypoint(self.indexWayPoint, [e.lngLat.lng,e.lngLat.lat]);
           } else {
             map.addLayer({
               id: 'customer',
@@ -280,42 +287,10 @@
                 'circle-color': '#f30'
               }
             });
-            directions.addWaypoint(self.indexWayPoint, [e.lngLat.lng,e.lngLat.lat]);
+            // directions.addWaypoint(self.indexWayPoint, [e.lngLat.lng,e.lngLat.lat]);
           }
         });
         map.on('load', function() {
-          // let point1 = [105.869979061677, 21.037181634883864];
-          // map.addLayer({
-          //   id: 'old',
-          //   type: 'circle',
-          //   source: {
-          //     type: 'geojson',
-          //     data: {
-          //       type: 'FeatureCollection',
-          //       features: [{
-          //         type: 'Feature',
-          //         properties: {
-          //           id: 'marker'
-          //         },
-          //         geometry: {
-          //           type: 'Point',
-          //           coordinates: point1
-          //         }
-          //       }]
-          //     }
-          //   },
-          //   paint: {
-          //     'circle-radius': 10,
-          //     'circle-color': '#000'
-          //   }
-          // });
-          let routeStep = [
-            {long : 105.824780, lat: 21.009160},
-            {long : 105.828914, lat: 21.000584},
-            {long : 105.849991, lat: 20.995914},
-            {long : 105.861015, lat: 20.995723}
-          ];
-
           let initSearch = true;
           $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
             let id = $(this).parent('div').attr('id');
@@ -345,34 +320,8 @@
           directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
 
           //set route step
-          routeStep.forEach(function (element) {
-            map.addLayer({
-              id: 'point' + self.indexWayPoint,
-              type: 'circle',
-              source: {
-                type: 'geojson',
-                data: {
-                  type: 'FeatureCollection',
-                  features: [{
-                    type: 'Feature',
-                    properties: {
-                      id: 'marker',
-                      "marker-symbol": "monument",
-                      "title": "Mapbox DC",
-                    },
-                    geometry: {
-                      type: 'Point',
-                      coordinates: [element.long, element.lat]
-                    }
-                  }]
-                }
-              },
-              paint: {
-                'circle-radius': 3,
-                'circle-color': '#000'
-              }
-            });
-            directions.addWaypoint(self.indexWayPoint, [element.long, element.lat]);
+          self.steps.forEach(function (element) {
+            directions.addWaypoint(self.indexWayPoint, [element.longitude, element.latitude]);
             self.indexWayPoint = self.indexWayPoint + 1;
           });
 
@@ -393,13 +342,17 @@
         };
       },
       registerTrip: function () {
-        http.post("trip-by-driver/register-with-driver/" + this.driverId)
+        let self = this;
+        console.log(self.position);
+        // http.post("trip-by-driver/register-with-driver/" + this.driverId, self.position)
+        http.post("trip-by-driver/register-with-driver/" + this.driverId, self.position)
             .then(response => {
               console.log(JSON.parse(response.data.metadata));
-              toastr.success('Register trip SUCCESS');
+              toastr.success('Gửi đăng ký thành công');
               this.showButton = "02";
             })
             .catch(e => {
+              toastr.error('Gửi đăng ký thất bại');
               console.error(e);
             });
       },
@@ -407,7 +360,6 @@
         let self = this;
         http.get('/trip-by-driver/status/' + this.driverId)
             .then(response => {
-              console.log(JSON.parse(response.data.metadata));
               let userDriver = JSON.parse(response.data.metadata);
               if (userDriver === null) {
                 self.showButton = "01";
@@ -432,13 +384,23 @@
               console.error(e);
             });
       },
+      getRouteStep: function() {
+        let self = this;
+        http.get('/trip-by-driver/' + this.driverId + '/route-step')
+            .then(response => {
+              self.steps = JSON.parse(JSON.parse(response.data.metadata).steps);
+            })
+            .catch(e => {
+              console.error(e);
+            });
+      },
       redirectListRegister() {
         window.location.href = "/trip-by-driver/" + this.driverId + "/list-register";
       }
     },
     mounted() {
+      this.getRouteStep();
       this.getTripDetail();
-      mapbox.optimizeRoute();
     }
   }
 </script>
