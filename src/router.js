@@ -22,6 +22,7 @@ import Login from "./pages/Login.vue";
 import PageNotFound from "./pages/404.vue";
 import Home from "./pages/Home.vue";
 import UserRegister from "./pages/user/UserRegister.vue";
+import UserProfile from "./pages/user/UserProfile.vue";
 import { URL_PAGE_LOGIN, URL_PAGE_REGISTER, AUTHORIZATION, DEFAULT_LOGIN } from './services/variables.js'
 
 Vue.use(Router);
@@ -40,6 +41,11 @@ const router = new Router({
       path: '/user/register',
       name: 'UserRegister',
       component: UserRegister
+    },
+    {
+      path: '/user/profile',
+      name: 'UserProfile',
+      component: UserProfile
     },
     // Trip by driver
     {
