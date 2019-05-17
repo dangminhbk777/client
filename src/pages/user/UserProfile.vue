@@ -37,19 +37,50 @@
             <div class="form-group m-form__group row">
               <label class="col-2 col-form-label">Tên</label>
               <div class="col-7">
-                <input class="form-control m-input" type="text" value="Mark Andre">
+                <input class="form-control m-input" type="text" v-model="information.username">
               </div>
             </div>
+
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">Mật khẩu</label>
+              <div class="col-7">
+                <!--<input class="form-control m-input" type="text" v-model="information.password">-->
+
+                <div class="m-accordion m-accordion--default" id="m_accordion_1">
+                  <div class="m-accordion__item">
+                    <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
+                      <span class="m-accordion__item-icon">
+                        <i class="fa flaticon-safe-shield-protection"></i>
+                      </span>
+                      <span class="m-accordion__item-title">Thay đổi mật khẩu</span>
+                      <span class="m-accordion__item-mode"></span>
+                    </div>
+                    <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1">
+                      <div class="m-accordion__item-content">
+                        <span>Nhập mật khẩu cũ</span>
+                        <input class="form-control m-input" type="text" v-model="information.password">
+                      </div>
+                      <div class="m-accordion__item-content">
+                        <span>Nhập mật khẩu mới</span>
+                        <input class="form-control m-input" type="text" v-model="information.password">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
             <div class="form-group m-form__group row">
               <label class="col-2 col-form-label">Email</label>
               <div class="col-7">
-                <input class="form-control m-input" type="text" value="CTO">
+                <input class="form-control m-input" type="text" v-model="information.email">
               </div>
             </div>
             <div class="form-group m-form__group row">
               <label class="col-2 col-form-label">Số điện thoại</label>
               <div class="col-7">
-                <input class="form-control m-input" type="text" value="Keenthemes">
+                <input class="form-control m-input" type="text" v-model="information.phone">
               </div>
             </div>
           </div>
@@ -84,13 +115,24 @@
         username: localStorage.getItem("username"),
         email: localStorage.getItem("email"),
         avatar: URL_AVATAR + localStorage.getItem("image"),
+        information: {
+          id: null,
+          username: null,
+          password: "●●●●●●●●●●",
+          email: null,
+          image: null,
+          phone: null,
+          star: null
+        }
       }
     },
     methods: {
       getUserInformation: function () {
+        let self = this;
         http.get('/user/detail')
             .then(response => {
-              console.log(response.data.metadata);
+              self.information = JSON.parse(response.data.metadata);
+              self.information.password = "●●●●●●●●●●";
             })
             .catch(e => {
               console.error(e);
