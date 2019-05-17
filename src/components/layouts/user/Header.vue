@@ -9,7 +9,7 @@
           <div class="m-stack m-stack--ver m-stack--general">
             <div class="m-stack__item m-stack__item--middle m-brand__logo">
               <a href="/home" class="m-brand__logo-wrapper">
-                <img alt="" src="/assets/demo/media/img/logo/logo.png"/>
+                <img alt="" src="/assets/demo/media/img/logo/logo-2-medium.png"/>
               </a>
             </div>
             <div class="m-stack__item m-stack__item--middle m-brand__tools">
@@ -154,7 +154,7 @@
         <div class="m-stack__item m-stack__item--middle m-stack__item--center">
           <!-- BEGIN: Brand -->
           <a href="/home" class="m-brand m-brand--desktop">
-            <img alt="" src="/assets/demo/media/img/logo/logo.png" />
+            <img alt="" src="/assets/demo/media/img/logo/logo-2-medium.png" />
           </a>
           <!-- END: Brand -->
         </div>
