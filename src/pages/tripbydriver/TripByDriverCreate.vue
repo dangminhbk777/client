@@ -35,13 +35,13 @@
             <div class="form-group m-form__group row">
               <label class="col-4 col-form-label">Số chỗ trống</label>
               <div class="col-8">
-                <input class="form-control m-input" type="number" v-model="numberSeat">
+                <input class="form-control m-input" type="number" min="1" v-model="numberSeat">
               </div>
             </div>
             <div class="form-group m-form__group row">
               <label class="col-4 col-form-label">Giá dự kiến (VND)</label>
               <div class="col-8">
-                <input class="form-control m-input" type="number" v-model="price">
+                <input class="form-control m-input" type="number" min="0" v-model="price">
               </div>
             </div>
             <div class="form-group m-form__group row">
@@ -65,8 +65,8 @@
           </div>
           <div class="m-portlet__foot m-portlet__foot--fit">
             <div class="m-form__actions text-right">
-                <button type="button" class="btn btn-primary margin-10" v-on:click="postNewTrip">Submit</button>
-                <button type="reset" class="btn btn-secondary">Cancel</button>
+                <button type="button" class="btn btn-primary margin-10" v-on:click="postNewTrip">Tạo chuyến đi</button>
+                <button type="reset" class="btn btn-secondary">Hủy bỏ</button>
             </div>
           </div>
         </form>

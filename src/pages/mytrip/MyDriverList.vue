@@ -6,7 +6,7 @@
         <div class="m-portlet__head-caption">
           <div class="m-portlet__head-title">
             <h3 class="m-portlet__head-text">
-              TRIP Data<small>data loaded from remote service</small>
+              Danh sách chuyến đi
             </h3>
           </div>
         </div>
@@ -38,13 +38,13 @@
         mData: null,
         urlRecord: 'trip-by-driver/',
         templateActions: '<a href="urlDetail" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
-        '  <span>Detail</span>\n' +
+        '  <span>Chi tiết</span>\n' +
         '</a>&nbsp;&nbsp;' +
         '<a href="urlUpdate" class="btn m-btn--pill m-btn--air btn-warning btn-sm">\n' +
-        '  <span>Update</span>\n' +
+        '  <span>Cập nhật</span>\n' +
         '</a>&nbsp;&nbsp;' +
         '<a href="urlDelete" class="btn m-btn--pill m-btn--air btn-danger btn-sm">\n' +
-        '  <span>Delete</span>\n' +
+        '  <span>Xóa</span>\n' +
         '</a>&nbsp;&nbsp;'
       }
     },

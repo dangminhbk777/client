@@ -80,14 +80,14 @@
           },
           {
             field: "description",
-            title: "Description",
+            title: "Mô tả chuyến đi",
             width: 250,
             textAlign: 'left',
             sortable: false,
           },
           {
             field: "time",
-            title: "Time",
+            title: "Thời gian",
             width: 150,
             textAlign: 'left',
             template: function(data) {
@@ -102,7 +102,7 @@
           },
           {
             field: "typeVehicle",
-            title: "Type Vehicle",
+            title: "Phương tiện",
             width: 150,
             textAlign: 'center',
             template: function(data) {
@@ -122,12 +122,12 @@
           },
           {
             field: "numberSeat",
-            title: "Number Seat",
+            title: "Số chỗ trống",
             textAlign: 'center'
           },
           {
             field: "price",
-            title: "Price",
+            title: "Giá",
             template: function(data) {
               if (data.price != null && !data.price.toString().includes(".000 (VNĐ)")) {
                 data.price = data.price + ".000 (VNĐ)";
@@ -137,12 +137,12 @@
           },
           {
             field: "note",
-            title: "note",
+            title: "Chú thích",
             sortable: false,
           },
           {
             field: "Actions",
-            title: "Actions",
+            title: "Hoạt động",
             textAlign: 'center',
             width: self.widthColumnActions,
             locked: {right: 'xl'},

@@ -47,6 +47,17 @@
           header: true,
           footer: false
         },
+
+        translate: {
+          toolbar: {
+            pagination: {
+              items: {
+                info: 'Hiển thị {{start}} - {{end}} của {{total}} chuyến đi'
+              }
+            }
+          }
+        },
+
         sortable: true,
         filterable: false,
         pagination: true,
@@ -69,14 +80,14 @@
           },
           {
             field: "description",
-            title: "Description",
+            title: "Mô tả chuyến đi",
             filterable: false,
             width: 250,
             textAlign: 'left'
           },
           {
             field: "time",
-            title: "Time",
+            title: "Thời gian",
             textAlign: 'left',
             sortable: 'desc',
             template: function(data) {
@@ -91,7 +102,7 @@
           },
           {
             field: "typeVehicle",
-            title: "Type Vehicle",
+            title: "Phương tiện",
             textAlign: 'center',
             template: function(data) {
               switch(data.typeVehicle) {
@@ -110,7 +121,7 @@
           },
           {
             field: "numberSeat",
-            title: "Number Seat",
+            title: "Số chỗ trống",
             textAlign: 'center'
           },
           {
@@ -125,12 +136,12 @@
           },
           {
             field: "note",
-            title: "note",
+            title: "Chú thích",
             sortable: false,
           },
           {
             field: "Actions",
-            title: "Actions",
+            title: "Hoạt động",
             textAlign: 'center',
             width: 110,
             locked: {right: 'xl'},
@@ -139,7 +150,7 @@
             template: function (data) {
               let url = URL_WEP_APP + self.urlRecord + data.id;
               return '<a href="' + url + '" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
-                     '  <span>Detail</span>\n' +
+                     '  <span>Chi tiết</span>\n' +
                      '</a>';
             }
           }
