@@ -44,8 +44,7 @@
             <div class="form-group m-form__group row">
               <label class="col-2 col-form-label">Mật khẩu</label>
               <div class="col-7">
-                <!--<input class="form-control m-input" type="text" v-model="information.password">-->
-
+                <!-- Change Password: BEGIN -->
                 <div class="m-accordion m-accordion--default" id="m_accordion_1">
                   <div class="m-accordion__item">
                     <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
@@ -58,16 +57,16 @@
                     <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1">
                       <div class="m-accordion__item-content">
                         <span>Nhập mật khẩu cũ</span>
-                        <input class="form-control m-input" type="text" v-model="information.password">
+                        <input class="form-control m-input" type="password" v-model="information.password">
                       </div>
                       <div class="m-accordion__item-content">
                         <span>Nhập mật khẩu mới</span>
-                        <input class="form-control m-input" type="text" v-model="information.password">
+                        <input class="form-control m-input" type="password" v-model="information.newPassword">
                       </div>
                     </div>
                   </div>
                 </div>
-
+                <!-- Change Password: END -->
               </div>
             </div>
 
@@ -90,9 +89,8 @@
                 <div class="col-2">
                 </div>
                 <div class="col-7">
-                  <button type="reset" class="btn btn-accent m-btn m-btn--air m-btn--custom">Cập nhật</button>
-                  &nbsp;&nbsp;
-                  <button type="reset" class="btn btn-secondary m-btn m-btn--air m-btn--custom">Hủy bỏ</button>
+                  <button v-on:click="updateInformation" class="btn btn-accent m-btn m-btn--air m-btn--custom">Cập nhật</button>&nbsp;&nbsp;
+                  <button v-on:click="resetData" class="btn btn-secondary m-btn m-btn--air m-btn--custom">Hủy bỏ</button>
                 </div>
               </div>
             </div>
@@ -118,12 +116,14 @@
         information: {
           id: null,
           username: null,
-          password: "●●●●●●●●●●",
+          password: null,
+          newPassword: null,
           email: null,
           image: null,
           phone: null,
           star: null
-        }
+        },
+        formData: new FormData()
       }
     },
     methods: {
@@ -132,12 +132,42 @@
         http.get('/user/detail')
             .then(response => {
               self.information = JSON.parse(response.data.metadata);
-              self.information.password = "●●●●●●●●●●";
+              self.information.password = null;
+              self.information.newPassword = null;
             })
             .catch(e => {
               console.error(e);
               toastr.error("Error occurred");
             });
+      },
+      updateInformation: function () {
+        let self = this;
+        console.log(self.information);
+        self.setDataToFormRequest();
+        http.post('/user/update', self.formData)
+            .then(response => {
+              console.log(JSON.parse(response.data.metadata));
+              toastr.success('Cập nhật thông tin thành công');
+              this.formData = new FormData();
+            })
+            .catch(e => {
+              console.error(e);
+              toastr.error("Cập nhật thông tin thất bại");
+              this.formData = new FormData();
+            });
+      },
+      setDataToFormRequest: function () {
+        let self = this;
+        self.formData.append("id", self.information.id);
+        self.formData.append("username", self.information.username);
+        self.formData.append("email", self.information.email);
+        self.formData.append("password", self.information.password);
+        self.formData.append("newPassword", self.information.newPassword);
+        self.formData.append("phone", self.information.phone);
+      },
+      resetData: function () {
+        this.getUserInformation();
+        this.formData = new FormData();
       }
     },
     mounted() {

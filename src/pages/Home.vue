@@ -16,9 +16,9 @@
                 <img src="http://hi.gocar.my/wp-content/uploads/2018/12/gocar-background-14.jpg" alt="">
                 <div class="col-sm-12 text-center" style="position: absolute; display: block; top: 10%; z-index: 1;">
                   <h2 class="m--font-light">Cải thiện đáng kể</h2>
-                  <h2 class="m--font-light">đi lại của bạn</h2>
+                  <h2 class="m--font-light">quãng đường đi lại của bạn</h2>
                   <h4 class="m--font-light" style="padding-top: 20px; font-weight: lighter">Đi chung xe tiện lợi với</h4>
-                  <h4 class="m--font-light" style="font-weight: lighter">đồng nghiệp và hàng xóm</h4>
+                  <h4 class="m--font-light" style="font-weight: lighter">mọi người xung quanh</h4>
                 </div>
                 <div class="m-widget19__shadow"></div>
               </div>

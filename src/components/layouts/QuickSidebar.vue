@@ -21,13 +21,13 @@
               <div class="m-list-settings__item">
                 <span class="m-list-settings__item-label">Email Notifications</span>
                 <span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" checked="checked" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
+                  <span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
+                    <label>
+                      <input type="checkbox" checked="checked" name="">
+                      <span></span>
+                    </label>
+                  </span>
+                </span>
               </div>
             </div>
             <div class="m-list-settings__group">
@@ -35,13 +35,13 @@
               <div class="m-list-settings__item">
                 <span class="m-list-settings__item-label">System Logs</span>
                 <span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
+                  <span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span></span>
+                    </label>
+                  </span>
+                </span>
               </div>
             </div>
             <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 4px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>

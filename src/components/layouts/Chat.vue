@@ -2,17 +2,9 @@
   <div class="__chat">
     <!-- Quick Nav: BEGIN -->
     <ul class="m-nav-sticky" style="margin-top: 30px;">
-      <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="Purchase" data-placement="left">
-        <a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" target="_blank">
-          <i class="la la-cart-arrow-down"></i>
-        </a>
-      </li>
-      <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="Documentation" data-placement="left">
-        <a href="https://keenthemes.com/metronic/documentation.html" target="_blank"><i class="la la-code-fork"></i></a>
-      </li>
       <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="Chat" data-placement="left">
         <a href="#" id="addClass">
-          <i class="la la-comments"></i>
+          <i class="flaticon-chat"></i>
         </a>
       </li>
     </ul>

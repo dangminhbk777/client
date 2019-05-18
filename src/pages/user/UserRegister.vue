@@ -73,10 +73,10 @@
     data() {
       return {
         // Field request
-        "username": null,
-        "email": null,
-        "password": null,
-        "phone": null,
+        username: null,
+        email: null,
+        password: null,
+        phone: null,
         // Form submit and show image
         previewImage: null,
         formData: new FormData()
