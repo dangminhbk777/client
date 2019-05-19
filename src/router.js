@@ -156,21 +156,3 @@ router.beforeEach((to, from, next) => {
 });
 
 export default router;
-
-// export default new Router({
-//     mode: "history",
-//     routes: [
-//         /*{
-//         path: "/",
-//         name: "customers",
-//         alias: "/customer",
-//         component: CustomersList,
-//         children: [
-//           {
-//             path: "/customer/:id",
-//             name: "customer-details",
-//             component: Customer,
-//             props: true
-//           }
-//         ]
-//         },*/

@@ -55,7 +55,7 @@
                                 :placeHolder="select2.placeHolder"
                                 :allowClear="select2.allowClear"
                                 v-model="select2.selected">
-                                <option disabled value="0">Chọn một</option>
+                                <option disabled value="0">Chọn phương tiện</option>
                               </select-place-holder>
                             </div>
                           </div>
@@ -127,7 +127,7 @@
       return {
         select2: {
           allowClear: true,
-          placeHolder: "Select One",
+          placeHolder: "Chọn phương tiện",
           options: [
             { id: '1', text: 'Motorbike' },
             { id: '2', text: 'Car' },
