@@ -50,7 +50,7 @@
       } else if (self.$route.path.includes('/trip-by-driver/create')
           || self.$route.path.includes('/trip-by-hitchhiker/create')) {
         self.titlePage = 'Tạo chuyến đi'
-      } else if (self.$route.path.includes('/trip-by-driver/:driverId')
+      } else if (self.$route.path === '/trip-by-driver/:driverId'
           || self.$route.path.includes('/trip-by-hitchhiker/:hitchhikerId')) {
         self.titlePage = 'Chi tiết chuyến đi'
       } else if (self.$route.path.includes('/trip-by-driver/:driverId/update')) {
