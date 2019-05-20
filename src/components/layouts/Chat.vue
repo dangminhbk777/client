@@ -201,9 +201,11 @@
                 element.style = 'position:absolute;top:0;left:0;width:138px;height:50px;' +
                     'transform:matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, ' + index*50 + ', 0, 1);';
               });
-              self.params.idReceive = self.userConversations[0].userId;
-              $('#username').text(self.userConversations[0].username);
-              self.getConversation();
+              if (self.userConversations[0]) {
+                self.params.idReceive = self.userConversations[0].userId;
+                $('#username').text(self.userConversations[0].username);
+                self.getConversation();
+              }
             })
             .catch(e => {
               console.error(e);

@@ -52,8 +52,8 @@
               </div>
               <div class="m-portlet__foot m-portlet__foot--fit">
                 <div class="m-form__actions text-right">
-                  <button type="button" class="btn btn-primary margin-10" v-on:click="registerUser">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Cancel</button>
+                  <button type="button" class="btn btn-primary margin-10" v-on:click="registerUser">Đăng ký</button>
+                  <button type="reset" class="btn btn-secondary">Hủy bỏ</button>
                 </div>
               </div>
             </div>
