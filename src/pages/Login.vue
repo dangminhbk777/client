@@ -38,24 +38,24 @@
         <!-- REGISTER: BEGIN -->
         <div class="m-login__signup_" v-if="!showFormLogin">
           <div class="m-login__head">
-            <h3 class="m-login__title">Đăng ký</h3>
+            <h3 class="m-login__title">Đăng ký tài khoản</h3>
             <div class="m-login__desc">Nhập thông tin chi tiết để tạo tài khoản của bạn</div>
           </div>
-          <form class="m-login__form m-form">
+          <div class="m-login__form m-form">
             <div class="form-group m-form__group">
-              <input class="form-control m-input" type="text" placeholder="Tên của bạn">
+              <input class="form-control m-input" v-model="registerInformation.username" type="text" placeholder="Tên của bạn">
             </div>
             <div class="form-group m-form__group">
-              <input class="form-control m-input" type="text" placeholder="Email" autocomplete="off">
+              <input class="form-control m-input" v-model="registerInformation.email" type="text" placeholder="Email" autocomplete="off">
             </div>
             <div class="form-group m-form__group">
-              <input class="form-control m-input" type="password" placeholder="Mật khẩu">
+              <input class="form-control m-input" v-model="registerInformation.password" type="password" placeholder="Mật khẩu">
             </div>
             <div class="form-group m-form__group">
               <input class="form-control m-input m-login__form-input--last" type="password" placeholder="Xác nhận mật khẩu">
             </div>
             <div class="form-group m-form__group">
-              <input class="form-control m-input" type="text" placeholder="Số điện thoại">
+              <input class="form-control m-input" v-model="registerInformation.phone" type="text" placeholder="Số điện thoại">
             </div>
             <!--<div class="row form-group m-form__group m-login__form-sub">
               <div class="col m&#45;&#45;align-left">
@@ -71,15 +71,15 @@
                   <input type="file" class="custom-file-input" id="image" v-on:change="onImageChange">
                   <label class="custom-file-label form-control m-input m-input--air m-input--pill" for="image" style="padding: 1.0rem 1.5rem; !important;">Ảnh đại diện</label>
                 </div>
-                <div v-if="previewImage" style="padding-top: 20px;" class="col-6">
+                <div v-if="previewImage" class="col-6">
                   <img :src="previewImage" class="img-responsive mr-10 overview-img">
                 </div>
             </div>
             <div class="m-login__form-action">
-              <button class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">Đăng ký</button>&nbsp;&nbsp;
+              <button v-on:click="registerAccount" class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">Đăng ký</button>&nbsp;&nbsp;
               <button class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn">Hủy bỏ</button>
             </div>
-          </form>
+          </div>
         </div>
         <!-- REGISTER: END -->
         <div class="m-login__account" v-if="showFormLogin">
@@ -111,6 +111,12 @@
             email: null
           }
         },
+        registerInformation: {
+          username: null,
+          email: null,
+          password: null,
+          phone: null
+        },
         showFormLogin: true,
         previewImage: null,
         formData: new FormData()
@@ -137,6 +143,25 @@
               console.error(error);
               this.messageError = error.response.data.message;
             });
+      },
+      registerAccount: function() {
+        let self = this;
+        self.setDataToFormRequest();
+        http.post('/user/register', self.formData)
+            .then(success => {
+              self.formData = new FormData();
+              toastr.success("Đăng ký tài khoản thành công");
+            })
+            .catch(error => {
+              toastr.error("Đăng ký tài khoản thất bại");
+              console.log(error.response.data);
+            });
+      },
+      setDataToFormRequest: function () {
+        this.formData.append("username", this.registerInformation.username);
+        this.formData.append("email", this.registerInformation.email);
+        this.formData.append("password", this.registerInformation.password);
+        this.formData.append("phone", this.registerInformation.phone);
       },
       showFormRegister: function () {
         let self = this;
@@ -182,12 +207,14 @@
     margin: 10px 10px 10px 10px;
   }
   .overview-img {
-    height: 70px;
+    height: 80px;
     width: 90px;
+    border: solid 1px darkgrey;
+    border-radius: 50%;
   }
   .custom-file-label::after {
     position: absolute;
-    top: 0.9px;
+    top: 1px;
     right: 0;
     bottom: 0;
     z-index: 3;
