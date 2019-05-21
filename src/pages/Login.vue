@@ -95,7 +95,7 @@
 
 <script>
   import http from '../services/http-common.js';
-  import {DEFAULT_LOGIN, AUTHORIZATION} from '../services/variables.js';
+  import {DEFAULT_LOGIN, AUTHORIZATION, URL_PAGE_LOGIN} from '../services/variables.js';
 
   export default {
     name: "login",
@@ -151,6 +151,7 @@
             .then(success => {
               self.formData = new FormData();
               toastr.success("Đăng ký tài khoản thành công");
+              window.location.href = URL_PAGE_LOGIN;
             })
             .catch(error => {
               toastr.error("Đăng ký tài khoản thất bại");
