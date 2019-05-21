@@ -6,7 +6,7 @@
         <div class="m-portlet__head-caption">
           <div class="m-portlet__head-title">
             <h3 class="m-portlet__head-text">
-              Chi tiết chuyến đi
+              Danh sách đăng ký tài xế
             </h3>
           </div>
         </div>
@@ -27,7 +27,7 @@
 <script>
   import http from '../../services/http-common.js';
   import toastr from '../../services/toastr.js';
-  import Table from '../../components/tables/TableMyDriver.vue';
+  import Table from '../../components/tables/TableMyHitchhiker.vue';
 
   export default {
     name: "MyDriverRegister",
@@ -52,6 +52,7 @@
         http.get('/trip-by-hitchhiker/my-trip-register/')
             .then(response => {
               self.mData = JSON.parse(response.data.metadata);
+              console.log(self.mData);
             })
             .catch(e => {
               console.error(e);

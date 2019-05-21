@@ -44,6 +44,20 @@
           header: true,
           footer: false
         },
+
+        translate: {
+          toolbar: {
+            pagination: {
+              items: {
+                info: 'Hiển thị {{start}} - {{end}} của {{total}} chuyến đi'
+              }
+            }
+          },
+          records: {
+            noRecords: 'Không có dữ liệu hiển thị'
+          }
+        },
+
         sortable: true,
         filterable: false,
         pagination: true,
@@ -65,14 +79,14 @@
           },
           {
             field: "username",
-            title: "User Name",
+            title: "Tên người dùng",
             sortable: false,
             width: 100,
             textAlign: 'left',
           },
           {
             field: "avatar",
-            title: "Avatar",
+            title: "Ảnh đại diện",
             sortable: false,
             width: 200,
             textAlign: 'center',
@@ -82,14 +96,14 @@
           },
           {
             field: "phone",
-            title: "Phone",
+            title: "Số điện thoại",
             sortable: false,
             width: 150,
             textAlign: 'center',
           },
           {
             field: "createdAt",
-            title: "Create At",
+            title: "Ngày tạo",
             width: 150,
             textAlign: 'left',
             template: function(data) {
@@ -104,14 +118,14 @@
           },
           {
             field: "star",
-            title: "Favourite",
+            title: "Xếp hạng",
             sortable: false,
             width: 100,
             textAlign: 'center',
           },
           {
             field: "status",
-            title: "Status",
+            title: "Trạng thái",
             width: 250,
             textAlign: 'center',
             sortable: false,
@@ -123,19 +137,20 @@
                 dataId = data.userDriverId;
               }
               let status = data.status;
-              let isDisableCancel = status === "00" ? 'disabled="disabled" ' : '';
+              // let isDisableCancel = status === "00" ? 'disabled="disabled" ' : '';
               let isDisableNotAccept = status === "01" ? 'disabled="disabled" ' : '';
               let isDisableAccept = status === "02" ? 'disabled="disabled" ' : '';
               let temp =
                   '  <button data-uh-id="'+ dataId +'" class="m-badge--wide btn btn-success btn-sm ___btn-accept"'+ isDisableAccept +'>\n' +
-                  '    <span>Accept</span>\n' +
+                  '    <span>Chấp nhận</span>\n' +
                   '  </button>\n' +
                   '  <button data-uh-id="'+ dataId +'" class="m-badge--wide btn btn btn-warning btn-sm ___btn-not-accept"'+ isDisableNotAccept + '>\n' +
-                  '    <span>Not Accept</span>\n' +
+                  '    <span>Không chấp nhận</span>\n' /*+
                   '  </button>\n' +
                   '  <button data-uh-id="'+ dataId +'" class="m-badge--wide btn btn-danger btn-sm ___btn-cancel"'+ isDisableCancel + '>\n' +
                   '    <span>Cancel</span>\n' +
-                  '  </button>\n';
+                  '  </button>\n'*/
+              ;
               return temp;
             }
           }

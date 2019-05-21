@@ -1,5 +1,5 @@
 <template>
-  
+  <div class="m_datatable_"></div>
 </template>
 
 <script>
@@ -42,6 +42,20 @@
         sortable: true,
         filterable: false,
         pagination: true,
+
+        translate: {
+          toolbar: {
+            pagination: {
+              items: {
+                info: 'Hiển thị {{start}} - {{end}} của {{total}} chuyến đi'
+              }
+            }
+          },
+          records: {
+            noRecords: 'Không có dữ liệu hiển thị'
+          }
+        },
+
         toolbar: {
           placement: ['bottom'],
           items: {
@@ -60,14 +74,14 @@
           },
           {
             field: "description",
-            title: "Description",
+            title: "Mô tả chuyến đi",
             width: 250,
             textAlign: 'left',
             sortable: false,
           },
           {
             field: "time",
-            title: "Time",
+            title: "Thời gian",
             width: 150,
             textAlign: 'left',
             template: function(data) {
@@ -82,12 +96,12 @@
           },
           {
             field: "numberSeat",
-            title: "Number Seat",
+            title: "Số chỗ trống",
             textAlign: 'center'
           },
           {
             field: "price",
-            title: "Price",
+            title: "Giá",
             template: function(data) {
               if (data.price != null && !data.price.toString().includes(".000 (VNĐ)")) {
                 data.price = data.price + ".000 (VNĐ)";
@@ -97,12 +111,12 @@
           },
           {
             field: "note",
-            title: "note",
+            title: "Chú thích",
             sortable: false,
           },
           {
             field: "Actions",
-            title: "Actions",
+            title: "Hoạt động",
             textAlign: 'center',
             width: 195,
             locked: {right: 'xl'},
@@ -113,13 +127,13 @@
               let urlUpdate = URL_WEP_APP + self.urlRecord + data.id + '/update';
               let urlDelete = URL_WEP_APP + self.urlRecord + data.id + '/delete';
               return '<a href="' + urlDetail + '" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
-                  '  <span>Detail</span>\n' +
+                  '  <span>Chi tiết</span>\n' +
                   '</a>&nbsp;&nbsp;' +
                   '<a href="' + urlUpdate + '" class="btn m-btn--pill m-btn--air btn-warning btn-sm">\n' +
-                  '  <span>Update</span>\n' +
+                  '  <span>Cập nhật</span>\n' +
                   '</a>&nbsp;&nbsp;' +
                   '<a href="' + urlDelete + '" class="btn m-btn--pill m-btn--air btn-danger btn-sm">\n' +
-                  '  <span>Delete</span>\n' +
+                  '  <span>Xóa</span>\n' +
                   '</a>&nbsp;&nbsp;';
             }
           }

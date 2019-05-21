@@ -7,7 +7,7 @@
           <div class="m-portlet__head-caption">
             <div class="m-portlet__head-title">
               <h3 class="m-portlet__head-text">
-                TRIP Data Detail<small>data loaded from remote service</small>
+                Chi tiết chuyến đi
               </h3>
             </div>
           </div>
@@ -15,13 +15,16 @@
             <ul class="m-portlet__nav">
               <li class="m-portlet__nav-item">
                 <button v-if="showButton === '03'" v-on:click="redirectListRegister" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                  Show list register
+                  Danh sách đăng ký
                 </button>
                 <button v-else-if="showButton === '01'" v-on:click="registerTrip" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                  Register trip
+                  Đăng ký
+                </button>
+                <button v-else-if="showButton === '04'" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
+                  Đã được chấp nhận
                 </button>
                 <button v-else class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
-                  Registered
+                  Đã đăng ký
                 </button>
               </li>
             </ul>
@@ -291,6 +294,8 @@
                 self.showButton = "01";
               } else if (userDriver.isSubmitter) {
                 self.showButton = "03";
+              } else if (userDriver.status === "02") {
+                self.showButton = "04";
               } else {
                 self.showButton = "02";
               }

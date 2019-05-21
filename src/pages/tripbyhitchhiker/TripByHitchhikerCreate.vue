@@ -41,8 +41,8 @@
             </div>
             <div class="m-portlet__foot m-portlet__foot--fit">
               <div class="m-form__actions text-right">
-                  <button type="button" class="btn btn-primary margin-10" v-on:click="postNewTrip">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Cancel</button>
+                  <button type="button" class="btn btn-primary margin-10" v-on:click="postNewTrip">Gửi đăng ký</button>
+                  <button type="reset" class="btn btn-secondary">Hủy bỏ</button>
               </div>
             </div>
           </form>
@@ -96,7 +96,7 @@
             .then(response => {
               console.log(response);
               self.position = null;
-              toastr.success('Create trip by hitchhiker SUCCESS');
+              toastr.success('Tạo chuyến đi tìm xe thành công');
             })
             .catch(e => {
               console.error(e);

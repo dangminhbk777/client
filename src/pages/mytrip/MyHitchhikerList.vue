@@ -6,7 +6,7 @@
         <div class="m-portlet__head-caption">
           <div class="m-portlet__head-title">
             <h3 class="m-portlet__head-text">
-              TRIP Data<small>data loaded from remote service</small>
+              Danh sách chuyến đi tìm tài xế
             </h3>
           </div>
         </div>

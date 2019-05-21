@@ -62,6 +62,21 @@
         sortable: true,
         filterable: false,
         pagination: true,
+
+        translate: {
+          toolbar: {
+            pagination: {
+              items: {
+                info: 'Hiển thị {{start}} - {{end}} của {{total}} chuyến đi'
+              }
+            }
+          },
+          records: {
+            noRecords: 'Không có dữ liệu hiển thị'
+          }
+        },
+        //translate.records.noRecords
+
         toolbar: {
           placement: ['bottom'],
           items: {

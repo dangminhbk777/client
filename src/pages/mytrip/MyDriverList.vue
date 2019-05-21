@@ -6,7 +6,7 @@
         <div class="m-portlet__head-caption">
           <div class="m-portlet__head-title">
             <h3 class="m-portlet__head-text">
-              Danh sách chuyến đi
+              Danh sách chuyến đi tìm người đi chung
             </h3>
           </div>
         </div>

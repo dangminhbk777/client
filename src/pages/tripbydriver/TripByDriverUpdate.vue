@@ -7,7 +7,7 @@
           <div class="m-portlet__head-caption">
             <div class="m-portlet__head-title">
               <h3 class="m-portlet__head-text">
-                TRIP Data Detail<small>data loaded from remote service</small>
+                Chi tiết chuyến đi
               </h3>
             </div>
           </div>
@@ -15,7 +15,7 @@
             <ul class="m-portlet__nav">
               <li class="m-portlet__nav-item">
                 <button v-on:click="updateTrip" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                  Update
+                  Cập nhật thông tin
                 </button>
               </li>
             </ul>
@@ -47,7 +47,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                      <span class="text-dark">Name</span>&nbsp;&nbsp;{{tripDetail.username}}
+                      <span class="text-dark">Tên tài xế</span>&nbsp;&nbsp;{{tripDetail.username}}
                     </span>
                   </div>
                 </div>
@@ -59,7 +59,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Phone</span>&nbsp;&nbsp;{{tripDetail.phone}}
+                        <span class="text-dark">Số điện thoại</span>&nbsp;&nbsp;{{tripDetail.phone}}
                     </span>
                   </div>
                 </div>
@@ -71,7 +71,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Quality service</span>&nbsp;&nbsp;{{tripDetail.star}}
+                        <span class="text-dark">Xếp hạng</span>&nbsp;&nbsp;{{tripDetail.star}}
                     </span>
                   </div>
                 </div>
@@ -83,7 +83,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Number of seats</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
+                        <span class="text-dark">Số chỗ trống</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
                     </span>
                   </div>
                 </div>
@@ -95,7 +95,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Price</span>&nbsp;&nbsp;{{tripDetail.price}}.000 (VNĐ)
+                        <span class="text-dark">Giá</span>&nbsp;&nbsp;{{tripDetail.price}}.000 (VNĐ)
                     </span>
                   </div>
                 </div>
@@ -107,7 +107,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Note</span>&nbsp;&nbsp;
+                        <span class="text-dark">Chú thích</span>&nbsp;&nbsp;
                     </span>
                     <span class="m-widget4__text">
                         {{tripDetail.note}}
@@ -127,7 +127,7 @@
               <!-- MAP: BEGIN -->
               <div id="information-map">
                 <button v-on:click="clearRouteStep" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom __btn-clear">
-                  Clear Route Step
+                  Xóa lộ trình
                 </button>
                 <div class="flex-parent relative scroll-hidden">
                   <div id="map" class="flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-mm mapboxgl-map" >

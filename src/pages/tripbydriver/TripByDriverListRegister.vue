@@ -6,7 +6,7 @@
         <div class="m-portlet__head-caption">
           <div class="m-portlet__head-title">
             <h3 class="m-portlet__head-text">
-              TRIP Data<small>data loaded from remote service</small>
+              Danh sách người đi chung
             </h3>
           </div>
         </div>
@@ -14,7 +14,7 @@
           <ul class="m-portlet__nav">
             <li class="m-portlet__nav-item">
               <button v-on:click="acceptHitchhiker" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                Submit
+                Gửi trạng thái
               </button>
             </li>
           </ul>
@@ -81,11 +81,12 @@
         });
         http.post('/trip-by-driver/accept-hitchhiker/' + self.driverId, JSON.stringify(self.dataChange))
             .then(response => {
-              toastr.success("Update success");
+              toastr.success("Cập nhật thành công");
               self.dataChange = [];
             })
             .catch(e => {
               console.error(e);
+              toastr.error("Cập nhật thất bại");
             });
       },
       copyObject: function (object) {
