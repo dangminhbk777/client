@@ -77,7 +77,7 @@
             </div>
             <div class="m-login__form-action">
               <button v-on:click="registerAccount" class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">Đăng ký</button>&nbsp;&nbsp;
-              <button class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn">Hủy bỏ</button>
+              <a href="/login" class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn">Hủy bỏ</a>
             </div>
           </div>
         </div>

@@ -17,6 +17,7 @@ import MyDriverRegisterList from "./pages/mytrip/MyDriverRegisterList.vue";
 import MyDriverComplete from "./pages/mytrip/MyDriverComplete.vue";
 // MyHitchhiker
 import MyHitchhikerList from "./pages/mytrip/MyHitchhikerList.vue";
+import MyHitchhikerRegisterList from "./pages/mytrip/MyHitchhikerRegisterList.vue";
 // Page
 import Login from "./pages/Login.vue";
 import PageNotFound from "./pages/404.vue";
@@ -120,6 +121,11 @@ const router = new Router({
       path: '/my-hitchhiker',
       name: 'MyHitchhikerList',
       component: MyHitchhikerList,
+    },
+    {
+      path: '/my-hitchhiker-register',
+      name: 'MyHitchhikerRegisterList',
+      component: MyHitchhikerRegisterList,
     },
     // Authentication
     {
