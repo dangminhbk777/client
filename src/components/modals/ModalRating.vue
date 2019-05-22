@@ -12,7 +12,7 @@
           </div>
           <div class="modal-body">
             <div class="form-group m-form__group row">
-              <label class="col-3 col-form-label" for="driver">Driver's name:</label>
+              <label class="col-3 col-form-label" for="driver">Tên tài xế:</label>
               <div class="col-9" v-if="information">
                 <span class="form-control __information-driver" id="driver">{{information.username}}</span>
               </div>
@@ -36,17 +36,17 @@
             </div>
             <form>
               <div class="form-group">
-                <label for="comment-text" class="form-control-label">Comment:</label>
+                <label for="comment-text" class="form-control-label">Bình luận:</label>
                 <textarea class="form-control" id="comment-text" v-model="rating.comment"></textarea>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="hide">
-              Close
+              Đóng
             </button>
             <button type="button" class="btn btn-primary" v-on:click="submitRating">
-              Submit
+              Gửi đánh giá
             </button>
           </div>
         </div>

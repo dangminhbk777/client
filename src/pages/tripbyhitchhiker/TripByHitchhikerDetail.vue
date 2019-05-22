@@ -316,7 +316,6 @@
       registerTrip: function () {
         http.post("trip-by-hitchhiker/register-with-hitchhiker/" + this.hitchhikerId)
             .then(response => {
-              console.log(JSON.parse(response.data.metadata));
               this.showButton = "02";
               toastr.success('Register trip SUCCESS');
             })

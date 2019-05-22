@@ -14,18 +14,44 @@
           <div class="m-portlet__head-tools">
             <ul class="m-portlet__nav">
               <li class="m-portlet__nav-item">
-                <button v-if="showButton === '03'" v-on:click="redirectListRegister" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                  Danh sách đăng ký
-                </button>
-                <button v-else-if="showButton === '01'" v-on:click="registerTrip" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                  Đăng ký
-                </button>
-                <button v-else-if="showButton === '04'" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
-                  Đã được chấp nhận
-                </button>
-                <button v-else class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
-                  Đã đăng ký
-                </button>
+                <div class="__show-actions" v-if="showButton === '03'">
+                  <button v-on:click="redirectListRegister" class="m-portlet__nav-link btn btn-primary m-btn">
+                    Danh sách đăng ký
+                  </button>
+                </div>
+                <div class="__show-actions" v-else-if="showButton === '01'">
+                  <a href="#" class="btn btn-warning m-btn m-btn--icon m-btn--wide" v-on:click="showChat">
+                    <span>
+                      <i class="fa flaticon-chat-1"></i>
+                      <span>Nhắn tin</span>
+                    </span>
+                  </a>&nbsp;
+                  <button v-on:click="registerTrip" class="m-portlet__nav-link btn btn-primary m-btn">
+                    Đăng ký
+                  </button>
+                </div>
+                <div class="__show-actions" v-else-if="showButton === '04'">
+                  <a href="#" class="btn btn-warning m-btn m-btn--icon m-btn--wide" v-on:click="showChat">
+                    <span>
+                      <i class="fa flaticon-chat-1"></i>
+                      <span>Nhắn tin</span>
+                    </span>
+                  </a>&nbsp;
+                  <button class="m-portlet__nav-link btn btn-primary m-btn" disabled="disabled">
+                    Đã được chấp nhận
+                  </button>
+                </div>
+                <div class="__show-actions" v-else>
+                  <a href="#" class="btn btn-warning m-btn m-btn--icon m-btn--wide" v-on:click="showChat">
+                    <span>
+                      <i class="fa flaticon-chat-1"></i>
+                      <span>Nhắn tin</span>
+                    </span>
+                  </a>&nbsp;
+                  <button class="m-portlet__nav-link btn btn-primary m-btn" disabled="disabled">
+                    Đã đăng ký
+                  </button>
+                </div>
               </li>
             </ul>
           </div>
@@ -157,6 +183,7 @@
   import toastr from '../../services/toastr.js';
   import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
   import SlideShow from '../../components/other/SlideShow.vue';
+  import {eventBus} from "../../main";
 
   export default {
     name: "TripByDriverDetail",
@@ -202,6 +229,7 @@
         * show registered    : 02
         * show list register : 03
         * */
+        userDriver: null,
         showButton: null,
         indexWayPoint: 0,
         steps: [],
@@ -343,11 +371,8 @@
       },
       registerTrip: function () {
         let self = this;
-        console.log(self.position);
-        // http.post("trip-by-driver/register-with-driver/" + this.driverId, self.position)
         http.post("trip-by-driver/register-with-driver/" + this.driverId, self.position)
             .then(response => {
-              console.log(JSON.parse(response.data.metadata));
               toastr.success('Gửi đăng ký thành công');
               this.showButton = "02";
             })
@@ -360,6 +385,7 @@
         let self = this;
         http.get('/trip-by-driver/status/' + this.driverId)
             .then(response => {
+              self.userDriver = JSON.parse(response.data.metadata);
               let userDriver = JSON.parse(response.data.metadata);
               if (userDriver === null) {
                 self.showButton = "01";
@@ -394,8 +420,19 @@
               console.error(e);
             });
       },
-      redirectListRegister() {
+      redirectListRegister: function() {
         window.location.href = "/trip-by-driver/" + this.driverId + "/list-register";
+      },
+      showChat: function () {
+        let self = this;
+        $('#addClass').click();
+        let userConversation = {
+          email: 'xx',
+          image: 'xx',
+          userId: self.userDriver.userId,
+          username: 'xx'
+        };
+        eventBus.$emit('addUserConversation', JSON.stringify(userConversation));
       }
     },
     mounted() {

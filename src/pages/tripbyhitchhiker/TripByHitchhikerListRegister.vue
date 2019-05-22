@@ -82,7 +82,6 @@
         });
         http.post('/trip-by-hitchhiker/accept-driver/' + self.hitchhikerId, JSON.stringify(self.registerTripUpdate))
             .then(response => {
-              console.log(response.data);
               toastr.success("Cập nhật thành công");
               self.dataChange = null;
             })

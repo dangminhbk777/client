@@ -204,7 +204,6 @@
       },
       initMap: function () {
         let self = this;
-        console.log(this);
         mapboxgl.accessToken = MAPBOX_KEY;
         let map = new mapboxgl.Map({
           container: 'map',
@@ -244,7 +243,7 @@
           });
 
           directions.on('route', function (ev) {
-            console.log(ev.route);
+            // console.log(ev.route);
           });
           directions.on('origin', function (e) {
             if (e !=  null) {

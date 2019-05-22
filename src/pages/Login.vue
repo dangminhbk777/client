@@ -155,7 +155,7 @@
             })
             .catch(error => {
               toastr.error("Đăng ký tài khoản thất bại");
-              console.log(error.response.data);
+              console.error(error);
             });
       },
       setDataToFormRequest: function () {

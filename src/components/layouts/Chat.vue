@@ -45,10 +45,10 @@
               </div>
             </div>
             <!-- List conversation: end -->
-            <a href="/offer" class="link-offer ember-view">
-              Đã nhận trả giá
-              <span class="badge">0</span>
-            </a>
+            <!--<a href="/offer" class="link-offer ember-view">-->
+              <!--Đã nhận trả giá-->
+              <!--<span class="badge">0</span>-->
+            <!--</a>-->
           </div>
 
           <div class="conversation-window">
@@ -142,6 +142,7 @@
   import http from '../../services/http-common.js';
   import toastr from '../../services/toastr.js';
   import { URL_AVATAR, ADDRESS_SOCKET } from '../../services/variables.js';
+  import {eventBus} from "../../main";
 
   export default {
     name: "Chat",
@@ -193,6 +194,7 @@
         let self = this;
         http.get('/message/user-conversation')
             .then(response => {
+              console.log(JSON.parse(response.data.metadata));
               self.userConversations = JSON.parse(response.data.metadata);
               self.userConversations.forEach(function (element, index) {
                 if (!element.image.includes(URL_AVATAR)) {
@@ -274,6 +276,21 @@
     mounted() {
       this.initChat();
       this.getUserConversation();
+    },
+    created() {
+      let self = this;
+      eventBus.$on('addUserConversation', function (data) {
+        console.log(self.userConversations);
+        self.userConversations.push(JSON.parse(data));
+        self.userConversations.forEach(function (element, index) {
+          if (!element.image.includes(URL_AVATAR)) {
+            element.image = URL_AVATAR + element.image;
+          }
+          element.style = 'position:absolute;top:0;left:0;width:138px;height:50px;' +
+              'transform:matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, ' + index*50 + ', 0, 1);';
+        });
+        console.log(data);
+      })
     }
   }
 </script>

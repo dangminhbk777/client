@@ -227,7 +227,6 @@
           if (self.indexWayPoint > 5) {
             toastr.warning('Max route step');
           } else {
-            console.log(self.indexWayPoint);
             self.map.addLayer({
               id: 'step' + self.indexWayPoint,
               type: 'circle',
@@ -387,7 +386,6 @@
         };
         http.post('/trip-by-driver/update-trip', requestBody)
             .then(response => {
-              console.log(response);
               toastr.success('Cập nhật thông tin chuyến đi thành công');
             })
             .catch(e => {

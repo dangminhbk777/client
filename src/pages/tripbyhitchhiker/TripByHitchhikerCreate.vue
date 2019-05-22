@@ -94,7 +94,6 @@
             + self.position.descriptionDestination;
         http.post('/trip-by-hitchhiker/new-trip', this.position)
             .then(response => {
-              console.log(response);
               self.position = null;
               toastr.success('Tạo chuyến đi tìm xe thành công');
             })
@@ -167,7 +166,7 @@
                     self.position.descriptionOrigin = e.target.value;
                   })
                   .catch(e => {
-                    this.errors.push(e)
+                    console.error(e);
                   });
             } else if (e.target.value != null) {
               axios.get(URL_MAPBOX_API + e.target.value + '.json?types=poi&access_token=' + MAPBOX_KEY)
@@ -176,13 +175,13 @@
                     self.position.descriptionDestination = e.target.value;
                   })
                   .catch(e => {
-                    this.errors.push(e)
+                    console.error(e);
                   });
             }
           });
 
           directions.on('route', function (ev) {
-            console.log(ev.route);
+            // console.log(ev.route);
           });
           directions.on('origin', function (e) {
             if (e !=  null) {

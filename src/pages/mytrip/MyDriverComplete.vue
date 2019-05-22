@@ -24,7 +24,7 @@
       </div>
     </div>
     <modal-app v-if="driverId"
-        title="Evaluate driving quality"
+        title="Đánh giá chất lượng lái xe"
         :showModal="showModal"
         :driverId="driverId"
         v-on:hideModal="showModal = $event">
@@ -50,7 +50,7 @@
         urlRecord: 'trip-by-driver/',
         templateActions:
             '<a href="#" driver-id="driverId" class="btn m-btn--pill m-btn--air btn-primary btn-sm ___btn-rating">\n' +
-            '  <span>Rating</span>\n' +
+            '  <span>Đánh giá</span>\n' +
             '</a>',
         showModal: false,
         driverId: null

@@ -52,7 +52,6 @@
         http.get('/trip-by-hitchhiker/my-trip-register/')
             .then(response => {
               self.mData = JSON.parse(response.data.metadata);
-              console.log(self.mData);
             })
             .catch(e => {
               console.error(e);

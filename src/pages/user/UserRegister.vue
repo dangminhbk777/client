@@ -105,12 +105,11 @@
         self.setDataToFormRequest();
         http.post('/user/register', self.formData)
             .then(success => {
-              console.log(success.data.metadata);
               self.formData = new FormData();
               toastr.success("Create new user SUCCESS");
             })
             .catch(error => {
-              console.log(error.response.data);
+              console.error(error);
             });
       },
       setDataToFormRequest: function () {

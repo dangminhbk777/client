@@ -159,7 +159,7 @@
           }
         ]
       });
-      tableApp
+      /*tableApp
           .on('m-datatable--on-init', function () {
             console.log('Datatable init');
           })
@@ -192,7 +192,7 @@
           })
           .on('click', '.m-btn--pill', function(e) {
             console.log(tableApp);
-          });
+          });*/
 
       $('#buttonSearch').click(function () {
         // get value position

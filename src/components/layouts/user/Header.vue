@@ -49,7 +49,7 @@
                     <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
                       <span class="m-menu__item-here"></span>
                       <i class="m-menu__link-icon fa fa-road"></i>
-                      <span class="m-menu__link-text">Quản lý chuyến đi</span>
+                      <span class="m-menu__link-text">Thông tin chuyến đi</span>
                       <i class="m-menu__hor-arrow la la-angle-down"></i>
                       <i class="m-menu__ver-arrow la la-angle-right"></i>
                     </a>
@@ -67,7 +67,7 @@
                           <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right">
                             <span class="m-menu__arrow "></span>
                             <ul class="m-menu__subnav">
-                              <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                              <!--<li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                 <a href="/my-driver" class="m-menu__link ">
                                   <span class="m-menu__link-text">Chủ xe</span>
                                 </a>
@@ -86,7 +86,67 @@
                                 <a href="/my-driver-complete" class="m-menu__link ">
                                   <span class="m-menu__link-text">Chuyến đi hoàn thành</span>
                                 </a>
+                              </li>-->
+
+                              <!-- DRIVER: BEGIN -->
+                              <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
+                                <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Bạn là chủ xe">
+                                  <span class="m-menu__link-text">Chủ xe</span>
+                                  <i class="m-menu__hor-arrow la la-angle-right"></i>
+                                  <i class="m-menu__ver-arrow la la-angle-right"></i>
+                                </a>
+                                <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right">
+                                  <span class="m-menu__arrow "></span>
+                                  <ul class="m-menu__subnav">
+                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                      <a href="/my-driver" class="m-menu__link ">
+                                        <span class="m-menu__link-text">Danh sách chuyến đi</span>
+                                      </a>
+                                    </li>
+                                    <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                                      <a href="/my-hitchhiker-register" class="m-menu__link ">
+                                        <span class="m-menu__link-text">Chuyến đi đã đăng ký</span>
+                                      </a>
+                                    </li>
+                                    <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                                      <a href="/my-driver-complete" class="m-menu__link ">
+                                        <span class="m-menu__link-text">Chuyến đi hoàn thành</span>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </div>
                               </li>
+                              <!-- DRIVER: END -->
+
+                              <!-- PASSENGER: BEGIN -->
+                              <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
+                                <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Bạn là chủ xe">
+                                  <span class="m-menu__link-text">Người đi chung</span>
+                                  <i class="m-menu__hor-arrow la la-angle-right"></i>
+                                  <i class="m-menu__ver-arrow la la-angle-right"></i>
+                                </a>
+                                <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right">
+                                  <span class="m-menu__arrow "></span>
+                                  <ul class="m-menu__subnav">
+                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                      <a href="/my-hitchhiker" class="m-menu__link ">
+                                        <span class="m-menu__link-text">Danh sách chuyến đi</span>
+                                      </a>
+                                    </li>
+                                    <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                                      <a href="/my-driver-register" class="m-menu__link ">
+                                        <span class="m-menu__link-text">Chuyến đi đã đăng ký</span>
+                                      </a>
+                                    </li>
+                                    <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                                      <a href="/my-driver-complete" class="m-menu__link ">
+                                        <span class="m-menu__link-text">Chuyến đi hoàn thành</span>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </li>
+                              <!-- PASSENGER: END -->
                             </ul>
                           </div>
                         </li>
@@ -95,7 +155,7 @@
                         <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
                           <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
                             <i class="m-menu__link-icon fa fa-car"></i>
-                            <span class="m-menu__link-text">Chuyến đi của chủ xe</span>
+                            <span class="m-menu__link-text">Chủ xe đăng tin</span>
                             <i class="m-menu__hor-arrow la la-angle-right"></i>
                             <i class="m-menu__ver-arrow la la-angle-right"></i>
                           </a>
@@ -120,7 +180,7 @@
                         <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
                           <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
                             <i class="m-menu__link-icon fa fa-user-friends"></i>
-                            <span class="m-menu__link-text">Chuyến đi của người đi chung</span>
+                            <span class="m-menu__link-text">Người đi chung đăng tin</span>
                             <i class="m-menu__hor-arrow la la-angle-right"></i>
                             <i class="m-menu__ver-arrow la la-angle-right"></i>
                           </a>

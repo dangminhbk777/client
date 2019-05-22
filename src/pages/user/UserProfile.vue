@@ -142,11 +142,9 @@
       },
       updateInformation: function () {
         let self = this;
-        console.log(self.information);
         self.setDataToFormRequest();
         http.post('/user/update', self.formData)
             .then(response => {
-              console.log(JSON.parse(response.data.metadata));
               toastr.success('Cập nhật thông tin thành công');
               this.formData = new FormData();
             })
