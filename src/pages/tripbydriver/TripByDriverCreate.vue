@@ -2,7 +2,7 @@
   <div class="row">
     <!-- FORM INFORMATION: BEGIN -->
     <div class="col-xl-6" id="information-driver">
-      <div class="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--bordered">
+      <div class="m-portlet m-portlet--brand m-portlet--bordered">
         <div class="m-portlet__head">
           <div class="m-portlet__head-caption">
             <div class="m-portlet__head-title">
@@ -118,9 +118,9 @@
           allowClear: true,
           placeHolder: "Chọn phương tiện",
           options: [
-            { id: '1', text: 'Motorbike' },
-            { id: '2', text: 'Car' },
-            { id: '3', text: 'Passenger Car' }
+            { id: '1', text: 'Xe máy' },
+            { id: '2', text: 'Ô tô' },
+            // { id: '3', text: 'Passenger Car' }
           ],
           selected: null,
         },

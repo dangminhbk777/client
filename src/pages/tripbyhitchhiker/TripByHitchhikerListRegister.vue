@@ -15,7 +15,7 @@
             <ul class="m-portlet__nav">
               <li class="m-portlet__nav-item">
                 <button v-on:click="acceptDriver" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" :disabled="!dataRaw">
-                  Gửi trạng thái
+                  Gửi thông tin
                 </button>
               </li>
             </ul>

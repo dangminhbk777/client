@@ -88,7 +88,7 @@
             field: "avatar",
             title: "Ảnh đại diện",
             sortable: false,
-            width: 200,
+            width: 180,
             textAlign: 'center',
             template: function (data) {
               return '<img style="border: solid 1px darkgrey" src="'+ URL_CALL_API + self.urlImage + data.avatar +'" alt="Image">'

@@ -20,7 +20,7 @@
                   </button>
                 </div>
                 <div class="__show-actions" v-else-if="showButton === '01'">
-                  <a href="#" class="btn btn-warning m-btn m-btn--icon m-btn--wide" v-on:click="showChat">
+                  <a href="#" class="btn btn-outline-info m-btn m-btn--icon" v-on:click="showChat">
                     <span>
                       <i class="fa flaticon-chat-1"></i>
                       <span>Nhắn tin</span>
@@ -31,7 +31,7 @@
                   </button>
                 </div>
                 <div class="__show-actions" v-else-if="showButton === '04'">
-                  <a href="#" class="btn btn-warning m-btn m-btn--icon m-btn--wide" v-on:click="showChat">
+                  <a href="#" class="btn btn-outline-info m-btn m-btn--icon" v-on:click="showChat">
                     <span>
                       <i class="fa flaticon-chat-1"></i>
                       <span>Nhắn tin</span>
@@ -42,7 +42,7 @@
                   </button>
                 </div>
                 <div class="__show-actions" v-else>
-                  <a href="#" class="btn btn-warning m-btn m-btn--icon m-btn--wide" v-on:click="showChat">
+                  <a href="#" class="btn btn-outline-info m-btn m-btn--icon" v-on:click="showChat">
                     <span>
                       <i class="fa flaticon-chat-1"></i>
                       <span>Nhắn tin</span>

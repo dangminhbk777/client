@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-xl-6" id="information-driver">
-        <div class="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--bordered">
+        <div class="m-portlet m-portlet--brand m-portlet--bordered">
           <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
               <div class="m-portlet__head-title">
@@ -23,13 +23,13 @@
               <div class="form-group m-form__group row">
                 <label class="col-4 col-form-label">Số chỗ trống</label>
                 <div class="col-8">
-                  <input class="form-control m-input" type="number" v-model="position.numberSeat">
+                  <input class="form-control m-input" type="number" min="1" v-model="position.numberSeat">
                 </div>
               </div>
               <div class="form-group m-form__group row">
                 <label class="col-4 col-form-label">Giá dự kiến (VND)</label>
                 <div class="col-8">
-                  <input class="form-control m-input" type="number" v-model="position.price">
+                  <input class="form-control m-input" type="number" min="1" v-model="position.price">
                 </div>
               </div>
               <div class="form-group m-form__group row">

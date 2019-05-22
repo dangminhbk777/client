@@ -100,7 +100,7 @@
                                   <ul class="m-menu__subnav">
                                     <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
                                       <a href="/my-driver" class="m-menu__link ">
-                                        <span class="m-menu__link-text">Danh sách chuyến đi</span>
+                                        <span class="m-menu__link-text">Chuyến đi đã đăng</span>
                                       </a>
                                     </li>
                                     <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
@@ -130,7 +130,7 @@
                                   <ul class="m-menu__subnav">
                                     <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
                                       <a href="/my-hitchhiker" class="m-menu__link ">
-                                        <span class="m-menu__link-text">Danh sách chuyến đi</span>
+                                        <span class="m-menu__link-text">Chuyến đi đã đăng</span>
                                       </a>
                                     </li>
                                     <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">

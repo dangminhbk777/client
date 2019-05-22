@@ -110,14 +110,14 @@
             template: function(data) {
               switch(data.typeVehicle) {
                 case "1":
-                  data.typeVehicle = "Motorbike";
+                  data.typeVehicle = "Xe máy";
                   break;
                 case "2":
-                  data.typeVehicle = "Car";
+                  data.typeVehicle = "Ô tô";
                   break;
-                case "3":
-                  data.typeVehicle = "Passenger Car";
-                  break;
+                // case "3":
+                //   data.typeVehicle = "Passenger Car";
+                //   break;
               }
               return data.typeVehicle;
             },

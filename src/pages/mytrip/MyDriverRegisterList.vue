@@ -39,10 +39,10 @@
         mData: null,
         urlRecord: 'trip-by-driver/',
         templateActions: '<a href="urlDetail" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
-            '  <span>Detail</span>\n' +
+            '  <span>Chi tiết</span>\n' +
             '</a>&nbsp;&nbsp;' +
             '<a href="urlDelete" class="btn m-btn--pill m-btn--air btn-danger btn-sm">\n' +
-            '  <span>Delete</span>\n' +
+            '  <span>Xóa</span>\n' +
             '</a>&nbsp;&nbsp;'
       }
     },

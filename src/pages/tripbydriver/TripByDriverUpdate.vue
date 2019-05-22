@@ -416,7 +416,7 @@
   }
   .__btn-clear {
     top: 10px;
-    left: 80%;
+    left: 85%;
     position: absolute;
     display: block;
     z-index: 90;
