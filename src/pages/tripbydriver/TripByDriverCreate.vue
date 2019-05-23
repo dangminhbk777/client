@@ -153,10 +153,11 @@
         http.post('/trip-by-driver/new-trip', this.formData)
             .then(response => {
               self.formData = new FormData();
-              toastr.success('Create trip by driver SUCCESS');
+              toastr.success('Tạo chuyến đi thành công');
             })
             .catch(e => {
               console.error(e);
+              toastr.error('Tạo chuyến đi thất bại');
               self.formData = new FormData();
             });
       },

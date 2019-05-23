@@ -355,23 +355,25 @@
             dataSteps = dataSteps + element.longitude + ',' + element.latitude + ';'
           });
           dataSteps = dataSteps + self.tripDetail.endLongitude + ',' + self.tripDetail.endLatitude;
+          let routeOptimize;
           mapbox.optimizeRoute(dataSteps, function handleResponse(data) {
-            let routeOptimize  = data.waypoints;
+            routeOptimize = data.waypoints;
             routeOptimize.sort(function(point1, point2) {
               return point1.waypoint_index - point2.waypoint_index;
             });
-            /*routeOptimize.forEach(function (element){
-              directions.addWaypoint(self.indexWayPoint, [element.location[0], element.location[1]]);
+            routeOptimize.forEach(function (element){
+              directions.addWaypoint(self.indexWayPoint, element.location);
               self.indexWayPoint = self.indexWayPoint + 1
-            });*/
+            });
           });
 
-          self.steps.forEach(function (element) {
-            directions.addWaypoint(self.indexWayPoint, [element.longitude, element.latitude]);
-            self.indexWayPoint = self.indexWayPoint + 1;
-          });
+          // self.steps.forEach(function (element) {
+          //   if (self.indexWayPoint !== 0 && self.indexWayPoint !== self.steps.length - 1) {
+          //     directions.addWaypoint(self.indexWayPoint, [element.longitude, element.latitude]);
+          //   }
+          //   self.indexWayPoint = self.indexWayPoint + 1;
+          // });
 
-          // directions.addWaypoint(0, point1);
           directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
           directions.on('destination', function (e) {
             if (e !=  null) {
