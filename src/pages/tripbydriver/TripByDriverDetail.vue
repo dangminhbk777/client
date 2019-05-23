@@ -180,6 +180,7 @@
 <script>
   import axios from 'axios';
   import http from '../../services/http-common.js';
+  import mapbox from '../../services/mapbox-common.js';
   import toastr from '../../services/toastr.js';
   import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
   import SlideShow from '../../components/other/SlideShow.vue';
@@ -348,6 +349,23 @@
           directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
 
           //set route step
+          let dataSteps;
+          dataSteps = self.tripDetail.startLongitude + ',' + self.tripDetail.startLatitude + ';';
+          self.steps.forEach(function (element) {
+            dataSteps = dataSteps + element.longitude + ',' + element.latitude + ';'
+          });
+          dataSteps = dataSteps + self.tripDetail.endLongitude + ',' + self.tripDetail.endLatitude;
+          mapbox.optimizeRoute(dataSteps, function handleResponse(data) {
+            let routeOptimize  = data.waypoints;
+            routeOptimize.sort(function(point1, point2) {
+              return point1.waypoint_index - point2.waypoint_index;
+            });
+            /*routeOptimize.forEach(function (element){
+              directions.addWaypoint(self.indexWayPoint, [element.location[0], element.location[1]]);
+              self.indexWayPoint = self.indexWayPoint + 1
+            });*/
+          });
+
           self.steps.forEach(function (element) {
             directions.addWaypoint(self.indexWayPoint, [element.longitude, element.latitude]);
             self.indexWayPoint = self.indexWayPoint + 1;
