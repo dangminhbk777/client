@@ -428,9 +428,9 @@
         $('#addClass').click();
         let userConversation = {
           email: 'xx',
-          image: 'xx',
-          userId: self.userDriver.userId,
-          username: 'xx'
+          image: self.tripDetail.avatar,
+          userId: self.tripDetail.userId,
+          username: self.tripDetail.username
         };
         eventBus.$emit('addUserConversation', JSON.stringify(userConversation));
       }

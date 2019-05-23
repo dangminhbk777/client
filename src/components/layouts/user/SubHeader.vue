@@ -13,13 +13,13 @@
           <li class="m-nav__separator">-</li>
           <li class="m-nav__item">
             <a href="" class="m-nav__link">
-              <span class="m-nav__link-text">Dashboard</span>
+              <span class="m-nav__link-text">Hỗ trợ</span>
             </a>
           </li>
           <li class="m-nav__separator">-</li>
           <li class="m-nav__item">
             <a href="" class="m-nav__link">
-              <span class="m-nav__link-text">Generate Reports</span>
+              <span class="m-nav__link-text">Đi chung xe</span>
             </a>
           </li>
         </ul>

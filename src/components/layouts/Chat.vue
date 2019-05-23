@@ -194,7 +194,6 @@
         let self = this;
         http.get('/message/user-conversation')
             .then(response => {
-              console.log(JSON.parse(response.data.metadata));
               self.userConversations = JSON.parse(response.data.metadata);
               self.userConversations.forEach(function (element, index) {
                 if (!element.image.includes(URL_AVATAR)) {
@@ -258,13 +257,13 @@
         self.conversations.push(messageShow);
         let messageSave = {
           userIdSend: localStorage.getItem('userId'),
-          userIdReceive: this.params.idReceive,
+          userIdReceive: self.params.idReceive,
           content: content
         };
         let authorization = localStorage.getItem("authorization");
         let headers = {};
         headers["authorization"] = authorization;
-        let url = '/user/' + this.params.idReceive + '/';
+        let url = '/user/' + self.params.idReceive + '/';
         this.stompClient.send(
             url,
             {headers},
@@ -280,8 +279,17 @@
     created() {
       let self = this;
       eventBus.$on('addUserConversation', function (data) {
-        console.log(self.userConversations);
-        self.userConversations.push(JSON.parse(data));
+        let dataParse = JSON.parse(data);
+        self.params.idReceive = dataParse.userId;
+        let notExist = true;
+        self.userConversations.forEach(function (element) {
+          if (element.userId === dataParse.userId) {
+            notExist = false;
+          }
+        });
+        if (notExist) {
+          self.userConversations.push(dataParse);
+        }
         self.userConversations.forEach(function (element, index) {
           if (!element.image.includes(URL_AVATAR)) {
             element.image = URL_AVATAR + element.image;
@@ -289,7 +297,6 @@
           element.style = 'position:absolute;top:0;left:0;width:138px;height:50px;' +
               'transform:matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, ' + index*50 + ', 0, 1);';
         });
-        console.log(data);
       })
     }
   }
