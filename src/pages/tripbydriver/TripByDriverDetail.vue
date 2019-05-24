@@ -346,7 +346,6 @@
                   });
             }
           });
-          directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
 
           //set route step
           let dataSteps;
@@ -361,20 +360,14 @@
             routeOptimize.sort(function(point1, point2) {
               return point1.waypoint_index - point2.waypoint_index;
             });
+            directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
             routeOptimize.forEach(function (element){
               directions.addWaypoint(self.indexWayPoint, element.location);
               self.indexWayPoint = self.indexWayPoint + 1
             });
+            directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
           });
 
-          // self.steps.forEach(function (element) {
-          //   if (self.indexWayPoint !== 0 && self.indexWayPoint !== self.steps.length - 1) {
-          //     directions.addWaypoint(self.indexWayPoint, [element.longitude, element.latitude]);
-          //   }
-          //   self.indexWayPoint = self.indexWayPoint + 1;
-          // });
-
-          directions.setDestination([self.tripDetail.endLongitude, self.tripDetail.endLatitude]);
           directions.on('destination', function (e) {
             if (e !=  null) {
               if (directions.getDestination().geometry.coordinates[0].toString() !== self.tripDetail.endLongitude
@@ -432,9 +425,17 @@
       },
       getRouteStep: function() {
         let self = this;
-        http.get('/trip-by-driver/' + this.driverId + '/route-step')
+        http.get('/trip-by-driver/' + this.driverId + '/route-step-accept')
             .then(response => {
-              self.steps = JSON.parse(JSON.parse(response.data.metadata).steps);
+              // self.steps = JSON.parse(JSON.parse(response.data.metadata).steps);
+              let allRouteStep = JSON.parse(response.data.metadata);
+              let steps = [];
+              allRouteStep.forEach(function (element) {
+                JSON.parse(element.steps).forEach(function (e) {
+                  steps.push(e);
+                });
+              });
+              self.steps = steps;
             })
             .catch(e => {
               console.error(e);

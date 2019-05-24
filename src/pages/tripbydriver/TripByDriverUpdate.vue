@@ -288,7 +288,7 @@
           });
           self.directions.setOrigin([self.tripDetail.startLongitude, self.tripDetail.startLatitude]);
 
-          //set route step
+          // Set route step your trip
           self.routeStep.forEach(function (element) {
             self.map.addLayer({
               id: 'step' + self.indexWayPoint,
@@ -351,8 +351,10 @@
         let self = this;
         http.get('/trip-by-driver/' + this.driverId + '/route-step')
             .then(response => {
-              self.steps = JSON.parse(JSON.parse(response.data.metadata).steps);
-              self.routeStep = self.routeStep.concat(self.steps);
+              if (response.data.metadata) {
+                self.steps = JSON.parse(JSON.parse(response.data.metadata).steps);
+                self.routeStep = self.routeStep.concat(self.steps);
+              }
             })
             .catch(e => {
               console.error(e);
@@ -397,7 +399,6 @@
     mounted() {
       this.getRouteStep();
       this.getTripDetail();
-      mapbox.optimizeRoute();
     }
   }
 </script>
