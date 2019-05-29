@@ -433,10 +433,22 @@
               console.error(e);
             });
       },
+      getRouteStepa: function() {
+        let self = this;
+        http.get('/trip-by-driver/' + this.driverId + '/route-step')
+            .then(response => {
+              console.log(response.data.metadata);
+              // self.steps = JSON.parse(JSON.parse(response.data.metadata).steps);
+            })
+            .catch(e => {
+              console.error(e);
+            });
+      },
       getRouteStep: function() {
         let self = this;
         http.get('/trip-by-driver/' + this.driverId + '/route-step-accept')
             .then(response => {
+              console.log(response.data.metadata);
               // self.steps = JSON.parse(JSON.parse(response.data.metadata).steps);
               let allRouteStep = JSON.parse(response.data.metadata);
               let steps = [];
@@ -471,6 +483,7 @@
       }
     },
     mounted() {
+      this.getRouteStepa();
       this.getRouteStep();
       this.getTripDetail();
     }
