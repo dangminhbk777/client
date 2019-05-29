@@ -108,6 +108,7 @@
                     <span class="m-widget4__text">
                         <span class="text-dark">Xếp hạng</span>&nbsp;&nbsp;{{tripDetail.star}}
                     </span>
+                    <a href="javascript:;" v-on:click="showRating" style="float: right">Xem các đánh giá</a>
                   </div>
                 </div>
                 <div class="m-widget4__item">
@@ -174,6 +175,12 @@
         <!-- BODY: END -->
       </div>
     </div>
+    <modal-app v-if="driverId"
+        title="DANH SÁCH ĐÁNH GIÁ"
+        :showModal="showModal"
+        :driverId="driverId"
+        v-on:hideModal="showModal = $event">
+    </modal-app>
   </div>
 </template>
 
@@ -185,11 +192,13 @@
   import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
   import SlideShow from '../../components/other/SlideShow.vue';
   import {eventBus} from "../../main";
+  import Modal from '../../components/modals/ModalText.vue';
 
   export default {
     name: "TripByDriverDetail",
     components: {
-      "slide-show": SlideShow
+      "slide-show": SlideShow,
+      'modal-app': Modal
     },
     props: {
       driverId: {
@@ -237,7 +246,8 @@
         position: {
           longitude: null,
           latitude: null
-        }
+        },
+        showModal: false
       }
     },
     methods: {
@@ -443,6 +453,10 @@
       },
       redirectListRegister: function() {
         window.location.href = "/trip-by-driver/" + this.driverId + "/list-register";
+      },
+      showRating: function () {
+        let self = this;
+        self.showModal = true;
       },
       showChat: function () {
         let self = this;

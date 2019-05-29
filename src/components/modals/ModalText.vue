@@ -1,35 +1,40 @@
 <template>
   <div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" v-on:click="show"> Launch Modal</button>
-      <!--begin::Modal-->
-      <div class="modal fade" v-bind:class="showClass" v-bind:style="showStyle" id="m_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="hide">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>{{content}}</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="hide">
-                Close
+    <!--begin::Modal-->
+    <div class="modal fade" v-bind:class="classModal" v-bind:style="styleModal" id="m_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="hide">
+                <span aria-hidden="true">&times;</span>
               </button>
-              <button type="button" class="btn btn-primary" v-on:click="confirm">
-                Save changes
-              </button>
+          </div>
+          <div class="modal-body">
+            <div class="m-scrollable" data-scrollbar-shown="true" data-scrollable="true" data-height="200">
+              <div v-for="rating in dataRating" style="padding: 10px">
+                <span class="font-weight-bold">{{rating.username}}</span>&nbsp;
+                <i v-for="star in rating.star" class="la la-star" style="color: darkgrey"></i>
+                <br>
+                <span>{{rating.comment}}</span>
+              </div>
             </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="hide">
+              Close
+            </button>
           </div>
         </div>
       </div>
-      <!--end::Modal-->
+    </div>
+    <!--end::Modal-->
   </div>
 </template>
 
 <script>
+  import http from '../../services/http-common.js';
+
   export default {
     name: "app-modal",
     props: {
@@ -48,26 +53,50 @@
       method: {
         type: String,
         default: 'GET'
-      }
+      },
+      showModal: {
+        type: Boolean,
+        default: false
+      },
     },
     data() {
       return {
-        // variable that shows/hides modal
-        showClass: null,
-        showStyle: 'display: none',
+        dataRating: null
       }
     },
     methods: {
-      show() {
-        this.showClass = 'show';
-        this.showStyle = 'display: block';
-      },
       hide() {
-        this.showClass = null;
-        this.showStyle = 'display: none';
+        let self = this;
+        self.$emit('hideModal', false);
       },
-      confirm() {
-        this.hide();
+      getRating: function () {
+        let self = this;
+        http.get('/user/' + 1 + '/rating')
+            .then(response => {
+              self.dataRating = JSON.parse(response.data.metadata);
+            })
+            .catch(e => {
+              console.error(e);
+            });
+      },
+    },
+    mounted() {
+      this.getRating();
+    },
+    computed: {
+      classModal: function () {
+        let self = this;
+        if (self.showModal) {
+          return 'show';
+        }
+        return null;
+      },
+      styleModal: function () {
+        let self = this;
+        if (self.showModal) {
+          return 'display: block';
+        }
+        return 'display: none';
       }
     }
   }
