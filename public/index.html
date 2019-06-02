@@ -192,6 +192,12 @@
         $("#chat-close-button").click(function () {
           $('#_shopee-chat-container').removeClass('expanded');
         });
+
+        $.getJSON("https://ipinfo.io/", onLocationGot);
+        function onLocationGot(info) {
+          let position = info.loc.split(",");
+          console.log(position);
+        }
       });
     </script>
     <style>

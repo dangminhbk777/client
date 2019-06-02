@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="form-group m-form__group row">
-              <label class="col-4 col-form-label">Số chỗ trống</label>
+              <label class="col-4 col-form-label">Số chỗ còn trống</label>
               <div class="col-8">
                 <input class="form-control m-input" type="number" min="1" v-model="numberSeat">
               </div>
@@ -154,6 +154,9 @@
             .then(response => {
               self.formData = new FormData();
               toastr.success('Tạo chuyến đi thành công');
+              setTimeout(function() {
+                window.location.href = "/my-driver";
+              }, 2000);
             })
             .catch(e => {
               console.error(e);

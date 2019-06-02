@@ -10,18 +10,15 @@
                 <span aria-hidden="true">&times;</span>
               </button>
           </div>
-          <div class="modal-body">
-            <div v-if="dataRating.length" class="m-scrollable" data-scrollbar-shown="true" data-scrollable="true" data-height="200">
-              <div v-for="rating in dataRating" style="padding: 10px">
-                <span class="font-weight-bold">{{rating.username}}</span>&nbsp;
-                <i v-for="star in rating.star" class="la la-star" style="color: darkgrey"></i>
-                <br>
-                <span>{{rating.comment}}</span>
+          <div class="modal-body" style="width: 400px">
+            <!-- MAP: BEGIN -->
+            <div id="information-map2">
+              <div class="flex-parent relative scroll-hidden">
+                <div id="map2" class="flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-mm mapboxgl-map" >
+                </div>
               </div>
             </div>
-            <div v-else>
-              <span style="color: darkgrey">Chưa có đánh giá</span>
-            </div>
+            <!-- MAP: END -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="hide">
@@ -37,6 +34,7 @@
 
 <script>
   import http from '../../services/http-common.js';
+  import { MAPBOX_KEY } from '../../services/variables.js';
 
   export default {
     name: "app-modal",
@@ -71,24 +69,24 @@
       hide() {
         let self = this;
         self.$emit('hideModal', false);
-      },
-      getRating: function () {
-        let self = this;
-        http.get('/user/' + 1 + '/rating')
-            .then(response => {
-              self.dataRating = JSON.parse(response.data.metadata);
-              console.log(self.dataRating);
-            })
-            .catch(e => {
-              console.error(e);
-            });
-      },
+      }
+    },
+    mounted() {
+      mapboxgl.accessToken = MAPBOX_KEY;
+      let map = new mapboxgl.Map({
+        container: 'map2',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [105.859979061677,21.007181634883864],
+        zoom: 12
+      });
+      window.onresize = function() {
+        map.resize();
+      };
     },
     computed: {
       classModal: function () {
         let self = this;
         if (self.showModal) {
-          self.getRating();
           return 'show';
         }
         return null;
@@ -105,4 +103,9 @@
 </script>
 
 <style scoped>
+  #map2, #information-map2 {
+    max-width: 500px;
+    min-height: 200px;
+    max-height: 300px;
+  }
 </style>

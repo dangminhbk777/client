@@ -124,7 +124,7 @@
           },
           {
             field: "numberSeat",
-            title: "Số chỗ trống",
+            title: "Số chỗ còn trống",
             textAlign: 'center'
           },
           {

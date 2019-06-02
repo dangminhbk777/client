@@ -43,7 +43,7 @@
         '<a href="urlUpdate" class="btn m-btn--pill m-btn--air btn-warning btn-sm">\n' +
         '  <span>Cập nhật</span>\n' +
         '</a>&nbsp;&nbsp;' +
-        '<a href="urlDelete" class="btn m-btn--pill m-btn--air btn-danger btn-sm">\n' +
+        '<a href="urlDelete" driver-id="driverId" class="btn m-btn--pill m-btn--air btn-danger btn-sm ___btn-delete">\n' +
         '  <span>Xóa</span>\n' +
         '</a>&nbsp;&nbsp;'
       }

@@ -4,6 +4,8 @@
 
 <script>
   import {URL_WEP_APP} from '../../services/variables.js';
+  import toastr from '../../services/toastr.js';
+  import http from '../../services/http-common.js';
 
   export default {
     name: "TableMyDriver",
@@ -35,6 +37,16 @@
         let self = this;
         self.$emit('showModal', true);
         self.$emit('driverId', id);
+      },
+      deleteAction: function (id) {
+        http.get('/trip-by-driver/delete-trip/' + id)
+            .then(response => {
+              console.log(response);
+              toastr.success("Chuyến đi đã bị hủy bỏ");
+            })
+            .catch(e => {
+              console.error(e);
+            });
       }
     },
     mounted() {
@@ -137,7 +149,7 @@
           },
           {
             field: "numberSeat",
-            title: "Số chỗ trống",
+            title: "Số chỗ còn trống",
             textAlign: 'center'
           },
           {
@@ -166,11 +178,11 @@
             template: function (data) {
               let urlDetail = URL_WEP_APP + self.urlRecord + data.id;
               let urlUpdate = URL_WEP_APP + self.urlRecord + data.id + '/update';
-              let urlDelete = URL_WEP_APP + self.urlRecord + data.id + '/delete';
+              // let urlDelete = URL_WEP_APP + self.urlRecord + data.id + '/delete';
               return self.templateActions
                   .replace('urlDetail', urlDetail)
                   .replace('urlUpdate', urlUpdate)
-                  .replace('urlDelete', urlDelete)
+                  .replace('urlDelete', "javascript:;")
                   .replace('driverId', data.id);
             }
           }
@@ -180,6 +192,14 @@
         let element = $(this);
         let id = element.attr("driver-id");
         self.updateAction(id);
+      });
+      tableApp.on('click', '.___btn-delete', function(e) {
+        let element = $(this);
+        let id = element.attr("driver-id");
+        self.deleteAction(id);
+        setTimeout(function() {
+          location.reload();
+          }, 2000);
       });
     }
   }

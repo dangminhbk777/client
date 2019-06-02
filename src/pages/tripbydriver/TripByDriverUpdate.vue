@@ -71,7 +71,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Xếp hạng</span>&nbsp;&nbsp;{{tripDetail.star}}
+                        <span class="text-dark">Đánh giá</span>&nbsp;&nbsp;{{tripDetail.star}}
                     </span>
                   </div>
                 </div>
@@ -83,7 +83,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Số chỗ trống</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
+                        <span class="text-dark">Số chỗ còn trống</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
                     </span>
                   </div>
                 </div>

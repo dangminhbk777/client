@@ -117,7 +117,7 @@
         http.post('/user/rating', JSON.stringify(userInformation))
             .then(response => {
               self.information = JSON.parse(response.data.metadata);
-              toastr.success('Your review has been submitted. Thank you');
+              toastr.success('Đánh giá của bạn đã được gửi. Cảm ơn bạn');
             })
             .catch(e => {
               console.error(e);

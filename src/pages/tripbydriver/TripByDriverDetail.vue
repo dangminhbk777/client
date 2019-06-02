@@ -106,8 +106,8 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Xếp hạng</span>&nbsp;&nbsp;{{tripDetail.star}}
-                    </span>
+                        <span class="text-dark">Đánh giá</span>&nbsp;&nbsp;{{tripDetail.star}}
+                    </span>ư
                     <a href="javascript:;" v-on:click="showRating" style="float: right">Xem các đánh giá</a>
                   </div>
                 </div>
@@ -394,7 +394,7 @@
       },
       registerTrip: function () {
         let self = this;
-        http.post("trip-by-driver/register-with-driver/" + this.driverId, self.position)
+        http.post("trip-by-driver/register-with-driver/" + self.driverId, self.position)
             .then(response => {
               toastr.success('Gửi đăng ký thành công');
               this.showButton = "02";
@@ -406,7 +406,7 @@
       },
       getTripDetail: function () {
         let self = this;
-        http.get('/trip-by-driver/status/' + this.driverId)
+        http.get('/trip-by-driver/status/' + self.driverId)
             .then(response => {
               self.userDriver = JSON.parse(response.data.metadata);
               let userDriver = JSON.parse(response.data.metadata);
@@ -423,10 +423,10 @@
             .catch(e => {
               console.error(e);
             });
-        http.get('/trip-by-driver/' + this.driverId)
+        http.get('/trip-by-driver/' + self.driverId)
             .then(response => {
               self.tripDetail = JSON.parse(response.data.metadata);
-              self.tripDetail.images = JSON.parse(this.tripDetail.images);
+              self.tripDetail.images = JSON.parse(self.tripDetail.images);
               self.initMap();
             })
             .catch(e => {
@@ -435,15 +435,17 @@
       },
       getRouteStep: function() {
         let self = this;
-        http.get('/trip-by-driver/' + this.driverId + '/route-step-accept')
+        http.get('/trip-by-driver/' + self.driverId + '/route-step-accept')
             .then(response => {
               let allRouteStep = JSON.parse(response.data.metadata);
               let steps = [];
-              allRouteStep.forEach(function (element) {
-                JSON.parse(element.steps).forEach(function (e) {
-                  steps.push(e);
+              if (allRouteStep != null) {
+                allRouteStep.forEach(function (element) {
+                  JSON.parse(element.steps).forEach(function (e) {
+                    steps.push(e);
+                  });
                 });
-              });
+              }
               self.steps = steps;
             })
             .catch(e => {

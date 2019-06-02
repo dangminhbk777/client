@@ -19,7 +19,8 @@
     },
     data() {
       return {
-        dataMap: new Map()
+        dataMap: new Map(),
+        warningFirst: true
       }
     },
     mounted() {
@@ -81,14 +82,14 @@
             field: "username",
             title: "Tên người dùng",
             sortable: false,
-            width: 100,
+            width: 120,
             textAlign: 'left',
           },
           {
             field: "avatar",
             title: "Ảnh đại diện",
             sortable: false,
-            width: 180,
+            width: 160,
             textAlign: 'center',
             template: function (data) {
               return '<img style="border: solid 1px darkgrey" src="'+ URL_CALL_API + self.urlImage + data.avatar +'" alt="Image">'
@@ -118,7 +119,7 @@
           },
           {
             field: "star",
-            title: "Xếp hạng",
+            title: "Đánh giá",
             sortable: false,
             width: 100,
             textAlign: 'center',
@@ -144,7 +145,7 @@
                   '  <button data-uh-id="'+ dataId +'" class="m-badge--wide btn btn-success btn-sm ___btn-accept"'+ isDisableAccept +'>\n' +
                   '    <span>Chấp nhận</span>\n' +
                   '  </button>\n' +
-                  '  <button data-uh-id="'+ dataId +'" class="m-badge--wide btn btn btn-warning btn-sm ___btn-not-accept"'+ isDisableNotAccept + '>\n' +
+                  '  <button data-uh-id="'+ dataId +'" title="Khi hủy người đi chung sẽ bị trừ điểm đánh giá" class="m-badge--wide btn btn btn-warning btn-sm ___btn-not-accept"'+ isDisableNotAccept + '>\n' +
                   '    <span>Không chấp nhận</span>\n' /*+
                   '  </button>\n' +
                   '  <button data-uh-id="'+ dataId +'" class="m-badge--wide btn btn-danger btn-sm ___btn-cancel"'+ isDisableCancel + '>\n' +
@@ -168,6 +169,10 @@
       tableApp.on('click', '.___btn-not-accept', function(e) {
         let elementBetween = $(this);
         let id = elementBetween.attr("data-uh-id");
+        if (self.warningFirst) {
+          self.warningFirst = false;
+          alert("Huỷ xác nhận sẽ bị trừ điểm đánh giá");
+        }
         self.dataMap.set(id, "01");
         self.$emit('dataMapUpdate', self.dataMap);
         elementBetween.attr("disabled", true);
