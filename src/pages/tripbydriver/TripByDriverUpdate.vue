@@ -35,7 +35,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                      <span class="text-dark">ID</span>&nbsp;&nbsp;{{tripDetail.driverId}}
+                      <span class="text-dark">Mã chuyến đi</span>&nbsp;&nbsp;{{tripDetail.driverId}}
                     </span>
                   </div>
                 </div>
@@ -49,6 +49,29 @@
                     <span class="m-widget4__text">
                       <span class="text-dark">Tên tài xế</span>&nbsp;&nbsp;{{tripDetail.username}}
                     </span>
+                  </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-calendar-with-a-clock-time-tools m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                      <div class="m-form__group row">
+                        <label class="col-6 col-form-label text-dark">Thời gian xuất phát</label>
+                        <div class="col-6">
+                          <input class="form-control m-input" type="datetime-local" v-model="tripDetail.time">
+                        </div>
+                      </div>
+                    </span>
+                  </div>
+                  <div class="m-widget4__ext" style="min-width: 60px !important;">
+                    <!--<span class="m-widget4__icon">
+                      <i class="flaticon-calendar-with-a-clock-time-tools m&#45;&#45;font-brand"></i>
+                    </span>-->
+                    <a href="javascript:;" class="">Chỉnh sửa</a>
                   </div>
                 </div>
                 <div class="m-widget4__item">
@@ -71,7 +94,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Đánh giá</span>&nbsp;&nbsp;{{tripDetail.star}}
+                        <span class="text-dark">Đánh giá</span>&nbsp;&nbsp;{{tripDetail.star}} / 5
                     </span>
                   </div>
                 </div>
@@ -83,7 +106,12 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Số chỗ còn trống</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
+                      <div class="m-form__group row">
+                        <label class="col-6 col-form-label text-dark">Số chỗ còn trống</label>
+                        <div class="col-6">
+                          <input class="form-control m-input" type="number" min="0" v-model="tripDetail.numberSeat">
+                        </div>
+                      </div>
                     </span>
                   </div>
                 </div>
@@ -341,6 +369,7 @@
             .then(response => {
               self.tripDetail = JSON.parse(response.data.metadata);
               self.tripDetail.images = JSON.parse(this.tripDetail.images);
+              console.log(self.tripDetail);
               self.initMap();
             })
             .catch(e => {
