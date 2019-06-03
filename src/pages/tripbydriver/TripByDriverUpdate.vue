@@ -59,6 +59,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
+                      <span class="text-dark">Thời gian xuất phát</span>&nbsp;&nbsp;{{tripDetail.time}}
                       <div class="m-form__group row">
                         <label class="col-6 col-form-label text-dark">Thời gian xuất phát</label>
                         <div class="col-6">
@@ -68,9 +69,6 @@
                     </span>
                   </div>
                   <div class="m-widget4__ext" style="min-width: 60px !important;">
-                    <!--<span class="m-widget4__icon">
-                      <i class="flaticon-calendar-with-a-clock-time-tools m&#45;&#45;font-brand"></i>
-                    </span>-->
                     <a href="javascript:;" class="">Chỉnh sửa</a>
                   </div>
                 </div>
@@ -82,7 +80,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Số điện thoại</span>&nbsp;&nbsp;{{tripDetail.phone}}
+                      <span class="text-dark">Số điện thoại</span>&nbsp;&nbsp;{{tripDetail.phone}}
                     </span>
                   </div>
                 </div>
@@ -94,7 +92,8 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Đánh giá</span>&nbsp;&nbsp;{{tripDetail.star}} / 5
+                      <span class="text-dark">Đánh giá</span>&nbsp;&nbsp;{{tripDetail.star}} / 5
+                      <i class="flaticon-star" style="color: darkgrey;"></i>
                     </span>
                   </div>
                 </div>
@@ -106,6 +105,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
+                      <span class="text-dark">Số chỗ còn trống</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
                       <div class="m-form__group row">
                         <label class="col-6 col-form-label text-dark">Số chỗ còn trống</label>
                         <div class="col-6">
@@ -113,6 +113,9 @@
                         </div>
                       </div>
                     </span>
+                  </div>
+                  <div class="m-widget4__ext" style="min-width: 60px !important;">
+                    <a href="javascript:;" class="">Chỉnh sửa</a>
                   </div>
                 </div>
                 <div class="m-widget4__item">
@@ -140,6 +143,9 @@
                     <span class="m-widget4__text">
                         {{tripDetail.note}}
                     </span>
+                  </div>
+                  <div class="m-widget4__ext" style="min-width: 60px !important;">
+                    <a href="javascript:;" class="">Chỉnh sửa</a>
                   </div>
                 </div>
               </div>
@@ -450,5 +456,10 @@
     position: absolute;
     display: block;
     z-index: 90;
+  }
+  .flaticon-star:before {
+    content: "\f1b3";
+    width: 10px !important;
+    height: 10px !important;
   }
 </style>
