@@ -11,6 +11,10 @@
               </button>
           </div>
           <div class="modal-body" style="width: 400px">
+            <div class="m-form__label">
+              <label class="m-label m-label--single">Bán kính</label>
+              <input type="number" class="form-control" id="radius" style="max-width: 90px"/>
+            </div>
             <!-- MAP: BEGIN -->
             <div id="information-map2">
               <div class="flex-parent relative scroll-hidden">

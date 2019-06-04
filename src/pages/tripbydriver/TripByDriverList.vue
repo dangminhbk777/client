@@ -33,7 +33,7 @@
                             <span class="m-input-icon__icon m-input-icon__icon&#45;&#45;left">
                               <span><i class="la la-search"></i></span>
                             </span>-->
-                            <button class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
+                            <button v-on:click="showSearchAdvance" class="btn btn-info m-btn m-btn--custom">
                               Chọn khu vực
                             </button>
                           </div>
@@ -71,10 +71,6 @@
                   <div class="row align-items-center __padding-top-10">
                     <div class="col-xl-10 order-2 order-xl-1 m--align-right">
                       <div class="m-form__group m-form__group--inline">
-                        <!--<div class="m-form__label">
-                          <label class="m-label m-label&#45;&#45;single">Bán kính</label>
-                        </div>-->
-                        <!--<input type="number" class="form-control" id="radius" style="max-width: 90px"/>-->
                         <div class="m-form__label">
                           <label class="m-label m-label--single">Từ giá</label>
                         </div>
@@ -147,6 +143,11 @@
         url: "/data-tables/trip-by-driver",
         urlRecord: "trip-by-driver/",
         showModal: false
+      }
+    },
+    methods: {
+      showSearchAdvance: function () {
+        this.showModal = true;
       }
     }
   }
