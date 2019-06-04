@@ -14,8 +14,14 @@
           <div class="m-portlet__head-tools">
             <ul class="m-portlet__nav">
               <li class="m-portlet__nav-item">
-                <button v-on:click="updateTrip" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                  Cập nhật thông tin
+                <button v-if="!editFlag" v-on:click="actionUpdate" class="m-portlet__nav-link btn btn-info m-btn m-btn--custom">
+                  Chỉnh sửa
+                </button>
+                <button v-if="editFlag" v-on:click="actionCancel" class="m-portlet__nav-link btn btn-warning m-btn m-btn--custom" style="margin-right: 5px">
+                  Hủy bỏ
+                </button>
+                <button v-if="editFlag" v-on:click="updateTrip" class="m-portlet__nav-link btn btn-brand m-btn m-btn--custom">
+                  Gửi thông tin
                 </button>
               </li>
             </ul>
@@ -59,17 +65,16 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                      <span class="text-dark">Thời gian xuất phát</span>&nbsp;&nbsp;{{tripDetail.time}}
-                      <div class="m-form__group row">
+                      <div v-if="!editFlag">
+                        <span class="text-dark">Thời gian xuất phát</span>&nbsp;&nbsp;{{timeFake}}
+                      </div>
+                      <div v-else class="m-form__group row">
                         <label class="col-6 col-form-label text-dark">Thời gian xuất phát</label>
                         <div class="col-6">
                           <input class="form-control m-input" type="datetime-local" v-model="tripDetail.time">
                         </div>
                       </div>
                     </span>
-                  </div>
-                  <div class="m-widget4__ext" style="min-width: 60px !important;">
-                    <a href="javascript:;" class="">Chỉnh sửa</a>
                   </div>
                 </div>
                 <div class="m-widget4__item">
@@ -105,17 +110,16 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                      <span class="text-dark">Số chỗ còn trống</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
-                      <div class="m-form__group row">
+                      <div v-if="!editFlag">
+                        <span class="text-dark">Số chỗ còn trống</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
+                      </div>
+                      <div v-else class="m-form__group row">
                         <label class="col-6 col-form-label text-dark">Số chỗ còn trống</label>
                         <div class="col-6">
                           <input class="form-control m-input" type="number" min="0" v-model="tripDetail.numberSeat">
                         </div>
                       </div>
                     </span>
-                  </div>
-                  <div class="m-widget4__ext" style="min-width: 60px !important;">
-                    <a href="javascript:;" class="">Chỉnh sửa</a>
                   </div>
                 </div>
                 <div class="m-widget4__item">
@@ -126,7 +130,15 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
+                      <div v-if="!editFlag">
                         <span class="text-dark">Giá</span>&nbsp;&nbsp;{{tripDetail.price}}.000 (VNĐ)
+                      </div>
+                      <div v-else class="m-form__group row">
+                        <label class="col-6 col-form-label text-dark">Giá (VNĐ)</label>
+                        <div class="col-6">
+                          <input class="form-control m-input" type="number" min="0" v-model="tripDetail.price">
+                        </div>
+                      </div>
                     </span>
                   </div>
                 </div>
@@ -143,9 +155,6 @@
                     <span class="m-widget4__text">
                         {{tripDetail.note}}
                     </span>
-                  </div>
-                  <div class="m-widget4__ext" style="min-width: 60px !important;">
-                    <a href="javascript:;" class="">Chỉnh sửa</a>
                   </div>
                 </div>
               </div>
@@ -181,7 +190,6 @@
 <script>
   import axios from 'axios';
   import http from '../../services/http-common.js';
-  import mapbox from '../../services/mapbox-common.js';
   import toastr from '../../services/toastr.js';
   import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
   import SlideShow from '../../components/other/SlideShow.vue';
@@ -203,6 +211,8 @@
     },
     data() {
       return {
+        editFlag: false,
+        timeFake: null,
         tripDetail: {
           userId: null,
           username: null,
@@ -225,6 +235,7 @@
           isSubmitter: null,
           status: null
         },
+        dataBackup: null,
         routeStep: [],
         //urlPageListRegister:  'localhost:4200/trip-by-driver/' + this.driverId + "/list-register",
         indexWayPoint: 0,
@@ -375,7 +386,8 @@
             .then(response => {
               self.tripDetail = JSON.parse(response.data.metadata);
               self.tripDetail.images = JSON.parse(this.tripDetail.images);
-              console.log(self.tripDetail);
+              self.setupTime();
+              self.dataBackup = self.copyObject(self.tripDetail);
               self.initMap();
             })
             .catch(e => {
@@ -411,24 +423,63 @@
         self.indexWayPoint = 0;
         self.routeStep = [];
       },
+      actionUpdate: function() {
+        let self = this;
+        self.editFlag = true;
+      },
+      actionCancel: function () {
+        let self = this;
+        self.editFlag = false;
+        self.tripDetail = self.dataBackup;
+      },
       updateTrip: function () {
         let self = this;
         let requestBody = {
           driverId: self.driverId,
-          time: null,
-          numberSeat: null,
-          price: null,
+          time: self.tripDetail.time,
+          numberSeat: self.tripDetail.numberSeat,
+          price: self.tripDetail.price,
           note: null,
           routeStep: JSON.stringify(self.routeStep)
         };
         http.post('/trip-by-driver/update-trip', requestBody)
             .then(response => {
               toastr.success('Cập nhật thông tin chuyến đi thành công');
+              self.editFlag = false;
+              self.dataBackup = self.copyObject(self.tripDetail);
+              self.setupTime();
             })
             .catch(e => {
               console.error(e);
               toastr.error('Cập nhật thông tin chuyến đi thất bại');
             });
+      },
+      setupTime: function() {
+        // setup current time
+        let self = this;
+        let timeStart = new Date(self.tripDetail.time);
+        let year = timeStart.getFullYear();
+        let month = timeStart.getMonth() + 1;
+        if (month < 10) {
+          month = '0' + month;
+        }
+        let dateTime = timeStart.getDate();
+        if (dateTime < 10) {
+          dateTime = '0' + dateTime;
+        }
+        let hour = timeStart.getHours();
+        if (hour < 10) {
+          hour = '0' + hour;
+        }
+        let minute = timeStart.getMinutes();
+        if (minute < 10) {
+          minute = '0' + minute;
+        }
+        self.tripDetail.time = year + '-' + month + '-' + dateTime + 'T' + hour + ':' + minute + ":00";
+        self.timeFake = hour + ':' + minute + ' ngày ' + dateTime + ' tháng ' + month + ' năm ' + year;
+      },
+      copyObject: function (object) {
+        return JSON.parse(JSON.stringify(object));
       }
     },
     mounted() {

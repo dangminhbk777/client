@@ -29,10 +29,13 @@
                       <div class="form-group m-form__group row align-items-center">
                         <div class="col-md-3">
                           <div class="m-input-icon m-input-icon--left">
-                            <input type="text" class="form-control m-input" placeholder="Mô tả..." id="positionSearch">
-                            <span class="m-input-icon__icon m-input-icon__icon--left">
+                            <!--<input type="text" class="form-control m-input" placeholder="Mô tả..." id="positionSearch">
+                            <span class="m-input-icon__icon m-input-icon__icon&#45;&#45;left">
                               <span><i class="la la-search"></i></span>
-                            </span>
+                            </span>-->
+                            <button class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
+                              Chọn khu vực
+                            </button>
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -68,10 +71,10 @@
                   <div class="row align-items-center __padding-top-10">
                     <div class="col-xl-10 order-2 order-xl-1 m--align-right">
                       <div class="m-form__group m-form__group--inline">
-                        <div class="m-form__label">
-                          <label class="m-label m-label--single">Bán kính</label>
-                        </div>
-                        <input type="number" class="form-control" id="radius" style="max-width: 90px"/>
+                        <!--<div class="m-form__label">
+                          <label class="m-label m-label&#45;&#45;single">Bán kính</label>
+                        </div>-->
+                        <!--<input type="number" class="form-control" id="radius" style="max-width: 90px"/>-->
                         <div class="m-form__label">
                           <label class="m-label m-label--single">Từ giá</label>
                         </div>
@@ -105,9 +108,13 @@
         <table-app
             :url="url"
             :urlRecord="urlRecord"
-            :vehicle="select2"
-        >
+            :vehicle="select2">
         </table-app>
+        <modal-app
+            title="TÌM KIẾM THEO KHU VỰC"
+            :showModal="showModal"
+            v-on:hideModal="showModal = $event">
+        </modal-app>
       </div>
     </div>
   </div>
@@ -116,12 +123,14 @@
 <script>
   import Table from '../../components/tables/TableView.vue';
   import Select from '../../components/selects/SelectPlaceHolder';
+  import Modal from '../../components/modals/ModalMap';
 
   export default {
     name: "TripByDriverList",
     components: {
       'table-app': Table,
-      'select-place-holder': Select
+      'select-place-holder': Select,
+      'modal-app': Modal
     },
     data() {
       return {
@@ -136,7 +145,8 @@
           selected: null,
         },
         url: "/data-tables/trip-by-driver",
-        urlRecord: "trip-by-driver/"
+        urlRecord: "trip-by-driver/",
+        showModal: false
       }
     }
   }

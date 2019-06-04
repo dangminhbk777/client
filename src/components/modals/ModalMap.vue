@@ -104,8 +104,11 @@
 
 <style scoped>
   #map2, #information-map2 {
-    max-width: 500px;
-    min-height: 200px;
+    max-width: 400px;
+    min-height: 300px;
     max-height: 300px;
+  }
+  .modal-content {
+    max-width: 400px;
   }
 </style>
