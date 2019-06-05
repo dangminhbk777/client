@@ -24,6 +24,7 @@
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css" rel="stylesheet" type="text/css" >
     <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.css"
         rel="stylesheet" type="text/css">
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.css' type='text/css' />
 
     <link href="/vendors/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
     <!--end:: Global Mandatory Vendors -->
@@ -77,6 +78,9 @@
         padding: 7px 5px 0 5px !important;
         border-radius: 20px !important;
         vertical-align: bottom !important;
+      }
+      .mapboxgl-ctrl-geocoder--input {
+        margin-left: 20px !important;
       }
     </style>
   </head>
@@ -181,6 +185,7 @@
     <!-- MapBox: BEGIN -->
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.js'></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.min.js'></script>
     <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
     <!-- MapBox: END -->
 

@@ -29,13 +29,10 @@
                       <div class="form-group m-form__group row align-items-center">
                         <div class="col-md-3">
                           <div class="m-input-icon m-input-icon--left">
-                            <!--<input type="text" class="form-control m-input" placeholder="Mô tả..." id="positionSearch">
-                            <span class="m-input-icon__icon m-input-icon__icon&#45;&#45;left">
-                              <span><i class="la la-search"></i></span>
-                            </span>-->
                             <button v-on:click="showSearchAdvance" class="btn btn-info m-btn m-btn--custom">
                               Chọn khu vực
-                            </button>
+                            </button>&nbsp;&nbsp;
+                            <span style="color: darkgrey">{{searchArea.chooseSearchArea}}</span>
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -109,8 +106,10 @@
         <modal-app
             title="TÌM KIẾM THEO KHU VỰC"
             :showModal="showModal"
-            v-on:hideModal="showModal = $event">
+            v-on:hideModal="showModal = $event"
+            v-on:searchAdvance="searchArea = $event">
         </modal-app>
+        {{searchArea}}
       </div>
     </div>
   </div>
@@ -142,7 +141,15 @@
         },
         url: "/data-tables/trip-by-driver",
         urlRecord: "trip-by-driver/",
-        showModal: false
+        showModal: false,
+        searchArea: {
+          chooseSearchArea: "Chưa chọn",
+          radius: 1,
+          beginLongitude: null,
+          beginLatitude: null,
+          endLongitude: null,
+          endLatitude: null
+        }
       }
     },
     methods: {
