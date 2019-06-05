@@ -21,7 +21,7 @@
                 </div>
               </div>
               <div class="form-group m-form__group row">
-                <label class="col-4 col-form-label">Số chỗ còn trống</label>
+                <label class="col-4 col-form-label">Số chỗ cần</label>
                 <div class="col-8">
                   <input class="form-control m-input" type="number" min="1" v-model="position.numberSeat">
                 </div>

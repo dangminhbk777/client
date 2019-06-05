@@ -237,7 +237,6 @@
         },
         dataBackup: null,
         routeStep: [],
-        //urlPageListRegister:  'localhost:4200/trip-by-driver/' + this.driverId + "/list-register",
         indexWayPoint: 0,
         map: null,
         directions: null,
@@ -455,7 +454,7 @@
             });
       },
       setupTime: function() {
-        // setup current time
+        // setup format time
         let self = this;
         let timeStart = new Date(self.tripDetail.time);
         let year = timeStart.getFullYear();

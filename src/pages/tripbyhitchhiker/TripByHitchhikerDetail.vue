@@ -35,7 +35,6 @@
         <div class="m-portlet__body">
           <div class="row">
             <div class="col-lg-6">
-<!--              {{tripDetail}}-->
               <div class="m-widget4">
                 <div class="m-widget4__item">
                   <div class="m-widget4__ext">
@@ -45,7 +44,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                      <span class="text-dark">ID</span>&nbsp;&nbsp;{{tripDetail.hitchhikerId}}
+                      <span class="text-dark">Mã chuyến đi</span>&nbsp;&nbsp;{{tripDetail.hitchhikerId}}
                     </span>
                   </div>
                 </div>
@@ -57,7 +56,19 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                      <span class="text-dark">Name</span>&nbsp;&nbsp;{{tripDetail.username}}
+                      <span class="text-dark">Tên người đi chung</span>&nbsp;&nbsp;{{tripDetail.username}}
+                    </span>
+                  </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
+                      <i class="flaticon-calendar-with-a-clock-time-tools m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                        <span class="text-dark">Thời gian xuất phát</span>&nbsp;&nbsp;{{timeFake}}
                     </span>
                   </div>
                 </div>
@@ -69,7 +80,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Phone</span>&nbsp;&nbsp;{{tripDetail.phone}}
+                        <span class="text-dark">Số điện thoại</span>&nbsp;&nbsp;{{tripDetail.phone}}
                     </span>
                   </div>
                 </div>
@@ -81,7 +92,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Number of seats</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
+                        <span class="text-dark">Số chỗ cần</span>&nbsp;&nbsp;{{tripDetail.numberSeat}}
                     </span>
                   </div>
                 </div>
@@ -93,7 +104,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Price</span>&nbsp;&nbsp;{{tripDetail.price}}.000 (VNĐ)
+                        <span class="text-dark">Giá</span>&nbsp;&nbsp;{{tripDetail.price}}.000 (VNĐ)
                     </span>
                   </div>
                 </div>
@@ -105,7 +116,7 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Note</span>&nbsp;&nbsp;
+                        <span class="text-dark">Chú thích</span>&nbsp;&nbsp;
                     </span>
                     <span class="m-widget4__text">
                         {{tripDetail.note}}
@@ -119,60 +130,6 @@
               <div id="information-map">
                 <div class="flex-parent relative scroll-hidden">
                   <div id="map" class="flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-mm mapboxgl-map" >
-                    <div class="mapboxgl-canary" style="visibility: hidden;">
-                    </div>
-                    <!-- MAP BOX CONTAINER: BEGIN -->
-                    <div class="mapboxgl-control-container">
-                      <div class="mapboxgl-ctrl-top-left">
-                        <div class="mapboxgl-ctrl-directions mapboxgl-ctrl">
-                          <div class="directions-control directions-control-inputs">
-                            <div class="mapbox-directions-component mapbox-directions-inputs">
-                              <div class="mapbox-directions-component-keyline">
-                                <!-- INPUT ORIGIN: BEGIN -->
-                                <div class="mapbox-directions-origin">
-                                  <label class="mapbox-form-label">
-                                    <span class="directions-icon directions-icon-depart"></span>
-                                  </label>
-                                  <div id="mapbox-directions-origin-input">
-                                    <div class="mapboxgl-ctrl-geocoder">
-                                      <span class="geocoder-icon geocoder-icon-search"></span>
-                                      <input type="text" placeholder="Choose a starting place">
-                                      <ul class="suggestions" style="display: none;"></ul>
-                                      <div class="geocoder-pin-right">
-                                        <button class="geocoder-icon geocoder-icon-close"></button>
-                                        <span class="geocoder-icon geocoder-icon-loading"></span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- INPUT ORIGIN: END -->
-                                <button class="directions-icon directions-icon-reverse directions-reverse js-reverse-inputs" title="Reverse origin &amp; destination">
-                                </button>
-                                <!-- INPUT DESTINATION: BEGIN -->
-                                <div class="mapbox-directions-destination">
-                                  <label class="mapbox-form-label">
-                                    <span class="directions-icon directions-icon-arrive"></span>
-                                  </label>
-                                  <div id="mapbox-directions-destination-input">
-                                    <div class="mapboxgl-ctrl-geocoder">
-                                      <span class="geocoder-icon geocoder-icon-search"></span>
-                                      <input type="text" placeholder="Choose destination">
-                                      <ul class="suggestions" style="display: none;"></ul>
-                                      <div class="geocoder-pin-right">
-                                        <button class="geocoder-icon geocoder-icon-close"></button>
-                                        <span class="geocoder-icon geocoder-icon-loading"></span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- INPUT DESTINATION: END -->
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- MAP BOX CONTAINER: END -->
                   </div>
                 </div>
               </div>
@@ -219,22 +176,19 @@
           startLatitude: null,
           endLatitude: null,
           time: null,
-          // typeVehicle: null,
           numberSeat: null,
-          // images: null,
           price: null,
-          // isShipping: null,
           note: null,
           isSubmitter: null,
           status: null
         },
-        //urlPageListRegister:  'localhost:4200/trip-by-driver/' + this.driverId + "/list-register",
         /*
         * show register trip : 01
         * show registered    : 02
         * show list register : 03
         * */
-        showButton: null
+        showButton: null,
+        timeFake: null
       }
     },
     methods: {
@@ -308,6 +262,7 @@
               self.tripDetail = JSON.parse(response.data.metadata);
               // check show button
               self.initMap();
+              self.setupTime();
             })
             .catch(e => {
               console.error(e);
@@ -325,7 +280,31 @@
       },
       redirectListRegister() {
         window.location.href = "/trip-by-hitchhiker/" + this.hitchhikerId + "/list-register";
-      }
+      },
+      setupTime: function() {
+        // setup format time
+        let self = this;
+        let timeStart = new Date(self.tripDetail.time);
+        let year = timeStart.getFullYear();
+        let month = timeStart.getMonth() + 1;
+        if (month < 10) {
+          month = '0' + month;
+        }
+        let dateTime = timeStart.getDate();
+        if (dateTime < 10) {
+          dateTime = '0' + dateTime;
+        }
+        let hour = timeStart.getHours();
+        if (hour < 10) {
+          hour = '0' + hour;
+        }
+        let minute = timeStart.getMinutes();
+        if (minute < 10) {
+          minute = '0' + minute;
+        }
+        self.tripDetail.time = year + '-' + month + '-' + dateTime + 'T' + hour + ':' + minute + ":00";
+        self.timeFake = hour + ':' + minute + ' ngày ' + dateTime + ' tháng ' + month + ' năm ' + year;
+      },
     },
     mounted() {
       this.getTripDetail();

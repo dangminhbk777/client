@@ -4,6 +4,7 @@
 
 <script>
   import {URL_WEP_APP} from '../../services/variables.js';
+  import http from '../../services/http-common.js';
 
   export default {
     name: "TableMyHitchhiker",
@@ -15,6 +16,18 @@
       urlRecord: {
         type: String,
         default: null
+      }
+    },
+    methods: {
+      deleteAction: function (id) {
+        http.get('/trip-by-hitchhiker/delete-trip/' + id)
+            .then(response => {
+              console.log(response);
+              toastr.success("Chuyến đi đã bị hủy bỏ");
+            })
+            .catch(e => {
+              console.error(e);
+            });
       }
     },
     mounted() {
@@ -125,19 +138,27 @@
             template: function (data) {
               let urlDetail = URL_WEP_APP + self.urlRecord + data.id;
               let urlUpdate = URL_WEP_APP + self.urlRecord + data.id + '/update';
-              let urlDelete = URL_WEP_APP + self.urlRecord + data.id + '/delete';
+              // let urlDelete = URL_WEP_APP + self.urlRecord + data.id + '/delete';
               return '<a href="' + urlDetail + '" class="btn m-btn--pill m-btn--air btn-primary btn-sm">\n' +
                   '  <span>Chi tiết</span>\n' +
                   '</a>&nbsp;&nbsp;' +
                   '<a href="' + urlUpdate + '" class="btn m-btn--pill m-btn--air btn-warning btn-sm">\n' +
                   '  <span>Cập nhật</span>\n' +
                   '</a>&nbsp;&nbsp;' +
-                  '<a href="' + urlDelete + '" class="btn m-btn--pill m-btn--air btn-danger btn-sm">\n' +
+                  '<a href="javascript:;" hitchhiker-id="'+ data.id +'" class="btn m-btn--pill m-btn--air btn-danger btn-sm ___btn-delete">\n' +
                   '  <span>Xóa</span>\n' +
                   '</a>&nbsp;&nbsp;';
             }
           }
         ]
+      });
+      tableApp.on('click', '.___btn-delete', function(e) {
+        let element = $(this);
+        let id = element.attr("hitchhiker-id");
+        self.deleteAction(id);
+        setTimeout(function() {
+          location.reload();
+        }, 2000);
       });
     }
   }
