@@ -106,8 +106,8 @@
                   </div>
                   <div class="m-widget4__info">
                     <span class="m-widget4__text">
-                        <span class="text-dark">Đánh giá</span>&nbsp;&nbsp;{{tripDetail.star}}
-                    </span>ư
+                        <span class="text-dark">Đánh giá</span>&nbsp;&nbsp;{{tripDetail.star}} / 5
+                    </span>
                     <a href="javascript:;" v-on:click="showRating" style="float: right">Xem các đánh giá</a>
                   </div>
                 </div>
@@ -298,7 +298,6 @@
               ]
             };
             map.getSource('customer').setData(customer);
-            // directions.setWaypoint(self.indexWayPoint, [e.lngLat.lng,e.lngLat.lat]);
           } else {
             map.addLayer({
               id: 'customer',
@@ -326,7 +325,6 @@
                 'circle-color': '#f30'
               }
             });
-            // directions.addWaypoint(self.indexWayPoint, [e.lngLat.lng,e.lngLat.lat]);
           }
         });
         map.on('load', function() {

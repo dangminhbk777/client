@@ -14,18 +14,44 @@
           <div class="m-portlet__head-tools">
             <ul class="m-portlet__nav">
               <li class="m-portlet__nav-item">
-                <button v-if="showButton === '03'" v-on:click="redirectListRegister" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                  Danh sách đăng ký
-                </button>
-                <button v-else-if="showButton === '01'" v-on:click="registerTrip" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
-                  Đăng ký
-                </button>
-                <button v-else-if="showButton === '04'" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
-                  Đã được chấp nhận
-                </button>
-                <button v-else class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
-                  Đã đăng ký
-                </button>
+                <div class="__show-actions" v-if="showButton === '03'">
+                  <button v-on:click="redirectListRegister" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
+                    Danh sách đăng ký
+                  </button>
+                </div>
+                <div class="__show-actions" v-else-if="showButton === '01'">
+                  <a href="#" class="btn btn-outline-info m-btn m-btn--icon" v-on:click="showChat">
+                    <span>
+                      <i class="fa flaticon-chat-1"></i>
+                      <span>Nhắn tin</span>
+                    </span>
+                  </a>&nbsp;
+                  <button v-on:click="registerTrip" class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom">
+                    Đăng ký
+                  </button>
+                </div>
+                <div class="__show-actions" v-else-if="showButton === '04'">
+                  <a href="#" class="btn btn-outline-info m-btn m-btn--icon" v-on:click="showChat">
+                    <span>
+                      <i class="fa flaticon-chat-1"></i>
+                      <span>Nhắn tin</span>
+                    </span>
+                  </a>&nbsp;
+                  <button class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
+                    Đã được chấp nhận
+                  </button>
+                </div>
+                <div class="__show-actions" v-else>
+                  <a href="#" class="btn btn-outline-info m-btn m-btn--icon" v-on:click="showChat">
+                    <span>
+                      <i class="fa flaticon-chat-1"></i>
+                      <span>Nhắn tin</span>
+                    </span>
+                  </a>&nbsp;
+                  <button class="m-portlet__nav-link btn btn-primary m-btn m-btn--custom" disabled="disabled">
+                    Đã đăng ký
+                  </button>
+                </div>
               </li>
             </ul>
           </div>
@@ -87,6 +113,19 @@
                 <div class="m-widget4__item">
                   <div class="m-widget4__ext">
                     <span class="m-widget4__icon">
+                      <i class="flaticon-customer m--font-brand"></i>
+                    </span>
+                  </div>
+                  <div class="m-widget4__info">
+                    <span class="m-widget4__text">
+                        <span class="text-dark">Đánh giá</span>&nbsp;&nbsp;{{tripDetail.star}} / 5
+                    </span>
+                    <a href="javascript:;" v-on:click="showRating" style="float: right">Xem các đánh giá</a>
+                  </div>
+                </div>
+                <div class="m-widget4__item">
+                  <div class="m-widget4__ext">
+                    <span class="m-widget4__icon">
                       <i class="flaticon-users m--font-brand"></i>
                     </span>
                   </div>
@@ -140,6 +179,12 @@
         <!-- BODY: END -->
       </div>
     </div>
+    <modal-app v-if="hitchhikerId"
+        title="DANH SÁCH ĐÁNH GIÁ"
+        :showModal="showModal"
+        :driverId="hitchhikerId"
+        v-on:hideModal="showModal = $event">
+    </modal-app>
   </div>
 </template>
 
@@ -148,9 +193,13 @@
   import http from '../../services/http-common.js';
   import toastr from '../../services/toastr.js';
   import { URL_MAPBOX_API, MAPBOX_KEY } from '../../services/variables.js';
+  import Modal from '../../components/modals/ModalText.vue';
 
   export default {
     name: "TripByHitchhikerDetail",
+    components: {
+      'modal-app': Modal
+    },
     props: {
       hitchhikerId: {
         type: String,
@@ -159,7 +208,7 @@
       path: {
         type: String,
         default: "/trip-by-hitchhiker/"
-      }
+      },
     },
     data() {
       return {
@@ -188,7 +237,8 @@
         * show list register : 03
         * */
         showButton: null,
-        timeFake: null
+        timeFake: null,
+        showModal: false
       }
     },
     methods: {
@@ -306,6 +356,21 @@
         self.tripDetail.time = year + '-' + month + '-' + dateTime + 'T' + hour + ':' + minute + ":00";
         self.timeFake = hour + ':' + minute + ' ngày ' + dateTime + ' tháng ' + month + ' năm ' + year;
       },
+      showChat: function () {
+        let self = this;
+        $('#addClass').click();
+        let userConversation = {
+          email: 'xx',
+          image: self.tripDetail.avatar,
+          userId: self.tripDetail.userId,
+          username: self.tripDetail.username
+        };
+        eventBus.$emit('addUserConversation', JSON.stringify(userConversation));
+      },
+      showRating: function () {
+        let self = this;
+        self.showModal = true;
+      }
     },
     mounted() {
       this.getTripDetail();

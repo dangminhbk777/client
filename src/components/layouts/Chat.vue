@@ -35,7 +35,7 @@
                             <img :src="user.image" width="100%" height="100%">
                             <div class="badge "></div>
                           </div>
-                          <div class="shopee-chat__name">{{user.username}}</div>
+                          <div class="shopee-chat__name" style="height: 50px;">{{user.username}}</div>
                           <div class="shopee-chat__close">✕</div>
                         </a>
                       </div>
@@ -44,11 +44,6 @@
                 </div>
               </div>
             </div>
-            <!-- List conversation: end -->
-            <!--<a href="/offer" class="link-offer ember-view">-->
-              <!--Đã nhận trả giá-->
-              <!--<span class="badge">0</span>-->
-            <!--</a>-->
           </div>
 
           <div class="conversation-window">
@@ -59,7 +54,6 @@
               <div class="user-menu ember-view">
                 <span style="cursor:pointer;" class="shopee-chat-header-text">
                   <span id="username"></span>
-<!--                  <span class="arrow-down "></span>-->
                 </span>
               </div>
             </div>
@@ -306,5 +300,8 @@
   .col-1 {
      padding-right: 0;
      padding-left: 0;
+  }
+  .shopee-chat-root button {
+    margin: 0;
   }
 </style>
