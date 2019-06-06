@@ -96,6 +96,9 @@
             .then(response => {
               self.position = null;
               toastr.success('Tạo chuyến đi tìm xe thành công');
+              setTimeout(function() {
+                window.location.href = "/my-hitchhiker";
+              }, 2000);
             })
             .catch(e => {
               console.error(e);

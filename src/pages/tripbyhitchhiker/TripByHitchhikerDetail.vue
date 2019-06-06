@@ -272,10 +272,11 @@
         http.post("trip-by-hitchhiker/register-with-hitchhiker/" + this.hitchhikerId)
             .then(response => {
               this.showButton = "02";
-              toastr.success('Register trip SUCCESS');
+              toastr.success('Đăng ký đi chung thành công');
             })
             .catch(e => {
               console.error(e);
+              toastr.success('Đăng ký đi chung thất bại');
             });
       },
       redirectListRegister() {

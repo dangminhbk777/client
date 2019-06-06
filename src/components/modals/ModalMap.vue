@@ -24,7 +24,7 @@
                 </div>
               </div>
             </div>
-            <small class="text-primary">Chọn điểm đầu và điểm cuối hành trình của bạn</small><br>
+            <small class="text-primary">Chọn địa điểm bạn muốn tìm kiếm</small><br>
             <!-- MAP: END -->
           </div>
           <div class="modal-footer">
@@ -43,8 +43,7 @@
 </template>
 
 <script>
-  import { MAPBOX_KEY, URL_MAPBOX_API } from '../../services/variables.js';
-  import axios from 'axios';
+  import { MAPBOX_KEY } from '../../services/variables.js';
 
   export default {
     name: "app-modal",
@@ -80,7 +79,10 @@
           beginLatitude: null,
           endLongitude: null,
           endLatitude: null
-        }
+        },
+        firstPointFlag: false,
+        finalPointFlag: false,
+        map: null
       }
     },
     methods: {
@@ -88,6 +90,16 @@
         let self = this;
         self.$emit('hideModal', false);
         self.searchArea.chooseSearchArea = "Chưa chọn";
+        self.searchArea.beginLongitude = null;
+        self.searchArea.beginLatitude = null;
+        self.searchArea.endLongitude = null;
+        self.searchArea.endLatitude = null;
+        if (self.map.getLayer("pointSearch")){
+          self.map.removeLayer("pointSearch");
+        }
+        if (self.map.getSource("pointSearch")){
+          self.map.removeSource("pointSearch");
+        }
         self.$emit('searchAdvance', self.searchArea);
       },
       accept() {
@@ -100,17 +112,11 @@
     mounted() {
       let self = this;
       mapboxgl.accessToken = MAPBOX_KEY;
-      let map = new mapboxgl.Map({
+      self.map = new mapboxgl.Map({
         container: 'map2',
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [105.859979061677,21.007181634883864],
         zoom: 12
-      });
-      let directions = new MapboxDirections({
-        accessToken: mapboxgl.accessToken,
-        steps: false,
-        geometries: 'polyline',
-        controls: {instructions: false}
       });
       let geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
@@ -118,18 +124,16 @@
         placeholder: "Tìm địa điểm",
         mapboxgl: mapboxgl
       });
-      map.addControl(geocoder);
-      let canvas = map.getCanvasContainer();
-      map.on('click', function (e) {
-        self.searchArea.beginLongitude = e.lngLat.lng;
-        self.searchArea.beginLatitude = e.lngLat.lat;
-        if (map.getLayer('customer')) {
+      self.map.addControl(geocoder);
+      let canvas = self.map.getCanvasContainer();
+      self.map.on('click', function (e) {
+        if (self.map.getLayer('pointSearch')) {
           let coordsObj = e.lngLat;
           canvas.style.cursor = '';
           let coords = Object.keys(coordsObj).map(function(key) {
             return coordsObj[key];
           });
-          let customer = {
+          let pointSearch = {
             type: 'FeatureCollection',
             features: [
               {
@@ -142,10 +146,12 @@
               }
             ]
           };
-          map.getSource('customer').setData(customer);
+          self.map.getSource('pointSearch').setData(pointSearch);
+          self.searchArea.beginLongitude = e.lngLat.lng;
+          self.searchArea.beginLatitude = e.lngLat.lat;
         } else {
-          map.addLayer({
-            id: 'customer',
+          self.map.addLayer({
+            id: 'pointSearch',
             type: 'circle',
             source: {
               type: 'geojson',
@@ -166,56 +172,67 @@
               }
             },
             paint: {
-              'circle-radius': 10,
+              'circle-radius': 8,
               'circle-color': '#f30'
             }
           });
+          self.searchArea.beginLongitude = e.lngLat.lng;
+          self.searchArea.beginLatitude = e.lngLat.lat;
         }
       });
       geocoder.on('results', function (response) {
-        console.log(response);
+        if (response.features && response.features[0]) {
+          let coords = response.features[0].center;
+          if (self.map.getLayer('pointSearch')) {
+            canvas.style.cursor = '';
+            let pointSearch = {
+              type: 'FeatureCollection',
+              features: [
+                {
+                  type: 'Feature',
+                  properties: {},
+                  geometry: {
+                    type: 'Point',
+                    coordinates: coords
+                  }
+                }
+              ]
+            };
+            self.map.getSource('pointSearch').setData(pointSearch);
+            self.searchArea.beginLongitude = coords[0];
+            self.searchArea.beginLatitude = coords[1];
+          } else {
+            self.map.addLayer({
+              id: 'pointSearch',
+              type: 'circle',
+              source: {
+                type: 'geojson',
+                data: {
+                  type: 'FeatureCollection',
+                  features: [{
+                    type: 'Feature',
+                    properties: {
+                      id: 'marker',
+                      "marker-symbol": "monument",
+                      "title": "carpool",
+                    },
+                    geometry: {
+                      type: 'Point',
+                      coordinates: coords
+                    }
+                  }]
+                }
+              },
+              paint: {
+                'circle-radius': 8,
+                'circle-color': '#f30'
+              }
+            });
+          }
+        }
       });
-      // map.addControl( directions, 'top-left');
-      // map.on('load', function() {
-      //   $(".mapboxgl-ctrl-geocoder").on('change', function (e) {
-      //     let id = $(this).parent('div').attr('id');
-      //     if (id === "mapbox-directions-origin-input" && e.target.value != null) {
-      //       axios.get(URL_MAPBOX_API + e.target.value + '.json?types=poi&access_token=' + MAPBOX_KEY)
-      //           .then(response => {
-      //             e.target.value = response.data.features[0].place_name;
-      //           })
-      //           .catch(e => {
-      //             this.errors.push(e)
-      //           });
-      //     } else if (e.target.value != null) {
-      //       axios.get(URL_MAPBOX_API + e.target.value + '.json?types=poi&access_token=' + MAPBOX_KEY)
-      //           .then(response => {
-      //             e.target.value = response.data.features[0].place_name;
-      //           })
-      //           .catch(e => {
-      //             this.errors.push(e)
-      //           });
-      //     }
-      //   });
-      //
-      //   directions.on('route', function (ev) {
-      //     // console.log(ev.route);
-      //   });
-      //   directions.on('origin', function (e) {
-      //     if (e !=  null) {
-      //       self.searchArea.beginLongitude = e.feature.geometry.coordinates[0];
-      //       self.searchArea.beginLatitude = e.feature.geometry.coordinates[1];
-      //     }
-      //   });
-      //   directions.on('destination', function (e) {
-      //     if (e != null) {
-      //       self.searchArea.endLongitude = e.feature.geometry.coordinates[0];
-      //       self.searchArea.endLatitude = e.feature.geometry.coordinates[1];
-      //     }
-      //   });
-      // });
       window.onresize = function() {
-        map.resize();
+        self.map.resize();
       };
     },
     computed: {

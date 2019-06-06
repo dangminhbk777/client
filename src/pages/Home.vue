@@ -44,8 +44,8 @@
           <br class="hidden-xs"> Người đi chung xe thích gặp gỡ những người mới và tận dụng tối đa thời gian của họ.
         </div>
         <div :class="descriptionCss3" v-on:click="switchShow(3)">
-          <span class="font-weight-bold"> Giải pháp doanh nghiệp:</span>
-          <br class="hidden-xs"> Hợp tác với các nhà tuyển dụng cạnh tranh để làm phong phú thêm cuộc sống của nhân viên của họ.
+          <span class="font-weight-bold">Môi trường:</span>
+          <br class="hidden-xs"> Đi chung với những người cùng lộ trình giúp giảm thiểu khí thải và tài nguyên môi trường.
         </div>
       </div>
       <div class="col-sm-7 col-sm-push-5 text-center">

@@ -16,7 +16,8 @@
         type: String,
         default: null
       },
-      vehicle: null
+      vehicle: null,
+      searchArea: null
     },
     mounted() {
       let self = this;
@@ -159,45 +160,11 @@
           }
         ]
       });
-      /*tableApp
-          .on('m-datatable--on-init', function () {
-            console.log('Datatable init');
-          })
-          .on('m-datatable--on-layout-updated', function () {
-            console.log('Layout render updated');
-          })
-          .on('m-datatable--on-ajax-done', function () {
-            console.log('Ajax data successfully updated');
-          })
-          .on('m-datatable--on-ajax-fail', function (e, jqXHR) {
-            console.log('Ajax error');
-          })
-          .on('m-datatable--on-goto-page', function (e, args) {
-            console.log('Goto to pagination: ' + args.page);
-          })
-          .on('m-datatable--on-update-perpage', function (e, args) {
-            console.log('Update page size: ' + args.perpage);
-          })
-          .on('m-datatable--on-reloaded', function (e) {
-            console.log('Datatable reloaded');
-          })
-          .on('m-datatable--on-check', function (e, args) {
-            console.log('Checkbox active: ' + args.toString());
-          })
-          .on('m-datatable--on-uncheck', function (e, args) {
-            console.log('Checkbox inactive: ' + args.toString());
-          })
-          .on('m-datatable--on-sort', function (e, args) {
-            console.log('Datatable sorted by ' + args.field + ' ' + args.sort);
-          })
-          .on('click', '.m-btn--pill', function(e) {
-            console.log(tableApp);
-          });*/
-
       $('#buttonSearch').click(function () {
+        console.log(self.searchArea);
         // get value position
-        let position = $('#positionSearch').val();
-        let positionArr = position.split(',');
+        // let position = $('#positionSearch').val();
+        // let positionArr = position.split(',');
         // get value date
         let date = $('#m_daterangepicker_1').val();
         date = date.replace(' ', '');
@@ -213,8 +180,8 @@
         // get radius
         let radius = $('#radius').val();
         let params = {
-          longitude: positionArr[0],
-          latitude: positionArr[1],
+          longitude: self.searchArea.beginLongitude,
+          latitude: self.searchArea.beginLatitude,
           radius: radius,
           dateFrom: dateArr[0],
           dateTo: dateArr[1],

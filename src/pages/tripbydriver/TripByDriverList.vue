@@ -71,15 +71,15 @@
                         <div class="m-form__label">
                           <label class="m-label m-label--single">Từ giá</label>
                         </div>
-                        <input type="number" class="form-control" id="priceFrom"/>
+                        <input type="number" class="form-control" id="priceFrom" min="0"/>
                         <div class="m-form__label" style="padding-left: 20px">
                           <label class="m-label m-label--single">Đến giá</label>
                         </div>
-                        <input type="number" class="form-control" id="priceTo"/>
+                        <input type="number" class="form-control" id="priceTo" min="0"/>
                         <div class="m-form__label" style="padding-left: 20px">
                           <label class="m-label m-label--single">Số chỗ</label>
                         </div>
-                        <input type="number" class="form-control" id="numberSeat"/>
+                        <input type="number" class="form-control" id="numberSeat" min="1"/>
                       </div>
                     </div>
                     <div class="col-xl-2 order-1 order-xl-2 m--align-right">
@@ -101,7 +101,8 @@
         <table-app
             :url="url"
             :urlRecord="urlRecord"
-            :vehicle="select2">
+            :vehicle="select2"
+            :searchArea="searchArea">
         </table-app>
         <modal-app
             title="TÌM KIẾM THEO KHU VỰC"
@@ -109,7 +110,6 @@
             v-on:hideModal="showModal = $event"
             v-on:searchAdvance="searchArea = $event">
         </modal-app>
-        {{searchArea}}
       </div>
     </div>
   </div>
