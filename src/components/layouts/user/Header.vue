@@ -108,11 +108,11 @@
                                         <span class="m-menu__link-text">Chuyến đi đã đăng ký</span>
                                       </a>
                                     </li>
-                                    <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
+                                    <!--<li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                       <a href="/my-driver-complete" class="m-menu__link ">
                                         <span class="m-menu__link-text">Chuyến đi hoàn thành</span>
                                       </a>
-                                    </li>
+                                    </li>-->
                                   </ul>
                                 </div>
                               </li>

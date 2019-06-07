@@ -77,7 +77,6 @@
         http.get('/user/' + 1 + '/rating')
             .then(response => {
               self.dataRating = JSON.parse(response.data.metadata);
-              console.log(self.dataRating);
             })
             .catch(e => {
               console.error(e);

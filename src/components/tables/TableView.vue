@@ -87,7 +87,13 @@
             title: "Mô tả chuyến đi",
             filterable: false,
             width: 250,
-            textAlign: 'left'
+            textAlign: 'left',
+            template: function(data) {
+              if (data.description == null) {
+                data.description = 'Không có mô tả';
+              }
+              return data.description;
+            }
           },
           {
             field: "time",
